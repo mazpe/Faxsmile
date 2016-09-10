@@ -24,6 +24,7 @@ class CreateCompanyTable extends Migration
             $table->string('telephone');
             $table->string('fax');
             $table->string('website');
+            $table->text('notes');
             $table->timestamps();
         });
     }
