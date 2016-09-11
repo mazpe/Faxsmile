@@ -15,6 +15,7 @@ class CreateFaxTable extends Migration
     {
         Schema::create('faxes', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('company_id');
             $table->string('number');
             $table->string('company_id');
             $table->text('notes');
