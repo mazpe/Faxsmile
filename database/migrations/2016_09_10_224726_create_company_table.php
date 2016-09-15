@@ -15,16 +15,24 @@ class CreateCompanyTable extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('type');
             $table->string('name');
             $table->string('address_1');
             $table->string('address_2');
             $table->string('city');
             $table->string('state');
             $table->string('zip');
-            $table->string('telephone');
+            $table->string('phone');
             $table->string('fax');
             $table->string('website');
+            $table->string('fax_domain');
+            $table->string('domain');
+            $table->string('time_zone');
+            $table->string('external_account');
+            $table->string('contact');
+            $table->string('contact_phone');
             $table->text('notes');
+            $table->integer('active');
             $table->timestamps();
         });
     }
@@ -36,6 +44,6 @@ class CreateCompanyTable extends Migration
      */
     public function down()
     {
-        Schema::drop('companies');
+        Schema::dropIfExists('companies');
     }
 }
