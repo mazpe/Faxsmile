@@ -16,5 +16,5 @@ Route::get('/', function () {
 });
 
 Route::get('admin', function () {
-    return view('admin_template');
+    return view('admin.admin_template');
 });

@@ -19,10 +19,10 @@
 <div class="wrapper">
 
     <!-- Main Header -->
-    @include('header')
+    @include('admin.header')
 
     <!-- Left side column. contains the logo and sidebar -->
-    @include('sidebar')
+    @include('admin.sidebar')
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -45,10 +45,10 @@
     </div>
 
     <!-- Main Footer -->
-    @include('footer')
+    @include('admin.footer')
 
     <!-- Control Sidebar -->
-    @include('control_sidebar')
+    @include('admin.control_sidebar')
     <div class="control-sidebar-bg"></div>
 </div>
 
