@@ -20,8 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('recipient');
-            $table->string('sender');
+            $table->string('recipient')->nullable();
+            $table->string('sender')->nullable();
             $table->integer('active')->default(1);
             $table->rememberToken();
             $table->timestamps();
@@ -30,11 +30,11 @@ class CreateUsersTable extends Migration
                 ->references('id')->on('clients')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-//
-//            $table->foreign('fax_id')
-//                ->references('id')->on('faxes')
-//                ->onDelete('cascade')
-//                ->onUpdate('cascade');
+
+            $table->foreign('fax_id')
+                ->references('id')->on('faxes')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 
         });
     }
