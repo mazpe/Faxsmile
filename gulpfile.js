@@ -28,4 +28,8 @@ elixir(function(mix) {
 
     mix.copy('./bower_components/AdminLTE/dist/img', 'public/assets/images/admin');
     mix.copy('bower_components/bootstrap/dist/fonts', 'public/assets/fonts');
+
+    mix.browserSync({
+        proxy: 'faxsmile.app'
+    });
 });
