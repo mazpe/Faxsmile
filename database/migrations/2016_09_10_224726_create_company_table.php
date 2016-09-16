@@ -15,24 +15,24 @@ class CreateCompanyTable extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('type');
+            $table->string('type')->nullable();
             $table->string('name');
-            $table->string('address_1');
-            $table->string('address_2');
-            $table->string('city');
-            $table->string('state');
-            $table->string('zip');
-            $table->string('phone');
-            $table->string('fax');
-            $table->string('website');
-            $table->string('fax_domain');
-            $table->string('domain');
-            $table->string('time_zone');
-            $table->string('external_account');
-            $table->string('contact');
-            $table->string('contact_phone');
-            $table->text('notes');
-            $table->integer('active');
+            $table->string('address_1')->nullable();
+            $table->string('address_2')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('zip')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('fax')->nullable();
+            $table->string('website')->nullable();
+            $table->string('fax_domain')->nullable();
+            $table->string('domain')->nullable();
+            $table->string('time_zone')->nullable();
+            $table->string('external_account')->nullable();
+            $table->string('contact')->nullable();
+            $table->string('contact_phone')->nullable();
+            $table->text('notes')->nullable();
+            $table->integer('active')->default(1);
             $table->timestamps();
         });
     }
