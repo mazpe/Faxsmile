@@ -13,8 +13,9 @@
 
 $factory->define(App\Fax::class, function (Faker\Generator $faker) {
     return [
-        'client_id' => 1,
-        //'number' => $faker->randomNumber($nbDigits = 10),
+        'client_id' => function () {
+            return App\Client::orderByRaw("RAND()")->first()->id;
+        },
         'number' => $faker->numerify($string = '##########'),
         'notes' => $faker->realText($maxNbChars = 50, $indexSize = 2),
         'active' => 1

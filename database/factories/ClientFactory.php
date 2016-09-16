@@ -13,7 +13,9 @@
 
 $factory->define(App\Client::class, function (Faker\Generator $faker) {
     return [
-        'company_id' => 1,
+        'company_id' => function () {
+            return App\Company::orderByRaw("RAND()")->first()->id;
+        },
         'name' => $faker->company,
         'address_1' => $faker->streetAddress,
         'address_2' => '',
