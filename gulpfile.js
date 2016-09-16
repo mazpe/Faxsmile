@@ -13,7 +13,19 @@ require('laravel-elixir-vue');
  |
  */
 
-elixir(mix => {
-    mix.sass('app.scss')
-       .webpack('app.js');
+elixir(function(mix) {
+    mix.styles([
+        './bower_components/bootstrap/dist/css/bootstrap.css',
+        './bower_components/AdminLTE/dist/css/AdminLTE.css',
+        './bower_components/AdminLTE/dist/css/skins/skin-blue.min.css'
+    ], 'public/assets/css/admin.css');
+
+    mix.scripts([
+        './bower_components/jquery/dist/jquery.js',
+        './bower_components/bootstrap/dist/js/bootstrap.js',
+        './bower_components/AdminLTE/dist/js/app.js',
+    ], 'public/assets/js/admin.js');
+
+    mix.copy('./bower_components/AdminLTE/dist/img', 'public/assets/images/admin');
+    mix.copy('bower_components/bootstrap/dist/fonts', 'public/assets/fonts');
 });
