@@ -48,7 +48,7 @@
     @include('footer')
 
     <!-- Control Sidebar -->
-    @include('control.sidebar')
+    @include('control_sidebar')
     <div class="control-sidebar-bg"></div>
 </div>
 
