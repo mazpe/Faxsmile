@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCompanyTable extends Migration
+class CreateClientsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateCompanyTable extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('clients', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('type')->nullable();
+            $table->integer('company_id')->unsigned();
             $table->string('name')->unique();
             $table->string('address_1')->nullable();
             $table->string('address_2')->nullable();
@@ -25,15 +25,16 @@ class CreateCompanyTable extends Migration
             $table->string('phone')->nullable();
             $table->string('fax')->nullable();
             $table->string('website')->nullable();
-            $table->string('fax_domain')->nullable();
-            $table->string('domain')->nullable();
-            $table->string('time_zone')->nullable();
-            $table->string('external_account')->nullable();
             $table->string('contact')->nullable();
             $table->string('contact_phone')->nullable();
             $table->text('notes')->nullable();
             $table->integer('active')->default(1);
             $table->timestamps();
+
+            $table->foreign('company_id')
+                ->references('id')->on('companies')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 
@@ -44,6 +45,6 @@ class CreateCompanyTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('clients');
     }
 }
