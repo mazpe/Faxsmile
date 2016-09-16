@@ -25,11 +25,11 @@ class CreateUsersTable extends Migration
             $table->integer('active')->default(1);
             $table->rememberToken();
             $table->timestamps();
-//
-//            $table->foreign('client_id')
-//                ->references('id')->on('clients')
-//                ->onDelete('cascade')
-//                ->onUpdate('cascade');
+
+            $table->foreign('client_id')
+                ->references('id')->on('clients')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 //
 //            $table->foreign('fax_id')
 //                ->references('id')->on('faxes')
