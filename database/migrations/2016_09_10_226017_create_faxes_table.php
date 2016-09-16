@@ -15,11 +15,16 @@ class CreateFaxesTable extends Migration
     {
         Schema::create('faxes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('company_id')->unsigned();
+            $table->integer('client_id')->unsigned();
             $table->string('number');
-            $table->text('notes');
-            $table->integer('active');
+            $table->text('notes')->nullable();
+            $table->integer('active')->default(1);
             $table->timestamps();
+
+            $table->foreign('client_id')
+                ->references('id')->on('clients')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 
