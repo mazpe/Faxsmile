@@ -11,9 +11,8 @@
 |
 */
 
-$factory->define(App\Company::class, function (Faker\Generator $faker) {
-    $type = ['White Label', 'Reseller'];
-
+$factory->define(App\Provider::class, function (Faker\Generator $faker) {
+    $type = ['Fax Services'];
     return [
         'type' => $type[array_rand($type)],
         'name' => $faker->company,
@@ -25,9 +24,6 @@ $factory->define(App\Company::class, function (Faker\Generator $faker) {
         'phone' => $faker->phoneNumber,
         'fax' => $faker->phoneNumber,
         'website' => $faker->domainName,
-        'fax_domain' => $faker->domainName,
-        'domain' => $faker->domainName,
-        'time_zone' => $faker->timezone,
         'external_account' => $faker->randomNumber($nbDigits = 5),
         'contact' => $faker->name,
         'contact_phone' => $faker->phoneNumber,

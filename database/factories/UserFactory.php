@@ -12,12 +12,14 @@
 */
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
+    static $password;
+
     return [
         'client_id' => 1,
         'fax_id' => 1,
         'name' => $faker->name,
-        'email' => $faker->email,
-        'password' => Hash::make('NoPassword'),
+        'email' => $faker->safeEmail,
+        'password' => $password ?: $password = bcrypt('secret'),
         'active' => 1
     ];
 });
