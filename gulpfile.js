@@ -41,6 +41,7 @@ elixir(function(mix) {
         'node_modules/bootstrap-sass/assets/javascripts/bootstrap.js',
         'bower_components/AdminLTE/dist/js/app.js',
         'bower_components/html5shiv/dist/html5shiv.js',
+        'bower_components/respond/dest/respond.src.js',
     ], 'public/assets/js/admin.js','./');
 
     // Tasks
