@@ -21,8 +21,10 @@ elixir(function(mix) {
             ],'resources/assets/css/global.css');
     });
 
+    // admin style
     mix.styles([
         'resources/assets/css/global.css',
+        'bower_components/Ionicons/css/ionicons.css',
         'bower_components/AdminLTE/dist/css/AdminLTE.css',
         'bower_components/AdminLTE/dist/css/skins/skin-blue.min.css'
     ], 'public/assets/css/admin.css','./');
@@ -40,9 +42,10 @@ elixir(function(mix) {
     ], 'public/assets/js/admin.js','./');
 
     // Tasks
-    mix.copy('bower_components/AdminLTE/dist/img', 'public/assets/images/admin');
     mix.copy('node_modules/bootstrap-sass/assets/fonts/bootstrap', 'public/assets/fonts');
     mix.copy('node_modules/font-awesome/fonts','public/assets/fonts');
+    mix.copy('bower_components/AdminLTE/dist/img', 'public/assets/images/admin');
+    mix.copy('bower_components/Ionicons/fonts','public/assets/fonts');
 
 
     // Browser Sync
