@@ -50,7 +50,6 @@ elixir(function(mix) {
     mix.copy('bower_components/AdminLTE/dist/img', 'public/assets/images/admin');
     mix.copy('bower_components/Ionicons/fonts','public/assets/fonts');
 
-
     // Browser Sync
     mix.browserSync({
         proxy: 'faxsmile.app'
