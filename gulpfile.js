@@ -14,21 +14,38 @@ require('laravel-elixir-vue');
  */
 
 elixir(function(mix) {
+    // CSS
+    elixir(function(mix) {
+        mix.sass([
+            'global.scss',
+            ],'resources/assets/css/global.css');
+    });
+
     mix.styles([
-        './bower_components/bootstrap/dist/css/bootstrap.css',
-        './bower_components/AdminLTE/dist/css/AdminLTE.css',
-        './bower_components/AdminLTE/dist/css/skins/skin-blue.min.css'
-    ], 'public/assets/css/admin.css');
+        'resources/assets/css/global.css',
+        'bower_components/AdminLTE/dist/css/AdminLTE.css',
+        'bower_components/AdminLTE/dist/css/skins/skin-blue.min.css'
+    ], 'public/assets/css/admin.css','./');
+
+    // JavaScript
+    mix.scripts([
+        'bower_components/jquery/dist/jquery.js',
+        'bower_components/bootstrap/dist/js/bootstrap.js',
+    ], 'resources/assets/js/global.js','./');
 
     mix.scripts([
-        './bower_components/jquery/dist/jquery.js',
-        './bower_components/bootstrap/dist/js/bootstrap.js',
-        './bower_components/AdminLTE/dist/js/app.js',
-    ], 'public/assets/js/admin.js');
+        'resources/assets/js/global.js',
+        'node_modules/bootstrap-sass/assets/javascripts/bootstrap.js',
+        'bower_components/AdminLTE/dist/js/app.js',
+    ], 'public/assets/js/admin.js','./');
 
-    mix.copy('./bower_components/AdminLTE/dist/img', 'public/assets/images/admin');
-    mix.copy('bower_components/bootstrap/dist/fonts', 'public/assets/fonts');
+    // Tasks
+    mix.copy('bower_components/AdminLTE/dist/img', 'public/assets/images/admin');
+    mix.copy('node_modules/bootstrap-sass/assets/fonts/bootstrap', 'public/assets/fonts');
+    mix.copy('node_modules/font-awesome/fonts','public/assets/fonts');
 
+
+    // Browser Sync
     mix.browserSync({
         proxy: 'faxsmile.app'
     });
