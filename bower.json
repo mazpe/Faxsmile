@@ -4,6 +4,7 @@
     "AdminLTE": "admin-lte#^2.3.6",
     "bootstrap": "^3.3.7",
     "font-awesome": "^4.6.3",
-    "Ionicons": "ionicons#^2.0.1"
+    "Ionicons": "ionicons#^2.0.1",
+    "html5shiv": "^3.7.3"
   }
 }

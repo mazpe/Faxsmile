@@ -35,10 +35,12 @@ elixir(function(mix) {
         'bower_components/bootstrap/dist/js/bootstrap.js',
     ], 'resources/assets/js/global.js','./');
 
+    // admin javascripts
     mix.scripts([
         'resources/assets/js/global.js',
         'node_modules/bootstrap-sass/assets/javascripts/bootstrap.js',
         'bower_components/AdminLTE/dist/js/app.js',
+        'bower_components/html5shiv/dist/html5shiv.js',
     ], 'public/assets/js/admin.js','./');
 
     // Tasks
