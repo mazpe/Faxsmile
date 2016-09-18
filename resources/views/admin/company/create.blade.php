@@ -19,24 +19,24 @@
 
     {!! Form::open(['action' => 'Admin\CompanyController@store', 'class' => 'form-horizontal']) !!}
     <div class="box-body">
-
-
-        <div class="form-group">
-            {{ Form::label('type', 'Type', ['class' => 'col-sm-2 control-label']) }}
-            <div class="col-sm-10">
-                {{ Form::select('type', $company_types, null,
-                    ['class' => 'form-control','placeholder' => 'Pick a size...']) }}
-            </div>
-        </div>
-
-        <div class="form-group">
-        {{ Form::label('name', 'Name', ['class' => 'col-sm-2 control-label']) }}
-            <div class="col-sm-10">
-            {{ Form::text('name', '', ['class' => 'form-control']) }}
-            </div>
-        </div>
-
-        {{  Form::submit('Click Me!') }}
+        {{ Form::bsSelect('type', '', $company_types) }}
+        {{ Form::bsText('name') }}
+        {{ Form::bsText('address_1') }}
+        {{ Form::bsText('address_2') }}
+        {{ Form::bsText('city') }}
+        {{ Form::bsSelect('state', '', $states) }}
+        {{ Form::bsText('zip') }}
+        {{ Form::bsText('phone') }}
+        {{ Form::bsText('fax') }}
+        {{ Form::bsText('website') }}
+        {{ Form::bsText('fax_domain') }}
+        {{ Form::bsText('domain') }}
+        {{ Form::bsText('time_zone') }}
+        {{ Form::bsText('external_account') }}
+        {{ Form::bsText('contact') }}
+        {{ Form::bsText('contact_phone') }}
+        {{ Form::bsText('notes') }}
+        {{ Form::bsSubmit('Create Company', '','btn btn-info pull-right') }}
     </div>
     {!! Form::close() !!}
 </div>

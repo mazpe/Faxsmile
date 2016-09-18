@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Company;
 use Illuminate\Http\Request;
+//use App\Providers\FormServiceProvider;
 
 class CompanyController extends Controller
 {
@@ -27,14 +28,19 @@ class CompanyController extends Controller
      * @return Response
      */
     public function create() {
-        $company_type = [
+        $company_types = [
             'White Label' => "White Label",
             'Reseller' => "Reseller",
         ];
 
+        $states = [
+            'FL' => "Florida"
+        ];
+
         return view('admin.company.create',[
             'page_title' => 'Companies',
-            'company_types' => $company_type
+            'company_types' => $company_types,
+            'states' => $states,
         ]);
     }
 
