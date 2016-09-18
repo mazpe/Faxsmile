@@ -27,9 +27,14 @@ class CompanyController extends Controller
      * @return Response
      */
     public function create() {
+        $company_type = [
+            'White Label' => "White Label",
+            'Reseller' => "Reseller",
+        ];
+
         return view('admin.company.create',[
             'page_title' => 'Companies',
-            'companies' => Company::all()
+            'company_types' => $company_type
         ]);
     }
 
