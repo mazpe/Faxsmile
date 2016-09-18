@@ -19,6 +19,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/', function () {
         return view('admin.admin_template');
     });
+
     Route::get('test', 'TestController@index');
+
+    Route::resource('company', 'Admin\CompanyController');
 });
 
