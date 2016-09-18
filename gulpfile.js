@@ -26,7 +26,8 @@ elixir(function(mix) {
         'resources/assets/css/global.css',
         'bower_components/Ionicons/css/ionicons.css',
         'bower_components/AdminLTE/dist/css/AdminLTE.css',
-        'bower_components/AdminLTE/dist/css/skins/skin-blue.min.css'
+        'bower_components/AdminLTE/dist/css/skins/skin-blue.min.css',
+        'bower_components/datatables.net-bs/css/dataTables.bootstrap.css',
     ], 'public/assets/css/admin.css','./');
 
     // JavaScript
@@ -36,7 +37,9 @@ elixir(function(mix) {
         'node_modules/bootstrap-sass/assets/javascripts/bootstrap.js',
         'bower_components/AdminLTE/dist/js/app.js',
         'bower_components/html5shiv/dist/html5shiv.js',
-        'bower_components/respond/dest/respond.src.js'
+        'bower_components/respond/dest/respond.src.js',
+        'bower_components/datatables.net/js/jquery.dataTables.js',
+        'bower_components/datatables.net-bs/js/dataTables.bootstrap.js',
     ], 'public/assets/js/admin.js','./');
 
     // Tasks
