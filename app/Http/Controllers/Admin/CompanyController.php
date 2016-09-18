@@ -56,7 +56,9 @@ class CompanyController extends Controller
             'name' => 'required|unique:companies|max:255',
         ]);
 
-        
+        Company::create($request->all());
 
+        return redirect()->route('company.index')
+            ->with('success','Product created successfully');
     }
 }
