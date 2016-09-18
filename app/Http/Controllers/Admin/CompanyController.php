@@ -56,5 +56,7 @@ class CompanyController extends Controller
             'name' => 'required|unique:companies|max:255',
         ]);
 
+        
+
     }
 }
