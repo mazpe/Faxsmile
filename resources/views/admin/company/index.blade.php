@@ -83,9 +83,6 @@
                                     aria-label="Name: activate to sort column ascending" style="width: 195px;">Name
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="companies" rowspan="1" colspan="1"
-                                    aria-label="Notes: activate to sort column ascending" style="width: 200px;">Notes
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="companies" rowspan="1" colspan="1"
                                     aria-label="Active: activate to sort column ascending" style="width: 30px;">Active
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="companies" rowspan="1" colspan="1"
@@ -99,7 +96,6 @@
                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/company/' . $company->id)}}">
                                     <td class="sorting_1">{{ $company->type }}</td>
                                     <td>{{ $company->name }}</td>
-                                    <td>{{ $company->notes }}</td>
                                     <td>{{ $company->active }}</td>
                                     <td>
                                         {{ link_to_action('Admin\CompanyController@show', $title = 'Show',
@@ -108,7 +104,10 @@
                                         {{ link_to_action('Admin\CompanyController@edit', $title = 'Edit',
                                             $parameters = array($company->id),
                                             $attributes = array('class' => 'btn btn-xs btn-info')) }}
-                                        delete</td>
+                                        {!! Form::open(['method' => 'DELETE','action' => ['Admin\CompanyController@destroy', $company->id],'style'=>'display:inline']) !!}
+                                        {!! Form::submit('Delete', ['class' => 'btn btn-xs btn-danger']) !!}
+                                        {!! Form::close() !!}
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -116,7 +115,6 @@
                             <tr>
                                 <th rowspan="1" colspan="1">Type</th>
                                 <th rowspan="1" colspan="1">Name</th>
-                                <th rowspan="1" colspan="1">Notes</th>
                                 <th rowspan="1" colspan="1">Active</th>
                                 <th rowspan="1" colspan="1">Action</th>
                             </tr>
