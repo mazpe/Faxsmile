@@ -26,7 +26,7 @@ class CompanyController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create() {
-        return view('admin.company.show');
+        return view('admin.company.create');
     }
 
     /**
@@ -85,7 +85,7 @@ class CompanyController extends Controller
     {
         $this->validate($request, [
             'type' => 'required',
-            'name' => 'required|unique:companies|max:255',
+            'name' => 'required|max:255',
         ]);
 
         Company::find($id)->update($request->all());

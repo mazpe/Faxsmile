@@ -40,7 +40,10 @@
                         </li>
                     </ul>
                 </div>
-                <a href="#" class="btn btn-primary btn-block"><b>Edit</b></a>
+
+                {{ link_to_action('Admin\CompanyController@edit', $title = 'Edit',
+                $parameters = array($company->id),
+                $attributes = array('class' => 'btn btn-primary btn-block')) }}
                 <!-- /.box-body -->
             </div>
             <!-- /.box -->
