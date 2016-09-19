@@ -102,7 +102,7 @@
                                     <td>{{ $company->notes }}</td>
                                     <td>{{ $company->active }}</td>
                                     <td>
-                                        {{ link_to_action('Admin\CompanyController@show', $title = 'Show',
+                                        {{ link_to_action('Admin\CompanyController@show', $title = 'Edit',
                                             $parameters = array($company->id),
                                             $attributes = array('class' => 'btn btn-xs btn-default')) }}
                                         -
