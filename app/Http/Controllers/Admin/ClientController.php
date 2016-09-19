@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Company;
+use App\Client;
 
-class CompanyController extends Controller
+class ClientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class CompanyController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index() {
-        return view('admin.company.index',[
-            'companies' => Company::all()
+        return view('admin.client.index',[
+            'clients' => Client::all()
         ]);
     }
 
@@ -25,7 +25,7 @@ class CompanyController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create() {
-        return view('admin.company.create');
+        return view('admin.client.create');
     }
 
     /**
@@ -37,12 +37,12 @@ class CompanyController extends Controller
     public function store(Request $request) {
         $this->validate($request, [
             'type' => 'required',
-            'name' => 'required|unique:companies|max:255',
+            'name' => 'required|unique:clients|max:255',
         ]);
 
-        Company::create($request->all());
+        Client::create($request->all());
 
-        return redirect()->route('company.index')
+        return redirect()->route('client.index')
             ->with('success','Product created successfully');
     }
 
@@ -54,10 +54,10 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
-        $company= Company::find($id);
-        $company_clients = $company->clients;
-        return view('admin.company.show',
-            compact('company','company_clients')
+        $client= Client::find($id);
+        $client_clients = $client->clients;
+        return view('admin.client.show',
+            compact('client','client_clients')
         );
     }
 
@@ -69,8 +69,8 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-        $company= Company::find($id);
-        return view('admin.company.edit',compact('company'));
+        $client= Client::find($id);
+        return view('admin.client.edit',compact('client'));
     }
 
     /**
@@ -87,10 +87,10 @@ class CompanyController extends Controller
             'name' => 'required|max:255',
         ]);
 
-        Company::find($id)->update($request->all());
+        Client::find($id)->update($request->all());
 
-        return redirect()->route('company.index')
-            ->with('success','Company updated successfully');
+        return redirect()->route('client.index')
+            ->with('success','Client updated successfully');
     }
 
 
@@ -102,8 +102,8 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        Company::find($id)->delete();
-        return redirect()->route('company.index')
-            ->with('success','Company deleted successfully');
+        Client::find($id)->delete();
+        return redirect()->route('client.index')
+            ->with('success','Client deleted successfully');
     }
 }
