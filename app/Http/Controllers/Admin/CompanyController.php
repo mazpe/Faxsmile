@@ -56,7 +56,10 @@ class CompanyController extends Controller
     public function show($id)
     {
         $company= Company::find($id);
-        return view('admin.company.show',compact('company'));
+        $company_clients = $company->clients;
+        return view('admin.company.show',
+            compact('company','company_clients')
+        );
     }
 
     /**

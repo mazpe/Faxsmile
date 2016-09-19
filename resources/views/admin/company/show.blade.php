@@ -52,7 +52,6 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#info" data-toggle="tab">Info</a></li>
                     <li><a href="#company-clients" data-toggle="tab">Clients</a></li>
-                    <li><a href="#settings" data-toggle="tab">Settings</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="active tab-pane" id="info">
@@ -110,12 +109,8 @@
                                                aria-describedby="company_clients_info">
                                             <thead>
                                             <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="company_clients" rowspan="1" colspan="1"
-                                                    aria-sort="ascending" aria-label="Type: activate to sort column descending"
-                                                    style="width: 80px;">Type
-                                                </th>
                                                 <th class="sorting" tabindex="0" aria-controls="company_clients" rowspan="1" colspan="1"
-                                                    aria-label="Name: activate to sort column ascending" style="width: 195px;">Name
+                                                    aria-label="Name: activate to sort column ascending" style="width: 250px;">Name
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="company_clients" rowspan="1" colspan="1"
                                                     aria-label="Active: activate to sort column ascending" style="width: 30px;">Active
@@ -127,26 +122,23 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            {{--@foreach($company_clients as $company)--}}
-                                                {{--<tr role="row" class="odd"  data-href="{{URL::to('/admin/company/' . $company->id)}}">--}}
-                                                    {{--<td class="sorting_1">{{ $company->type }}</td>--}}
-                                                    {{--<td>{{ $company->name }}</td>--}}
-                                                    {{--<td>{{ $company->notes }}</td>--}}
-                                                    {{--<td>{{ $company->active }}</td>--}}
-                                                    {{--<td>--}}
-                                                        {{--{{ link_to_action('Admin\CompanyController@show', $title = 'Show',--}}
-                                                            {{--$parameters = array($company->id),--}}
-                                                            {{--$attributes = array('class' => 'btn btn-xs btn-success')) }}--}}
-                                                        {{--{{ link_to_action('Admin\CompanyController@edit', $title = 'Edit',--}}
-                                                            {{--$parameters = array($company->id),--}}
-                                                            {{--$attributes = array('class' => 'btn btn-xs btn-info')) }}--}}
-                                                        {{--delete</td>--}}
-                                                {{--</tr>--}}
-                                            {{--@endforeach--}}
+                                            @foreach($company_clients as $client)
+                                                <tr role="row" class="odd"  data-href="{{URL::to('/admin/company/' . $client->id)}}">
+                                                    <td>{{ $client->name }}</td>
+                                                    <td>{{ $client->active }}</td>
+                                                    <td>
+                                                        {{ link_to_action('Admin\CompanyController@show', $title = 'Show',
+                                                            $parameters = array($company->id),
+                                                            $attributes = array('class' => 'btn btn-xs btn-success')) }}
+                                                        {{ link_to_action('Admin\CompanyController@edit', $title = 'Edit',
+                                                            $parameters = array($company->id),
+                                                            $attributes = array('class' => 'btn btn-xs btn-info')) }}
+                                                        delete</td>
+                                                </tr>
+                                            @endforeach
                                             </tbody>
                                             <tfoot>
                                             <tr>
-                                                <th rowspan="1" colspan="1">Type</th>
                                                 <th rowspan="1" colspan="1">Name</th>
                                                 <th rowspan="1" colspan="1">Active</th>
                                                 <th rowspan="1" colspan="1">Action</th>
@@ -163,60 +155,6 @@
                     </div>
                     <!-- /.tab-pane -->
 
-                    <div class="tab-pane" id="settings">
-                        <form class="form-horizontal">
-                            <div class="form-group">
-                                <label for="inputName" class="col-sm-2 control-label">Name</label>
-
-                                <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="inputName" placeholder="Name">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputEmail" class="col-sm-2 control-label">Email</label>
-
-                                <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputName" class="col-sm-2 control-label">Name</label>
-
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inputName" placeholder="Name">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
-
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
-
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-danger">Submit</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- /.tab-pane -->
                 </div>
                 <!-- /.tab-content -->
             </div>
