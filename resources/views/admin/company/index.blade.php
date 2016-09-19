@@ -101,7 +101,12 @@
                                     <td>{{ $company->name }}</td>
                                     <td>{{ $company->notes }}</td>
                                     <td>{{ $company->active }}</td>
-                                    <td>edit - delete</td>
+                                    <td>
+                                        {{ link_to_action('Admin\CompanyController@show', $title = 'Show',
+                                            $parameters = array($company->id),
+                                            $attributes = array('class' => 'btn btn-xs btn-default')) }}
+                                        -
+                                        delete</td>
                                 </tr>
                             @endforeach
                             </tbody>

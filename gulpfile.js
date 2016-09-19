@@ -44,7 +44,8 @@ elixir(function(mix) {
 
     // Tasks
     // - fonts
-    mix.copy('node_modules/bootstrap-sass/assets/fonts/bootstrap', 'public/assets/fonts');
+
+    mix.copy('node_modules/bootstrap-sass/assets/fonts/bootstrap', 'public/assets/fonts/bootstrap');
     mix.copy('node_modules/font-awesome/fonts','public/assets/fonts');
     mix.copy('bower_components/Ionicons/fonts','public/assets/fonts');
 

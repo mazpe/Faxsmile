@@ -15,9 +15,7 @@ class CompanyController extends Controller
      * @return Response
      */
     public function index() {
-        $page_title = 'Company';
         return view('admin.company.index',[
-            'page_title' => 'Companies',
             'companies' => Company::all()
         ]);
     }
@@ -28,20 +26,7 @@ class CompanyController extends Controller
      * @return Response
      */
     public function create() {
-        $company_types = [
-            'White Label' => "White Label",
-            'Reseller' => "Reseller",
-        ];
-
-        $states = [
-            'FL' => "Florida"
-        ];
-
-        return view('admin.company.create',[
-            'page_title' => 'Companies',
-            'company_types' => $company_types,
-            'states' => $states,
-        ]);
+        return view('admin.company.show');
     }
 
     /**
@@ -60,5 +45,35 @@ class CompanyController extends Controller
 
         return redirect()->route('company.index')
             ->with('success','Product created successfully');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function show($id)
+    {
+        $company= Company::find($id);
+        return view('admin.company.show',compact('company'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  Request  $request
+     * @param  int  $id
+     * @return Response
+     */
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'type' => 'required',
+            'name' => 'required|unique:companies|max:255',
+        ]);
+        Company::find($id)->update($request->all());
+        return redirect()->route('company.index')
+            ->with('success','Company updated successfully');
     }
 }
