@@ -52,8 +52,18 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
+                    <strong><i class="fa fa-phone margin-r-5"></i> Contact</strong>
+                    <p class="text-muted">{{ $company->contact }} </p>
+                    <p class="text-muted">{{ $company->contact_phone }} </p>
 
+                    <hr>
+
+                    <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+                    <p class="text-muted">{{ $company->city }} {{ $company->state }}</p>
+
+                    <hr>
+
+                    <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
                     <p>{{ $company->notes }}.</p>
                 </div>
                 <!-- /.box-body -->
@@ -74,58 +84,24 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="box">
-                                    <dl class="row">
-                                        @if ($company->name)
-                                            <dt class="col-sm-3">Name:</dt>
-                                            <dd class="col-sm-9">{{ $company->name }}</dd>
-                                        @endif
-                                        @if ($company->type)
-                                            <dt class="col-sm-3">Type:</dt>
-                                            <dd class="col-sm-9">{{ $company->type }}</dd>
-                                        @endif
-                                        @if ($company->address_1)
-                                            <dt class="col-sm-3">Address 1:</dt>
-                                            <dd class="col-sm-9">{{ $company->address_1 }}</dd>
-                                        @endif
-                                        @if ($company->address_2)
-                                            <dt class="col-sm-3">Address 2:</dt>
-                                            <dd class="col-sm-9">{{ $company->address_2 }}</dd>
-                                        @endif
-                                        @if ($company->city)
-                                            <dt class="col-sm-3">City:</dt>
-                                            <dd class="col-sm-9">{{ $company->city }}</dd>
-                                        @endif
-                                        @if ($company->state)
-                                            <dt class="col-sm-3">State:</dt>
-                                            <dd class="col-sm-9">{{ $company->state }}</dd>
-                                        @endif
-                                        @if ($company->zip)
-                                            <dt class="col-sm-3">Zip:</dt>
-                                            <dd class="col-sm-9">{{ $company->zip }}</dd>
-                                        @endif
-                                    </dl>
+                                    <div><strong>Name:</strong> {{ $company->name }}</div>
+                                    <div><strong>Type:</strong> {{ $company->type }}</div>
+                                    <div><strong>Address 1:</strong> {{ $company->address_1 }}</div>
+                                    <div><strong>Address 2:</strong> {{ $company->address_2 }}</div>
+                                    <div><strong>City:</strong> {{ $company->city }}</div>
+                                    <div><strong>State:</strong> {{ $company->state }}</div>
+                                    <div><strong>Zip:</strong> {{ $company->zip }}</div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="box">
-                                    <dl class="row">
-                                        @if ($company->phone)
-                                            <dt class="col-sm-4">Phone:</dt>
-                                            <dd class="col-sm-8">{{ $company->phone }}</dd>
-                                        @endif
-                                        @if ($company->fax)
-                                            <dt class="col-sm-4">Fax:</dt>
-                                            <dd class="col-sm-8">{{ $company->fax }}</dd>
-                                        @endif
-                                        @if ($company->website)
-                                            <dt class="col-sm-4">Web Site:</dt>
-                                            <dd class="col-sm-8">{{ $company->website }}</dd>
-                                        @endif
-                                        @if ($company->fax_domain)
-                                            <dt class="col-sm-4">Fax Domain:</dt>
-                                            <dd class="col-sm-8">{{ $company->fax_domain }}</dd>
-                                        @endif
-                                    </dl>
+                                    <div><strong>Phone:</strong> {{ $company->phone }}</div>
+                                    <div><strong>Fax:</strong> {{ $company->fax }}</div>
+                                    <div><strong>Web Site:</strong> {{ $company->website }}</div>
+                                    <div><strong>Fax Domain:</strong> {{ $company->fax_domain }}</div>
+                                    <div><strong>Domain:</strong> {{ $company->domain }}</div>
+                                    <div><strong>Time Zone:</strong> {{ $company->time_zone }}</div>
+                                    <div><strong>External Account:</strong> {{ $company->external_account }}</div>
                                 </div>
                             </div>
                         </div>
