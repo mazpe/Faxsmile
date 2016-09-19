@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class CompanyController extends Controller
 {
     /**
-     * Show companies
+     * Display a listing of the resource.
      *
      * @return Response
      */
@@ -21,7 +21,7 @@ class CompanyController extends Controller
     }
 
     /**
-     * Show the form to create a new company
+     * Show the form for creating a new resource.
      *
      * @return Response
      */
@@ -30,7 +30,7 @@ class CompanyController extends Controller
     }
 
     /**
-     * Store a new company
+     * Store a newly created resource in storage.
      *
      * @param Request $request
      * @return Response
@@ -60,6 +60,18 @@ class CompanyController extends Controller
     }
 
     /**
+     * Display the specified resource to be edited.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function edit($id)
+    {
+        $company= Company::find($id);
+        return view('admin.company.edit',compact('company'));
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  Request  $request
@@ -72,7 +84,9 @@ class CompanyController extends Controller
             'type' => 'required',
             'name' => 'required|unique:companies|max:255',
         ]);
+
         Company::find($id)->update($request->all());
+
         return redirect()->route('company.index')
             ->with('success','Company updated successfully');
     }

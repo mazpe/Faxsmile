@@ -71,7 +71,7 @@
             <div id="companies_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                 <div class="row">
                     <div class="col-sm-12">
-                        <table id="companies" class="table table-bordered table-striped dataTable" role="grid"
+                        <table id="companies" class="table table-bordered table-striped hover dataTable" role="grid"
                                aria-describedby="companies_info">
                             <thead>
                             <tr role="row">
@@ -96,15 +96,15 @@
                             </thead>
                             <tbody>
                             @foreach($companies as $company)
-                                <tr role="row" class="odd">
+                                <tr role="row" class="odd"  data-href="{{URL::to('/admin/company/' . $company->id)}}">
                                     <td class="sorting_1">{{ $company->type }}</td>
                                     <td>{{ $company->name }}</td>
                                     <td>{{ $company->notes }}</td>
                                     <td>{{ $company->active }}</td>
                                     <td>
-                                        {{ link_to_action('Admin\CompanyController@show', $title = 'Edit',
+                                        {{ link_to_action('Admin\CompanyController@edit', $title = 'Edit',
                                             $parameters = array($company->id),
-                                            $attributes = array('class' => 'btn btn-xs btn-default')) }}
+                                            $attributes = array('class' => 'btn btn-xs btn-info')) }}
                                         -
                                         delete</td>
                                 </tr>
