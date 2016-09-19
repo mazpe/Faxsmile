@@ -102,10 +102,12 @@
                                     <td>{{ $company->notes }}</td>
                                     <td>{{ $company->active }}</td>
                                     <td>
+                                        {{ link_to_action('Admin\CompanyController@show', $title = 'Show',
+                                            $parameters = array($company->id),
+                                            $attributes = array('class' => 'btn btn-xs btn-success')) }}
                                         {{ link_to_action('Admin\CompanyController@edit', $title = 'Edit',
                                             $parameters = array($company->id),
                                             $attributes = array('class' => 'btn btn-xs btn-info')) }}
-                                        -
                                         delete</td>
                                 </tr>
                             @endforeach
