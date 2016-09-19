@@ -12,7 +12,6 @@ require('laravel-elixir-vue');
  | file for our application, as well as publishing vendor resources.
  |
  */
-
 elixir(function(mix) {
     // CSS
     elixir(function(mix) {
@@ -40,6 +39,7 @@ elixir(function(mix) {
         'bower_components/respond/dest/respond.src.js',
         'bower_components/datatables.net/js/jquery.dataTables.js',
         'bower_components/datatables.net-bs/js/dataTables.bootstrap.js',
+        'resources/assets/js/admin.js'
     ], 'public/assets/js/admin.js','./');
 
     // Tasks
