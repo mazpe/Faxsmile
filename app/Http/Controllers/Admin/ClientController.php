@@ -26,9 +26,8 @@ class ClientController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create() {
-
-        $companies = Company::all(['id', 'name']);
-        return view('admin.client.create', compact('id','companies'));
+        $companies = Company::Pluck('name', 'id');
+        return view('admin.client.create', compact('companies'));
     }
 
     /**
@@ -71,8 +70,9 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        $client= Client::find($id);
-        return view('admin.client.edit',compact('client'));
+        $client = Client::find($id);
+        $companies = Company::Pluck('name', 'id');
+        return view('admin.client.edit',compact('client','companies'));
     }
 
     /**

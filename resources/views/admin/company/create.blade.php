@@ -20,7 +20,7 @@
     @endif
 
     {!! Form::open(['action' => 'Admin\CompanyController@store', 'class' => 'form-horizontal']) !!}
-        @include('admin.client.form')
+        @include('admin.company.form')
     {!! Form::close() !!}
 </div>
 @endsection

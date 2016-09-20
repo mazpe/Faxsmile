@@ -31,7 +31,7 @@ class ComposerServiceProvider extends ServiceProvider
         });
 
         view()->composer('admin.client.*', function ($view) {
-             $states = [
+            $states = [
                 'FL' => "Florida"
             ];
 
