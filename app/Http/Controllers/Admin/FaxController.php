@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Fax;
 use App\Client;
-use App\Company;
 
-class ClientController extends Controller
+class FaxController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class ClientController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index() {
-        return view('admin.client.index',[
-            'clients' => Client::all()
+        return view('admin.fax.index',[
+            'faxes' => Fax::all()
         ]);
     }
 
@@ -26,8 +26,8 @@ class ClientController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create() {
-        $companies = Company::Pluck('name', 'id');
-        return view('admin.client.create', compact('companies'));
+        $clients = Client::Pluck('name', 'id');
+        return view('admin.fax.create', compact('clients'));
     }
 
     /**
@@ -38,14 +38,14 @@ class ClientController extends Controller
      */
     public function store(Request $request) {
         $this->validate($request, [
-            'company_id' => 'required|numeric',
-            'name' => 'required|unique:clients|max:255',
+            'client_id' => 'required|numeric',
+            'number' => 'required|unique:faxes|numeric',
         ]);
 
-        Client::create($request->all());
+        Fax::create($request->all());
 
-        return redirect()->route('client.index')
-            ->with('success','Client created successfully');
+        return redirect()->route('fax.index')
+            ->with('success','Fax created successfully');
     }
 
     /**
@@ -56,9 +56,10 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        $client = Client::find($id);
-        return view('admin.client.show',
-            compact('client')
+        $fax = Fax::find($id);
+        $fax_users = $fax->users;
+        return view('admin.fax.show',
+            compact('fax','fax_users')
         );
     }
 
@@ -70,9 +71,9 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        $client = Client::find($id);
-        $companies = Company::Pluck('name', 'id');
-        return view('admin.client.edit',compact('client','companies'));
+        $fax = Fax::find($id);
+        $clients = Client::Pluck('name', 'id');
+        return view('admin.fax.edit',compact('fax','clients'));
     }
 
     /**
@@ -85,14 +86,14 @@ class ClientController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'company_id' => 'required|numeric',
-            'name' => 'required|max:255',
+            'client_id' => 'required|numeric',
+            'number' => 'required|numeric',
         ]);
 
-        Client::find($id)->update($request->all());
+        Fax::find($id)->update($request->all());
 
-        return redirect()->route('client.index')
-            ->with('success','Client updated successfully');
+        return redirect()->route('fax.index')
+            ->with('success','Fax updated successfully');
     }
 
 
@@ -104,8 +105,8 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        Client::find($id)->delete();
-        return redirect()->route('client.index')
-            ->with('success','Client deleted successfully');
+        Fax::find($id)->delete();
+        return redirect()->route('fax.index')
+            ->with('success','Fax deleted successfully');
     }
 }

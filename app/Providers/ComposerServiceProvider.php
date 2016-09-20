@@ -38,6 +38,15 @@ class ComposerServiceProvider extends ServiceProvider
             $view->with('page_title', 'Clients')
                 ->with('states', $states);
         });
+
+        view()->composer('admin.fax.*', function ($view) {
+            $states = [
+                'FL' => "Florida"
+            ];
+
+            $view->with('page_title', 'Faxes')
+                ->with('states', $states);
+        });
     }
 
     /**

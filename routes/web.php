@@ -17,11 +17,9 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/', 'AdminController@index');
-
     Route::get('test', 'TestController@index');
-
     Route::resource('company', 'Admin\CompanyController');
-
     Route::resource('client', 'Admin\ClientController');
+    Route::resource('fax', 'Admin\FaxController');
 });
 
