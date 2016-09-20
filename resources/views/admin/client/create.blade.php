@@ -3,7 +3,7 @@
 @section('content')
 <div class="box box-info">
     <div class="box-header with-border">
-        <h3 class="box-title">Edit Company</h3>
+        <h3 class="box-title">Create Client</h3>
     </div>
 
     <!-- form start -->
@@ -19,11 +19,8 @@
         </div>
     @endif
 
-    {!! Form::model($company, ['method' => 'PATCH','action' => ['Admin\CompanyController@update', $company->id],
-        'class' => 'form-horizontal']) !!}
-        <div class="box-body">
-            @include('admin.client.form')
-        </div>
+    {!! Form::open(['action' => 'Admin\ClientController@store', 'class' => 'form-horizontal']) !!}
+        @include('admin.client.form')
     {!! Form::close() !!}
 </div>
 @endsection

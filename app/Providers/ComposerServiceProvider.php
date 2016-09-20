@@ -29,6 +29,15 @@ class ComposerServiceProvider extends ServiceProvider
                 ->with('company_types', $company_types)
                 ->with('states', $states);
         });
+
+        view()->composer('admin.client.*', function ($view) {
+            $states = [
+                'FL' => "Florida"
+            ];
+
+            $view->with('page_title', 'Clients')
+                ->with('states', $states);
+        });
     }
 
     /**
