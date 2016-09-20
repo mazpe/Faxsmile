@@ -2,7 +2,10 @@ $(function () {
         var companies_table = $("#companies").DataTable();
         var company_clients_table = $("#company_clients").DataTable();
         var clients_table = $("#clients").DataTable();
+        var client_faxes_table = $("#client_faxes").DataTable();
+        var client_users_table = $("#client_users").DataTable();
         var faxes_table = $("#faxes").DataTable();
+        var faxes_users_table = $("#fax_users").DataTable();
         // var users_table = $("#users").DataTable();
 
         $('#companies tbody').on('click', 'tr', function () {
