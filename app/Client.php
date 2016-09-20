@@ -28,4 +28,13 @@ class Client extends Model
     public function faxes() {
         return $this->hasMany('App\Fax');
     }
+
+    /**
+     * Get the users owned by the client
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function users() {
+        return $this->hasMany('App\User');
+    }
 }

@@ -124,20 +124,23 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            {{--@foreach($client_clients as $client)--}}
-                                                {{--<tr role="row" class="odd"  data-href="{{URL::to('/admin/client/' . $client->id)}}">--}}
-                                                    {{--<td>{{ $client->name }}</td>--}}
-                                                    {{--<td>{{ $client->active }}</td>--}}
-                                                    {{--<td>--}}
-                                                        {{--{{ link_to_action('Admin\ClientController@show', $title = 'Show',--}}
-                                                            {{--$parameters = array($client->id),--}}
-                                                            {{--$attributes = array('class' => 'btn btn-xs btn-success')) }}--}}
-                                                        {{--{{ link_to_action('Admin\ClientController@edit', $title = 'Edit',--}}
-                                                            {{--$parameters = array($client->id),--}}
-                                                            {{--$attributes = array('class' => 'btn btn-xs btn-info')) }}--}}
-                                                        {{--delete</td>--}}
-                                                {{--</tr>--}}
-                                            {{--@endforeach--}}
+                                            @foreach($client->faxes as $fax)
+                                                <tr role="row" class="odd"  data-href="{{URL::to('/admin/fax/' . $fax->id)}}">
+                                                    <td>{{ $fax->number }}</td>
+                                                    <td>{{ $fax->active }}</td>
+                                                    <td>
+                                                        {{ link_to_action('Admin\ClientController@show', $title = 'Show',
+                                                            $parameters = array($fax->id),
+                                                            $attributes = array('class' => 'btn btn-xs btn-success')) }}
+                                                        {{ link_to_action('Admin\ClientController@edit', $title = 'Edit',
+                                                            $parameters = array($fax->id),
+                                                            $attributes = array('class' => 'btn btn-xs btn-info')) }}
+                                                        {!! Form::open(['method' => 'DELETE','action' => ['Admin\ClientController@destroy', $client->id],'style'=>'display:inline']) !!}
+                                                        {!! Form::submit('Delete', ['class' => 'btn btn-xs btn-danger']) !!}
+                                                        {!! Form::close() !!}
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                             </tbody>
                                             <tfoot>
                                             <tr>
@@ -170,6 +173,9 @@
                                                aria-describedby="client_clients_info">
                                             <thead>
                                             <tr role="row">
+                                                <th class="sorting_asc" tabindex="0" aria-controls="client_clients" rowspan="1" colspan="1"
+                                                    aria-sort="ascending" aria-label="ID: activate to sort column ascending" style="width: 5px;">ID
+                                                </th>
                                                 <th class="sorting" tabindex="0" aria-controls="client_clients" rowspan="1" colspan="1"
                                                     aria-label="Name: activate to sort column ascending" style="width: 250px;">Name
                                                 </th>
@@ -177,29 +183,34 @@
                                                     aria-label="Active: activate to sort column ascending" style="width: 30px;">Active
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="client_clients" rowspan="1" colspan="1"
-                                                    aria-label="CSS grade: activate to sort column ascending" style="width: 50px;">
+                                                    aria-label="CSS grade: activate to sort column ascending" style="width: 70px;">
                                                     Action
                                                 </th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            {{--@foreach($client_clients as $client)--}}
-                                            {{--<tr role="row" class="odd"  data-href="{{URL::to('/admin/client/' . $client->id)}}">--}}
-                                            {{--<td>{{ $client->name }}</td>--}}
-                                            {{--<td>{{ $client->active }}</td>--}}
-                                            {{--<td>--}}
-                                            {{--{{ link_to_action('Admin\ClientController@show', $title = 'Show',--}}
-                                            {{--$parameters = array($client->id),--}}
-                                            {{--$attributes = array('class' => 'btn btn-xs btn-success')) }}--}}
-                                            {{--{{ link_to_action('Admin\ClientController@edit', $title = 'Edit',--}}
-                                            {{--$parameters = array($client->id),--}}
-                                            {{--$attributes = array('class' => 'btn btn-xs btn-info')) }}--}}
-                                            {{--delete</td>--}}
-                                            {{--</tr>--}}
-                                            {{--@endforeach--}}
+                                            @foreach($client->users as $user)
+                                                <tr role="row" class="odd"  data-href="{{URL::to('/admin/user/' . $user->id)}}">
+                                                    <td class="sorting_1">{{ $user->id }}</td>
+                                                    <td>{{ $user->name }}</td>
+                                                    <td>{{ $user->active }}</td>
+                                                    <td>
+                                                        {{ link_to_action('Admin\ClientController@show', $title = 'Show',
+                                                            $parameters = array($user->id),
+                                                            $attributes = array('class' => 'btn btn-xs btn-success')) }}
+                                                        {{ link_to_action('Admin\ClientController@edit', $title = 'Edit',
+                                                            $parameters = array($user->id),
+                                                            $attributes = array('class' => 'btn btn-xs btn-info')) }}
+                                                        {!! Form::open(['method' => 'DELETE','action' => ['Admin\ClientController@destroy', $client->id],'style'=>'display:inline']) !!}
+                                                        {!! Form::submit('Delete', ['class' => 'btn btn-xs btn-danger']) !!}
+                                                        {!! Form::close() !!}
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                             </tbody>
                                             <tfoot>
                                             <tr>
+                                                <th rowspan="1" colspan="1">ID</th>
                                                 <th rowspan="1" colspan="1">Name</th>
                                                 <th rowspan="1" colspan="1">Active</th>
                                                 <th rowspan="1" colspan="1">Action</th>

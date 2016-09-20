@@ -76,7 +76,10 @@
                             <thead>
                             <tr role="row">
                                 <th class="sorting_asc" tabindex="0" aria-controls="clients" rowspan="1" colspan="1"
-                                    aria-sort="ascending" aria-label="Type: activate to sort column descending"
+                                    aria-sort="ascending" aria-label="ID: activate to sort column ascending" style="width: 5px;">ID
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="clients" rowspan="1" colspan="1"
+                                    aria-label="Company: activate to sort column descending"
                                     style="width: 80px;">Company
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="clients" rowspan="1" colspan="1"
@@ -94,7 +97,8 @@
                             <tbody>
                             @foreach($clients as $client)
                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/client/' . $client->id)}}">
-                                    <td class="sorting_1">{{ $client->company->name }}</td>
+                                    <td class="sorting_1">{{ $client->id }}</td>
+                                    <td>{{ $client->company->name }}</td>
                                     <td>{{ $client->name }}</td>
                                     <td>{{ $client->active }}</td>
                                     <td>
@@ -113,6 +117,7 @@
                             </tbody>
                             <tfoot>
                             <tr>
+                                <th rowspan="1" colspan="1">ID</th>
                                 <th rowspan="1" colspan="1">Company</th>
                                 <th rowspan="1" colspan="1">Name</th>
                                 <th rowspan="1" colspan="1">Active</th>
