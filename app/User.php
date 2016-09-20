@@ -35,4 +35,13 @@ class User extends Authenticatable
     public function client() {
         return $this->belongsTo('App\Client');
     }
+
+    /**
+     * Get the fax that is attached to the user
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function fax() {
+        return $this->belongsTo('App\Fax');
+    }
 }

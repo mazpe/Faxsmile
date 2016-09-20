@@ -54,8 +54,8 @@
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#info" data-toggle="tab">Info</a></li>
-                    <li><a href="#faxes" data-toggle="tab">Faxes</a></li>
-                    <li><a href="#users" data-toggle="tab">Users</a></li>
+                    <li><a href="#client_faxes_panel" data-toggle="tab">Faxes</a></li>
+                    <li><a href="#client_users_panel" data-toggle="tab">Users</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="active tab-pane" id="info">
@@ -99,25 +99,23 @@
                     <!-- /.tab-pane -->
 
                     <!-- faxes tab-pane -->
-                    <div class="tab-pane" id="faxes">
-
-
+                    <div class="tab-pane" id="client_faxes_panel">
                         <!-- box -->
                         <div class="box-body">
-                            <div id="client_clients_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                            <div id="client_faxes_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <table id="client_clients" class="table table-bordered table-striped hover dataTable" role="grid"
-                                               aria-describedby="client_clients_info">
+                                        <table id="client_faxes1" class="table table-bordered table-striped hover dataTable" role="grid"
+                                               aria-describedby="client_faxes_info">
                                             <thead>
                                             <tr role="row">
-                                                <th class="sorting" tabindex="0" aria-controls="client_clients" rowspan="1" colspan="1"
+                                                <th class="sorting" tabindex="0" aria-controls="client_faxes" rowspan="1" colspan="1"
                                                     aria-label="Name: activate to sort column ascending" style="width: 250px;">Name
                                                 </th>
-                                                <th class="sorting" tabindex="0" aria-controls="client_clients" rowspan="1" colspan="1"
+                                                <th class="sorting" tabindex="0" aria-controls="client_faxes" rowspan="1" colspan="1"
                                                     aria-label="Active: activate to sort column ascending" style="width: 30px;">Active
                                                 </th>
-                                                <th class="sorting" tabindex="0" aria-controls="client_clients" rowspan="1" colspan="1"
+                                                <th class="sorting" tabindex="0" aria-controls="client_faxes" rowspan="1" colspan="1"
                                                     aria-label="CSS grade: activate to sort column ascending" style="width: 50px;">
                                                     Action
                                                 </th>
@@ -155,34 +153,30 @@
                             </div>
                         </div>
                         <!-- /.box-body -->
-
-                        <!-- /.client clients -->
                     </div>
                     <!-- /.faxes tab-pane -->
 
                     <!-- users tab-pane -->
-                    <div class="tab-pane" id="users">
-
-
+                    <div class="tab-pane" id="client_users_panel">
                         <!-- box -->
                         <div class="box-body">
-                            <div id="client_clients_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                            <div id="client_users_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <table id="client_clients" class="table table-bordered table-striped hover dataTable" role="grid"
-                                               aria-describedby="client_clients_info">
+                                        <table id="client_users" class="table table-bordered table-striped hover dataTable" role="grid"
+                                               aria-describedby="client_users_info">
                                             <thead>
                                             <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="client_clients" rowspan="1" colspan="1"
+                                                <th class="sorting_asc" tabindex="0" aria-controls="client_users" rowspan="1" colspan="1"
                                                     aria-sort="ascending" aria-label="ID: activate to sort column ascending" style="width: 5px;">ID
                                                 </th>
-                                                <th class="sorting" tabindex="0" aria-controls="client_clients" rowspan="1" colspan="1"
+                                                <th class="sorting" tabindex="0" aria-controls="client_users" rowspan="1" colspan="1"
                                                     aria-label="Name: activate to sort column ascending" style="width: 250px;">Name
                                                 </th>
-                                                <th class="sorting" tabindex="0" aria-controls="client_clients" rowspan="1" colspan="1"
+                                                <th class="sorting" tabindex="0" aria-controls="client_users" rowspan="1" colspan="1"
                                                     aria-label="Active: activate to sort column ascending" style="width: 30px;">Active
                                                 </th>
-                                                <th class="sorting" tabindex="0" aria-controls="client_clients" rowspan="1" colspan="1"
+                                                <th class="sorting" tabindex="0" aria-controls="client_users" rowspan="1" colspan="1"
                                                     aria-label="CSS grade: activate to sort column ascending" style="width: 70px;">
                                                     Action
                                                 </th>
