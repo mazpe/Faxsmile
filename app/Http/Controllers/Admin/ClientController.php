@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Client;
+use App\Company;
 
 class ClientController extends Controller
 {
@@ -25,7 +26,9 @@ class ClientController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create() {
-        return view('admin.client.create');
+
+        $companies = Company::all(['id', 'name']);
+        return view('admin.client.create', compact('id','companies'));
     }
 
     /**
@@ -36,7 +39,6 @@ class ClientController extends Controller
      */
     public function store(Request $request) {
         $this->validate($request, [
-            'type' => 'required',
             'name' => 'required|unique:clients|max:255',
         ]);
 
@@ -83,7 +85,6 @@ class ClientController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'type' => 'required',
             'name' => 'required|max:255',
         ]);
 

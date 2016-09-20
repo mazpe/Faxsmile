@@ -22,7 +22,7 @@
     {!! Form::model($company, ['method' => 'PATCH','action' => ['Admin\CompanyController@update', $company->id],
         'class' => 'form-horizontal']) !!}
         <div class="box-body">
-            @include('admin.company.form')
+            @include('admin.client.form')
         </div>
     {!! Form::close() !!}
 </div>

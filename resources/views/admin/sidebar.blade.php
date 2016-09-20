@@ -34,8 +34,9 @@
             <li class="header">HEADER</li>
             <!-- Optionally, you can add icons to the links -->
             <li class="active"><a href="/admin/company"><i class="fa fa-link"></i> <span>Companies</span></a></li>
-            <li><a href="#"><i class="fa fa-link"></i> <span>Clients</span></a></li>
-            <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
+            <li><a href="/admin/client"><i class="fa fa-link"></i> <span>Clients</span></a></li>
+            <li><a href="/admin/fax"><i class="fa fa-link"></i> <span>Faxes</span></a></li>
+            <li><a href="/admin/user"><i class="fa fa-link"></i> <span>Users</span></a></li>
         </ul>
         <!-- /.sidebar-menu -->
     </section>
