@@ -19,4 +19,13 @@ class Client extends Model
     public function company() {
         return $this->belongsTo('App\Company');
     }
+
+    /**
+     * Get the faxes owned by the client
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function faxes() {
+        return $this->hasMany('App\Fax');
+    }
 }
