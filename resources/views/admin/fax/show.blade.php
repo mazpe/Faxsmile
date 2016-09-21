@@ -61,15 +61,15 @@
                                 <div class="box">
                                     <div><strong>Number:</strong> {{ $fax->number }}</div>
                                     <div><strong>Client:</strong> {{ $fax->client->name }}</div>
-                                    <div><strong>Provider:</strong> {{ $fax->provider }}</div>
+                                    <div><strong>Provider:</strong> {{ $fax->provider->name }}</div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="box">
-                                    <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
-                                    <p>{{ $fax->notes }}.</p>
+                                    <strong><i class="fa fa-file-text-o margin-r-5"></i> Note</strong>
+                                    <p>{{ $fax->note }}.</p>
                                 </div>
                             </div>
                         </div>

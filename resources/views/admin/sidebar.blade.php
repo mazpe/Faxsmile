@@ -34,6 +34,7 @@
             <li class="header">HEADER</li>
             <!-- Optionally, you can add icons to the links -->
             <li @if ($page_title == "Companies") class="active" @endif><a href="/admin/company"><i class="fa fa-link"></i> <span>Companies</span></a></li>
+            <li @if ($page_title == "Providers") class="active" @endif><a href="/admin/provider"><i class="fa fa-link"></i> <span>Providers</span></a></li>
             <li @if ($page_title == "Clients") class="active" @endif><a href="/admin/client"><i class="fa fa-link"></i> <span>Clients</span></a></li>
             <li @if ($page_title == "Faxes") class="active" @endif><a href="/admin/fax"><i class="fa fa-link"></i> <span>Faxes</span></a></li>
             <li @if ($page_title == "Users") class="active" @endif><a href="/admin/user"><i class="fa fa-link"></i> <span>Users</span></a></li>

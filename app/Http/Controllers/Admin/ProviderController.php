@@ -4,11 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Fax;
-use App\Client;
 use App\Provider;
 
-class FaxController extends Controller
+class ProviderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +14,8 @@ class FaxController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index() {
-        return view('admin.fax.index',[
-            'faxes' => Fax::all()
+        return view('admin.provider.index',[
+            'providers' => Provider::all()
         ]);
     }
 
@@ -27,9 +25,7 @@ class FaxController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create() {
-        $clients = Client::Pluck('name', 'id');
-        $providers = Provider::Pluck('name', 'id');
-        return view('admin.fax.create', compact('clients','providers'));
+        return view('admin.provider.create');
     }
 
     /**
@@ -40,14 +36,14 @@ class FaxController extends Controller
      */
     public function store(Request $request) {
         $this->validate($request, [
-            'client_id' => 'required|numeric',
-            'number' => 'required|unique:faxes|numeric',
+            'type' => 'required',
+            'name' => 'required|unique:providers|max:255',
         ]);
 
-        Fax::create($request->all());
+        Provider::create($request->all());
 
-        return redirect()->route('fax.index')
-            ->with('success','Fax created successfully');
+        return redirect()->route('provider.index')
+            ->with('success','Provider created successfully');
     }
 
     /**
@@ -58,10 +54,10 @@ class FaxController extends Controller
      */
     public function show($id)
     {
-        $fax = Fax::find($id);
-        $fax_users = $fax->users;
-        return view('admin.fax.show',
-            compact('fax','fax_users')
+        $provider= Provider::find($id);
+        $provider_faxes = $provider->faxes;
+        return view('admin.provider.show',
+            compact('provider','provider_faxes')
         );
     }
 
@@ -73,10 +69,8 @@ class FaxController extends Controller
      */
     public function edit($id)
     {
-        $fax = Fax::find($id);
-        $clients = Client::Pluck('name', 'id');
-        $providers = Provider::Pluck('name', 'id');
-        return view('admin.fax.edit', compact('fax','clients','providers'));
+        $provider= Provider::find($id);
+        return view('admin.provider.edit',compact('provider'));
     }
 
     /**
@@ -89,14 +83,14 @@ class FaxController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'client_id' => 'required|numeric',
-            'number' => 'required|numeric',
+            'type' => 'required',
+            'name' => 'required|max:255',
         ]);
 
-        Fax::find($id)->update($request->all());
+        Provider::find($id)->update($request->all());
 
-        return redirect()->route('fax.index')
-            ->with('success','Fax updated successfully');
+        return redirect()->route('provider.index')
+            ->with('success','Provider updated successfully');
     }
 
     /**
@@ -107,8 +101,8 @@ class FaxController extends Controller
      */
     public function destroy($id)
     {
-        Fax::find($id)->delete();
-        return redirect()->route('fax.index')
-            ->with('success','Fax deleted successfully');
+        Provider::find($id)->delete();
+        return redirect()->route('provider.index')
+            ->with('success','Provider deleted successfully');
     }
 }

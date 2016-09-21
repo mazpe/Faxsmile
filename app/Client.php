@@ -6,9 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Client extends Model
 {
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     public $fillable = [
         'company_id','name','address_1','address_2','city','state','zip','phone','fax','website','contact',
-        'contact_phone','notes'
+        'contact_phone','note'
     ];
 
     /**

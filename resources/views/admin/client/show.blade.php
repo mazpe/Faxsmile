@@ -85,7 +85,7 @@
                             <div class="col-md-12">
                                 <div class="box">
                                     <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
-                                    <p>{{ $client->notes }}.</p>
+                                    <p>{{ $client->note }}.</p>
                                 </div>
                             </div>
                         </div>
