@@ -83,10 +83,14 @@
                                     style="width: 80px;">Client
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
-                                    aria-label="Number: activate to sort column ascending" style="width: 195px;">Number
+                                    aria-label="Provider: activate to sort column descending"
+                                    style="width: 80px;">Provider
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
-                                    aria-label="Active: activate to sort column ascending" style="width: 30px;">Active
+                                    aria-label="Number: activate to sort column ascending" style="width: 20px;">Number
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
+                                    aria-label="Active: activate to sort column ascending" style="width: 20px;">Active
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 50px;">
@@ -99,6 +103,7 @@
                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/fax/' . $fax->id)}}">
                                     <td class="sorting_1">{{ $fax->id }}</td>
                                     <td>{{ $fax->client->name }}</td>
+                                    <td>{{ $fax->provider->name }}</td>
                                     <td>{{ $fax->number }}</td>
                                     <td>{{ $fax->active }}</td>
                                     <td>
@@ -119,6 +124,7 @@
                             <tr>
                                 <th rowspan="1" colspan="1">ID</th>
                                 <th rowspan="1" colspan="1">Client</th>
+                                <th rowspan="1" colspan="1">Provider</th>
                                 <th rowspan="1" colspan="1">Name</th>
                                 <th rowspan="1" colspan="1">Active</th>
                                 <th rowspan="1" colspan="1">Action</th>

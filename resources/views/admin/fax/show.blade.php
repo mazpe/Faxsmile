@@ -61,7 +61,7 @@
                                 <div class="box">
                                     <div><strong>Number:</strong> {{ $fax->number }}</div>
                                     <div><strong>Client:</strong> {{ $fax->client->name }}</div>
-                                    <div><strong>Provider:</strong> {{ $fax->provider }}</div>
+                                    <div><strong>Provider:</strong> {{ $fax->provider->name }}</div>
                                 </div>
                             </div>
                         </div>

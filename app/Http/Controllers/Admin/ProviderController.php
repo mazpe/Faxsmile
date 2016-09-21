@@ -39,7 +39,7 @@ class ProviderController extends Controller
             'type' => 'required',
             'name' => 'required|unique:providers|max:255',
         ]);
-        
+
         Provider::create($request->all());
 
         return redirect()->route('provider.index')
