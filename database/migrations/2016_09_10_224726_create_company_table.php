@@ -31,7 +31,7 @@ class CreateCompanyTable extends Migration
             $table->string('external_account')->nullable();
             $table->string('contact')->nullable();
             $table->string('contact_phone')->nullable();
-            $table->text('notes')->nullable();
+            $table->text('note')->nullable();
             $table->integer('active')->default(1);
             $table->timestamps();
         });

@@ -13,7 +13,6 @@
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
-    //static $client_id;
 
     return [
         'client_id' => 1,

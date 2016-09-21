@@ -31,7 +31,7 @@ $factory->define(App\Company::class, function (Faker\Generator $faker) {
         'external_account' => $faker->randomNumber($nbDigits = 5),
         'contact' => $faker->name,
         'contact_phone' => $faker->phoneNumber,
-        'notes' => $faker->realText($maxNbChars = 50, $indexSize = 2),
+        'note' => $faker->realText($maxNbChars = 50, $indexSize = 2),
         'active' => 1
     ];
 });
