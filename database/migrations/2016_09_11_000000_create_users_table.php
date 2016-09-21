@@ -31,7 +31,6 @@ class CreateUsersTable extends Migration
                 ->references('id')->on('clients')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-
             $table->foreign('fax_id')
                 ->references('id')->on('faxes')
                 ->onDelete('cascade')
