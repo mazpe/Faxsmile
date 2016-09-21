@@ -68,8 +68,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="box">
-                                    <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
-                                    <p>{{ $fax->notes }}.</p>
+                                    <strong><i class="fa fa-file-text-o margin-r-5"></i> Note</strong>
+                                    <p>{{ $fax->note }}.</p>
                                 </div>
                             </div>
                         </div>

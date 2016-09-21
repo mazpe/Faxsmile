@@ -30,6 +30,21 @@ class ComposerServiceProvider extends ServiceProvider
                 ->with('states', $states);
         });
 
+        view()->composer('admin.provider.*', function ($view) {
+            $provider_types = [
+                'Fax Service' => "Fax Service"
+            ];
+
+            $states = [
+                'FL' => "Florida"
+            ];
+            $page_title = 'Providers';
+
+            $view->with('page_title', $page_title)
+                ->with('provider_types', $provider_types)
+                ->with('states', $states);
+        });
+
         view()->composer('admin.client.*', function ($view) {
             $states = [
                 'FL' => "Florida"

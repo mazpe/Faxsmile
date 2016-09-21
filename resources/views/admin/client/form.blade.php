@@ -11,6 +11,6 @@
     {{ Form::bsText('website',null,[],'col-sm-2 control-label') }}
     {{ Form::bsText('contact',null,[],'col-sm-2 control-label') }}
     {{ Form::bsText('contact_phone',null,[],'col-sm-2 control-label') }}
-    {{ Form::bsText('notes',null,[],'col-sm-2 control-label') }}
+    {{ Form::bsText('note',null,[],'col-sm-2 control-label') }}
     {{ Form::bsSubmit('Submit', '','btn btn-info pull-right') }}
 </div>

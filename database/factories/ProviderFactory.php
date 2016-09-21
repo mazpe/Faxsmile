@@ -12,7 +12,7 @@
 */
 
 $factory->define(App\Provider::class, function (Faker\Generator $faker) {
-    $type = ['Fax Services'];
+    $type = ['Fax Service'];
     return [
         'type' => $type[array_rand($type)],
         'name' => $faker->company,
