@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('recipient')->nullable();
             $table->string('sender')->nullable();
+            $table->text('note');
             $table->integer('active')->default(1);
             $table->rememberToken();
             $table->timestamps();

@@ -96,7 +96,6 @@ class FaxController extends Controller
             ->with('success','Fax updated successfully');
     }
 
-
     /**
      * Remove the specified resource from storage.
      *

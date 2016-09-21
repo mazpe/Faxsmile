@@ -21,5 +21,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('company', 'Admin\CompanyController');
     Route::resource('client', 'Admin\ClientController');
     Route::resource('fax', 'Admin\FaxController');
+    Route::resource('user', 'Admin\UserController');
 });
 

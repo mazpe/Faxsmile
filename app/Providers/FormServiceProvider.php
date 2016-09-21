@@ -17,6 +17,8 @@ class FormServiceProvider extends ServiceProvider
     {
         // Register the form components
         Form::component('bsText', 'components.form.text', ['name', 'value' => null, 'attributes' => [], 'class']);
+        Form::component('bsPassword', 'components.form.password', ['name', 'value' => null, 'attributes' => [], 'class']);
+        Form::component('bsEmail', 'components.form.email', ['name', 'value' => null, 'attributes' => [], 'class']);
         Form::component('bsSelect', 'components.form.select', ['name', 'value' => null, 'attributes' => [], 'class']);
         Form::component('bsSubmit', 'components.form.submit', ['name', 'value' => null, 'class']);
     }

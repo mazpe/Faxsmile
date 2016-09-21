@@ -51,7 +51,7 @@
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#info" data-toggle="tab">Info</a></li>
-                    <li><a href="#users" data-toggle="tab">Users</a></li>
+                    <li><a href="#users-pane" data-toggle="tab">Users</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="active tab-pane" id="info">
@@ -79,7 +79,7 @@
                     <!-- /.tab-pane -->
 
                     <!-- users tab-pane -->
-                    <div class="tab-pane" id="users">
+                    <div class="tab-pane" id="users-pane">
                         <!-- box -->
                         <div class="box-body">
                             <div id="fax_users_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">

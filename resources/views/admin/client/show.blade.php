@@ -21,7 +21,6 @@
 
     <div class="row">
         <div class="col-md-3">
-
             <!-- Profile Image -->
             <div class="box box-primary">
                 <div class="box-body box-profile">
@@ -40,14 +39,12 @@
                         </li>
                     </ul>
                 </div>
-
                 {{ link_to_action('Admin\ClientController@edit', $title = 'Edit',
                 $parameters = array($client->id),
                 $attributes = array('class' => 'btn btn-primary btn-block')) }}
                 <!-- /.box-body -->
             </div>
             <!-- /.box -->
-
         </div>
         <!-- /.col -->
         <div class="col-md-9">
@@ -84,7 +81,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="box">
@@ -93,7 +89,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <!-- /.client info -->
                     </div>
                     <!-- /.tab-pane -->

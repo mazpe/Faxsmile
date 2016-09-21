@@ -93,7 +93,6 @@ class CompanyController extends Controller
             ->with('success','Company updated successfully');
     }
 
-
     /**
      * Remove the specified resource from storage.
      *

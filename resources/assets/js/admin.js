@@ -6,7 +6,7 @@ $(function () {
         var client_users_table = $("#client_users").DataTable();
         var faxes_table = $("#faxes").DataTable();
         var faxes_users_table = $("#fax_users").DataTable();
-        // var users_table = $("#users").DataTable();
+        var users_table = $("#users").DataTable();
 
         $('#companies tbody').on('click', 'tr', function () {
                 var data = companies_table.row( this ).data();
@@ -23,8 +23,8 @@ $(function () {
                 window.location.href = $(this).data('href');
         } );
 
-        // $('#users tbody').on('click', 'tr', function () {
-        //         var data = users_table.row( this ).data();
-        //         window.location.href = $(this).data('href');
-        // } );
+        $('#users tbody').on('click', 'tr', function () {
+                var data = users_table.row( this ).data();
+                window.location.href = $(this).data('href');
+        } );
 });
