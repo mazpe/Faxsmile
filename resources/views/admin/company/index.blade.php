@@ -72,7 +72,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <table id="companies" class="table table-bordered table-striped hover dataTable" role="grid"
-                               aria-describedby="companies_info">
+                               aria-describedby="companies_info" data-form="deleteForm">
                             <thead>
                             <tr role="row">
                                 <th class="sorting_asc" tabindex="0" aria-controls="companies" rowspan="1" colspan="1"
@@ -104,8 +104,8 @@
                                         {{ link_to_action('Admin\CompanyController@edit', $title = 'Edit',
                                             $parameters = array($company->id),
                                             $attributes = array('class' => 'btn btn-xs btn-info')) }}
-                                        {!! Form::open(['method' => 'DELETE','action' => ['Admin\CompanyController@destroy', $company->id],'style'=>'display:inline']) !!}
-                                        {!! Form::submit('Delete', ['class' => 'btn btn-xs btn-danger']) !!}
+                                        {!! Form::open(['method' => 'DELETE','action' => ['Admin\CompanyController@destroy', $company->id],'class' => 'form-delete','style'=>'display:inline']) !!}
+                                        {!! Form::submit('Delete', ['class' => 'btn btn-xs btn-danger delete', 'name' => 'delete_modal']) !!}
                                         {!! Form::close() !!}
                                     </td>
                                 </tr>
