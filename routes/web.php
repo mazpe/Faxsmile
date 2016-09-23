@@ -25,3 +25,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('user', 'Admin\UserController');
 });
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
