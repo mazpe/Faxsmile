@@ -3,10 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Askedio\SoftCascade\Traits\SoftCascadeTrait;
 
 class Company extends Model
 {
     use SoftDeletes;
+    use SoftCascadeTrait;
+
+    protected $softCascade = ['clients'];
 
     /**
      * The attributes that are mass assignable.

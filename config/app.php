@@ -184,6 +184,7 @@ return [
          *
          */
         Collective\Html\HtmlServiceProvider::class,
+        Askedio\SoftCascade\Providers\GenericServiceProvider::class,
 
         /*
          *
