@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Client extends Model
 {
+    use SoftDeletes;
+
+
     /**
      * The attributes that are mass assignable.
      *
@@ -16,6 +19,13 @@ class Client extends Model
         'contact_phone','note'
     ];
 
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
+    
     /**
      * Get the company that owns the client
      *
