@@ -30,6 +30,8 @@ class CreateClientsTable extends Migration
             $table->text('note')->nullable();
             $table->integer('active')->default(1);
             $table->timestamps();
+            $table->softDeletes();
+
 
             $table->foreign('company_id')
                 ->references('id')->on('companies')

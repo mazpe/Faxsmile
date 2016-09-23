@@ -72,7 +72,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <table id="faxes" class="table table-bordered table-striped hover dataTable" role="grid"
-                               aria-describedby="faxes_info">
+                               aria-describedby="faxes_info" data-form="deleteForm">
                             <thead>
                             <tr role="row">
                                 <th class="sorting_asc" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
@@ -113,8 +113,8 @@
                                         {{ link_to_action('Admin\FaxController@edit', $title = 'Edit',
                                             $parameters = array($fax->id),
                                             $attributes = array('class' => 'btn btn-xs btn-info')) }}
-                                        {!! Form::open(['method' => 'DELETE','action' => ['Admin\FaxController@destroy', $fax->id],'style'=>'display:inline']) !!}
-                                        {!! Form::submit('Delete', ['class' => 'btn btn-xs btn-danger']) !!}
+                                        {!! Form::open(['method' => 'DELETE','action' => ['Admin\FaxController@destroy', $fax->id],'class' => 'form-delete','style'=>'display:inline']) !!}
+                                        {!! Form::submit('Delete', ['class' => 'btn btn-xs btn-danger delete', 'name' => 'delete_modal']) !!}
                                         {!! Form::close() !!}
                                     </td>
                                 </tr>

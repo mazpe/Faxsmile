@@ -3,9 +3,17 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Askedio\SoftCascade\Traits\SoftCascadeTrait;
+
 
 class Client extends Model
 {
+    use SoftDeletes;
+    use SoftCascadeTrait;
+
+    protected $softCascade = ['faxes', 'users'];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -15,6 +23,13 @@ class Client extends Model
         'company_id','name','address_1','address_2','city','state','zip','phone','fax','website','contact',
         'contact_phone','note'
     ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
     /**
      * Get the company that owns the client
