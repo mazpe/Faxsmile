@@ -25,7 +25,7 @@ class Client extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
-    
+
     /**
      * Get the company that owns the client
      *

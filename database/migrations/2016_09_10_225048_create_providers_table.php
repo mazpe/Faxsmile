@@ -31,6 +31,8 @@ class CreateProvidersTable extends Migration
             $table->text('note')->nullable();
             $table->integer('active')->default(1);
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 

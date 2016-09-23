@@ -21,6 +21,8 @@ class CreateFaxesTable extends Migration
             $table->text('note')->nullable();
             $table->integer('active')->default(1);
             $table->timestamps();
+            $table->softDeletes();
+
 
             $table->foreign('client_id')
                 ->references('id')->on('clients')
