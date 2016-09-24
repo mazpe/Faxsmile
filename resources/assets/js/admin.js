@@ -16,29 +16,27 @@ $(function () {
                 if (e.target.name === 'delete_modal') return;
                 var data = companies_table.row( this ).data();
                 window.location.href = $(this).data('href');
-
-
         } );
 
-        $('#providers tbody').on('click', 'tr', function () {
+        $('#providers tbody').on('click', 'tr', function (e) {
                 if (e.target.name === 'delete_modal') return;
                 var data = providers_table.row( this ).data();
                 window.location.href = $(this).data('href');
         } );
 
-        $('#clients tbody').on('click', 'tr', function () {
+        $('#clients tbody').on('click', 'tr', function (e) {
                 if (e.target.name === 'delete_modal') return;
                 var data = clients_table.row( this ).data();
                 window.location.href = $(this).data('href');
         } );
 
-        $('#faxes tbody').on('click', 'tr', function () {
+        $('#faxes tbody').on('click', 'tr', function (e) {
                 if (e.target.name === 'delete_modal') return;
                 var data = faxes_table.row( this ).data();
                 window.location.href = $(this).data('href');
         } );
 
-        $('#users tbody').on('click', 'tr', function () {
+        $('#users tbody').on('click', 'tr', function (e) {
                 if (e.target.name === 'delete_modal') return;
                 var data = users_table.row( this ).data();
                 window.location.href = $(this).data('href');
