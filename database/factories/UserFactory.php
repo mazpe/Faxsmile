@@ -19,9 +19,10 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'fax_id' => 1,
         'name' => $faker->name,
         'email' => $faker->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
+        'password' => $password ?: $password = 'secret',
         'remember_token' => str_random(10),
         'note' => $faker->realText($maxNbChars = 50, $indexSize = 2),
         'active' => 1
     ];
 });
+
