@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/', 'AdminController@index');
     Route::get('test', 'TestController@index');
@@ -24,7 +25,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('fax', 'Admin\FaxController');
     Route::resource('user', 'Admin\UserController');
 });
-
 
 Auth::routes();
 

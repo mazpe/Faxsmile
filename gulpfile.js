@@ -58,7 +58,7 @@ elixir(function(mix) {
         'bower_components/html5shiv/dist/html5shiv.js',
         'bower_components/respond/dest/respond.src.js',
         'resources/assets/js/app.js'
-    ], 'public/assets/js/admin.js','./');
+    ], 'public/assets/js/app.js','./');
     // Tasks
     // - fonts
 
