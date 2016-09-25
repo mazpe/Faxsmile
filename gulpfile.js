@@ -18,7 +18,16 @@ elixir(function(mix) {
         mix.sass([
             'global.scss',
             ],'resources/assets/css/global.css');
+        mix.sass([
+            'app.scss',
+        ],'resources/assets/css/app.css');
     });
+
+    // - admin
+    mix.styles([
+        'resources/assets/css/global.css',
+        'resources/assets/css/app.css',
+    ], 'public/assets/css/app.css','./');
 
     // - admin
     mix.styles([
@@ -42,6 +51,14 @@ elixir(function(mix) {
         'resources/assets/js/admin.js'
     ], 'public/assets/js/admin.js','./');
 
+    // - app
+    mix.scripts([
+        'bower_components/jquery/dist/jquery.js',
+        'node_modules/bootstrap-sass/assets/javascripts/bootstrap.js',
+        'bower_components/html5shiv/dist/html5shiv.js',
+        'bower_components/respond/dest/respond.src.js',
+        'resources/assets/js/app.js'
+    ], 'public/assets/js/app.js','./');
     // Tasks
     // - fonts
 
