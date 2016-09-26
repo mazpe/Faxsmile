@@ -26,7 +26,7 @@
                                     aria-label="Full Name: activate to sort column ascending" style="width: 195px;">Full Name
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="users" rowspan="1" colspan="1"
-                                    aria-label="Active: activate to sort column ascending" style="width: 30px;">Active
+                                    aria-label="Active: activate to sort column ascending" style="width: 30px;">E-Mail
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="users" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 50px;">
@@ -40,7 +40,7 @@
                                     <td class="sorting_1">{{ $user->id }}</td>
                                     <td>{{ $user->client->name }}</td>
                                     <td>{{ $user->fullName() }}</td>
-                                    <td>{{ $user->active }}</td>
+                                    <td>{{ $user->email }}</td>
                                     <td>
                                         {{ link_to_action('Admin\UserController@show', $title = 'Show',
                                             $parameters = array($user->id),

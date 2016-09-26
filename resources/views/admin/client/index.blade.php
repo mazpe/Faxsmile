@@ -20,13 +20,16 @@
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="clients" rowspan="1" colspan="1"
                                     aria-label="Company: activate to sort column descending"
-                                    style="width: 80px;">Company
+                                    style="width: 80px;">Seller
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="clients" rowspan="1" colspan="1"
                                     aria-label="Name: activate to sort column ascending" style="width: 195px;">Name
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="clients" rowspan="1" colspan="1"
-                                    aria-label="Active: activate to sort column ascending" style="width: 30px;">Active
+                                    aria-label="Active: activate to sort column ascending" style="width: 30px;">Contact
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="clients" rowspan="1" colspan="1"
+                                    aria-label="Active: activate to sort column ascending" style="width: 30px;">Phone
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="clients" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 50px;">
@@ -40,7 +43,8 @@
                                     <td class="sorting_1">{{ $client->id }}</td>
                                     <td>{{ $client->company->name }}</td>
                                     <td>{{ $client->name }}</td>
-                                    <td>{{ $client->active }}</td>
+                                    <td>{{ $client->contact_first_name }}</td>
+                                    <td>{{ $client->phone }}</td>
                                     <td>
                                         {{ link_to_action('Admin\ClientController@show', $title = 'Show',
                                             $parameters = array($client->id),
