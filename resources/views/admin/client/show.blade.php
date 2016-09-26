@@ -32,10 +32,10 @@
 
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
-                            <b>Faxes</b> <a class="pull-right">1,322</a>
+                            <b>Faxes</b> <a class="pull-right">{{ $client->faxes->count() }}</a>
                         </li>
                         <li class="list-group-item">
-                            <b>Users</b> <a class="pull-right">543</a>
+                            <b>Users</b> <a class="pull-right">{{ $client->users->count() }}</a>
                         </li>
                     </ul>
                 </div>
@@ -100,8 +100,8 @@
                             <div id="client_faxes_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <table id="client_faxes1" class="table table-bordered table-striped hover dataTable" role="grid"
-                                               aria-describedby="client_faxes_info">
+                                        <table id="client_faxes" class="table table-bordered table-striped hover dataTable" role="grid"
+                                               aria-describedby="client_faxes_info" data-form="deleteForm">
                                             <thead>
                                             <tr role="row">
                                                 <th class="sorting" tabindex="0" aria-controls="client_faxes" rowspan="1" colspan="1"
@@ -122,13 +122,13 @@
                                                     <td>{{ $fax->number }}</td>
                                                     <td>{{ $fax->active }}</td>
                                                     <td>
-                                                        {{ link_to_action('Admin\ClientController@show', $title = 'Show',
+                                                        {{ link_to_action('Admin\FaxController@show', $title = 'Show',
                                                             $parameters = array($fax->id),
                                                             $attributes = array('class' => 'btn btn-xs btn-success')) }}
-                                                        {{ link_to_action('Admin\ClientController@edit', $title = 'Edit',
+                                                        {{ link_to_action('Admin\FaxController@edit', $title = 'Edit',
                                                             $parameters = array($fax->id),
                                                             $attributes = array('class' => 'btn btn-xs btn-info')) }}
-                                                        {!! Form::open(['method' => 'DELETE','action' => ['Admin\ClientController@destroy', $client->id],'style'=>'display:inline']) !!}
+                                                        {!! Form::open(['method' => 'DELETE','action' => ['Admin\FaxController@destroy', $fax->id],'style'=>'display:inline']) !!}
                                                         {!! Form::submit('Delete', ['class' => 'btn btn-xs btn-danger']) !!}
                                                         {!! Form::close() !!}
                                                     </td>
@@ -159,7 +159,7 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <table id="client_users" class="table table-bordered table-striped hover dataTable" role="grid"
-                                               aria-describedby="client_users_info">
+                                               aria-describedby="client_users_info" data-form="deleteForm">
                                             <thead>
                                             <tr role="row">
                                                 <th class="sorting_asc" tabindex="0" aria-controls="client_users" rowspan="1" colspan="1"
@@ -184,13 +184,13 @@
                                                     <td>{{ $user->name }}</td>
                                                     <td>{{ $user->active }}</td>
                                                     <td>
-                                                        {{ link_to_action('Admin\ClientController@show', $title = 'Show',
+                                                        {{ link_to_action('Admin\UserController@show', $title = 'Show',
                                                             $parameters = array($user->id),
                                                             $attributes = array('class' => 'btn btn-xs btn-success')) }}
-                                                        {{ link_to_action('Admin\ClientController@edit', $title = 'Edit',
+                                                        {{ link_to_action('Admin\UserController@edit', $title = 'Edit',
                                                             $parameters = array($user->id),
                                                             $attributes = array('class' => 'btn btn-xs btn-info')) }}
-                                                        {!! Form::open(['method' => 'DELETE','action' => ['Admin\ClientController@destroy', $client->id],'style'=>'display:inline']) !!}
+                                                        {!! Form::open(['method' => 'DELETE','action' => ['Admin\UserController@destroy', $user->id],'style'=>'display:inline']) !!}
                                                         {!! Form::submit('Delete', ['class' => 'btn btn-xs btn-danger']) !!}
                                                         {!! Form::close() !!}
                                                     </td>
@@ -224,7 +224,6 @@
         <!-- /.col -->
     </div>
     <!-- /.row -->
-
 
 </div>
 @endsection

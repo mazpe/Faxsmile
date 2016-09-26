@@ -33,10 +33,7 @@
 
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
-                            <b>Clients</b> <a class="pull-right">1,322</a>
-                        </li>
-                        <li class="list-group-item">
-                            <b>Faxes</b> <a class="pull-right">543</a>
+                            <b>Clients</b> <a class="pull-right">{{ $company->clients->count() }}</a>
                         </li>
                     </ul>
                 </div>
@@ -126,17 +123,17 @@
                                             </thead>
                                             <tbody>
                                             @foreach($company_clients as $client)
-                                                <tr role="row" class="odd"  data-href="{{URL::to('/admin/company/' . $client->id)}}">
+                                                <tr role="row" class="odd"  data-href="{{URL::to('/admin/client/' . $client->id)}}">
                                                     <td>{{ $client->name }}</td>
                                                     <td>{{ $client->active }}</td>
                                                     <td>
-                                                        {{ link_to_action('Admin\CompanyController@show', $title = 'Show',
-                                                            $parameters = array($company->id),
+                                                        {{ link_to_action('Admin\ClientController@show', $title = 'Show',
+                                                            $parameters = array($client->id),
                                                             $attributes = array('class' => 'btn btn-xs btn-success')) }}
-                                                        {{ link_to_action('Admin\CompanyController@edit', $title = 'Edit',
-                                                            $parameters = array($company->id),
+                                                        {{ link_to_action('Admin\ClientController@edit', $title = 'Edit',
+                                                            $parameters = array($client->id),
                                                             $attributes = array('class' => 'btn btn-xs btn-info')) }}
-                                                        delete</td>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                             </tbody>

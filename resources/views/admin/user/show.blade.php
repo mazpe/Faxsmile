@@ -30,12 +30,6 @@
                     <h3 class="profile-username text-center">{{ $user->name }}</h3>
 
                     <p class="text-muted text-center">{{ $user->client->name }}</p>
-
-                    <ul class="list-group list-group-unbordered">
-                        <li class="list-group-item">
-                            <b>Users</b> <a class="pull-right">543</a>
-                        </li>
-                    </ul>
                 </div>
 
                 {{ link_to_action('Admin\UserController@edit', $title = 'Edit',
@@ -73,7 +67,7 @@
                             <div class="col-md-12">
                                 <div class="box">
                                     <strong><i class="fa fa-file-text-o margin-r-5"></i> Note</strong>
-                                    <p>{{ $user->note }}.</p>
+                                    <p>{{ $user->note }}</p>
                                 </div>
                             </div>
                         </div>
