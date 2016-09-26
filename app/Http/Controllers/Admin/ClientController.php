@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Client;
 use App\Company;
+use App\User;
 
 class ClientController extends Controller
 {
@@ -42,7 +43,21 @@ class ClientController extends Controller
             'name' => 'required|unique:clients|max:255',
         ]);
 
-        Client::create($request->all());
+        $client = Client::create($request->all());
+
+        if ($request->contact_email) {
+
+            $user = User::create([
+                'client_id' => $client->id,
+                'first_name' => $request->input('contact_first_name'),
+                'last_name' => $request->input('contact_last_name'),
+                'email' => $request->input('contact_email'),
+                'password' => 'ChangeMe1!',
+                'remember_token' => str_random(10),
+                'note' => 'Client Administrator',
+                'active' => 1
+            ]);
+        }
 
         return redirect()->route('client.index')
             ->with('success','Client created successfully');

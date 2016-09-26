@@ -25,8 +25,10 @@ $factory->define(App\Client::class, function (Faker\Generator $faker) {
         'phone' => $faker->phoneNumber,
         'fax' => $faker->phoneNumber,
         'website' => $faker->domainName,
-        'contact' => $faker->name,
+        'contact_first_name' => $faker->firstName,
+        'contact_last_name' => $faker->lastName,
         'contact_phone' => $faker->phoneNumber,
+        'contact_email' => $faker->companyEmail,
         'note' => $faker->realText($maxNbChars = 50, $indexSize = 2),
         'active' => 1
     ];

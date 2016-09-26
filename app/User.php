@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'client_id', 'fax_id', 'name', 'email', 'password', 'note'
+        'client_id', 'fax_id', 'first_name', 'last_name', 'email', 'password', 'note'
     ];
 
     /**
@@ -44,7 +44,12 @@ class User extends Authenticatable
      * @param $value
      */
     public function setPasswordAttribute($value) {
-        $this->attributes['password'] = Hash::make($value);
+        if ($value) {
+            $this->attributes['password'] = Hash::make($value);
+        } else {
+            dd('setting password');
+            $this->attributes['password'] = Hash::make('ChangeMe1!');
+        }
     }
 
     /**
@@ -59,6 +64,18 @@ class User extends Authenticatable
             $this->attributes['fax_id'] = null;
         }
     }
+
+//    /**
+//     *  Get name
+//     *
+//     * @param $value
+//     * @return string
+//     */
+//    public function getNameAttribute($value) {
+//        dd($value);
+//
+//        return $value->first_name ." " .$value->last_name;
+//    }
 
 
     /**
