@@ -48,6 +48,20 @@ class User extends Authenticatable
     }
 
     /**
+     *  Set hashed password
+     *
+     * @param $value
+     */
+    public function setFaxIdAttribute($value) {
+        if ($value) {
+            $this->attributes['fax_id'] = $value;
+        } else {
+            $this->attributes['fax_id'] = null;
+        }
+    }
+
+
+    /**
      * Get the client that owns the user
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
