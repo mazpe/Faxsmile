@@ -13,10 +13,11 @@ class UserAdminSeeder extends Seeder
     public function run()
     {
         User::create([
-            'client_id' => '1',
+            'client_id' => 1,
             'name' => 'Administrator',
             'email' => 'superadmin@faxit.cloud',
             'password' => 'SuperAdmin',
+            'remember_token' => str_random(10),
         ]);
     }
 }
