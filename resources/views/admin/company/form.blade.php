@@ -13,8 +13,10 @@
     {{ Form::bsText('domain',null,[],'col-sm-2 control-label') }}
     {{ Form::bsText('time_zone',null,[],'col-sm-2 control-label') }}
     {{ Form::bsText('external_account',null,[],'col-sm-2 control-label') }}
-    {{ Form::bsText('contact',null,[],'col-sm-2 control-label') }}
+    {{ Form::bsText('contact_first_name',null,[],'col-sm-2 control-label') }}
+    {{ Form::bsText('contact_last_name',null,[],'col-sm-2 control-label') }}
     {{ Form::bsText('contact_phone',null,[],'col-sm-2 control-label') }}
+    {{ Form::bsEmail('contact_email',null,[],'col-sm-2 control-label') }}
     {{ Form::bsText('note',null,[],'col-sm-2 control-label') }}
     {{ Form::bsSubmit('Submit', '','btn btn-info pull-right') }}
 </div>
