@@ -30,6 +30,9 @@
                                     aria-label="Number: activate to sort column ascending" style="width: 20px;">Number
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
+                                    aria-label="Description: activate to sort column ascending" style="width: 20px;">Description
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
                                     aria-label="Active: activate to sort column ascending" style="width: 20px;">Active
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
@@ -45,6 +48,7 @@
                                     <td>{{ $fax->client->name }}</td>
                                     <td>{{ $fax->provider->name }}</td>
                                     <td>{{ $fax->number }}</td>
+                                    <td>{{ $fax->description }}</td>
                                     <td>{{ $fax->active }}</td>
                                     <td>
                                         {{ link_to_action('Admin\FaxController@show', $title = 'Show',
@@ -65,7 +69,8 @@
                                 <th rowspan="1" colspan="1">ID</th>
                                 <th rowspan="1" colspan="1">Client</th>
                                 <th rowspan="1" colspan="1">Provider</th>
-                                <th rowspan="1" colspan="1">Name</th>
+                                <th rowspan="1" colspan="1">Number</th>
+                                <th rowspan="1" colspan="1">Description</th>
                                 <th rowspan="1" colspan="1">Active</th>
                                 <th rowspan="1" colspan="1">Action</th>
                             </tr>

@@ -65,17 +65,11 @@ class User extends Authenticatable
         }
     }
 
-//    /**
-//     *  Get name
-//     *
-//     * @param $value
-//     * @return string
-//     */
-//    public function getNameAttribute($value) {
-//        dd($value);
-//
-//        return $value->first_name ." " .$value->last_name;
-//    }
+    public function fullName() {
+        $fullName = $this->first_name . ' ' . $this->last_name;
+
+        return trim($fullName);
+    }
 
 
     /**
