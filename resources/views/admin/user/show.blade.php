@@ -62,7 +62,9 @@
                                     <div><strong>Name:</strong> {{ $user->name }}</div>
                                     <div><strong>Client:</strong> {{ $user->client->name }}</div>
                                     <div><strong>Email:</strong> {{ $user->email }}</div>
-                                    <div><strong>Fax:</strong> {{ $user->fax->number }}</div>
+                                    @if ($user->fax)
+                                        <div><strong>Fax:</strong> {{ $user->fax->number }}</div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
