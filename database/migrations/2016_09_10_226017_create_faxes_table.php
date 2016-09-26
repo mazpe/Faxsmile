@@ -18,6 +18,7 @@ class CreateFaxesTable extends Migration
             $table->integer('client_id')->unsigned();
             $table->integer('provider_id')->unsigned();
             $table->string('number');
+            $table->string('description');
             $table->text('note')->nullable();
             $table->integer('active')->default(1);
             $table->timestamps();

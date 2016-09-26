@@ -25,13 +25,14 @@ class CreateClientsTable extends Migration
             $table->string('phone')->nullable();
             $table->string('fax')->nullable();
             $table->string('website')->nullable();
-            $table->string('contact')->nullable();
+            $table->string('contact_first_name')->nullable();
+            $table->string('contact_last_name')->nullable();
             $table->string('contact_phone')->nullable();
+            $table->string('contact_email')->nullable();
             $table->text('note')->nullable();
             $table->integer('active')->default(1);
             $table->timestamps();
             $table->softDeletes();
-
 
             $table->foreign('company_id')
                 ->references('id')->on('companies')

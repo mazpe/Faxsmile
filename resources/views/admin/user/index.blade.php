@@ -23,7 +23,7 @@
                                     style="width: 80px;">Client
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="users" rowspan="1" colspan="1"
-                                    aria-label="Name: activate to sort column ascending" style="width: 195px;">Name
+                                    aria-label="Full Name: activate to sort column ascending" style="width: 195px;">Full Name
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="users" rowspan="1" colspan="1"
                                     aria-label="Active: activate to sort column ascending" style="width: 30px;">Active
@@ -39,7 +39,7 @@
                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/user/' . $user->id)}}">
                                     <td class="sorting_1">{{ $user->id }}</td>
                                     <td>{{ $user->client->name }}</td>
-                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->fullName() }}</td>
                                     <td>{{ $user->active }}</td>
                                     <td>
                                         {{ link_to_action('Admin\UserController@show', $title = 'Show',
@@ -59,7 +59,7 @@
                             <tr>
                                 <th rowspan="1" colspan="1">ID</th>
                                 <th rowspan="1" colspan="1">Client</th>
-                                <th rowspan="1" colspan="1">Name</th>
+                                <th rowspan="1" colspan="1">Full Name</th>
                                 <th rowspan="1" colspan="1">Active</th>
                                 <th rowspan="1" colspan="1">Action</th>
                             </tr>

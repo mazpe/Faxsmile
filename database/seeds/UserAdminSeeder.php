@@ -14,7 +14,8 @@ class UserAdminSeeder extends Seeder
     {
         User::create([
             'client_id' => 1,
-            'name' => 'Administrator',
+            'first_name' => 'Super',
+            'last_name' => 'Admin',
             'email' => 'superadmin@faxit.cloud',
             'password' => 'SuperAdmin',
             'remember_token' => str_random(10),

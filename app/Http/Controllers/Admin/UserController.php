@@ -42,7 +42,6 @@ class UserController extends Controller
     public function store(Request $request) {
         $this->validate($request, [
             'client_id' => 'required|numeric',
-            'name' => 'required|max:255',
             'email' => 'required|unique:users|email',
             'password' => 'required'
         ]);
@@ -92,7 +91,6 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'client_id' => 'required|numeric',
-            'name' => 'required|max:255',
             'email' => 'required|email'
         ]);
 
