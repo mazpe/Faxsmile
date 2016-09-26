@@ -33,7 +33,7 @@
 
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
-                            <b>Faxes</b> <a class="pull-right">543</a>
+                            <b>Faxes</b> <a class="pull-right">{{ $provider->faxes->count() }}</a>
                         </li>
                     </ul>
                 </div>
@@ -102,7 +102,7 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <table id="provider_faxes" class="table table-bordered table-striped hover dataTable" role="grid"
-                                               aria-describedby="provider_faxes_info">
+                                               aria-describedby="provider_faxes_info" data-form="deleteForm">
                                             <thead>
                                             <tr role="row">
                                                 <th class="sorting" tabindex="0" aria-controls="provider_faxes" rowspan="1" colspan="1"
@@ -119,17 +119,20 @@
                                             </thead>
                                             <tbody>
                                             @foreach($provider_faxes as $fax)
-                                                <tr role="row" class="odd"  data-href="{{URL::to('/admin/provider/' . $fax->id)}}">
+                                                <tr role="row" class="odd"  data-href="{{URL::to('/admin/fax/' . $fax->id)}}">
                                                     <td>{{ $fax->number }}</td>
                                                     <td>{{ $fax->active }}</td>
                                                     <td>
-                                                        {{ link_to_action('Admin\ProviderController@show', $title = 'Show',
-                                                            $parameters = array($provider->id),
+                                                        {{ link_to_action('Admin\FaxController@show', $title = 'Show',
+                                                            $parameters = array($fax->id),
                                                             $attributes = array('class' => 'btn btn-xs btn-success')) }}
-                                                        {{ link_to_action('Admin\ProviderController@edit', $title = 'Edit',
-                                                            $parameters = array($provider->id),
+                                                        {{ link_to_action('Admin\FaxController@edit', $title = 'Edit',
+                                                            $parameters = array($fax->id),
                                                             $attributes = array('class' => 'btn btn-xs btn-info')) }}
-                                                        delete</td>
+                                                        {!! Form::open(['method' => 'DELETE','action' => ['Admin\FaxController@destroy', $fax->id],'class' => 'form-delete','style'=>'display:inline']) !!}
+                                                        {!! Form::submit('Delete', ['class' => 'btn btn-xs btn-danger delete', 'name' => 'delete_modal']) !!}
+                                                        {!! Form::close() !!}
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                             </tbody>

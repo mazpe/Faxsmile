@@ -33,7 +33,7 @@
 
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
-                            <b>Users</b> <a class="pull-right">543</a>
+                            <b>Users</b> <a class="pull-right">{{ $fax->users->count() }}</a>
                         </li>
                     </ul>
                 </div>
@@ -86,7 +86,7 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <table id="fax_users" class="table table-bordered table-striped hover dataTable" role="grid"
-                                               aria-describedby="fax_users_info">
+                                               aria-describedby="fax_users_info" data-form="deleteForm">
                                             <thead>
                                             <tr role="row">
                                                 <th class="sorting_asc" tabindex="0" aria-controls="fax_users" rowspan="1" colspan="1"
@@ -111,13 +111,13 @@
                                                     <td>{{ $user->name }}</td>
                                                     <td>{{ $user->active }}</td>
                                                     <td>
-                                                        {{ link_to_action('Admin\FaxController@show', $title = 'Show',
+                                                        {{ link_to_action('Admin\UserController@show', $title = 'Show',
                                                             $parameters = array($user->id),
                                                             $attributes = array('class' => 'btn btn-xs btn-success')) }}
-                                                        {{ link_to_action('Admin\FaxController@edit', $title = 'Edit',
+                                                        {{ link_to_action('Admin\UserController@edit', $title = 'Edit',
                                                             $parameters = array($user->id),
                                                             $attributes = array('class' => 'btn btn-xs btn-info')) }}
-                                                        {!! Form::open(['method' => 'DELETE','action' => ['Admin\FaxController@destroy', $fax->id],'style'=>'display:inline']) !!}
+                                                        {!! Form::open(['method' => 'DELETE','action' => ['Admin\UserController@destroy', $user->id],'style'=>'display:inline']) !!}
                                                         {!! Form::submit('Delete', ['class' => 'btn btn-xs btn-danger']) !!}
                                                         {!! Form::close() !!}
                                                     </td>

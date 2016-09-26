@@ -105,4 +105,5 @@ class ProviderController extends Controller
         return redirect()->route('provider.index')
             ->with('success','Provider deleted successfully');
     }
+
 }
