@@ -9,7 +9,6 @@
     {{ Form::bsText('phone',null,[],'col-sm-2 control-label') }}
     {{ Form::bsText('fax',null,[],'col-sm-2 control-label') }}
     {{ Form::bsText('website',null,[],'col-sm-2 control-label') }}
-    {{ Form::bsText('fax_domain',null,[],'col-sm-2 control-label') }}
     {{ Form::bsText('domain',null,[],'col-sm-2 control-label') }}
     {{ Form::bsText('time_zone',null,[],'col-sm-2 control-label') }}
     {{ Form::bsText('external_account',null,[],'col-sm-2 control-label') }}
