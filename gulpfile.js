@@ -21,9 +21,12 @@ elixir(function(mix) {
         mix.sass([
             'app.scss',
         ],'resources/assets/css/app.css');
+        mix.sass([
+            'admin.scss',
+        ],'resources/assets/css/admin.css');
     });
 
-    // - admin
+    // - app
     mix.styles([
         'resources/assets/css/global.css',
         'resources/assets/css/app.css',
@@ -32,6 +35,7 @@ elixir(function(mix) {
     // - admin
     mix.styles([
         'resources/assets/css/global.css',
+        'resources/assets/css/admin.css',
         'bower_components/Ionicons/css/ionicons.css',
         'bower_components/AdminLTE/dist/css/AdminLTE.css',
         'bower_components/AdminLTE/dist/css/skins/skin-blue.min.css',
