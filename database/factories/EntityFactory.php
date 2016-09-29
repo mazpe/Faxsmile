@@ -11,10 +11,10 @@
 |
 */
 
-$factory->define(App\Company::class, function (Faker\Generator $faker) {
+$factory->define(App\Entity::class, function (Faker\Generator $faker) {
 
     return [
-        'type' => 'Company',
+        'type' => $faker->randomElement($array = array ('Company','Provider','Client')),
         'name' => $faker->company,
         'address_1' => $faker->streetAddress,
         'address_2' => '',

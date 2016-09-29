@@ -4,18 +4,38 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Askedio\SoftCascade\Traits\SoftCascadeTrait;
+use Nanigans\SingleTableInheritance\SingleTableInheritanceTrait;
 
 class Entity extends Model
 {
+    use SingleTableInheritanceTrait;
     use SoftDeletes;
+    use SoftCascadeTrait;
+
+    protected $table = "entities";
+    protected static $singleTableTypeField = 'type';
+    protected static $singleTableSubclasses = [
+        Company::class,
+        Provider::class,
+        Client::class
+    ];
+    protected $softCascade = ['users'];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public $fillable = [
+        'type','name','address_1','address_2','city','state','zip','phone','fax','website','fax_domain','domain',
+        'time_zone','external_account','contact','contact_phone','note'
+    ];
 
     /**
-     * Get the type the Entity belongs too
+     * The attributes that should be mutated to dates.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @var array
      */
-    public function type() {
-        return $this->belongsTo('App\Type');
-    }
+    protected $dates = ['deleted_at'];
 
 }

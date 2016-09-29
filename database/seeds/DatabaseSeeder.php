@@ -13,12 +13,12 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(JackCompanyTableSeeder::class);
         $this->call(CompaniesTableSeeder::class);
-        $this->call(ProvidersTableSeeder::class);
-        $this->call(EmailConfigsTableSeeder::class);
-        $this->call(EmailTemplatesTableSeeder::class);
-        $this->call(ClientsTableSeeder::class);
-        $this->call(FaxesTableSeeder::class);
-        $this->call(UserAdminSeeder::class);
-        $this->call(UsersTableSeeder::class);
+//        $this->call(ProvidersTableSeeder::class);
+//        $this->call(EmailConfigsTableSeeder::class);
+//        $this->call(EmailTemplatesTableSeeder::class);
+//        $this->call(ClientsTableSeeder::class);
+//        $this->call(FaxesTableSeeder::class);
+//        $this->call(UserAdminSeeder::class);
+//        $this->call(UsersTableSeeder::class);
     }
 }
