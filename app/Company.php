@@ -26,7 +26,16 @@ class Company extends Entity
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function clients() {
-        return $this->hasMany('App\Client');
+        return $this->hasMany('App\Client','parent_id');
+    }
+
+    /**
+     * Get the users that belong to the company
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function users() {
+        return $this->hasMany('App\User','entity_id');
     }
 
     /**

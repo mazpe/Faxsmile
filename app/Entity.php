@@ -24,7 +24,7 @@ class Entity extends Model
      */
     public $fillable = [
         'type','name','address_1','address_2','city','state','zip','phone','fax','website','fax_domain','domain',
-        'time_zone','external_account','contact','contact_phone','note'
+        'time_zone','external_account','contact_first_name','contact_last_name', 'contact_phone','contact_email','note'
     ];
 
     /**
