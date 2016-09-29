@@ -4,13 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Askedio\SoftCascade\Traits\SoftCascadeTrait;
-use Nanigans\SingleTableInheritance\SingleTableInheritanceTrait;
 
 class Company extends Entity
 {
     use SoftDeletes;
     use SoftCascadeTrait;
-    use SingleTableInheritanceTrait;
 
     protected static $singleTableType = 'company';
     protected $softCascade = ['clients', 'email_configs', 'email_templates'];
@@ -38,5 +36,14 @@ class Company extends Entity
      */
     public function emailConfig() {
         return $this->hasOne('App\EmailConfig');
+    }
+
+    /**
+     * Get the email templates that belong to the company
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function emailTemplates() {
+        return $this->hasMany('App\EmailTemplate');
     }
 }

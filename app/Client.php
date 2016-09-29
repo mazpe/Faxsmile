@@ -2,27 +2,17 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Askedio\SoftCascade\Traits\SoftCascadeTrait;
 
 
-class Client extends Model
+class Client extends Entity
 {
     use SoftDeletes;
     use SoftCascadeTrait;
 
-    protected $softCascade = ['faxes', 'users'];
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    public $fillable = [
-        'company_id','name','address_1','address_2','city','state','zip','phone','fax','website','contact',
-        'contact_phone','note'
-    ];
+    protected static $singleTableType = 'client';
+    protected $softCascade = ['users'];
 
     /**
      * The attributes that should be mutated to dates.

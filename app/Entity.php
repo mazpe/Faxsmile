@@ -3,15 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Askedio\SoftCascade\Traits\SoftCascadeTrait;
 use Nanigans\SingleTableInheritance\SingleTableInheritanceTrait;
 
 class Entity extends Model
 {
     use SingleTableInheritanceTrait;
-    use SoftDeletes;
-    use SoftCascadeTrait;
 
     protected $table = "entities";
     protected static $singleTableTypeField = 'type';
@@ -20,7 +16,7 @@ class Entity extends Model
         Provider::class,
         Client::class
     ];
-    protected $softCascade = ['users'];
+
     /**
      * The attributes that are mass assignable.
      *
