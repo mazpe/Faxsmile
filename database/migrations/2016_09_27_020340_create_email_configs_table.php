@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class EmailConfigsTable extends Migration
+class CreateEmailConfigsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -24,14 +24,14 @@ class EmailConfigsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('company_id')
-                ->references('id')->on('companies')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-            $table->foreign('provider_id')
-                ->references('id')->on('providers')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+//            $table->foreign('company_id')
+//                ->references('id')->on('companies')
+//                ->onDelete('cascade')
+//                ->onUpdate('cascade');
+//            $table->foreign('provider_id')
+//                ->references('id')->on('providers')
+//                ->onDelete('cascade')
+//                ->onUpdate('cascade');
         });
     }
 

@@ -30,14 +30,14 @@ class CreateUsersTable extends Migration
             $table->softDeletes();
 
 
-            $table->foreign('client_id')
-                ->references('id')->on('clients')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-            $table->foreign('fax_id')
-                ->references('id')->on('faxes')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+//            $table->foreign('client_id')
+//                ->references('id')->on('clients')
+//                ->onDelete('cascade')
+//                ->onUpdate('cascade');
+//            $table->foreign('fax_id')
+//                ->references('id')->on('faxes')
+//                ->onDelete('cascade')
+//                ->onUpdate('cascade');
 
         });
     }
