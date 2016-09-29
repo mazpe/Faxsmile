@@ -11,7 +11,7 @@ class Company extends Model
     use SoftDeletes;
     use SoftCascadeTrait;
 
-    protected $softCascade = ['clients'];
+    protected $softCascade = ['clients', 'email_configs'];
 
     /**
      * The attributes that are mass assignable.
@@ -37,5 +37,14 @@ class Company extends Model
      */
     public function clients() {
         return $this->hasMany('App\Client');
+    }
+
+    /**
+     * Get the email config owned by the company
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function emailConfig() {
+        return $this->hasOne('App\EmailConfig');
     }
 }
