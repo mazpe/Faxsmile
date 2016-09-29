@@ -12,9 +12,9 @@
 */
 
 $factory->define(App\Provider::class, function (Faker\Generator $faker) {
-    $type = ['Fax Services'];
+    $type = ['Fax Service'];
     return [
-        'type' => $type[array_rand($type)],
+        'type' => $faker->randomElement($array = array ('Fax Service')),
         'name' => $faker->company,
         'address_1' => $faker->streetAddress,
         'address_2' => '',
@@ -27,7 +27,7 @@ $factory->define(App\Provider::class, function (Faker\Generator $faker) {
         'external_account' => $faker->randomNumber($nbDigits = 5),
         'contact' => $faker->name,
         'contact_phone' => $faker->phoneNumber,
-        'notes' => $faker->realText($maxNbChars = 50, $indexSize = 2),
+        'note' => $faker->realText($maxNbChars = 50, $indexSize = 2),
         'active' => 1
     ];
 });

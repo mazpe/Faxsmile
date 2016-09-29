@@ -12,12 +12,17 @@
 */
 
 $factory->define(App\Fax::class, function (Faker\Generator $faker) {
+
     return [
         'client_id' => function () {
             return App\Client::orderByRaw("RAND()")->first()->id;
         },
+        'provider_id' => function () {
+            return App\Provider::orderByRaw("RAND()")->first()->id;
+        },
         'number' => $faker->numerify($string = '##########'),
-        'notes' => $faker->realText($maxNbChars = 50, $indexSize = 2),
+        'description' => $faker->randomElement($array = array ('Accounting', 'Finance', 'Sales', 'Parts', 'Service')),
+        'note' => $faker->realText($maxNbChars = 50, $indexSize = 2),
         'active' => 1
     ];
 });

@@ -25,13 +25,14 @@ $factory->define(App\Company::class, function (Faker\Generator $faker) {
         'phone' => $faker->phoneNumber,
         'fax' => $faker->phoneNumber,
         'website' => $faker->domainName,
-        'fax_domain' => $faker->domainName,
         'domain' => $faker->domainName,
         'time_zone' => $faker->timezone,
         'external_account' => $faker->randomNumber($nbDigits = 5),
-        'contact' => $faker->name,
+        'contact_first_name' => $faker->firstName,
+        'contact_last_name' => $faker->lastName,
         'contact_phone' => $faker->phoneNumber,
-        'notes' => $faker->realText($maxNbChars = 50, $indexSize = 2),
+        'contact_email' => $faker->companyEmail,
+        'note' => $faker->realText($maxNbChars = 50, $indexSize = 2),
         'active' => 1
     ];
 });
