@@ -12,15 +12,13 @@ class EmailConfig extends Model
     use SoftDeletes;
     use SoftCascadeTrait;
 
-    protected $softCascade = ['faxes', 'users'];
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     public $fillable = [
-        'company_id','from_email','from_name','body','signature'
+        'company_id', 'provider_id', 'from_email','from_name','signature', 'note'
     ];
 
     /**

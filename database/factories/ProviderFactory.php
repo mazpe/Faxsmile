@@ -14,7 +14,7 @@
 $factory->define(App\Provider::class, function (Faker\Generator $faker) {
     $type = ['Fax Service'];
     return [
-        'type' => $type[array_rand($type)],
+        'type' => $faker->randomElement($array = array ('Fax Service')),
         'name' => $faker->company,
         'address_1' => $faker->streetAddress,
         'address_2' => '',

@@ -12,7 +12,7 @@
 */
 
 $factory->define(App\EmailConfig::class, function (Faker\Generator $faker) {
-    $departmentNames = ['White Label', 'Reseller'];
+    $departmentNames = ['Accounting','Sales', 'Finance'];
     $departmentName = $departmentNames[array_rand($departmentNames)];
 
     return [
@@ -24,7 +24,7 @@ $factory->define(App\EmailConfig::class, function (Faker\Generator $faker) {
         },
         'from_email' => $departmentName.'@'.$faker->safeEmailDomain,
         'from_name' => $departmentName,
-        'body' => '',
         'signature' => $faker->company,
+        'note' => $faker->realText($maxNbChars = 50, $indexSize = 2),
     ];
 });

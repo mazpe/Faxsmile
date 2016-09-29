@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class EmailConfigTableSeeder extends Seeder
+class EmailConfigsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

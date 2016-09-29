@@ -19,8 +19,8 @@ class EmailConfigsTable extends Migration
             $table->integer('provider_id')->unsigned();
             $table->string('from_email')->nullable();
             $table->string('from_name')->nullable();
-            $table->string('body')->nullable();
             $table->string('signature')->nullable();
+            $table->text('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

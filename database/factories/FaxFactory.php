@@ -12,7 +12,6 @@
 */
 
 $factory->define(App\Fax::class, function (Faker\Generator $faker) {
-    $description = ['Accounting', 'Finance', 'Sales', 'Parts', 'Service'];
 
     return [
         'client_id' => function () {
@@ -22,7 +21,7 @@ $factory->define(App\Fax::class, function (Faker\Generator $faker) {
             return App\Provider::orderByRaw("RAND()")->first()->id;
         },
         'number' => $faker->numerify($string = '##########'),
-        'description' => $description[array_rand($description)],
+        'description' => $faker->randomElement($array = array ('Accounting', 'Finance', 'Sales', 'Parts', 'Service')),
         'note' => $faker->realText($maxNbChars = 50, $indexSize = 2),
         'active' => 1
     ];
