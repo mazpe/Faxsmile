@@ -2,26 +2,16 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Askedio\SoftCascade\Traits\SoftCascadeTrait;
 
-class Company extends Model
+class Company extends Entity
 {
     use SoftDeletes;
     use SoftCascadeTrait;
 
-    protected $softCascade = ['clients', 'email_configs'];
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    public $fillable = [
-        'type','name','address_1','address_2','city','state','zip','phone','fax','website','fax_domain','domain',
-        'time_zone','external_account','contact','contact_phone','note'
-    ];
+    protected static $singleTableType = 'company';
+    protected $softCascade = ['clients', 'email_configs', 'email_templates'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -46,5 +36,14 @@ class Company extends Model
      */
     public function emailConfig() {
         return $this->hasOne('App\EmailConfig');
+    }
+
+    /**
+     * Get the email templates that belong to the company
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function emailTemplates() {
+        return $this->hasMany('App\EmailTemplate');
     }
 }

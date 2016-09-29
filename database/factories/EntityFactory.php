@@ -11,10 +11,10 @@
 |
 */
 
-$factory->define(App\Provider::class, function (Faker\Generator $faker) {
+$factory->define(App\Entity::class, function (Faker\Generator $faker) {
 
     return [
-        'type' => 'provider',
+        'type' => $faker->randomElement($array = array ('Company','Provider','Client')),
         'name' => $faker->company,
         'address_1' => $faker->streetAddress,
         'address_2' => '',
@@ -24,6 +24,8 @@ $factory->define(App\Provider::class, function (Faker\Generator $faker) {
         'phone' => $faker->phoneNumber,
         'fax' => $faker->phoneNumber,
         'website' => $faker->domainName,
+        'domain' => $faker->domainName,
+        'time_zone' => $faker->timezone,
         'external_account' => $faker->randomNumber($nbDigits = 5),
         'contact_first_name' => $faker->firstName,
         'contact_last_name' => $faker->lastName,

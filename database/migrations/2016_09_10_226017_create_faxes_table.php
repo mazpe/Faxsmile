@@ -25,14 +25,14 @@ class CreateFaxesTable extends Migration
             $table->softDeletes();
 
 
-            $table->foreign('client_id')
-                ->references('id')->on('clients')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-            $table->foreign('provider_id')
-                ->references('id')->on('providers')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+//            $table->foreign('client_id')
+//                ->references('id')->on('clients')
+//                ->onDelete('cascade')
+//                ->onUpdate('cascade');
+//            $table->foreign('provider_id')
+//                ->references('id')->on('providers')
+//                ->onDelete('cascade')
+//                ->onUpdate('cascade');
         });
     }
 

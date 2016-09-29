@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Company;
 
-class JackCompanyTableSeeder extends Seeder
+class IISCompanyTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,7 +13,7 @@ class JackCompanyTableSeeder extends Seeder
     public function run()
     {
         Company::create([
-            'type' => 'Reseller',
+            'type' => 'Company',
             'name' => 'Innovative Internet Solutions',
             'address_1' => '4901 SW 74th Ct',
             'address_2' => '',

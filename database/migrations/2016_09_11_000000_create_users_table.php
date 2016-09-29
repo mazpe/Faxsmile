@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('client_id')->unsigned();
+            $table->integer('entity_id')->unsigned();
             $table->integer('fax_id')->nullable()->unsigned();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
@@ -30,14 +30,14 @@ class CreateUsersTable extends Migration
             $table->softDeletes();
 
 
-            $table->foreign('client_id')
-                ->references('id')->on('clients')
+            $table->foreign('entity_id')
+                ->references('id')->on('entities')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->foreign('fax_id')
-                ->references('id')->on('faxes')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+//            $table->foreign('fax_id')
+//                ->references('id')->on('faxes')
+//                ->onDelete('cascade')
+//                ->onUpdate('cascade');
 
         });
     }

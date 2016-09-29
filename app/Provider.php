@@ -2,26 +2,16 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Askedio\SoftCascade\Traits\SoftCascadeTrait;
 
-class Provider extends Model
+class Provider extends Entity
 {
     use SoftDeletes;
     use SoftCascadeTrait;
 
-    protected $softCascade = ['faxes'];
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    public $fillable = [
-        'type','name','address_1','address_2','city','state','zip','phone','fax','website','contact',
-        'contact_phone','note'
-    ];
+    protected static $singleTableType = 'provider';
+    protected $softCascade = ['provider_configs', 'faxes'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -31,11 +21,21 @@ class Provider extends Model
     protected $dates = ['deleted_at'];
 
     /**
-     * Get the faxes attached to the provider
+     * Get the provider config for the provider
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function providerConfig() {
+        return $this->hasOne('App\ProviderConfig');
+    }
+
+    /**
+     * Get the faxes that belong to the provider
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function faxes() {
         return $this->hasMany('App\Fax');
     }
+
 }
