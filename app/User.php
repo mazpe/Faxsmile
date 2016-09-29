@@ -71,7 +71,6 @@ class User extends Authenticatable
         return trim($fullName);
     }
 
-
     /**
      * Get the client that owns the user
      *

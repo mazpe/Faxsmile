@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\User;
 
-class UserAdminSeeder extends Seeder
+class SuperAdminTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,7 +13,7 @@ class UserAdminSeeder extends Seeder
     public function run()
     {
         User::create([
-            'client_id' => 1,
+            'entity_id' => 1,
             'first_name' => 'Super',
             'last_name' => 'Admin',
             'email' => 'superadmin@faxit.cloud',

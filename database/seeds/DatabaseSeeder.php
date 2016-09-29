@@ -12,16 +12,17 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         echo "[SEEDING: Entities]\n";
-        $this->call(JackCompanyTableSeeder::class);
+        $this->call(IISCompanyTableSeeder::class);
         $this->call(CompaniesTableSeeder::class);
         $this->call(ProvidersTableSeeder::class);
         $this->call(ClientsTableSeeder::class);
-//        $this->call(FaxesTableSeeder::class);
-//        $this->call(EmailConfigsTableSeeder::class);
-//        $this->call(EmailTemplatesTableSeeder::class);
-
-
-//        $this->call(UserAdminSeeder::class);
-//        $this->call(UsersTableSeeder::class);
+        $this->call(FaxesTableSeeder::class);
+        $this->call(EmailConfigsTableSeeder::class);
+        $this->call(EmailTemplatesTableSeeder::class);
+        $this->call(SuperAdminTableSeeder::class);
+        $this->call(CompanyAdminTableSeeder::class);
+        $this->call(ProviderAdminTableSeeder::class);
+        $this->call(ClientAdminTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
     }
 }
