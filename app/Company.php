@@ -11,7 +11,7 @@ class Company extends Entity
     use SoftCascadeTrait;
 
     protected static $singleTableType = 'company';
-    protected $softCascade = ['clients', 'email_configs', 'email_templates'];
+    protected $softCascade = ['clients', 'emailConfig', 'emailTemplates'];
 
     /**
      * The attributes that should be mutated to dates.

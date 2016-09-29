@@ -39,7 +39,6 @@
                                 <strong>E:</strong> {{ $company->contact_email }}
                             </p>
                         </div>
-                    </p>
                     </div>
 
                     <ul class="list-group list-group-unbordered">

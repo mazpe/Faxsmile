@@ -11,7 +11,7 @@ class Provider extends Entity
     use SoftCascadeTrait;
 
     protected static $singleTableType = 'provider';
-    protected $softCascade = ['provider_configs', 'faxes'];
+    protected $softCascade = ['providerConfig', 'faxes'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -36,6 +36,15 @@ class Provider extends Entity
      */
     public function faxes() {
         return $this->hasMany('App\Fax');
+    }
+
+    /**
+     * Get the users that belong to the provider
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function users() {
+        return $this->hasMany('App\User','entity_id');
     }
 
 }
