@@ -23,7 +23,7 @@
                                     aria-label="Name: activate to sort column ascending" style="width: 195px;">Name
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="providers" rowspan="1" colspan="1"
-                                    aria-label="Active: activate to sort column ascending" style="width: 30px;">Active
+                                    aria-label="Faxes: activate to sort column ascending" style="width: 30px;">Faxes
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="providers" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 50px;">
@@ -36,7 +36,7 @@
                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/provider/' . $provider->id)}}">
                                     <td class="sorting_1">{{ $provider->id }}</td>
                                     <td>{{ $provider->name }}</td>
-                                    <td>{{ $provider->active }}</td>
+                                    <td>{{ $provider->faxes_count }}</td>
                                     <td>
                                         {{ link_to_action('Admin\ProviderController@show', $title = 'Show',
                                             $parameters = array($provider->id),
@@ -55,7 +55,7 @@
                             <tr>
                                 <th rowspan="1" colspan="1">ID</th>
                                 <th rowspan="1" colspan="1">Name</th>
-                                <th rowspan="1" colspan="1">Active</th>
+                                <th rowspan="1" colspan="1">Faxes</th>
                                 <th rowspan="1" colspan="1">Action</th>
                             </tr>
                             </tfoot>

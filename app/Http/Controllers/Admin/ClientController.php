@@ -17,7 +17,7 @@ class ClientController extends Controller
      */
     public function index() {
         return view('admin.client.index',[
-            'clients' => Client::all()
+            'clients' => Client::withCount('users')->get()
         ]);
     }
 

@@ -15,7 +15,7 @@ class CompanyController extends Controller
      */
     public function index() {
         return view('admin.company.index',[
-            'companies' => Company::all()
+            'companies' => Company::withCount('clients')->get()
         ]);
     }
 

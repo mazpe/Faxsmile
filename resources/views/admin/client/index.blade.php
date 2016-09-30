@@ -22,10 +22,10 @@
                                     aria-label="Name: activate to sort column ascending" style="width: 195px;">Name
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="clients" rowspan="1" colspan="1"
-                                    aria-label="Active: activate to sort column ascending" style="width: 30px;">Contact
+                                    aria-label="Contact: activate to sort column ascending" style="width: 30px;">Contact
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="clients" rowspan="1" colspan="1"
-                                    aria-label="Active: activate to sort column ascending" style="width: 30px;">Phone
+                                    aria-label="Users: activate to sort column ascending" style="width: 30px;">Users
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="clients" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 50px;">
@@ -39,7 +39,7 @@
                                     <td class="sorting_1">{{ $client->id }}</td>
                                     <td>{{ $client->name }}</td>
                                     <td>{{ $client->contact_first_name }} {{ $client->contact_last_name }}</td>
-                                    <td>{{ $client->phone }}</td>
+                                    <td>{{ $client->users_count }}</td>
                                     <td>
                                         {{ link_to_action('Admin\ClientController@show', $title = 'Show',
                                             $parameters = array($client->id),
@@ -57,9 +57,9 @@
                             <tfoot>
                             <tr>
                                 <th rowspan="1" colspan="1">ID</th>
-                                <th rowspan="1" colspan="1">Company</th>
                                 <th rowspan="1" colspan="1">Name</th>
-                                <th rowspan="1" colspan="1">Active</th>
+                                <th rowspan="1" colspan="1">Contact</th>
+                                <th rowspan="1" colspan="1">Users</th>
                                 <th rowspan="1" colspan="1">Action</th>
                             </tr>
                             </tfoot>

@@ -15,7 +15,7 @@ class ProviderController extends Controller
      */
     public function index() {
         return view('admin.provider.index',[
-            'providers' => Provider::all()
+            'providers' => Provider::withCount('faxes')->get()
         ]);
     }
 
