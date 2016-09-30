@@ -45,19 +45,7 @@ class ClientController extends Controller
 
         $client = Client::create($request->all());
 
-        if ($request->contact_email) {
 
-            $user = User::create([
-                'entity_id' => $client->id,
-                'first_name' => $request->input('contact_first_name'),
-                'last_name' => $request->input('contact_last_name'),
-                'email' => $request->input('contact_email'),
-                'password' => 'ChangeMe1!',
-                'remember_token' => str_random(10),
-                'note' => 'Client Administrator',
-                'active' => 1
-            ]);
-        }
 
         return redirect()->route('client.index')
             ->with('success','Client created successfully');
