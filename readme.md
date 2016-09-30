@@ -14,7 +14,6 @@
 - Types table
 - Users will belong to entities
 
-
 # NOTES
 ## Company
 - After a company entity is created the model creates the company admin user account if a contact email has been set
@@ -24,3 +23,5 @@
 - After a client entity is created the model creates the clients admin user account if a contact email has been set
 - Deleting a client it will set to null the client_id field on faxes previously owned by client
 
+## KEY FEATURES
+- Eager loading relationships
