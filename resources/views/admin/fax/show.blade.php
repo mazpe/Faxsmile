@@ -29,8 +29,6 @@
 
                     <h3 class="profile-username text-center">{{ $fax->number }}</h3>
 
-                    <p class="text-muted text-center">{{ $fax->client->name }}</p>
-
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
                             <b>Users</b> <a class="pull-right">{{ $fax->users->count() }}</a>
