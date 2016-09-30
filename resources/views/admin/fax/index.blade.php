@@ -19,10 +19,6 @@
                                     aria-sort="ascending" aria-label="ID: activate to sort column ascending" style="width: 5px;">ID
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
-                                    aria-label="Client: activate to sort column descending"
-                                    style="width: 80px;">Client
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
                                     aria-label="Provider: activate to sort column descending"
                                     style="width: 80px;">Provider
                                 </th>
@@ -67,7 +63,6 @@
                             <tfoot>
                             <tr>
                                 <th rowspan="1" colspan="1">ID</th>
-                                <th rowspan="1" colspan="1">Client</th>
                                 <th rowspan="1" colspan="1">Provider</th>
                                 <th rowspan="1" colspan="1">Number</th>
                                 <th rowspan="1" colspan="1">Description</th>

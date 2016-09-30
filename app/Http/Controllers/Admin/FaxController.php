@@ -17,7 +17,7 @@ class FaxController extends Controller
      */
     public function index() {
         return view('admin.fax.index',[
-            'faxes' => Fax::with('user.client','provider')->get()
+            'faxes' => Fax::with('provider')->get()
         ]);
     }
 
@@ -27,9 +27,9 @@ class FaxController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create() {
-        $clients = Client::Pluck('name', 'id');
         $providers = Provider::Pluck('name', 'id');
-        return view('admin.fax.create', compact('clients','providers'));
+        $users = User::Pluck('full_name', 'id');
+        return view('admin.fax.create', compact('providers','users'));
     }
 
     /**
@@ -59,7 +59,7 @@ class FaxController extends Controller
     public function show($id)
     {
         $fax = Fax::with('user.client','provider')->find($id);
-        $fax_users = $fax->users;
+//        $fax_users = $fax->users;
         return view('admin.fax.show',
             compact('fax','fax_users')
         );

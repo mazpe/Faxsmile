@@ -54,10 +54,10 @@
                                 <div class="box">
                                     <div><strong>Number:</strong> {{ $fax->number }}</div>
                                     <div><strong>Provider:</strong> {{ $fax->provider->name }}</div>
-                                    @if ($fax->user->cleint)
-                                    <div><strong>Client:</strong> {{ $fax->user->client->name }}</div>
-                                    @endif
-                                    <div><strong>User:</strong> {{ $fax->user->fullName() }}</div>
+                                    {{--@if ($fax->user->client)--}}
+                                    {{--<div><strong>Client:</strong> {{ $fax->user->client->name }}</div>--}}
+                                    {{--@endif--}}
+{{--                                    <div><strong>User:</strong> {{ $fax->user->fullName() }}</div>--}}
                                 </div>
                             </div>
                         </div>
