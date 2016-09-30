@@ -39,13 +39,11 @@ class ClientController extends Controller
      */
     public function store(Request $request) {
         $this->validate($request, [
-            'company_id' => 'required|numeric',
+            'parent_id' => 'required|numeric',
             'name' => 'required|unique:entities|max:255',
         ]);
 
-        $client = Client::create($request->all());
-
-
+        Client::create($request->all());
 
         return redirect()->route('client.index')
             ->with('success','Client created successfully');
@@ -89,7 +87,7 @@ class ClientController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'company_id' => 'required|numeric',
+            'parent_id' => 'required|numeric',
             'name' => 'required|max:255',
         ]);
 

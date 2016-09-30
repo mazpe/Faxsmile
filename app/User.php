@@ -51,7 +51,7 @@ class User extends Authenticatable
     }
 
     /**
-     *  Set hashed password
+     *  Set fax to value or null
      *
      * @param $value
      */

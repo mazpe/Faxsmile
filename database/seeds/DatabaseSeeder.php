@@ -11,7 +11,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        echo "[SEEDING: Entities]\n";
         $this->call(IISCompanyTableSeeder::class);
         $this->call(CompaniesTableSeeder::class);
         $this->call(ProvidersTableSeeder::class);

@@ -13,6 +13,16 @@ class Client extends Entity
 
     protected static $singleTableType = 'client';
     protected $softCascade = ['users'];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public $fillable = [
+        'parent_id','parent_type','type','name','address_1','address_2','city','state','zip','phone','fax','website',
+        'domain','time_zone','external_account','contact_first_name','contact_last_name', 'contact_phone',
+        'contact_email','note'
+    ];
 
     /**
      * The attributes that should be mutated to dates.
@@ -20,6 +30,10 @@ class Client extends Entity
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    protected $attributes = array(
+        'parent_type' => 'company'
+    );
 
     public static function boot()
     {
@@ -35,7 +49,6 @@ class Client extends Entity
         static::created(function(Client $client)
         {
             if ($client->contact_email) {
-
                 User::create([
                     'entity_id' => $client->id,
                     'first_name' => $client->contact_first_name,

@@ -11,7 +11,7 @@ class Company extends Entity
     use SoftCascadeTrait;
 
     protected static $singleTableType = 'company';
-    protected $softCascade = ['clients', 'emailConfig', 'emailTemplates'];
+    protected $softCascade = ['clients', 'users', 'emailConfig', 'emailTemplates'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -34,7 +34,6 @@ class Company extends Entity
         static::created(function(Company $company)
         {
             if ($company->contact_email) {
-
                 User::create([
                     'entity_id' => $company->id,
                     'first_name' => $company->contact_first_name,
