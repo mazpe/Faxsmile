@@ -28,7 +28,17 @@
 
                     <h3 class="profile-username text-center">{{ $client->name }}</h3>
 
-                    <p class="text-muted text-center">{{ $client->type }}</p>
+                    <div class="box">
+                        <div class="box-header"><strong>Contact Information</strong></div>
+                        <div class="box-body">
+                            <p class="text-muted text-left">
+                                <strong>First Name:</strong> {{ $client->contact_first_name }}<br/>
+                                <strong>Last Name:</strong> {{ $client->contact_last_name }}<br/>
+                                <strong>T:</strong> {{ $client->contact_phone }}<br />
+                                <strong>E:</strong> {{ $client->contact_email }}
+                            </p>
+                        </div>
+                    </div>
 
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
@@ -61,7 +71,6 @@
                             <div class="col-md-6">
                                 <div class="box">
                                     <div><strong>Name:</strong> {{ $client->name }}</div>
-                                    <div><strong>Vendor:</strong> {{ $client->company->name }}</div>
                                     <div><strong>Address 1:</strong> {{ $client->address_1 }}</div>
                                     <div><strong>Address 2:</strong> {{ $client->address_2 }}</div>
                                     <div><strong>City:</strong> {{ $client->city }}</div>
@@ -71,13 +80,12 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="box">
-                                    <div><strong>Contact:</strong> {{ $client->contact }}</div>
-                                    <div><strong>Contact Phone:</strong> {{ $client->contact_phone }}</div>
                                     <div><strong>Phone:</strong> {{ $client->phone }}</div>
                                     <div><strong>Fax:</strong> {{ $client->fax }}</div>
                                     <div><strong>Web Site:</strong> {{ $client->website }}</div>
                                     <div><strong>Time Zone:</strong> {{ $client->time_zone }}</div>
                                     <div><strong>External Account:</strong> {{ $client->external_account }}</div>
+                                    <br/>
                                 </div>
                             </div>
                         </div>

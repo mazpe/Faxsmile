@@ -36,8 +36,7 @@ class CompanyController extends Controller
      */
     public function store(Request $request) {
         $this->validate($request, [
-            'type' => 'required',
-            'name' => 'required|unique:companies|max:255',
+            'name' => 'required|unique:entities|max:255',
         ]);
 
         Company::create($request->all());
@@ -56,8 +55,9 @@ class CompanyController extends Controller
     {
         $company= Company::find($id);
         $company_clients = $company->clients;
+        $company_users = $company->users;
         return view('admin.company.show',
-            compact('company','company_clients')
+            compact('company','company_clients','company_users')
         );
     }
 
@@ -83,7 +83,6 @@ class CompanyController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'type' => 'required',
             'name' => 'required|max:255',
         ]);
 

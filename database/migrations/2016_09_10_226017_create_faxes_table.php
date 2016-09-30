@@ -15,7 +15,7 @@ class CreateFaxesTable extends Migration
     {
         Schema::create('faxes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('client_id')->unsigned();
+            $table->integer('client_id')->nullable()->unsigned();
             $table->integer('provider_id')->unsigned();
             $table->string('number');
             $table->string('description');

@@ -16,8 +16,8 @@
                             <thead>
                             <tr role="row">
                                 <th class="sorting_asc" tabindex="0" aria-controls="companies" rowspan="1" colspan="1"
-                                    aria-sort="ascending" aria-label="Type: activate to sort column descending"
-                                    style="width: 80px;">Type
+                                    aria-sort="ascending" aria-label="ID: activate to sort column descending"
+                                    style="width: 5px;">ID
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="companies" rowspan="1" colspan="1"
                                     aria-label="Name: activate to sort column ascending" style="width: 195px;">Name
@@ -34,7 +34,7 @@
                             <tbody>
                             @foreach($companies as $company)
                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/company/' . $company->id)}}">
-                                    <td class="sorting_1">{{ $company->type }}</td>
+                                    <td class="sorting_1">{{ $company->id }}</td>
                                     <td>{{ $company->name }}</td>
                                     <td>{{ $company->active }}</td>
                                     <td>

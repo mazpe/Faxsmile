@@ -40,7 +40,7 @@ class ClientController extends Controller
     public function store(Request $request) {
         $this->validate($request, [
             'company_id' => 'required|numeric',
-            'name' => 'required|unique:clients|max:255',
+            'name' => 'required|unique:entities|max:255',
         ]);
 
         $client = Client::create($request->all());
@@ -48,7 +48,7 @@ class ClientController extends Controller
         if ($request->contact_email) {
 
             $user = User::create([
-                'client_id' => $client->id,
+                'entity_id' => $client->id,
                 'first_name' => $request->input('contact_first_name'),
                 'last_name' => $request->input('contact_last_name'),
                 'email' => $request->input('contact_email'),
@@ -87,6 +87,7 @@ class ClientController extends Controller
     {
         $client = Client::find($id);
         $companies = Company::Pluck('name', 'id');
+
         return view('admin.client.edit',compact('client','companies'));
     }
 

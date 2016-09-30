@@ -21,13 +21,32 @@ class Client extends Entity
      */
     protected $dates = ['deleted_at'];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        /**
+         * Listen to the Client deleting event.
+         * - remove client_id from faxes owned by client
+         *
+         * @param  $client
+         * @return void
+         */
+
+        static::deleting(function($client)
+        {
+            Fax::where('client_id', $client->id)->update(['client_id' => null]);
+            return true;
+        });
+    }
+
     /**
      * Get the company that owns the client
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function company() {
-        return $this->belongsTo('App\Company');
+        return $this->belongsTo('App\Company','parent_id');
     }
 
     /**
@@ -45,6 +64,6 @@ class Client extends Entity
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function users() {
-        return $this->hasMany('App\User');
+        return $this->hasMany('App\User', 'entity_id');
     }
 }

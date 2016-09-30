@@ -13,3 +13,8 @@
 - Single table entities will define by a type field and will have many users and many self relationship
 - Types table
 - Users will belong to entities
+
+
+# NOTES
+## Clients
+- Deleting a client it will set to null the client_id field on faxes previously owned by client

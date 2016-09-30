@@ -11,7 +11,7 @@ class Company extends Entity
     use SoftCascadeTrait;
 
     protected static $singleTableType = 'company';
-    protected $softCascade = ['clients', 'email_configs', 'email_templates'];
+    protected $softCascade = ['clients', 'emailConfig', 'emailTemplates'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -26,7 +26,16 @@ class Company extends Entity
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function clients() {
-        return $this->hasMany('App\Client');
+        return $this->hasMany('App\Client','parent_id');
+    }
+
+    /**
+     * Get the users that belong to the company
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function users() {
+        return $this->hasMany('App\User','entity_id');
     }
 
     /**

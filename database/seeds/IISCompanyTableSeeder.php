@@ -23,14 +23,14 @@ class IISCompanyTableSeeder extends Seeder
             'phone' => '305-665-2500',
             'fax' => '305-665-2551',
             'website' => 'innovativeinternet.com',
-            'domain' => '.innovativeinternet.com/',
+            'domain' => 'innovativeinternet.com',
             'time_zone' => 'EST',
             'external_account' => '',
             'contact_first_name' => 'Jack',
             'contact_last_name' => 'Sasportas',
             'contact_phone' => '',
             'contact_email' => 'jack@innovativeinternet.com',
-            'note' => '',
+            'note' => 'Main/Root account',
             'active' => '1',
         ]);
     }

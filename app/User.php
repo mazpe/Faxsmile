@@ -7,7 +7,6 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Hash;
 
-
 class User extends Authenticatable
 {
     use Notifiable;
@@ -19,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'client_id', 'fax_id', 'first_name', 'last_name', 'email', 'password', 'note'
+        'entity_id', 'fax_id', 'first_name', 'last_name', 'password', 'email', 'note'
     ];
 
     /**
@@ -47,7 +46,6 @@ class User extends Authenticatable
         if ($value) {
             $this->attributes['password'] = Hash::make($value);
         } else {
-            dd('setting password');
             $this->attributes['password'] = Hash::make('ChangeMe1!');
         }
     }
@@ -72,12 +70,21 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the entity that owns the user
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function entity() {
+        return $this->belongsTo('App\Entity','entity_id');
+    }
+
+    /**
      * Get the client that owns the user
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function client() {
-        return $this->belongsTo('App\Client');
+        return $this->belongsTo('App\Client','entity_id');
     }
 
     /**

@@ -32,7 +32,7 @@ class Fax extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function provider() {
-        return $this->belongsTo('App\Provider');
+        return $this->belongsTo('App\Provider', 'provider_id', 'id');
     }
 
     /**
@@ -41,7 +41,7 @@ class Fax extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function client() {
-        return $this->belongsTo('App\Client');
+        return $this->belongsTo('App\Client', 'client_id', 'id');
     }
 
     /**

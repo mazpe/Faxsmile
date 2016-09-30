@@ -3,6 +3,7 @@ $(function () {
         // DataTables
         var companies_table = $("#companies").DataTable();
         var company_clients_table = $("#company_clients").DataTable();
+        var company_users_table = $("#company_users").DataTable();
         $('#companies tbody').on('click', 'tr', function (e) {
                 if (e.target.name === 'delete_modal') return;
                 var data = companies_table.row( this ).data();
@@ -13,9 +14,15 @@ $(function () {
                 var data = company_clients_table.row( this ).data();
                 window.location.href = $(this).data('href');
         } );
+        $('#company_users tbody').on('click', 'tr', function (e) {
+                if (e.target.name === 'delete_modal') return;
+                var data = company_users_table.row( this ).data();
+                window.location.href = $(this).data('href');
+        } );
 
         var providers_table = $("#providers").DataTable();
         var provider_faxes_table = $("#provider_faxes").DataTable();
+        var provider_users_table = $("#provider_users").DataTable();
         $('#providers tbody').on('click', 'tr', function (e) {
                 if (e.target.name === 'delete_modal') return;
                 var data = providers_table.row( this ).data();
@@ -24,6 +31,11 @@ $(function () {
         $('#provider_faxes tbody').on('click', 'tr', function (e) {
                 if (e.target.name === 'delete_modal') return;
                 var data = provider_faxes_table.row( this ).data();
+                window.location.href = $(this).data('href');
+        } );
+        $('#provider_users tbody').on('click', 'tr', function (e) {
+                if (e.target.name === 'delete_modal') return;
+                var data = provider_users_table.row( this ).data();
                 window.location.href = $(this).data('href');
         } );
 

@@ -1,5 +1,5 @@
 <div class="box-body">
-    {{ Form::bsSelect('company_id', null,$companies,'col-sm-2 control-label') }}
+    {{ Form::bsSelect('company_id',isset($client) ? $client->company->id : null,$companies,'col-sm-2 control-label') }}
     {{ Form::bsText('name',null,[],'col-sm-2 control-label') }}
     {{ Form::bsText('address_1',null,[],'col-sm-2 control-label') }}
     {{ Form::bsText('address_2',null,[],'col-sm-2 control-label') }}

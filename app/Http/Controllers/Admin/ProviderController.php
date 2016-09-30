@@ -36,8 +36,7 @@ class ProviderController extends Controller
      */
     public function store(Request $request) {
         $this->validate($request, [
-            'type' => 'required',
-            'name' => 'required|unique:providers|max:255',
+            'name' => 'required|unique:entities|max:255',
         ]);
 
         Provider::create($request->all());
@@ -56,8 +55,9 @@ class ProviderController extends Controller
     {
         $provider= Provider::find($id);
         $provider_faxes = $provider->faxes;
+        $provider_users = $provider->users;
         return view('admin.provider.show',
-            compact('provider','provider_faxes')
+            compact('provider','provider_faxes','provider_users')
         );
     }
 
@@ -83,7 +83,6 @@ class ProviderController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'type' => 'required',
             'name' => 'required|max:255',
         ]);
 
