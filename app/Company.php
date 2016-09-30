@@ -34,8 +34,7 @@ class Company extends Entity
         static::created(function(Company $company)
         {
             if ($company->contact_email) {
-                User::create([
-                    'entity_id' => $company->id,
+                $company->users()->create([
                     'first_name' => $company->contact_first_name,
                     'last_name' => $company->contact_last_name,
                     'email' => $company->contact_email,

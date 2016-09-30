@@ -49,8 +49,7 @@ class Client extends Entity
         static::created(function(Client $client)
         {
             if ($client->contact_email) {
-                User::create([
-                    'entity_id' => $client->id,
+                $client->users()->create([
                     'first_name' => $client->contact_first_name,
                     'last_name' => $client->contact_last_name,
                     'email' => $client->contact_email,

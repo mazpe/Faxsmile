@@ -34,8 +34,7 @@ class Provider extends Entity
         static::created(function(Provider $provider)
         {
             if ($provider->contact_email) {
-                User::create([
-                    'entity_id' => $provider->id,
+                $provider->users()->create([
                     'first_name' => $provider->contact_first_name,
                     'last_name' => $provider->contact_last_name,
                     'email' => $provider->contact_email,
