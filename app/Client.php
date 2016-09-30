@@ -58,7 +58,7 @@ class Client extends Entity
          * @param  $client
          * @return void
          */
-        static::deleting(function($client)
+        static::deleting(function(Client $client)
         {
             Fax::where('client_id', $client->id)->update(['client_id' => null]);
             return true;
