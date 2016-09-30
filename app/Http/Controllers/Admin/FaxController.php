@@ -17,7 +17,7 @@ class FaxController extends Controller
      */
     public function index() {
         return view('admin.fax.index',[
-            'faxes' => Fax::all()
+            'faxes' => Fax::with('client','provider')->get()
         ]);
     }
 
@@ -58,7 +58,7 @@ class FaxController extends Controller
      */
     public function show($id)
     {
-        $fax = Fax::find($id);
+        $fax = Fax::with('client','provider')->find($id);
         $fax_users = $fax->users;
         return view('admin.fax.show',
             compact('fax','fax_users')

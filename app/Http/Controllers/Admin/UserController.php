@@ -19,7 +19,7 @@ class UserController extends Controller
     public function index()
     {
         return view('admin.user.index', [
-            'users' => User::all()
+            'users' => User::with('entity')->get()
         ]);
     }
 
@@ -63,7 +63,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
+        $user = User::with('entity','fax')->find($id);
 
         return view('admin.user.show',
             compact('user')

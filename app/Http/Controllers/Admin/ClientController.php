@@ -57,7 +57,7 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        $client = Client::find($id);
+        $client = Client::with('users','faxes')->find($id);
         return view('admin.client.show',
             compact('client')
         );
