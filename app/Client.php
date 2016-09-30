@@ -21,6 +21,25 @@ class Client extends Entity
      */
     protected $dates = ['deleted_at'];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        /**
+         * Listen to the Client deleting event.
+         * - remove client_id from faxes owned by client
+         *
+         * @param  $client
+         * @return void
+         */
+
+        static::deleting(function($client)
+        {
+            Fax::where('client_id', $client->id)->update(['client_id' => null]);
+            return true;
+        });
+    }
+
     /**
      * Get the company that owns the client
      *
