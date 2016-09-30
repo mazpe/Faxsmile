@@ -29,3 +29,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Event::listen('illuminate.query',function($query){
+    dd($query);
+});

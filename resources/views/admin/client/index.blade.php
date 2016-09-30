@@ -16,11 +16,7 @@
                             <thead>
                             <tr role="row">
                                 <th class="sorting_asc" tabindex="0" aria-controls="clients" rowspan="1" colspan="1"
-                                    aria-sort="ascending" aria-label="ID: activate to sort column ascending" style="width: 5px;">ID
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="clients" rowspan="1" colspan="1"
-                                    aria-label="Company: activate to sort column descending"
-                                    style="width: 80px;">Seller
+                                    aria-sort="ascending" aria-label="ID: activate to sort column ascending" style="width: 10px;">ID
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="clients" rowspan="1" colspan="1"
                                     aria-label="Name: activate to sort column ascending" style="width: 195px;">Name
@@ -41,9 +37,8 @@
                             @foreach($clients as $client)
                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/client/' . $client->id)}}">
                                     <td class="sorting_1">{{ $client->id }}</td>
-                                    <td>{{ $client->company->name }}</td>
                                     <td>{{ $client->name }}</td>
-                                    <td>{{ $client->contact_first_name }}</td>
+                                    <td>{{ $client->contact_first_name }} {{ $client->contact_last_name }}</td>
                                     <td>{{ $client->phone }}</td>
                                     <td>
                                         {{ link_to_action('Admin\ClientController@show', $title = 'Show',

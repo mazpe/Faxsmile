@@ -87,6 +87,7 @@ class ClientController extends Controller
     {
         $client = Client::find($id);
         $companies = Company::Pluck('name', 'id');
+
         return view('admin.client.edit',compact('client','companies'));
     }
 

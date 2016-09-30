@@ -27,7 +27,7 @@ class Client extends Entity
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function company() {
-        return $this->belongsTo('App\Company');
+        return $this->belongsTo('App\Company','parent_id');
     }
 
     /**
@@ -45,6 +45,6 @@ class Client extends Entity
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function users() {
-        return $this->hasMany('App\User');
+        return $this->hasMany('App\User', 'entity_id');
     }
 }
