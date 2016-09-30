@@ -39,6 +39,11 @@ class Client extends Entity
         'parent_type' => 'company'
     );
 
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
     public static function boot()
     {
         parent::boot();
@@ -91,20 +96,20 @@ class Client extends Entity
     }
 
     /**
-     * Get all of the faxes for the client.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\hasManyThrough
-     */
-    public function faxes() {
-        return $this->hasManyThrough('App\Fax', 'App\User', 'entity_id', 'user_id', 'id');
-    }
-
-    /**
      * Get the users owned by the client
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function users() {
         return $this->hasMany('App\User', 'entity_id');
+    }
+
+    /**
+     * Get all of the faxes for the client.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasManyThrough
+     */
+    public function faxes() {
+        return $this->hasManyThrough('App\Fax', 'App\User', 'entity_id', 'user_id', 'id');
     }
 }
