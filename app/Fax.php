@@ -5,7 +5,6 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-
 class Fax extends Model
 {
     use SoftDeletes;
@@ -45,11 +44,11 @@ class Fax extends Model
     }
 
     /**
-     * Get the user the fax belongs to
+     * Get the users for the fax
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user() {
-        return $this->belongsTo('App\User');
+    public function users() {
+        return $this->hasMany('App\User');
     }
 }
