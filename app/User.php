@@ -50,15 +50,25 @@ class User extends Authenticatable
         }
     }
 
+    /**
+     *  Return the full concatenated name for the User
+     *
+     * @return string
+     */
+    public function getFullNameAttribute()
+    {
+        return trim($this->attributes['first_name'] .' '. $this->attributes['last_name']);
+    }
+
+    /**
+     *  Return the full concatenated name for the User
+     *
+     * @return string
+     */
     public function fullName() {
         $fullName = $this->first_name . ' ' . $this->last_name;
 
         return trim($fullName);
-    }
-
-    public function getFullNameAttribute()
-    {
-        return trim($this->attributes['first_name'] .' '. $this->attributes['last_name']);
     }
 
     /**
