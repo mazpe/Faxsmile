@@ -45,8 +45,8 @@
                             @foreach($faxes as $fax)
                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/fax/' . $fax->id)}}">
                                     <td class="sorting_1">{{ $fax->id }}</td>
-                                    <td>{{ $fax->client->name }}</td>
-                                    <td>{{ $fax->provider->name }}</td>
+                                    <td>{{ $fax->client }}</td>
+                                    {{--<td>{{ $fax->provider->name }}</td>--}}
                                     <td>{{ $fax->number }}</td>
                                     <td>{{ $fax->description }}</td>
                                     <td>{{ $fax->active }}</td>
