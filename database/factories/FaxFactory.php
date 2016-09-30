@@ -18,7 +18,9 @@ $factory->define(App\Fax::class, function (Faker\Generator $faker) {
             return App\Provider::orderByRaw("RAND()")->first()->id;
         },
         'user_id' => function () {
-            $user = App\User::with('client')->orderByRaw("RAND()")->first()->id;
+            $user = App\User::join('entities','entities.id','users.entity_id')
+                ->where('type','client')
+                ->with('client')->orderByRaw("RAND()")->first()->id;
             return $user;
         },
         'number' => $faker->numerify($string = '##########'),
