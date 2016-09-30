@@ -29,7 +29,18 @@
 
                     <h3 class="profile-username text-center">{{ $user->fullName() }}</h3>
 
-                    <p class="text-muted text-center">{{ $user->client->name }}</p>
+                    <p class="text-muted text-center">{{ $user->entity->name }}</p>
+                    <div class="box">
+                        <div class="box-header"><strong>Contact Information</strong></div>
+                        <div class="box-body">
+                            <p class="text-muted text-left">
+                                <strong>First Name:</strong> {{ $user->first_name }}<br/>
+                                <strong>Last Name:</strong> {{ $user->last_name }}<br/>
+                                <strong>T:</strong> {{ $user->phone }}<br />
+                                <strong>E:</strong> {{ $user->email }}
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
                 {{ link_to_action('Admin\UserController@edit', $title = 'Edit',
@@ -54,7 +65,8 @@
                             <div class="col-md-12">
                                 <div class="box">
                                     <div><strong>Name:</strong> {{ $user->fullName() }}</div>
-                                    <div><strong>Client:</strong> {{ $user->client->name }}</div>
+                                    <div><strong>Entity:</strong> {{ $user->entity->name }}</div>
+                                    <div><strong>Entity Type:</strong> {{ ucfirst($user->entity->type) }}</div>
                                     <div><strong>Email:</strong> {{ $user->email }}</div>
                                     @if ($user->fax)
                                         <div><strong>Fax:</strong> {{ $user->fax->number }}</div>
