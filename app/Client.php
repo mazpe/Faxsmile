@@ -87,12 +87,12 @@ class Client extends Entity
     }
 
     /**
-     * Get the faxes owned by the client
+     * Get all of the faxes for the client.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\hasManyThrough
      */
     public function faxes() {
-        return $this->hasMany('App\Fax');
+        return $this->hasManyThrough('App\Fax', 'App\User', 'entity_id', 'user_id', 'id');
     }
 
     /**

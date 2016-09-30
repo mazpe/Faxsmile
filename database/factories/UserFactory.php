@@ -18,7 +18,6 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'entity_id' => function () {
             return App\Client::orderByRaw("RAND()")->first()->id;
         },
-        'fax_id' => 1,
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
         'email' => $faker->safeEmail,

@@ -16,7 +16,7 @@ class Fax extends Model
      * @var array
      */
     public $fillable = [
-        'client_id', 'provider_id', 'number', 'description', 'note'
+        'provider_id', 'user_id', 'number', 'description', 'note'
     ];
 
     /**
@@ -25,6 +25,15 @@ class Fax extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    /**
+     *  Set user_id to value or null
+     *
+     * @param $value
+     */
+    public function setUserIdAttribute($value) {
+        $this->attributes['user_id'] = ($value ? $value : null);
+    }
 
     /**
      * Get the provider that owns the fax
@@ -36,20 +45,11 @@ class Fax extends Model
     }
 
     /**
-     * Get the client that owns the fax
+     * Get the user the fax belongs to
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function client() {
-        return $this->belongsTo('App\Client', 'client_id', 'id');
-    }
-
-    /**
-     * Get the users attached to the fax
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function users() {
-        return $this->hasMany('App\User');
+    public function user() {
+        return $this->belongsTo('App\User');
     }
 }

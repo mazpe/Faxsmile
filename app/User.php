@@ -50,23 +50,15 @@ class User extends Authenticatable
         }
     }
 
-    /**
-     *  Set fax to value or null
-     *
-     * @param $value
-     */
-    public function setFaxIdAttribute($value) {
-        if ($value) {
-            $this->attributes['fax_id'] = $value;
-        } else {
-            $this->attributes['fax_id'] = null;
-        }
-    }
-
     public function fullName() {
         $fullName = $this->first_name . ' ' . $this->last_name;
 
         return trim($fullName);
+    }
+
+    public function getFullNameAttribute()
+    {
+        return trim($this->attributes['first_name'] .' '. $this->attributes['last_name']);
     }
 
     /**
@@ -90,9 +82,9 @@ class User extends Authenticatable
     /**
      * Get the fax that is attached to the user
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\hasOne
      */
     public function fax() {
-        return $this->belongsTo('App\Fax');
+        return $this->hasOne('App\Fax');
     }
 }

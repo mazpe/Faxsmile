@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Fax;
-use App\Client;
+use App\User;
 use App\Provider;
 
 class FaxController extends Controller
@@ -17,7 +17,7 @@ class FaxController extends Controller
      */
     public function index() {
         return view('admin.fax.index',[
-            'faxes' => Fax::with('client','provider')->get()
+            'faxes' => Fax::with('user.client','provider')->get()
         ]);
     }
 
@@ -58,7 +58,7 @@ class FaxController extends Controller
      */
     public function show($id)
     {
-        $fax = Fax::with('client','provider')->find($id);
+        $fax = Fax::with('user.client','provider')->find($id);
         $fax_users = $fax->users;
         return view('admin.fax.show',
             compact('fax','fax_users')
@@ -74,9 +74,11 @@ class FaxController extends Controller
     public function edit($id)
     {
         $fax = Fax::find($id);
-        $clients = Client::Pluck('name', 'id');
         $providers = Provider::Pluck('name', 'id');
-        return view('admin.fax.edit', compact('fax','clients','providers'));
+        $users = User::All();
+        $users = $users->pluck('FullName', 'id');
+
+        return view('admin.fax.edit', compact('fax','providers','users'));
     }
 
     /**
@@ -89,7 +91,7 @@ class FaxController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'client_id' => 'required|numeric',
+            'provider_id' => 'required|numeric',
             'number' => 'required|numeric',
         ]);
 
