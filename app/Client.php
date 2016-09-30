@@ -4,7 +4,6 @@ namespace App;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Askedio\SoftCascade\Traits\SoftCascadeTrait;
-use Illuminate\Http\Request;
 
 class Client extends Entity
 {
@@ -31,6 +30,11 @@ class Client extends Entity
      */
     protected $dates = ['deleted_at'];
 
+    /**
+     * Default values for attributes in the model
+     *
+     * @var array
+     */
     protected $attributes = array(
         'parent_type' => 'company'
     );
