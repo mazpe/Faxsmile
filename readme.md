@@ -3,6 +3,18 @@
 - Administrative Dashboard to CRUD Companies, Clients, Fax DID, and Users
 - Interact with third party vendor API to send and recieve Fax2Email
 
+## [SERVICE]
+Fax can be added only requiring a provider
+Fax can be associated with a Client with
+Fax can be associated with a Client's User
+Fax can be sent only by associated User
+Fax can be received by many User
+User has a dedicated Fax
+
+
+fax_recipients
+fax_senders
+
 ## [CHANGE LOG]
 ### 09-29-2016
 - Entity single table inheritance design deprecated tables Company, Provider, Clients.

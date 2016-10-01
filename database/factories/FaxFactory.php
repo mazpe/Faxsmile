@@ -13,15 +13,19 @@
 
 $factory->define(App\Fax::class, function (Faker\Generator $faker) {
 
+    $user = App\User::join('entities','entities.id','users.entity_id')
+        ->where('type','client')
+        ->with('client')->orderByRaw("RAND()")->first();
+
     return [
         'provider_id' => function () {
             return App\Provider::orderByRaw("RAND()")->first()->id;
         },
-        'user_id' => function () {
-            $user = App\User::join('entities','entities.id','users.entity_id')
-                ->where('type','client')
-                ->with('client')->orderByRaw("RAND()")->first()->id;
-            return $user;
+        'client_id' => function ($user) {
+            return $user->client->id;
+        },
+        'sender_id' => function ($user) {
+            return $user->id;
         },
         'number' => $faker->numerify($string = '##########'),
         'description' => $faker->randomElement($array = array ('Accounting', 'Finance', 'Sales', 'Parts', 'Service')),
