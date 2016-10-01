@@ -15,7 +15,7 @@ class Fax extends Model
      * @var array
      */
     public $fillable = [
-        'provider_id', 'user_id', 'number', 'description', 'note'
+        'provider_id', 'client_id','user_id', 'number', 'description', 'note'
     ];
 
     /**

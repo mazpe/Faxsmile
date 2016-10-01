@@ -28,7 +28,7 @@ class FaxController extends Controller
      */
     public function create() {
         $providers = Provider::Pluck('name', 'id');
-        $users = User::Pluck('full_name', 'id');
+        $users = User::all()->pluck('full_name','id');
         return view('admin.fax.create', compact('providers','users'));
     }
 
@@ -40,7 +40,7 @@ class FaxController extends Controller
      */
     public function store(Request $request) {
         $this->validate($request, [
-            'client_id' => 'required|numeric',
+            'provider_id' => 'required|numeric',
             'number' => 'required|unique:faxes|numeric',
         ]);
 
@@ -58,7 +58,7 @@ class FaxController extends Controller
      */
     public function show($id)
     {
-        $fax = Fax::with('user.client','provider')->find($id);
+        $fax = Fax::with('provider')->find($id);
 //        $fax_users = $fax->users;
         return view('admin.fax.show',
             compact('fax','fax_users')
