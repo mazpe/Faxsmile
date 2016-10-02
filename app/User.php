@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Hash;
+use App\Fax;
 
 class User extends Authenticatable
 {
@@ -97,4 +98,66 @@ class User extends Authenticatable
     public function fax() {
         return $this->hasOne('App\Fax');
     }
+
+    ### CUSTOM FUNCTIONS
+    /**
+     *  Get a user that is not associated with a Fax
+     *
+     * @return mixed
+     */
+    public static function getUser()
+    {
+        $userIsASender = true;
+
+        while($userIsASender) {
+            $user = self::getRandomUser();
+            $userIsASender = self::checkIfUserIsAFaxSender($user->id);
+            $trueornot = $userIsASender ? 'true' : 'false';
+            echo "is $user->id a sender: $trueornot ";
+
+            if ($userIsASender) {
+                echo " - getAnotheUser\n";
+            } else {
+                echo " - using\n";
+            }
+        }
+
+        return $user;
+    }
+
+    /**
+     * Get a random User
+     *
+     * @return mixed
+     */
+    public static function getRandomUser()
+    {
+        return $user = self::getClientsOnlyUsers()->inRandomOrder()->first();
+    }
+
+    /**
+     * Get clients only users
+     *
+     * @return model
+     */
+    public static function getClientsOnlyUsers()
+    {
+        return $user = User::join('entities','entities.id','users.entity_id')
+            ->where('type','client')
+            ->with('client');
+    }
+
+    /**
+     * Check if a User is already associated with a Fax
+     *
+     * @param $user_id
+     * @return bool
+     */
+    public static function checkIfUserIsAFaxSender($user_id)
+    {
+        if (Fax::where('sender_id', $user_id)->count() > 0) {
+            return $isAlreadyFaxSender = true;
+        }
+    }
+
 }

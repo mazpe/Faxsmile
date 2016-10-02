@@ -34,3 +34,6 @@ fax_senders
 ## Clients
 - After a client entity is created the model creates the clients admin user account if a contact email has been set
 - Deleting a client it will set to null the client_id field on faxes previously owned by client
+
+# [TODO]
+- Improve seeder to one simple task: Create 10 Company foreach create 10 Client for each create 10 User
