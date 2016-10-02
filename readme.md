@@ -16,6 +16,9 @@ fax_recipients
 fax_senders
 
 ## [CHANGE LOG]
+### 10-01-2016
+- Added API calls
+
 ### 09-29-2016
 - Entity single table inheritance design deprecated tables Company, Provider, Clients.
 - Type field in entity table defines the type 
@@ -37,3 +40,4 @@ fax_senders
 
 # [TODO]
 - Improve seeder to one simple task: Create 10 Company foreach create 10 Client for each create 10 User
+- Secure API calls

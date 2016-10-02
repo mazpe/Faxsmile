@@ -23,6 +23,10 @@
                                     style="width: 80px;">Provider
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
+                                    aria-label="Sender: activate to sort column descending"
+                                    style="width: 80px;">Sender
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
                                     aria-label="Number: activate to sort column ascending" style="width: 20px;">Number
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
@@ -42,6 +46,7 @@
                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/fax/' . $fax->id)}}">
                                     <td class="sorting_1">{{ $fax->id }}</td>
                                     <td>{{ $fax->provider->name }}</td>
+                                    <td>{{ isset($fax->sender) ? $fax->sender->full_name : '' }}</td>
                                     <td>{{ $fax->number }}</td>
                                     <td>{{ $fax->description }}</td>
                                     <td>{{ $fax->active }}</td>
@@ -63,6 +68,7 @@
                             <tr>
                                 <th rowspan="1" colspan="1">ID</th>
                                 <th rowspan="1" colspan="1">Provider</th>
+                                <th rowspan="1" colspan="1">Sender</th>
                                 <th rowspan="1" colspan="1">Number</th>
                                 <th rowspan="1" colspan="1">Description</th>
                                 <th rowspan="1" colspan="1">Active</th>

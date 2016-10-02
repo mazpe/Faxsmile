@@ -88,7 +88,24 @@ $(function () {
                             $form.submit();
                     });
         });
+});
 
+$(function () {
+        $('#fax_client').on('change', function(e){
+                console.log(e);
+                var client_id = e.target.value;
 
-
+                $.get("/api/client/" + client_id + "/users", function(data) {
+                        console.log(data);
+                        $('#fax_sender').empty();
+                        $('#fax_sender').append('' +
+                            '<option value="">Select one...</option>'
+                        );
+                        $.each(data, function(index,sender){
+                                $('#fax_sender').append('' +
+                                    '<option value=' + sender.id + '>' + sender.first_name + ' ' + sender.last_name + '</option>'
+                                );
+                        });
+                });
+        });
 });

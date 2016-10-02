@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Fax;
 use App\User;
+use App\Client;
 use App\Provider;
 
 class FaxController extends Controller
@@ -28,8 +29,9 @@ class FaxController extends Controller
      */
     public function create() {
         $providers = Provider::Pluck('name', 'id');
+        $clients = Client::pluck('name','id');
         $users = User::all()->pluck('full_name','id');
-        return view('admin.fax.create', compact('providers','users'));
+        return view('admin.fax.create', compact('providers','clients','users'));
     }
 
     /**

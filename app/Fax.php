@@ -15,7 +15,7 @@ class Fax extends Model
      * @var array
      */
     public $fillable = [
-        'provider_id', 'client_id','user_id', 'number', 'description', 'note'
+        'provider_id', 'client_id','sender_id', 'number', 'description', 'note'
     ];
 
     /**
@@ -30,8 +30,8 @@ class Fax extends Model
      *
      * @param $value
      */
-    public function setUserIdAttribute($value) {
-        $this->attributes['user_id'] = ($value ? $value : null);
+    public function setSenderIdAttribute($value) {
+        $this->attributes['sender_id'] = ($value ? $value : null);
     }
 
     /**
@@ -41,6 +41,15 @@ class Fax extends Model
      */
     public function provider() {
         return $this->belongsTo('App\Provider', 'provider_id', 'id');
+    }
+
+    /**
+     * Get the sender for the fax
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function sender() {
+        return $this->belongsTo('App\User', 'sender_id');
     }
 
     /**

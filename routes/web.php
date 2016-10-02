@@ -28,4 +28,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
 Auth::routes();
 
+//Route::get('/api/users', 'API\UserController@index');
+
+
 Route::get('/home', 'HomeController@index');
