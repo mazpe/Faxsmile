@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Request;
 
 class Fax extends Model
 {
@@ -24,31 +25,6 @@ class Fax extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
-
-    public static function boot()
-    {
-        parent::boot();
-
-        /**
-         * Listen to the Fax created event.
-         * - once a Fax entity has been created also create the company's admin user account
-         *
-         * @param  $company
-         * @return void
-         */
-        static::created(function(Fax $fax)
-        {
-
-//            dd($fax);
-//            if ($fax->recipients) {
-//                $fax->recipients()->create([
-//
-//                ]);
-//            }
-//
-//            return true;
-        });
-    }
 
     /**
      *  Set user_id to value or null

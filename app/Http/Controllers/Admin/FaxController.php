@@ -46,7 +46,23 @@ class FaxController extends Controller
             'number' => 'required|unique:faxes|numeric',
         ]);
 
-        Fax::create($request->all());
+        $fax = Fax::create($request->all());
+
+        if ($request->input('recipients')) {
+
+            $recipients = explode(", ", $request->input('recipients'));
+
+            foreach($recipients as $recipient) {
+                $user = User::where('email', $recipient);
+
+                if ($user->exists()) {
+                    // create user
+                } else {
+                    $user = $user->first();
+                    $fax->recipients->attach($user->id);
+                }
+            }
+        }
 
         return redirect()->route('fax.index')
             ->with('success','Fax created successfully');
