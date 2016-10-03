@@ -36,16 +36,16 @@ class Fax extends Model
          * @param  $company
          * @return void
          */
-        static::created(function(Fax $fax)
-        {
-            if ($fax->recipients) {
-                $fax->recipients()->create([
-
-                ]);
-            }
-
-            return true;
-        });
+//        static::created(function(Fax $fax)
+//        {
+//            if ($fax->recipients) {
+//                $fax->recipients()->create([
+//
+//                ]);
+//            }
+//
+//            return true;
+//        });
     }
 
     /**
@@ -98,7 +98,7 @@ class Fax extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
-//    public function recipients() {
-//        return $this->belongsToMany('App\Recipient','fax_recipients');
-//    }
+    public function recipients() {
+        return $this->belongsToMany('App\Recipient','fax_recipients');
+    }
 }
