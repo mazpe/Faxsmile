@@ -99,6 +99,8 @@ class User extends Authenticatable
         return $this->hasOne('App\Fax');
     }
 
+
+
     ### CUSTOM FUNCTIONS
     /**
      *  Get a user that is not associated with a Fax
@@ -113,7 +115,7 @@ class User extends Authenticatable
             $user = self::getRandomUser();
             $userIsASender = self::checkIfUserIsAFaxSender($user->id);
         }
-
+        $user = self::getRandomUser();
         return $user;
     }
 

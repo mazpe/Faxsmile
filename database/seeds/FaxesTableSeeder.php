@@ -12,9 +12,7 @@ class FaxesTableSeeder extends Seeder
      */
     public function run()
     {
-//        factory(App\Fax::class,10)->create();
-
-        // needs improving... breaks after 10
+//         needs improving... breaks after 10
         for ($i = 1; $i <= 10; $i++) {
             factory(App\Fax::class)->create();
         }

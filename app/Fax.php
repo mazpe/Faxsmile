@@ -25,6 +25,29 @@ class Fax extends Model
      */
     protected $dates = ['deleted_at'];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        /**
+         * Listen to the Fax created event.
+         * - once a Fax entity has been created also create the company's admin user account
+         *
+         * @param  $company
+         * @return void
+         */
+        static::created(function(Fax $fax)
+        {
+            if ($fax->recipients) {
+                $fax->recipients()->create([
+
+                ]);
+            }
+
+            return true;
+        });
+    }
+
     /**
      *  Set user_id to value or null
      *
@@ -69,4 +92,13 @@ class Fax extends Model
     public function users() {
         return $this->hasMany('App\User');
     }
+
+    /**
+     * Get the users for the fax
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+//    public function recipients() {
+//        return $this->belongsToMany('App\Recipient','fax_recipients');
+//    }
 }
