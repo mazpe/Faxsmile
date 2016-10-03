@@ -16,6 +16,10 @@ fax_recipients
 fax_senders
 
 ## [CHANGE LOG]
+### 10-02-2016
+- Creating a Fax only selected Clients users are loaded
+- Editing a Fax the preselected User is Selected and only Clients Users loaded.
+
 ### 10-01-2016
 - Added API calls
 

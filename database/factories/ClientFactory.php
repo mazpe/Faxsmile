@@ -18,7 +18,7 @@ $factory->define(App\Client::class, function (Faker\Generator $faker) {
 //            return App\Company::orderByRaw("RAND()")->first()->id;
 //        },
         'parent_type' => 'company',
-        'name' => $faker->company,
+        'name' => 'Client - ' . $faker->company,
         'address_1' => $faker->streetAddress,
         'address_2' => '',
         'city' => $faker->city,

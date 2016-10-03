@@ -60,10 +60,12 @@ class FaxController extends Controller
      */
     public function show($id)
     {
+        $clients = Client::all();
         $fax = Fax::with('provider')->find($id);
-//        $fax_users = $fax->users;
+
+
         return view('admin.fax.show',
-            compact('fax','fax_users')
+            compact('fax','clients')
         );
     }
 
@@ -77,10 +79,11 @@ class FaxController extends Controller
     {
         $fax = Fax::find($id);
         $providers = Provider::Pluck('name', 'id');
-        $users = User::All();
-        $users = $users->pluck('FullName', 'id');
 
-        return view('admin.fax.edit', compact('fax','providers','users'));
+        $users = User::all()->pluck('full_name', 'id');
+        $clients = Client::pluck('name', 'id');
+
+        return view('admin.fax.edit', compact('fax','providers','clients','users'));
     }
 
     /**

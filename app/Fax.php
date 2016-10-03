@@ -44,6 +44,15 @@ class Fax extends Model
     }
 
     /**
+     * Get the client for the fax
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function client() {
+        return $this->belongsTo('App\Client');
+    }
+
+    /**
      * Get the sender for the fax
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne

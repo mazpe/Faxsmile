@@ -112,14 +112,6 @@ class User extends Authenticatable
         while($userIsASender) {
             $user = self::getRandomUser();
             $userIsASender = self::checkIfUserIsAFaxSender($user->id);
-            $trueornot = $userIsASender ? 'true' : 'false';
-            echo "is $user->id a sender: $trueornot ";
-
-            if ($userIsASender) {
-                echo " - getAnotheUser\n";
-            } else {
-                echo " - using\n";
-            }
         }
 
         return $user;
