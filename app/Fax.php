@@ -36,8 +36,10 @@ class Fax extends Model
          * @param  $company
          * @return void
          */
-//        static::created(function(Fax $fax)
-//        {
+        static::created(function(Fax $fax)
+        {
+
+//            dd($fax);
 //            if ($fax->recipients) {
 //                $fax->recipients()->create([
 //
@@ -45,7 +47,7 @@ class Fax extends Model
 //            }
 //
 //            return true;
-//        });
+        });
     }
 
     /**

@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ClientsTableSeeder::class);
 
         // Faxes
-        //$this->call(FaxesTableSeeder::class);
+        $this->call(FaxesTableSeeder::class);
 
         // Admin Users
         $this->call(SuperAdminTableSeeder::class);
