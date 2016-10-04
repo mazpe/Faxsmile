@@ -90,11 +90,9 @@ class User extends Authenticatable
      * @return \Illuminate\Database\Eloquent\Relations\hasOne
      */
     public function fax() {
-        return $this->hasOne('App\Fax');
+        return $this->hasOne('App\Fax','sender_id');
     }
-
-
-
+    
     ### CUSTOM FUNCTIONS
     /**
      *  Get a user that is not associated with a Fax

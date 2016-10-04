@@ -63,7 +63,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::with('entity','fax')->find($id);
+        $user = User::with('entity')->find($id);
 
         return view('admin.user.show',
             compact('user')

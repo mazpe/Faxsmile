@@ -27,7 +27,7 @@
                 <div class="box-body box-profile">
                     <img class="profile-user-img img-responsive img-circle" src="http://www.socialagent.me/wp-content/uploads/2014/07/avatarDefault.png" alt="User profile picture">
 
-                    <h3 class="profile-username text-center">{{ $user->fullName() }}</h3>
+                    <h3 class="profile-username text-center">{{ $user->full_name }}</h3>
 
                     <p class="text-muted text-center">{{ $user->entity->name }}</p>
                     <div class="box">
@@ -64,7 +64,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="box">
-                                    <div><strong>Name:</strong> {{ $user->fullName() }}</div>
+                                    <div><strong>Name:</strong> {{ $user->full_name }}</div>
                                     <div><strong>Entity:</strong> {{ $user->entity->name }}</div>
                                     <div><strong>Entity Type:</strong> {{ ucfirst($user->entity->type) }}</div>
                                     <div><strong>Email:</strong> {{ $user->email }}</div>
