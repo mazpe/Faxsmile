@@ -16,8 +16,8 @@ User has a dedicated Fax
 - Fax/ Recipients association
 - In global Fax create form, If a recipient is entered a client id is required
 - Fax creation tries to find the recipients in the list (seperated , or ;) 
--- It first tries to find an existing user with the email address and it find its it uses that User
--- If User is not found an account is automatically created.
+- - It first tries to find an existing user with the email address and it find its it uses that User
+- - If User is not found an account is automatically created.
 - Fax creation with unique validation ignoring Soft Delete
 - Display fax recipients in show Fax
 - Edit fax recipients
