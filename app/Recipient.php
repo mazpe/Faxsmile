@@ -63,7 +63,6 @@ class Recipient extends Model
         return trim($this->attributes['first_name'] .' '. $this->attributes['last_name']);
     }
 
-
     /**
      * Get the faxes for the recipient
      *

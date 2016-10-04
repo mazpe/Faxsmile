@@ -80,6 +80,6 @@ class Fax extends Model
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
     public function recipients() {
-        return $this->belongsToMany('App\Recipient','fax_recipients');
+        return $this->belongsToMany('App\Recipient','fax_recipients')->withTimestamps();
     }
 }
