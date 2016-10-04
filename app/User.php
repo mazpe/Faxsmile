@@ -41,6 +41,8 @@ class User extends Authenticatable
      */
     protected $dates = ['deleted_at'];
 
+    // TODO: create a listener on created() to send customer email with login information
+
     /**
      *  Set hashed password
      *
@@ -63,17 +65,6 @@ class User extends Authenticatable
     {
         return trim($this->attributes['first_name'] .' '. $this->attributes['last_name']);
     }
-//
-//    /**
-//     *  Return the full concatenated name for the User
-//     *
-//     * @return string
-//     */
-//    public function fullName() {
-//        $fullName = $this->first_name . ' ' . $this->last_name;
-//
-//        return trim($fullName);
-//    }
 
     /**
      * Get the entity that owns the user

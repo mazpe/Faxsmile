@@ -19,6 +19,10 @@ fax_senders
 ### 10-03-2016
 - Fax/ Recipients association
 - In global Fax create form, If a recipient is entered a client id is required
+- Fax creation tries to find the recipients in the list (seperated , or ;) 
+-- It first tries to find an existing user with the email address and it find its it uses that User
+-- If User is not found an account is automatically created.
+- Fax creation with unique validation ignoring Soft Delete
 
 ### 10-02-2016
 - Creating a Fax only selected Clients users are loaded
@@ -54,3 +58,5 @@ fax_senders
 - Add error handling when creating/editing a fax if the added recipient is not a user
 - When adding a fax recipient check if it entires are in a valid format and entires are valid emails
 - Fully support Soft Delete in fax_recipients table
+## User
+- When a User account is created it should send an email with login/password information.
