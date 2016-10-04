@@ -17,6 +17,7 @@ User has a dedicated Fax
 - Display users fax number as recipient and sender
 - More dynamic flexibility to forms creator
 - Create user only displays Faxes that have been assiged to the client
+- When creating a user selecting a fax_id sets him as a sender for that fax.
 
 ### 10-03-2016
 - Fax/ Recipients association
@@ -31,7 +32,6 @@ User has a dedicated Fax
 ### 10-02-2016
 - Creating a Fax only selected Clients users are loaded
 - Editing a Fax the preselected User is Selected and only Clients Users loaded.
-- When creating a user selecting a fax_id sets him as a sender for that fax.
 
 
 ### 10-01-2016

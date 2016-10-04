@@ -157,7 +157,7 @@ $(function () {
         var self = this;
 
         if ($('#field_id').val() !== "") {
-            self.preSelectedValue = $('#field_id').val();
+            self.preSelectedValue = $('#'+field_id).val();
         }
 
         $('#'+field_id).empty();

@@ -122,7 +122,7 @@ class User extends Authenticatable
      * @return \Illuminate\Database\Eloquent\Relations\hasOne
      */
     public function faxes() {
-        return $this->hasMany('App\Fax','sender_id');
+        return $this->hasMany('App\Fax');
     }
 
     /**
