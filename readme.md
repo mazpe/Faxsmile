@@ -20,7 +20,7 @@ User has a dedicated Fax
 -- If User is not found an account is automatically created.
 - Fax creation with unique validation ignoring Soft Delete
 - Display fax recipients in show Fax
-X Edit fax recipients
+- Edit fax recipients
 
 ### 10-02-2016
 - Creating a Fax only selected Clients users are loaded
