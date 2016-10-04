@@ -14,9 +14,19 @@ class CreateFaxRecipientsTable extends Migration
     public function up()
     {
         Schema::create('fax_recipients', function (Blueprint $table) {
-            $table->integer('fax_id');
-            $table->integer('recipient_id');
+            $table->integer('fax_id')->unsigned();
+            $table->integer('recipient_id')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('fax_id')
+                ->references('id')->on('faxes')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->foreign('recipient_id')
+                ->references('id')->on('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 

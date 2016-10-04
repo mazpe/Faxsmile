@@ -4,11 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Request;
+use Askedio\SoftCascade\Traits\SoftCascadeTrait;
 
 class Fax extends Model
 {
     use SoftDeletes;
+    use SoftCascadeTrait;
+
+    protected $softCascade = ['recipients'];
 
     /**
      * The attributes that are mass assignable.

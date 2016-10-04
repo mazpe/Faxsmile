@@ -53,3 +53,4 @@ fax_senders
 ## Fax
 - Add error handling when creating/editing a fax if the added recipient is not a user
 - When adding a fax recipient check if it entires are in a valid format and entires are valid emails
+- Fully support Soft Delete in fax_recipients table

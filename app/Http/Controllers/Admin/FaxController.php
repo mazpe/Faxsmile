@@ -47,6 +47,7 @@ class FaxController extends Controller
         $v = Validator::make($request->all(), [
             'provider_id' => 'required|numeric',
             'number' => 'required|unique:faxes|numeric',
+            
         ]);
         $v->sometimes('client_id', 'required|numeric', function($input) {
             return !empty($input['recipients']);
@@ -58,10 +59,11 @@ class FaxController extends Controller
         if ($request->input('recipients')) {
             // Convert list into array by , or ;
             // TODO: Verify that list is in correct format before processing.
-            $recipients = preg_split( "/[, ;]/", $request->input('recipients'));
+            $recipients = preg_split( "/[,;]/", $request->input('recipients'));
 
             // Attach each recipient in the list seperated by , or ; to the created fax
             foreach($recipients as $recipient_email) {
+                $recipient_email = trim($recipient_email);
                 $recipient = Recipient::where('email', $recipient_email);
 
                 if ($recipient->exists()) {

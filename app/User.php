@@ -5,13 +5,16 @@ namespace App;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Askedio\SoftCascade\Traits\SoftCascadeTrait;
 use Hash;
-use App\Fax;
 
 class User extends Authenticatable
 {
     use Notifiable;
     use SoftDeletes;
+    use SoftCascadeTrait;
+
+    protected $softCascade = ['recipients'];
 
     /**
      * The attributes that are mass assignable.
