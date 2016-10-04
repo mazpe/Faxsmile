@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Recipient;
+use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Fax;
 use App\User;
+use App\Client;
 use App\Provider;
 
 class FaxController extends Controller
@@ -17,7 +20,7 @@ class FaxController extends Controller
      */
     public function index() {
         return view('admin.fax.index',[
-            'faxes' => Fax::with('user.client','provider')->get()
+            'faxes' => Fax::with('provider')->get()
         ]);
     }
 
@@ -27,9 +30,10 @@ class FaxController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create() {
-        $clients = Client::Pluck('name', 'id');
         $providers = Provider::Pluck('name', 'id');
-        return view('admin.fax.create', compact('clients','providers'));
+        $clients = Client::pluck('name','id');
+        $users = User::all()->pluck('full_name','id');
+        return view('admin.fax.create', compact('providers','clients','users'));
     }
 
     /**
@@ -39,12 +43,49 @@ class FaxController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request) {
-        $this->validate($request, [
-            'client_id' => 'required|numeric',
-            'number' => 'required|unique:faxes|numeric',
+        $input = $request->input;
+        $v = Validator::make($request->all(), [
+            'provider_id' => 'required|numeric',
+            'recipients' => 'required',
+            'number' => 'required|unique:faxes,number,NULL,id,deleted_at,NULL'
         ]);
+        $v->sometimes('client_id', 'required|numeric', function($input) {
+            return !empty($input['recipients']);
+        });
+        $v->validate();
 
-        Fax::create($request->all());
+        $fax = Fax::create($request->all());
+
+        if ($request->input('recipients')) {
+            // Convert list into array by , or ;
+            // TODO: Verify that list is in correct format before processing.
+            $recipients = preg_split( "/[,;]/", $request->input('recipients'));
+
+            // Attach each recipient in the list seperated by , or ; to the created fax
+            foreach($recipients as $recipient_email) {
+                $recipient_email = trim($recipient_email);
+                $recipient = Recipient::where('email', $recipient_email);
+
+                if ($recipient->exists()) {
+                    $recipient = $recipient->first();
+                } else {
+                    // create user
+                    $recipient = Recipient::create([
+                        'entity_id' => $request->input('client_id'),
+                        'email' => $recipient_email,
+                        'password' => str_random(6),
+                        'remember_token' => str_random(10),
+                        'active' => 1
+                    ]);
+                }
+
+                if ($recipient) {
+                    $fax->recipients()->attach($recipient->id);
+                } else {
+                    // TODO: some kind of error
+                }
+            }
+        }
 
         return redirect()->route('fax.index')
             ->with('success','Fax created successfully');
@@ -58,10 +99,12 @@ class FaxController extends Controller
      */
     public function show($id)
     {
-        $fax = Fax::with('user.client','provider')->find($id);
-        $fax_users = $fax->users;
+        $clients = Client::all();
+        $fax = Fax::with('provider')->find($id);
+
+
         return view('admin.fax.show',
-            compact('fax','fax_users')
+            compact('fax','clients')
         );
     }
 
@@ -75,10 +118,14 @@ class FaxController extends Controller
     {
         $fax = Fax::find($id);
         $providers = Provider::Pluck('name', 'id');
-        $users = User::All();
-        $users = $users->pluck('FullName', 'id');
 
-        return view('admin.fax.edit', compact('fax','providers','users'));
+        $users = User::all()->pluck('full_name', 'id');
+        $clients = Client::pluck('name', 'id');
+
+        // create a mailing list style of recipients (email@email.com, user@aol.com)
+        $recipients = $fax->recipients->implode('email', ', ');
+
+        return view('admin.fax.edit', compact('fax','providers','clients','users','recipients'));
     }
 
     /**
@@ -95,7 +142,50 @@ class FaxController extends Controller
             'number' => 'required|numeric',
         ]);
 
-        Fax::find($id)->update($request->all());
+        $fax = Fax::find($id);
+        $fax->update($request->all());
+
+        $recipients_ids = array();
+
+        // TODO: this logic should probably be moved to owns function as its been reused by create and edit
+        // Check each recipient if its created and if its not create it and create an array with ids
+        // this array of ids is going to be used to sync the fax_recipients table
+        if ($request->input('recipients')) {
+            // Convert list into array by , or ;
+            // TODO: Verify that list is in correct format before processing.
+            $recipients = preg_split( "/[,;]/", $request->input('recipients'));
+
+            // Attach each recipient in the list seperated by , or ; to the created fax
+            foreach($recipients as $recipient_email) {
+                $recipient_email = trim($recipient_email);
+                $recipient = Recipient::where('email', $recipient_email);
+
+                if ($recipient->exists()) {
+                    $recipient = $recipient->first();
+                } else {
+                    // create user
+                    $recipient = Recipient::create([
+                        'entity_id' => $request->input('client_id'),
+                        'email' => $recipient_email,
+                        'password' => str_random(6),
+                        'remember_token' => str_random(10),
+                        'active' => 1
+                    ]);
+                }
+
+                array_push($recipients_ids, $recipient->id);
+            }
+        }
+
+        if ($recipient) {
+            $fax->recipients()->sync($recipients_ids);
+//            $fax->recipients()->sync([1,2,3]);
+        } else {
+            // TODO: some kind of error
+        }
+
+
+
 
         return redirect()->route('fax.index')
             ->with('success','Fax updated successfully');

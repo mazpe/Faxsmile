@@ -88,7 +88,61 @@ $(function () {
                             $form.submit();
                     });
         });
+});
+
+$(function () {
+    var client_id = $( "#fax-client" ).val();;
+
+    if ($("#fax-client").val() !== "") {
+        getClientUsers(client_id, function(results) {
+            updateUsersList(results,'fax-sender');
+        });
+    }
+
+    /**
+     *
+     */
+    $('#fax-client').on('change', function(e){
+        var client_id = e.target.value;
+        getClientUsers(client_id, function(results) {
+            updateUsersList(results,'fax-sender');
+        });
+    });
+
+    function updateUsersList(data,user_field_id) {
+        this.preSelectedValue = "";
+
+        var self = this;
+
+        if ($('#fax-sender').val() !== "") {
+            self.preSelectedValue = $('#fax-sender').val();
+        }
+
+        $('#'+user_field_id).empty();
+        $('#'+user_field_id).append('' +
+            '<option value="">Select one...</option>'
+        );
 
 
+        $.each(data, function(index,sender){
+            var selected;
+
+            if (sender.id == self.preSelectedValue) {
+                selected = "selected";
+            }
+
+            $('#'+user_field_id).append('' +
+                '<option value=' + sender.id + ' ' + selected +' >' + sender.first_name + ' ' + sender.last_name + '</option>'
+            );
+        });
+    }
+
+    function getClientUsers(client_id,callback) {
+        $.get("/api/client/" + client_id + "/users", function(results, status) {
+            if (status === "success") {
+                callback(results);
+            }
+        });
+    }
 
 });

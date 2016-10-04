@@ -11,8 +11,6 @@ class ProvidersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Provider::class, 5)->create()->each(function($u) {
-            factory(App\Provider::class)->make();
-        });
+        factory(App\Provider::class, 5)->create();
     }
 }

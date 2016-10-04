@@ -1,5 +1,10 @@
 <?php
 
+use App\Fax;
+use App\User;
+use App\Provider;
+
+
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -11,19 +16,24 @@
 |
 */
 
-$factory->define(App\Fax::class, function (Faker\Generator $faker) {
+$factory->define(Fax::class, function (Faker\Generator $faker) {
+
+    $user = App\User::getUser();
 
     return [
         'provider_id' => function () {
-            return App\Provider::orderByRaw("RAND()")->first()->id;
+            return Provider::inRandomOrder()->first()->id;
         },
-        'user_id' => function () {
-            $user = App\User::with('client')->orderByRaw("RAND()")->first()->id;
-            return $user;
+        'client_id' => function () use ($user) {
+            return $user->client->id;
+        },
+        'sender_id' => function () use ($user) {
+            return $user->id;
         },
         'number' => $faker->numerify($string = '##########'),
         'description' => $faker->randomElement($array = array ('Accounting', 'Finance', 'Sales', 'Parts', 'Service')),
         'note' => $faker->realText($maxNbChars = 50, $indexSize = 2),
         'active' => 1
     ];
+
 });

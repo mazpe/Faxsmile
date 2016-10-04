@@ -15,7 +15,7 @@ $factory->define(App\Provider::class, function (Faker\Generator $faker) {
 
     return [
         'type' => 'provider',
-        'name' => $faker->company,
+        'name' => 'Provider - ' . $faker->company,
         'address_1' => $faker->streetAddress,
         'address_2' => '',
         'city' => $faker->city,

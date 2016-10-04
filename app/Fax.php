@@ -4,11 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Askedio\SoftCascade\Traits\SoftCascadeTrait;
 
 class Fax extends Model
 {
     use SoftDeletes;
+    use SoftCascadeTrait;
+
+    protected $softCascade = ['recipients'];
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +19,7 @@ class Fax extends Model
      * @var array
      */
     public $fillable = [
-        'provider_id', 'user_id', 'number', 'description', 'note'
+        'provider_id', 'client_id','sender_id', 'number', 'description', 'note'
     ];
 
     /**
@@ -31,8 +34,8 @@ class Fax extends Model
      *
      * @param $value
      */
-    public function setUserIdAttribute($value) {
-        $this->attributes['user_id'] = ($value ? $value : null);
+    public function setSenderIdAttribute($value) {
+        $this->attributes['sender_id'] = ($value ? $value : null);
     }
 
     /**
@@ -45,11 +48,38 @@ class Fax extends Model
     }
 
     /**
-     * Get the user the fax belongs to
+     * Get the client for the fax
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function client() {
+        return $this->belongsTo('App\Client');
+    }
+
+    /**
+     * Get the sender for the fax
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function sender() {
+        return $this->belongsTo('App\User', 'sender_id');
+    }
+
+    /**
+     * Get the users for the fax
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user() {
-        return $this->belongsTo('App\User');
+    public function users() {
+        return $this->hasMany('App\User');
+    }
+
+    /**
+     * Get the users for the fax
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function recipients() {
+        return $this->belongsToMany('App\Recipient','fax_recipients')->withTimestamps();
     }
 }

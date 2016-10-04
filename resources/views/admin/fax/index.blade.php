@@ -19,12 +19,12 @@
                                     aria-sort="ascending" aria-label="ID: activate to sort column ascending" style="width: 5px;">ID
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
-                                    aria-label="Client: activate to sort column descending"
-                                    style="width: 80px;">Client
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
                                     aria-label="Provider: activate to sort column descending"
                                     style="width: 80px;">Provider
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
+                                    aria-label="Sender: activate to sort column descending"
+                                    style="width: 80px;">Sender
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
                                     aria-label="Number: activate to sort column ascending" style="width: 20px;">Number
@@ -45,8 +45,8 @@
                             @foreach($faxes as $fax)
                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/fax/' . $fax->id)}}">
                                     <td class="sorting_1">{{ $fax->id }}</td>
-                                    <td>{{ isset($fax->user->client) ? $fax->user->client->name : '' }}</td>
-                                    <td>{{ isset($fax->provider) ? $fax->provider->name : '' }}</td>
+                                    <td>{{ $fax->provider->name }}</td>
+                                    <td>{{ isset($fax->sender) ? $fax->sender->full_name : '' }}</td>
                                     <td>{{ $fax->number }}</td>
                                     <td>{{ $fax->description }}</td>
                                     <td>{{ $fax->active }}</td>
@@ -67,8 +67,8 @@
                             <tfoot>
                             <tr>
                                 <th rowspan="1" colspan="1">ID</th>
-                                <th rowspan="1" colspan="1">Client</th>
                                 <th rowspan="1" colspan="1">Provider</th>
+                                <th rowspan="1" colspan="1">Sender</th>
                                 <th rowspan="1" colspan="1">Number</th>
                                 <th rowspan="1" colspan="1">Description</th>
                                 <th rowspan="1" colspan="1">Active</th>

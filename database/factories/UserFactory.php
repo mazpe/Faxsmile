@@ -15,9 +15,6 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
-        'entity_id' => function () {
-            return App\Client::orderByRaw("RAND()")->first()->id;
-        },
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
         'email' => $faker->safeEmail,

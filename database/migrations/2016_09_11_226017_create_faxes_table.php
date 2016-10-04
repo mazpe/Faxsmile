@@ -16,7 +16,8 @@ class CreateFaxesTable extends Migration
         Schema::create('faxes', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('provider_id')->unsigned();
-            $table->integer('user_id')->nullable()->unsigned();
+            $table->integer('client_id')->nullable()->unsigned();
+            $table->integer('sender_id')->nullable()->unsigned();
             $table->string('number');
             $table->string('description');
             $table->text('note')->nullable();
@@ -28,7 +29,7 @@ class CreateFaxesTable extends Migration
                 ->references('id')->on('entities')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->foreign('user_id')
+            $table->foreign('sender_id')
                 ->references('id')->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
