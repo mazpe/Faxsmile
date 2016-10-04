@@ -56,10 +56,11 @@ class FaxController extends Controller
         $fax = Fax::create($request->all());
 
         if ($request->input('recipients')) {
-
+            // Convert list into array by , or ;
             // TODO: Verify that list is in correct format before processing.
-            $recipients = explode(", ", $request->input('recipients'));
+            $recipients = preg_split( "/[, ;]/", $request->input('recipients'));
 
+            // Attach each recipient in the list seperated by , or ; to the created fax
             foreach($recipients as $recipient_email) {
                 $recipient = Recipient::where('email', $recipient_email);
 
