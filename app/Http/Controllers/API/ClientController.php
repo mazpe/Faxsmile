@@ -16,4 +16,10 @@ class ClientController extends Controller
         $users = $client->users()->get();
         return $users;
     }
+
+    public function faxes($id) {
+        $client = Client::find($id);
+        $users = $client->faxes()->get();
+        return $users;
+    }
 }
