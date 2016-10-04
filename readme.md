@@ -14,6 +14,8 @@ User has a dedicated Fax
 ## [CHANGE LOG]
 ### 10-04-2016
 - Users CRUD updated to match new relationship and Reciepients list
+- Display users fax number as recipient and sender
+- More dynamic flexibility to forms creator
 
 ### 10-03-2016
 - Fax/ Recipients association
