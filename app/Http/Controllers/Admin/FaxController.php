@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Recipient;
+use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Fax;
@@ -41,25 +43,43 @@ class FaxController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request) {
-        $this->validate($request, [
+        $input = $request->input;
+        $v = Validator::make($request->all(), [
             'provider_id' => 'required|numeric',
             'number' => 'required|unique:faxes|numeric',
         ]);
+        $v->sometimes('client_id', 'required|numeric', function($input) {
+            return !empty($input['recipients']);
+        });
+        $v->validate();
 
         $fax = Fax::create($request->all());
 
         if ($request->input('recipients')) {
 
+            // TODO: Verify that list is in correct format before processing.
             $recipients = explode(", ", $request->input('recipients'));
 
-            foreach($recipients as $recipient) {
-                $user = User::where('email', $recipient);
+            foreach($recipients as $recipient_email) {
+                $recipient = Recipient::where('email', $recipient_email);
 
-                if ($user->exists()) {
-                    // create user
+                if ($recipient->exists()) {
+                    $recipient = $recipient->first();
                 } else {
-                    $user = $user->first();
-                    $fax->recipients->attach($user->id);
+                    // create user
+                    $recipient = Recipient::create([
+                        'entity_id' => $request->input('client_id'),
+                        'email' => $recipient_email,
+                        'password' => str_random(6),
+                        'remember_token' => str_random(10),
+                        'active' => 1
+                    ]);
+                }
+
+                if ($recipient) {
+                    $fax->recipients()->attach($recipient->id);
+                } else {
+                    // TODO: some kind of error
                 }
             }
         }

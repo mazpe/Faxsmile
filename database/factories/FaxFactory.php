@@ -4,6 +4,7 @@ use App\Fax;
 use App\User;
 use App\Provider;
 
+
 /*
 |--------------------------------------------------------------------------
 | Model Factories

@@ -16,6 +16,10 @@ fax_recipients
 fax_senders
 
 ## [CHANGE LOG]
+### 10-03-2016
+- Fax/ Recipients association
+- In global Fax create form, If a recipient is entered a client id is required
+
 ### 10-02-2016
 - Creating a Fax only selected Clients users are loaded
 - Editing a Fax the preselected User is Selected and only Clients Users loaded.
@@ -43,5 +47,9 @@ fax_senders
 - Deleting a client it will set to null the client_id field on faxes previously owned by client
 
 # [TODO]
+## Setup/System
 - Improve seeder to one simple task: Create 10 Company foreach create 10 Client for each create 10 User
 - Secure API calls
+## Fax
+- Add error handling when creating/editing a fax if the added recipient is not a user
+- When adding a fax recipient check if it entires are in a valid format and entires are valid emails
