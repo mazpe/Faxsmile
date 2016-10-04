@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Recipient;
 use Illuminate\Http\Request;
 use App\User;
 use App\Client;
@@ -64,9 +65,10 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::with('entity')->find($id);
+        $recipient = Recipient::find($user->id);
 
         return view('admin.user.show',
-            compact('user')
+            compact('user', 'recipient')
         );
     }
 

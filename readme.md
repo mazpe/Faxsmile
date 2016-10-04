@@ -12,6 +12,9 @@ Fax can be received by many User
 User has a dedicated Fax
 
 ## [CHANGE LOG]
+### 10-04-2016
+- Users CRUD updated to match new relationship and Reciepients list
+
 ### 10-03-2016
 - Fax/ Recipients association
 - In global Fax create form, If a recipient is entered a client id is required
