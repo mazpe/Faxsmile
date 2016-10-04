@@ -46,6 +46,7 @@ class FaxController extends Controller
         $input = $request->input;
         $v = Validator::make($request->all(), [
             'provider_id' => 'required|numeric',
+            'recipients' => 'required',
             'number' => 'required|unique:faxes,number,NULL,id,deleted_at,NULL'
         ]);
         $v->sometimes('client_id', 'required|numeric', function($input) {

@@ -11,10 +11,6 @@ Fax can be sent only by associated User
 Fax can be received by many User
 User has a dedicated Fax
 
-
-fax_recipients
-fax_senders
-
 ## [CHANGE LOG]
 ### 10-03-2016
 - Fax/ Recipients association
