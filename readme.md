@@ -19,6 +19,8 @@ User has a dedicated Fax
 -- It first tries to find an existing user with the email address and it find its it uses that User
 -- If User is not found an account is automatically created.
 - Fax creation with unique validation ignoring Soft Delete
+- Display fax recipients in show Fax
+X Edit fax recipients
 
 ### 10-02-2016
 - Creating a Fax only selected Clients users are loaded

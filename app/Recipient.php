@@ -54,6 +54,17 @@ class Recipient extends Model
     }
 
     /**
+     *  Return the full concatenated name for the Recipient
+     *
+     * @return string
+     */
+    public function getFullNameAttribute()
+    {
+        return trim($this->attributes['first_name'] .' '. $this->attributes['last_name']);
+    }
+
+
+    /**
      * Get the faxes for the recipient
      *
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
