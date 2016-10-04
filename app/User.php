@@ -22,7 +22,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'entity_id', 'fax_id', 'first_name', 'last_name', 'password', 'email', 'note'
+        'entity_id', 'first_name', 'last_name', 'email', 'note'
     ];
 
     /**
@@ -40,6 +40,38 @@ class User extends Authenticatable
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    public static function boot()
+    {
+        parent::boot();
+
+        // TODO: creating should touch mutators and use setPasswordAttribute mutator instead of having to specify it
+        /**
+         * Listen to the User creating an event.
+         * - if the token or password is missing.. create them
+         *
+         * @param  $client
+         * @return void
+         */
+        static::creating(function(User $user)
+        {
+            if (empty($user->remember_token)) {
+                $user->attributes['remember_token'] = str_random(10);
+            }
+            if (empty($user->password)) {
+                $user->attributes['password'] = Hash::make(str_random(12));
+            }
+
+            return $user;
+        });
+
+
+    }
 
     // TODO: create a listener on created() to send customer email with login information
 
@@ -91,6 +123,15 @@ class User extends Authenticatable
      */
     public function faxes() {
         return $this->hasMany('App\Fax','sender_id');
+    }
+
+    /**
+     * Get the fax that is attached to the user
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
+    public function fax() {
+        return $this->belongsTo('App\Fax');
     }
 
     ### CUSTOM FUNCTIONS

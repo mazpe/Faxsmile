@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Client;
 use App\Fax;
+use App\Sender;
 use Hash;
 
 class UserController extends Controller
@@ -50,7 +51,15 @@ class UserController extends Controller
             'email' => 'required|unique:users|email',
         ]);
 
-        User::create($request->all());
+        $user = User::create($request->all());
+
+        if (!empty($request->input('fax_id'))) {
+            $sender = Sender::find($user->id);
+            $fax = Fax::find($request->input('fax_id'));
+
+            $sender->fax()->associate($fax);
+            $sender->save();
+        }
 
         return redirect()->route('user.index')
             ->with('success', 'User created successfully');

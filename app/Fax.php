@@ -57,12 +57,12 @@ class Fax extends Model
     }
 
     /**
-     * Get the sender for the fax
+     * Get the senders for the fax
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function sender() {
-        return $this->belongsTo('App\User', 'sender_id');
+    public function senders() {
+        return $this->hasMany('App\Sender');
     }
 
     /**

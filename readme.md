@@ -31,6 +31,8 @@ User has a dedicated Fax
 ### 10-02-2016
 - Creating a Fax only selected Clients users are loaded
 - Editing a Fax the preselected User is Selected and only Clients Users loaded.
+- When creating a user selecting a fax_id sets him as a sender for that fax.
+
 
 ### 10-01-2016
 - Added API calls
@@ -64,3 +66,4 @@ User has a dedicated Fax
 - Fully support Soft Delete in fax_recipients table
 ## User
 - When a User account is created it should send an email with login/password information.
+- Creating should touch mutators and use setPasswordAttribute mutator instead of having to specify it

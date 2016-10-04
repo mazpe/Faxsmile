@@ -17,7 +17,6 @@ class CreateFaxesTable extends Migration
             $table->increments('id');
             $table->integer('provider_id')->unsigned();
             $table->integer('client_id')->nullable()->unsigned();
-            $table->integer('sender_id')->nullable()->unsigned();
             $table->string('number');
             $table->string('description');
             $table->text('note')->nullable();
@@ -27,10 +26,6 @@ class CreateFaxesTable extends Migration
 
             $table->foreign('provider_id')
                 ->references('id')->on('entities')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-            $table->foreign('sender_id')
-                ->references('id')->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
