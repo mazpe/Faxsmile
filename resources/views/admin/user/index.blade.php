@@ -39,7 +39,7 @@
                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/user/' . $user->id)}}">
                                     <td class="sorting_1">{{ $user->id }}</td>
                                     <td>{{ isset($user->entity) ? ucfirst($user->entity->type) : '' }}</td>
-                                    <td>{{ $user->fullName() }}</td>
+                                    <td>{{ $user->full_name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>
                                         {{ link_to_action('Admin\UserController@show', $title = 'Show',

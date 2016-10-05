@@ -102,7 +102,6 @@ class FaxController extends Controller
         $clients = Client::all();
         $fax = Fax::with('provider')->find($id);
 
-
         return view('admin.fax.show',
             compact('fax','clients')
         );
@@ -179,13 +178,9 @@ class FaxController extends Controller
 
         if ($recipient) {
             $fax->recipients()->sync($recipients_ids);
-//            $fax->recipients()->sync([1,2,3]);
         } else {
             // TODO: some kind of error
         }
-
-
-
 
         return redirect()->route('fax.index')
             ->with('success','Fax updated successfully');

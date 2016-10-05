@@ -27,9 +27,11 @@
                 <div class="box-body box-profile">
                     <img class="profile-user-img img-responsive img-circle" src="http://www.socialagent.me/wp-content/uploads/2014/07/avatarDefault.png" alt="User profile picture">
 
-                    <h3 class="profile-username text-center">{{ $user->fullName() }}</h3>
-
+                    <h3 class="profile-username text-center">{{ $user->full_name }}</h3>
+                    <p class="text-muted text-center">{{ $user->fax->number }}</p>
                     <p class="text-muted text-center">{{ $user->entity->name }}</p>
+
+
                     <div class="box">
                         <div class="box-header"><strong>Contact Information</strong></div>
                         <div class="box-body">
@@ -64,7 +66,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="box">
-                                    <div><strong>Name:</strong> {{ $user->fullName() }}</div>
+                                    <div><strong>Name:</strong> {{ $user->full_name }}</div>
                                     <div><strong>Entity:</strong> {{ $user->entity->name }}</div>
                                     <div><strong>Entity Type:</strong> {{ ucfirst($user->entity->type) }}</div>
                                     <div><strong>Email:</strong> {{ $user->email }}</div>
@@ -84,6 +86,57 @@
                             </div>
                         </div>
                         <!-- /.user info -->
+
+                        <!-- user-as-recipient-tab-pane -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="box">
+                                    <div class="box-header">
+                                        <strong>Recipients</strong>
+                                    </div>
+                                    <!-- box-body -->
+                                    <div class="box-body">
+                                        <div id="fax_recipients_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <table id="fax_recipients" class="table table-bordered table-striped hover dataTable" role="grid"
+                                                           aria-describedby="fax_recipients_info">
+                                                        <thead>
+                                                        <tr role="row">
+                                                            <th class="sorting_asc" tabindex="0" aria-controls="fax_recipients" rowspan="1" colspan="1"
+                                                                aria-sort="ascending" aria-label="ID: activate to sort column descending"
+                                                                style="width: 5px;">ID
+                                                            </th>
+                                                            <th class="sorting" tabindex="0" aria-controls="fax_recipients" rowspan="1" colspan="1"
+                                                                aria-label="Number: activate to sort column ascending" style="width: 250px;">Number
+                                                            </th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        @foreach($recipient->faxes as $fax)
+                                                            <tr role="row" class="odd"  data-href="{{URL::to('/admin/client/' . $fax->id)}}">
+                                                                <td class="sorting_1">{{ $fax->id }}</td>
+                                                                <td>{{ $fax->number }}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                        </tbody>
+                                                        <tfoot>
+                                                        <tr>
+                                                            <th rowspan="1" colspan="1">ID</th>
+                                                            <th rowspan="1" colspan="1">Name</th>
+                                                        </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /. user-as-recipient-tab-pane -->
+
                     </div>
                     <!-- /.tab-pane -->
 

@@ -22,7 +22,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'entity_id', 'fax_id', 'first_name', 'last_name', 'password', 'email', 'note'
+        'entity_id', 'first_name', 'fax_id', 'last_name', 'email', 'note'
     ];
 
     /**
@@ -41,6 +41,38 @@ class User extends Authenticatable
      */
     protected $dates = ['deleted_at'];
 
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    public static function boot()
+    {
+        parent::boot();
+
+        // TODO: creating should touch mutators and use setPasswordAttribute mutator instead of having to specify it
+        /**
+         * Listen to the User creating an event.
+         * - if the token or password is missing.. create them
+         *
+         * @param  $client
+         * @return void
+         */
+        static::creating(function(User $user)
+        {
+            if (empty($user->remember_token)) {
+                $user->attributes['remember_token'] = str_random(10);
+            }
+            if (empty($user->password)) {
+                $user->attributes['password'] = Hash::make(str_random(12));
+            }
+
+            return $user;
+        });
+
+
+    }
+
     // TODO: create a listener on created() to send customer email with login information
 
     /**
@@ -53,6 +85,19 @@ class User extends Authenticatable
             $this->attributes['password'] = Hash::make($value);
         } else {
             $this->attributes['password'] = Hash::make('ChangeMe1!');
+        }
+    }
+
+    /**
+     *  Set hashed password
+     *
+     * @param $value
+     */
+    public function setFaxIdAttribute($value) {
+        if (empty($value)) {
+            $this->attributes['fax_id'] = null;
+        } else {
+            $this->attributes['fax_id'] = $value;
         }
     }
 
@@ -89,11 +134,27 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\hasOne
      */
-    public function fax() {
-        return $this->hasOne('App\Fax');
+    public function faxes() {
+        return $this->hasMany('App\Fax');
     }
 
+    /**
+     * Get the fax that is attached to the user
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
+    public function fax() {
+        return $this->belongsTo('App\Fax');
+    }
 
+    /**
+     * Get the recipients for the user
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function recipients() {
+        return $this->belongsToMany('App\Recipient','fax_recipients', 'recipient_id')->withTimestamps();
+    }
 
     ### CUSTOM FUNCTIONS
     /**

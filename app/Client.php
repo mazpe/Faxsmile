@@ -110,6 +110,6 @@ class Client extends Entity
      * @return \Illuminate\Database\Eloquent\Relations\hasManyThrough
      */
     public function faxes() {
-        return $this->hasManyThrough('App\Fax', 'App\User', 'entity_id', 'user_id', 'id');
+        return $this->hasMany('App\Fax');
     }
 }

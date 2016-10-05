@@ -16,18 +16,18 @@ class FormServiceProvider extends ServiceProvider
     public function boot()
     {
         // Register the form components
-        Form::component('bsText', 'components.form.text', [
-            'name', 'title' => null, 'value' => null, 'attributes' => [], 'class', 'id'
-        ]);
-        Form::component('bsPassword', 'components.form.password', [
-            'name', 'title' => null, 'class', 'id'
+        Form::component('bsText', 'components.form.text',[
+            'name', 'title', 'value' => null, 'labelAttributes' => [], 'inputAttributes' => []
         ]);
         Form::component('bsEmail', 'components.form.email', [
-            'name', 'title' => null, 'value' => null, 'attributes' => [], 'class', 'id'
-            ]
-        );
+            'name', 'title', 'value' => null, 'labelAttributes' => [], 'inputAttributes' => []
+        ]);
+        Form::component('bsPassword', 'components.form.password', [
+//            'name', 'title' => null, 'class', 'id'
+            'name', 'title', 'value' => null, 'labelAttributes' => [], 'inputAttributes' => []
+        ]);
         Form::component('bsSelect', 'components.form.select', [
-            'name', 'title' => null, 'value' => null, 'attributes' => [], 'class', 'id'
+            'name', 'title' => null, 'value' => null, 'options' => null, 'labelAttributes' => [], 'inputAttributes' => []
         ]);
         Form::component('bsSubmit', 'components.form.submit', [
             'name', 'title' => null, 'value' => null, 'class', 'id'

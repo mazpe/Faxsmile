@@ -12,6 +12,13 @@ Fax can be received by many User
 User has a dedicated Fax
 
 ## [CHANGE LOG]
+### 10-04-2016
+- Users CRUD updated to match new relationship and Reciepients list
+- Display users fax number as recipient and sender
+- More dynamic flexibility to forms creator
+- Create user only displays Faxes that have been assiged to the client
+- When creating a user selecting a fax_id sets him as a sender for that fax.
+
 ### 10-03-2016
 - Fax/ Recipients association
 - In global Fax create form, If a recipient is entered a client id is required
@@ -25,6 +32,7 @@ User has a dedicated Fax
 ### 10-02-2016
 - Creating a Fax only selected Clients users are loaded
 - Editing a Fax the preselected User is Selected and only Clients Users loaded.
+
 
 ### 10-01-2016
 - Added API calls
@@ -58,3 +66,4 @@ User has a dedicated Fax
 - Fully support Soft Delete in fax_recipients table
 ## User
 - When a User account is created it should send an email with login/password information.
+- Creating should touch mutators and use setPasswordAttribute mutator instead of having to specify it

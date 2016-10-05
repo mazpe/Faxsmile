@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Recipient;
 use Illuminate\Http\Request;
 use App\User;
 use App\Client;
 use App\Fax;
+use App\Sender;
 use Hash;
 
 class UserController extends Controller
@@ -63,10 +65,11 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::with('entity','fax')->find($id);
+        $user = User::with('entity')->find($id);
+        $recipient = Recipient::find($user->id);
 
         return view('admin.user.show',
-            compact('user')
+            compact('user', 'recipient')
         );
     }
 
@@ -99,7 +102,7 @@ class UserController extends Controller
             'email' => 'required|email'
         ]);
 
-        User::find($id)->update($request->all());
+        $user = User::find($id)->update($request->all());
 
         return redirect()->route('user.index')
             ->with('success', 'User updated successfully');

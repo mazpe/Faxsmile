@@ -91,21 +91,36 @@ $(function () {
 });
 
 $(function () {
-    var client_id = $( "#fax-client" ).val();;
+    var client_id
 
+    // fax client/users list update
     if ($("#fax-client").val() !== "") {
+        client_id = $( "#fax-client" ).val();
         getClientUsers(client_id, function(results) {
             updateUsersList(results,'fax-sender');
         });
     }
 
-    /**
-     *
-     */
+
     $('#fax-client').on('change', function(e){
-        var client_id = e.target.value;
+        client_id = e.target.value;
         getClientUsers(client_id, function(results) {
             updateUsersList(results,'fax-sender');
+        });
+    });
+
+    // users client/fax list update
+    if ($("#user-clients").val() !== "") {
+        client_id = $( "#user-clients" ).val();
+        getClientFaxes(client_id, function(results) {
+            updateFaxesList(results,'user-faxes');
+        });
+    }
+
+    $('#user-clients').on('change', function(e){
+        client_id = e.target.value;
+        getClientFaxes(client_id, function(results) {
+            updateFaxesList(results,'user-faxes');
         });
     });
 
@@ -123,7 +138,6 @@ $(function () {
             '<option value="">Select one...</option>'
         );
 
-
         $.each(data, function(index,sender){
             var selected;
 
@@ -137,8 +151,43 @@ $(function () {
         });
     }
 
+    function updateFaxesList(data,field_id) {
+        this.preSelectedValue = "";
+
+        var self = this;
+
+        if ($('#'+field_id).val() !== "") {
+            self.preSelectedValue = $('#'+field_id).val();
+        }
+
+        $('#'+field_id).empty();
+        $('#'+field_id).append('' +
+            '<option value="">Select one...</option>'
+        );
+
+        $.each(data, function(index,fax){
+            var selected;
+
+            if (fax.id == self.preSelectedValue) {
+                selected = "selected";
+            }
+
+            $('#'+field_id).append('' +
+                '<option value=' + fax.id + ' ' + selected +' >' + fax.number + '</option>'
+            );
+        });
+    }
+
     function getClientUsers(client_id,callback) {
         $.get("/api/client/" + client_id + "/users", function(results, status) {
+            if (status === "success") {
+                callback(results);
+            }
+        });
+    }
+
+    function getClientFaxes(client_id,callback) {
+        $.get("/api/client/" + client_id + "/faxes", function(results, status) {
             if (status === "success") {
                 callback(results);
             }

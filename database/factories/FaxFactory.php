@@ -18,18 +18,19 @@ use App\Provider;
 
 $factory->define(Fax::class, function (Faker\Generator $faker) {
 
-    $user = App\User::getUser();
+//    $user = App\User::getUser();
 
     return [
         'provider_id' => function () {
-            return Provider::inRandomOrder()->first()->id;
+            return App\Provider::inRandomOrder()->first()->id;
         },
-        'client_id' => function () use ($user) {
-            return $user->client->id;
+        'client_id' => function ()  {
+//            return $user->client->id;
+            return App\Client::inRandomOrder()->first()->id;
         },
-        'sender_id' => function () use ($user) {
-            return $user->id;
-        },
+//        'sender_id' => function () use ($user) {
+//            return $user->id;
+//        },
         'number' => $faker->numerify($string = '##########'),
         'description' => $faker->randomElement($array = array ('Accounting', 'Finance', 'Sales', 'Parts', 'Service')),
         'note' => $faker->realText($maxNbChars = 50, $indexSize = 2),
