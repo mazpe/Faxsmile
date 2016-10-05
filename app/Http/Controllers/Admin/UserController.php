@@ -51,15 +51,7 @@ class UserController extends Controller
             'email' => 'required|unique:users|email',
         ]);
 
-        $user = User::create($request->all());
-
-        if (!empty($request->input('fax_id'))) {
-            $sender = Sender::find($user->id);
-            $fax = Fax::find($request->input('fax_id'));
-
-            $sender->fax()->associate($fax);
-            $sender->save();
-        }
+        User::create($request->all());
 
         return redirect()->route('user.index')
             ->with('success', 'User created successfully');
@@ -110,7 +102,7 @@ class UserController extends Controller
             'email' => 'required|email'
         ]);
 
-        User::find($id)->update($request->all());
+        $user = User::find($id)->update($request->all());
 
         return redirect()->route('user.index')
             ->with('success', 'User updated successfully');

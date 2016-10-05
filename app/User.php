@@ -22,7 +22,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'entity_id', 'first_name', 'last_name', 'email', 'note'
+        'entity_id', 'first_name', 'fax_id', 'last_name', 'email', 'note'
     ];
 
     /**
@@ -89,6 +89,19 @@ class User extends Authenticatable
     }
 
     /**
+     *  Set hashed password
+     *
+     * @param $value
+     */
+    public function setFaxIdAttribute($value) {
+        if (empty($value)) {
+            $this->attributes['fax_id'] = null;
+        } else {
+            $this->attributes['fax_id'] = $value;
+        }
+    }
+
+    /**
      *  Return the full concatenated name for the User
      *
      * @return string
@@ -132,6 +145,15 @@ class User extends Authenticatable
      */
     public function fax() {
         return $this->belongsTo('App\Fax');
+    }
+
+    /**
+     * Get the recipients for the user
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function recipients() {
+        return $this->belongsToMany('App\Recipient','fax_recipients', 'recipient_id')->withTimestamps();
     }
 
     ### CUSTOM FUNCTIONS
