@@ -90,7 +90,7 @@ class SenderController extends Controller
             $sender->update(['fax_id' => null]);
         }
 
-        return redirect()->route('fax.index')
+        return redirect()->route('fax.edit', ['fax_id' => $fax_id])
             ->with('success','Fax deleted successfully');
     }
 }

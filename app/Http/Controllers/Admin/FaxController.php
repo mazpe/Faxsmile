@@ -122,8 +122,8 @@ class FaxController extends Controller
             }
         }
 
-        return redirect()->route('fax.index')
-            ->with('success','Fax created successfully');
+        return redirect()->route('fax.edit', ['fax_id' => $fax->id])
+            ->with('success','Fax deleted successfully');
     }
 
     /**
@@ -252,8 +252,8 @@ class FaxController extends Controller
             // TODO: some kind of error
         }
 
-        return redirect()->route('fax.index')
-            ->with('success','Fax updated successfully');
+        return redirect()->route('fax.edit', ['fax_id' => $fax->id])
+            ->with('success','Fax deleted successfully');
     }
 
     /**
