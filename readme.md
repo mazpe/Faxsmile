@@ -7,9 +7,9 @@
 Fax can be added only requiring a provider
 Fax can be associated with a Client with
 Fax can be associated with a Client's User
-Fax can be sent only by associated User
+Fax can be sent by many User
 Fax can be received by many User
-User has a dedicated Fax
+User can only through one Fax
 
 ## [CHANGE LOG]
 ### 10-04-2016
@@ -18,6 +18,7 @@ User has a dedicated Fax
 - More dynamic flexibility to forms creator
 - Create user only displays Faxes that have been assiged to the client
 - When creating a user selecting a fax_id sets him as a sender for that fax.
+- Faxes creating with sender list
 
 ### 10-03-2016
 - Fax/ Recipients association
