@@ -72,6 +72,61 @@
                             </div>
                         </div>
 
+                        <!-- fax-senders-tab-pane -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="box">
+                                    <div class="box-header">
+                                        <strong>Senders</strong>
+                                    </div>
+                                    <!-- box-body -->
+                                    <div class="box-body">
+                                        <div id="fax_senders_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <table id="fax_senders" class="table table-bordered table-striped hover dataTable" role="grid"
+                                                           aria-describedby="fax_senders_info">
+                                                        <thead>
+                                                        <tr role="row">
+                                                            <th class="sorting_asc" tabindex="0" aria-controls="fax_senders" rowspan="1" colspan="1"
+                                                                aria-sort="ascending" aria-label="ID: activate to sort column descending"
+                                                                style="width: 5px;">ID
+                                                            </th>
+                                                            <th class="sorting" tabindex="0" aria-controls="fax_senders" rowspan="1" colspan="1"
+                                                                aria-label="Name: activate to sort column ascending" style="width: 250px;">Name
+                                                            </th>
+                                                            <th class="sorting" tabindex="0" aria-controls="fax_senders" rowspan="1" colspan="1"
+                                                                aria-label="Email: activate to sort column ascending" style="width: 30px;">Email
+                                                            </th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        @foreach($fax->senders as $sender)
+                                                            <tr role="row" class="odd"  data-href="{{URL::to('/admin/client/' . $sender->id)}}">
+                                                                <td class="sorting_1">{{ $sender->id }}</td>
+                                                                <td>{{ $sender->full_name }}</td>
+                                                                <td>{{ $sender->email }}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                        </tbody>
+                                                        <tfoot>
+                                                        <tr>
+                                                            <th rowspan="1" colspan="1">ID</th>
+                                                            <th rowspan="1" colspan="1">Name</th>
+                                                            <th rowspan="1" colspan="1">Email</th>
+                                                        </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /. fax-senders-tab-pane -->
+
                         <!-- fax-recipients-tab-pane -->
                         <div class="row">
                             <div class="col-md-12">

@@ -1,10 +1,17 @@
 <div class="box-body">
-    {{ Form::bsSelect('provider_id','Provider',isset($fax) ? $fax->provider->id : null,$providers,'col-sm-2 control-label') }}
-    {{ Form::bsSelect('client_id','Client',isset($client) ? $client->id : null,$clients,'col-sm-2 control-label', 'fax-client') }}
-    {{ Form::bsSelect('sender_id','Sender',isset($user) ? $user->id : null,$users,'col-sm-2 control-label','fax-sender') }}
-    {{ Form::bsText('recipients','Recipients', isset($recipients) ? $recipients : null,[],'col-sm-2 control-label') }}
-    {{ Form::bsText('number','Fax Number', null,[],'col-sm-2 control-label') }}
-    {{ Form::bsText('description',null,null,[],'col-sm-2 control-label') }}
-    {{ Form::bsText('note',null,null,[],'col-sm-2 control-label') }}
+
+    <!-- name, title, value, label attributes, input attributes -->
+    {{ Form::bsSelect('provider_id', 'Provider',
+        isset($fax) ? $fax->provider->id : null, $providers,
+        ['class' => 'col-sm-2 control-label'], ['id' => 'fax-providers', 'class' =>'form-control', 'placeholder' => 'Select one...']) }}
+    {{ Form::bsSelect('client_id', 'Client',
+        isset($fax) ? $fax->client_id : null, $clients,
+        ['class' => 'col-sm-2 control-label'], ['id' => 'fax-clients', 'class' =>'form-control', 'placeholder' => 'Select one...']) }}
+    {{ Form::bsText('senders', null, isset($temp) ? $senders : "", ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}
+    {{ Form::bsText('recipients', null, isset($temp) ? $recipients : "", ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}
+    {{ Form::bsText('number', null, null, ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}
+    {{ Form::bsText('description', null, null, ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}
+    {{ Form::bsText('notes', null, null, ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}
+
     {{ Form::bsSubmit('Submit', '','btn btn-info pull-right') }}
 </div>

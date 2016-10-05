@@ -11,7 +11,7 @@ class Fax extends Model
     use SoftDeletes;
     use SoftCascadeTrait;
 
-    protected $softCascade = ['recipients'];
+//    protected $softCascade = ['recipients'];
 
     /**
      * The attributes that are mass assignable.

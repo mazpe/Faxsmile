@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Recipient;
+
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -10,6 +10,8 @@ use App\Fax;
 use App\User;
 use App\Client;
 use App\Provider;
+use App\Sender;
+use App\Recipient;
 
 class FaxController extends Controller
 {
@@ -56,6 +58,39 @@ class FaxController extends Controller
 
         $fax = Fax::create($request->all());
 
+        // create || attach senders
+        if ($request->input('senders')) {
+            // Convert list into array by , or ;
+            // TODO: Verify that list is in correct format before processing.
+            $senders = preg_split( "/[,;]/", $request->input('senders'));
+
+            // Attach each recipient in the list seperated by , or ; to the created fax
+            foreach($senders as $sender_email) {
+                $sender_email = trim($sender_email);
+                $sender = Sender::where('email', $sender_email);
+
+                if ($sender->exists()) {
+                    $sender = $sender->first();
+                } else {
+                    // create user
+                    $sender = Sender::create([
+                        'entity_id' => $request->input('client_id'),
+                        'email' => $sender_email,
+                        'password' => str_random(6),
+                        'remember_token' => str_random(10),
+                        'active' => 1
+                    ]);
+                }
+
+                if ($sender) {
+                    $sender->update(['fax_id' => $fax->id]);
+                } else {
+                    // TODO: some kind of error
+                }
+            }
+        }
+
+        // create || attach recipients
         if ($request->input('recipients')) {
             // Convert list into array by , or ;
             // TODO: Verify that list is in correct format before processing.
@@ -87,8 +122,8 @@ class FaxController extends Controller
             }
         }
 
-        return redirect()->route('fax.index')
-            ->with('success','Fax created successfully');
+        return redirect()->route('fax.edit', ['fax_id' => $fax->id])
+            ->with('success','Fax deleted successfully');
     }
 
     /**
@@ -122,9 +157,11 @@ class FaxController extends Controller
         $clients = Client::pluck('name', 'id');
 
         // create a mailing list style of recipients (email@email.com, user@aol.com)
+        $senders = $fax->senders->implode('email', ', ');
+        // create a mailing list style of recipients (email@email.com, user@aol.com)
         $recipients = $fax->recipients->implode('email', ', ');
 
-        return view('admin.fax.edit', compact('fax','providers','clients','users','recipients'));
+        return view('admin.fax.edit', compact('fax','providers','clients','senders','recipients'));
     }
 
     /**
@@ -147,9 +184,42 @@ class FaxController extends Controller
         $recipients_ids = array();
 
         // TODO: this logic should probably be moved to owns function as its been reused by create and edit
+
+        // create || attach senders
+        if ($request->input('senders')) {
+            // Convert list into array by , or ;
+            // TODO: Verify that list is in correct format before processing.
+            $senders = preg_split( "/[,;]/", $request->input('senders'));
+
+            // Attach each recipient in the list seperated by , or ; to the created fax
+            foreach($senders as $sender_email) {
+                $sender_email = trim($sender_email);
+                $sender = Sender::where('email', $sender_email);
+
+                if ($sender->exists()) {
+                    $sender = $sender->first();
+                } else {
+                    // create user
+                    $sender = Sender::create([
+                        'entity_id' => $request->input('client_id'),
+                        'email' => $sender_email,
+                        'password' => str_random(6),
+                        'remember_token' => str_random(10),
+                        'active' => 1
+                    ]);
+                }
+
+                if ($sender) {
+                    $sender->update(['fax_id' => $fax->id]);
+                } else {
+                    // TODO: some kind of error
+                }
+            }
+        }
+
         // Check each recipient if its created and if its not create it and create an array with ids
         // this array of ids is going to be used to sync the fax_recipients table
-        if ($request->input('recipients')) {
+        if (!empty($request->input('recipients'))) {
             // Convert list into array by , or ;
             // TODO: Verify that list is in correct format before processing.
             $recipients = preg_split( "/[,;]/", $request->input('recipients'));
@@ -176,14 +246,14 @@ class FaxController extends Controller
             }
         }
 
-        if ($recipient) {
-            $fax->recipients()->sync($recipients_ids);
+        if (!empty($recipient)) {
+            $fax->recipients()->syncWithoutDetaching($recipients_ids);
         } else {
             // TODO: some kind of error
         }
 
-        return redirect()->route('fax.index')
-            ->with('success','Fax updated successfully');
+        return redirect()->route('fax.edit', ['fax_id' => $fax->id])
+            ->with('success','Fax deleted successfully');
     }
 
     /**
@@ -194,8 +264,12 @@ class FaxController extends Controller
      */
     public function destroy($id)
     {
-        Fax::find($id)->delete();
+        $fax = Fax::find($id);
+        $fax->recipients()->detach();
+        $fax->senders()->update(['fax_id' => null]);
+        $fax->delete();
         return redirect()->route('fax.index')
             ->with('success','Fax deleted successfully');
     }
+
 }

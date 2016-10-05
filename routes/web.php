@@ -23,6 +23,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('provider', 'Admin\ProviderController');
     Route::resource('client', 'Admin\ClientController');
     Route::resource('fax', 'Admin\FaxController');
+    Route::delete('/fax/{fax_id}/sender/{sender_id}/delete', 'Admin\Fax\SenderController@destroy');
+    Route::delete('/fax/{fax_id}/recipient/{recipient_id}/delete', 'Admin\Fax\RecipientController@destroy');
     Route::resource('user', 'Admin\UserController');
 });
 
