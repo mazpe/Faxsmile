@@ -264,7 +264,10 @@ class FaxController extends Controller
      */
     public function destroy($id)
     {
-        Fax::find($id)->delete();
+        $fax = Fax::find($id);
+        $fax->recipients()->detach();
+        $fax->senders()->update(['fax_id' => null]);
+        $fax->delete();
         return redirect()->route('fax.index')
             ->with('success','Fax deleted successfully');
     }

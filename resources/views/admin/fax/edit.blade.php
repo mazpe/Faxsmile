@@ -103,7 +103,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <table id="fax_recipients" class="table table-bordered table-striped hover dataTable" role="grid"
-                                       aria-describedby="fax_recipients_info">
+                                       aria-describedby="fax_recipients_info" data-form="deleteForm">
                                     <thead>
                                     <tr role="row">
                                         <th class="sorting_asc" tabindex="0" aria-controls="fax_recipients" rowspan="1" colspan="1"
