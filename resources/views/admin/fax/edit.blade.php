@@ -128,7 +128,7 @@
                                             <td>{{ $recipient->full_name }}</td>
                                             <td>{{ $recipient->email }}</td>
                                             <td>
-                                                {!! Form::open(['method' => 'DELETE','action' => ['Admin\FaxController@destroy', $fax->id],'class' => 'form-delete','style'=>'display:inline']) !!}
+                                                {!! Form::open(['method' => 'DELETE','action' => ['Admin\Fax\RecipientController@destroy', $fax->id, $recipient->id],'class' => 'form-delete','style'=>'display:inline']) !!}
                                                 {!! Form::submit('Delete', ['class' => 'btn btn-xs btn-danger delete', 'name' => 'delete_modal']) !!}
                                                 {!! Form::close() !!}
                                             </td>
