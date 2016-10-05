@@ -31,7 +31,7 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header">
-                    <strong>Senders</strong>
+                    <strong>Sender</strong>
                 </div>
                 <!-- box-body -->
                 <div class="box-body">
@@ -39,7 +39,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <table id="fax_senders" class="table table-bordered table-striped hover dataTable" role="grid"
-                                       aria-describedby="fax_senders_info" data-form="deleteForm">
+                                       aria-describedby="fax_senders_info">
                                     <thead>
                                     <tr role="row">
                                         <th class="sorting_asc" tabindex="0" aria-controls="fax_senders" rowspan="1" colspan="1"
@@ -103,7 +103,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <table id="fax_recipients" class="table table-bordered table-striped hover dataTable" role="grid"
-                                       aria-describedby="fax_recipients_info" data-form="deleteForm">
+                                       aria-describedby="fax_recipients_info">
                                     <thead>
                                     <tr role="row">
                                         <th class="sorting_asc" tabindex="0" aria-controls="fax_recipients" rowspan="1" colspan="1"

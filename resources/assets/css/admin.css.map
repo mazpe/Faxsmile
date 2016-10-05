@@ -1,1 +1,1 @@
-{"version":3,"sources":["admin.css"],"names":[],"mappings":"AAAA","file":"admin.css","sourceRoot":"/source/","sourcesContent":[]}
+{"version":3,"sources":["admin.scss"],"names":[],"mappings":"AAAA;EACE,kBAAiB,EAClB","file":"admin.css","sourcesContent":[".table > tr.active {\n  background:green;\n}"],"sourceRoot":"/source/"}

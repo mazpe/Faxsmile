@@ -1,2 +1,4 @@
+.table > tr.active {
+  background: green; }
 
 /*# sourceMappingURL=admin.css.map */
