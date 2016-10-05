@@ -20,6 +20,7 @@ User can only through one Fax
 - When creating a user selecting a fax_id sets him as a sender for that fax.
 - Faxes creating with sender list
 - Fax create, display and edit senders/recipients
+- Fax delete
 
 ### 10-03-2016
 - Fax/ Recipients association
