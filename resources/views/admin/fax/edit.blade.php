@@ -39,7 +39,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <table id="fax_senders" class="table table-bordered table-striped hover dataTable" role="grid"
-                                       aria-describedby="fax_senders_info">
+                                       aria-describedby="fax_senders_info" data-form="deleteForm">
                                     <thead>
                                     <tr role="row">
                                         <th class="sorting_asc" tabindex="0" aria-controls="fax_senders" rowspan="1" colspan="1"
@@ -64,7 +64,7 @@
                                             <td>{{ $sender->full_name }}</td>
                                             <td>{{ $sender->email }}</td>
                                             <td>
-                                            {!! Form::open(['method' => 'DELETE','action' => ['Admin\FaxController@destroy', $fax->id],'class' => 'form-delete','style'=>'display:inline']) !!}
+                                            {!! Form::open(['method' => 'DELETE','action' => ['Admin\Fax\SenderController@destroy', $fax->id, $sender->id],'class' => 'form-delete','style'=>'display:inline']) !!}
                                             {!! Form::submit('Delete', ['class' => 'btn btn-xs btn-danger delete', 'name' => 'delete_modal']) !!}
                                             {!! Form::close() !!}
                                             </td>

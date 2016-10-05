@@ -19,6 +19,7 @@ User can only through one Fax
 - Create user only displays Faxes that have been assiged to the client
 - When creating a user selecting a fax_id sets him as a sender for that fax.
 - Faxes creating with sender list
+- Fax create, display and edit senders/recipients
 
 ### 10-03-2016
 - Fax/ Recipients association

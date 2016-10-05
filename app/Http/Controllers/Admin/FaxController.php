@@ -268,4 +268,5 @@ class FaxController extends Controller
         return redirect()->route('fax.index')
             ->with('success','Fax deleted successfully');
     }
+
 }
