@@ -116,7 +116,7 @@
                                                     aria-label="Name: activate to sort column ascending" style="width: 250px;">Name
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="client_faxes" rowspan="1" colspan="1"
-                                                    aria-label="Active: activate to sort column ascending" style="width: 30px;">Active
+                                                    aria-label="Active: activate to sort column ascending" style="width: 20px;">Active
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="client_faxes" rowspan="1" colspan="1"
                                                     aria-label="CSS grade: activate to sort column ascending" style="width: 50px;">
@@ -174,13 +174,16 @@
                                                     aria-sort="ascending" aria-label="ID: activate to sort column ascending" style="width: 5px;">ID
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="client_users" rowspan="1" colspan="1"
-                                                    aria-label="Name: activate to sort column ascending" style="width: 250px;">Name
+                                                    aria-label="Name: activate to sort column ascending" style="width: 100px;">Name
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="client_users" rowspan="1" colspan="1"
-                                                    aria-label="Active: activate to sort column ascending" style="width: 30px;">Active
+                                                    aria-label="Email: activate to sort column ascending" style="width: 100px;">Email
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="client_users" rowspan="1" colspan="1"
-                                                    aria-label="CSS grade: activate to sort column ascending" style="width: 70px;">
+                                                    aria-label="Active: activate to sort column ascending" style="width: 20px;">Active
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="client_users" rowspan="1" colspan="1"
+                                                    aria-label="CSS grade: activate to sort column ascending" style="width: 50px;">
                                                     Action
                                                 </th>
                                             </tr>
@@ -189,7 +192,8 @@
                                             @foreach($client->users as $user)
                                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/user/' . $user->id)}}">
                                                     <td class="sorting_1">{{ $user->id }}</td>
-                                                    <td>{{ $user->fullName() }}</td>
+                                                    <td>{{ $user->full_name }}</td>
+                                                    <td>{{ $user->email }}</td>
                                                     <td>{{ $user->active }}</td>
                                                     <td>
                                                         {{ link_to_action('Admin\UserController@show', $title = 'Show',
@@ -209,6 +213,7 @@
                                             <tr>
                                                 <th rowspan="1" colspan="1">ID</th>
                                                 <th rowspan="1" colspan="1">Name</th>
+                                                <th rowspan="1" colspan="1">Email</th>
                                                 <th rowspan="1" colspan="1">Active</th>
                                                 <th rowspan="1" colspan="1">Action</th>
                                             </tr>

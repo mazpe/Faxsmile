@@ -40,7 +40,7 @@ class ClientController extends Controller
     public function store(Request $request) {
         $this->validate($request, [
             'parent_id' => 'required|numeric',
-            'name' => 'required|unique:entities|max:255',
+            'name' => 'required|unique:entities,name,NULL,id,deleted_at,NULL'
         ]);
 
         Client::create($request->all());

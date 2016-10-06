@@ -199,7 +199,7 @@
                                             @foreach($provider_users as $user)
                                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/user/' . $user->id)}}">
                                                     <td class="sorting_1">{{ $user->id }}</td>
-                                                    <td>{{ $user->fullName() }}</td>
+                                                    <td>{{ $user->full_name }}</td>
                                                     <td>{{ $user->active }}</td>
                                                     <td>
                                                         {{ link_to_action('Admin\UserController@show', $title = 'Show',

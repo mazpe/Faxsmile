@@ -28,7 +28,9 @@
                     <img class="profile-user-img img-responsive img-circle" src="http://www.socialagent.me/wp-content/uploads/2014/07/avatarDefault.png" alt="User profile picture">
 
                     <h3 class="profile-username text-center">{{ $user->full_name }}</h3>
+                    @if($user->fax)
                     <p class="text-muted text-center">{{ $user->fax->number }}</p>
+                    @endif
                     <p class="text-muted text-center">{{ $user->entity->name }}</p>
 
 

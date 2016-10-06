@@ -36,7 +36,7 @@ class ProviderController extends Controller
      */
     public function store(Request $request) {
         $this->validate($request, [
-            'name' => 'required|unique:entities|max:255',
+            'name' => 'required|unique:entities,name,NULL,id,deleted_at,NULL'
         ]);
 
         Provider::create($request->all());

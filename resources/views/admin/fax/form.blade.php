@@ -1,5 +1,4 @@
 <div class="box-body">
-
     <!-- name, title, value, label attributes, input attributes -->
     {{ Form::bsSelect('provider_id', 'Provider',
         isset($fax) ? $fax->provider->id : null, $providers,

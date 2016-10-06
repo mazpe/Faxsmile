@@ -11,7 +11,7 @@ class Provider extends Entity
     use SoftCascadeTrait;
 
     protected static $singleTableType = 'provider';
-    protected $softCascade = ['providerConfig', 'faxes'];
+    protected $softCascade = ['faxes'];
 
     /**
      * The attributes that should be mutated to dates.
