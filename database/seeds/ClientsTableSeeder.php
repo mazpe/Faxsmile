@@ -13,6 +13,10 @@ class ClientsTableSeeder extends Seeder
     {
         factory(App\Client::class, 10)->create()->each(function($u) {
             $u->users()->saveMany(factory(App\User::class, 5)->make());
+
+            $role = App\Role::where('name', 'User')->first();
+            $user = App\User::find($u->id);
+            $user->roles()->attach($role->id);
         });
     }
 }

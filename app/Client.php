@@ -58,7 +58,7 @@ class Client extends Entity
         static::created(function(Client $client)
         {
             if ($client->contact_email) {
-                $client->users()->create([
+                $user = $client->users()->create([
                     'first_name' => $client->contact_first_name,
                     'last_name' => $client->contact_last_name,
                     'email' => $client->contact_email,
@@ -67,6 +67,9 @@ class Client extends Entity
                     'note' => 'Client Administrator',
                     'active' => 1
                 ]);
+
+                // Make client user a "Client Admin"
+                $user->roles()->attach(App\Role::where('name','Client Admin')->first()->id);
             }
 
             return true;

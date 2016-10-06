@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
+use App\Role;
 
 class SuperAdminTableSeeder extends Seeder
 {
@@ -12,7 +13,9 @@ class SuperAdminTableSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
+        $role = Role::where('name', 'Super Admin')->first();
+
+        $user = User::create([
             'entity_id' => 1,
             'first_name' => 'Super',
             'last_name' => 'Admin',
@@ -20,5 +23,7 @@ class SuperAdminTableSeeder extends Seeder
             'password' => 'SuperAdmin',
             'remember_token' => str_random(10),
         ]);
+        $user->roles()->attach($role->id);
+
     }
 }

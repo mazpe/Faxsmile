@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CompaniesTableSeeder::class);
 
         // Clients / Users
+        $this->call(RolesTableSeeder::class);
         $this->call(ClientsTableSeeder::class);
 
         // Faxes

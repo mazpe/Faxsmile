@@ -148,6 +148,15 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the roles for the user
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function roles() {
+        return $this->belongsToMany('App\Role')->withTimestamps();
+    }
+
+    /**
      * Get the recipients for the user
      *
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
@@ -155,6 +164,7 @@ class User extends Authenticatable
     public function recipients() {
         return $this->belongsToMany('App\Recipient','fax_recipients', 'recipient_id')->withTimestamps();
     }
+
 
     ### CUSTOM FUNCTIONS
     /**

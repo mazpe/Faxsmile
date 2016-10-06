@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
+use App\Role;
+use App\Company;
 
 class CompanyAdminTableSeeder extends Seeder
 {
@@ -12,9 +14,10 @@ class CompanyAdminTableSeeder extends Seeder
      */
     public function run()
     {
-        $entity_id = App\Company::orderBy('id','ASC')->first()->id;
+        $role = Role::where('name', 'Company Admin')->first();
+        $entity_id = Company::orderBy('id','ASC')->first()->id;
 
-        User::create([
+        $user = User::create([
             'entity_id' => $entity_id,
             'first_name' => 'Company',
             'last_name' => 'Admin',
@@ -22,5 +25,6 @@ class CompanyAdminTableSeeder extends Seeder
             'password' => 'CompanyAdmin',
             'remember_token' => str_random(10),
         ]);
+        $user->roles()->attach($role->id);
     }
 }
