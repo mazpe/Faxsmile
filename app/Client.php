@@ -68,8 +68,9 @@ class Client extends Entity
                     'active' => 1
                 ]);
 
-                // Make client user a "Client Admin"
-                $user->roles()->attach(App\Role::where('name','Client Admin')->first()->id);
+
+                $role = Role::where('name', 'Client Admin')->first();
+                $user->roles()->attach($role->id);
             }
 
             return true;

@@ -219,4 +219,8 @@ class User extends Authenticatable
         }
     }
 
+    public static function attachUserToRole($user,$role) {
+        dd($role);
+    }
+
 }

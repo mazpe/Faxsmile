@@ -45,6 +45,20 @@
                             </p>
                         </div>
                     </div>
+
+                    <div class="box">
+                        <div class="box-header"><strong>Roles</strong></div>
+                        <div class="box-body">
+                            <ul>
+                            {{--{{ dd($user->roles) }}--}}
+                            @foreach($user->roles as $role)
+                                <li>{{ $role->name }}</li>
+                            @endforeach
+
+                            </ul>
+                        </div>
+                    </div>
+
                 </div>
 
                 {{ link_to_action('Admin\UserController@edit', $title = 'Edit',

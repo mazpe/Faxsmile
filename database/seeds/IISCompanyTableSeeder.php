@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Company;
+use App\Role;
 
 class IISCompanyTableSeeder extends Seeder
 {

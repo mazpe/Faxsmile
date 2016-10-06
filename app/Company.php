@@ -43,12 +43,14 @@ class Company extends Entity
                     'note' => 'Company Administrator',
                     'active' => 1
                 ]);
-                // Make client user a "Client Admin"
-                $user->roles()->attach(Role::where('name','Company Admin')->first()->id);
+
+                $role = Role::where('name', 'Company Admin')->first();
+                $user->roles()->attach($role->id);
             }
 
             return true;
         });
+
     }
 
     /**
@@ -85,5 +87,12 @@ class Company extends Entity
      */
     public function emailTemplates() {
         return $this->hasMany('App\EmailTemplate');
+    }
+
+    ### CUSTOM FUNCTION
+    public function makeCompanyUserAdmin($user) {
+        $role = Role::where('name', 'Company Admin');
+        $user->roles()->attach($role->id);
+        return;
     }
 }

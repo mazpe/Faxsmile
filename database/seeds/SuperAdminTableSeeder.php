@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\User;
 use App\Role;
+use App\Company;
 
 class SuperAdminTableSeeder extends Seeder
 {
@@ -15,8 +16,10 @@ class SuperAdminTableSeeder extends Seeder
     {
         $role = Role::where('name', 'Super Admin')->first();
 
+        $iisUser = Company::where('name', 'Innovative Internet Solutions')->first();
+
         $user = User::create([
-            'entity_id' => 1,
+            'entity_id' => $iisUser->id,
             'first_name' => 'Super',
             'last_name' => 'Admin',
             'email' => 'superadmin@faxit.cloud',
