@@ -10,8 +10,26 @@ class ProviderPolicy
 {
     use HandlesAuthorization;
 
+    public function before($user, $ability)
+    {
+        if ($user->isSuperAdmin()) {
+            return true;
+        }
+    }
+
     /**
-     * Determine whether the user can view the provider.
+     * Determine whether the user can index companies.
+     *
+     * @param  App\User  $user
+     * @return mixed
+     */
+    public function index(User $user)
+    {
+        return $user->isSuperAdmin();
+    }
+
+    /**
+     * Determine whether the user can view the company.
      *
      * @param  App\User  $user
      * @param  App\Provider  $provider
@@ -19,22 +37,22 @@ class ProviderPolicy
      */
     public function view(User $user, Provider $provider)
     {
-        //
+        return ($user->entity_id == $provider->id) &&  $user->isProviderAdmin();
     }
 
     /**
-     * Determine whether the user can create providers.
+     * Determine whether the user can create companies.
      *
      * @param  App\User  $user
      * @return mixed
      */
     public function create(User $user)
     {
-        //
+        return $user->isSuperAdmin();
     }
 
     /**
-     * Determine whether the user can update the provider.
+     * Determine whether the user can update the company.
      *
      * @param  App\User  $user
      * @param  App\Provider  $provider
@@ -42,18 +60,18 @@ class ProviderPolicy
      */
     public function update(User $user, Provider $provider)
     {
-        //
+        return ($user->entity_id == $provider->id) &&  $user->isProviderAdmin();
     }
 
     /**
-     * Determine whether the user can delete the provider.
+     * Determine whether the user can delete the company.
      *
      * @param  App\User  $user
      * @param  App\Provider  $provider
      * @return mixed
      */
-    public function delete(User $user, Provider $provider)
+    public function delete(User $user)
     {
-        //
+        return $user->isSuperAdmin();
     }
 }

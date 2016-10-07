@@ -14,13 +14,25 @@ User can only through one Fax
 ## [CHANGE LOG]
 ### 10-07-2016
 - Authorization
-- Super Admin can do anything
 #### Company Permissions
-- Only Super Admin can 'create' a Company
-- Only Company Admin that belongs to the Entity can 'view' a Company 
-- Only Company Admin that belongs to the Entity can 'update' a Company
-- Only Company Admin that belongs to the Entity can 'edit' a Company
-- Only Super Admin can 'delete' a Company
+- Only 'Super Admin' can 'store' a Company
+- Only 'Super Admin' can 'create' a Company
+- Only 'Company Admin' that belongs to the Entity can 'update' a Company
+- Only 'Company Admin' that belongs to the Entity can 'edit' a Company
+- Only 'Company Admin' that belongs to the Entity can 'view' a Company 
+- Only 'Super Admin' can 'delete' a Company
+- Only 'Super Admin' can 'index' Companies
+#### Provider Permissions
+- Only 'Super Admin' can 'store' a Provider
+- Only 'Super Admin' can 'create' a Provider
+- Only 'Provider Admin' that belongs to the Entity can 'update' a Provider
+- Only 'Provider Admin' that belongs to the Entity can 'edit' a Provider
+- Only 'Provider Admin' that belongs to the Entity can 'view' a Provider 
+- Only 'Super Admin' can 'delete' a Provider
+- Only 'Super Admin' can 'index' Providers
+
+#### Super Admin
+- 'Super Admin' can do anything
 
 ### 10-04-2016
 - Users CRUD updated to match new relationship and Reciepients list

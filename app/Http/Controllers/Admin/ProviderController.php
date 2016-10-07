@@ -14,6 +14,8 @@ class ProviderController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index() {
+        $this->authorize('index', Provider::class);
+
         return view('admin.provider.index',[
             'providers' => Provider::withCount('faxes')->get()
         ]);
@@ -24,7 +26,10 @@ class ProviderController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create() {
+    public function create()
+    {
+        $this->authorize('create', Provider::class);
+
         return view('admin.provider.create');
     }
 
@@ -34,7 +39,10 @@ class ProviderController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
+        $this->authorize('create', Provider::class);
+
         $this->validate($request, [
             'name' => 'required|unique:entities,name,NULL,id,deleted_at,NULL'
         ]);
@@ -54,8 +62,12 @@ class ProviderController extends Controller
     public function show($id)
     {
         $provider= Provider::find($id);
+
+        $this->authorize('view', $provider);
+
         $provider_faxes = $provider->faxes;
         $provider_users = $provider->users;
+
         return view('admin.provider.show',
             compact('provider','provider_faxes','provider_users')
         );
@@ -69,7 +81,10 @@ class ProviderController extends Controller
      */
     public function edit($id)
     {
-        $provider= Provider::find($id);
+        $provider = Provider::find($id);
+
+        $this->authorize('update', $provider);
+
         return view('admin.provider.edit',compact('provider'));
     }
 
@@ -82,11 +97,15 @@ class ProviderController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $provider = Provider::find($id);
+
+        $this->authorize('update', $provider);
+
         $this->validate($request, [
             'name' => 'required|max:255',
         ]);
 
-        Provider::find($id)->update($request->all());
+        $provider->update($request->all());
 
         return redirect()->route('provider.index')
             ->with('success','Provider updated successfully');
@@ -100,7 +119,12 @@ class ProviderController extends Controller
      */
     public function destroy($id)
     {
-        Provider::find($id)->delete();
+        $provider = Provider::find($id);
+
+        $this->authorize('delete', $provider);
+
+        $provider->delete();
+
         return redirect()->route('provider.index')
             ->with('success','Provider deleted successfully');
     }

@@ -183,6 +183,11 @@ class User extends Authenticatable
         return $this->roles->where('name', 'Company Admin');
     }
 
+    public function isProviderAdmin()
+    {
+        return $this->roles->where('name', 'Provider Admin');
+    }
+
     /**
      *  Get a user that is not associated with a Fax
      *

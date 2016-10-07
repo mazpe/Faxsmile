@@ -15,7 +15,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-//        $this->authorize('index', Company::class);
+        $this->authorize('index', Company::class);
 
         return view('admin.company.index',[
             'companies' => Company::withCount('clients')->get()

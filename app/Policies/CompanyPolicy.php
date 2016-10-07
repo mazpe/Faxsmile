@@ -25,7 +25,6 @@ class CompanyPolicy
      */
     public function index(User $user)
     {
-        //
         return $user->isSuperAdmin();
     }
 
