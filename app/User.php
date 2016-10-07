@@ -169,22 +169,12 @@ class User extends Authenticatable
     ### CUSTOM FUNCTIONS
     public function isSuperAdmin()
     {
-        foreach ($this->roles as $role) {
-            if ($role->name == "Super Admin") {
-                return true;
-            }
-        }
-        return false;
+        return $this->roles->where('name', 'Super Admin');
     }
 
     public function isCompanyAdmin()
     {
-        foreach ($this->roles as $role) {
-            if ($role->name == "Super Admin") {
-                return true;
-            }
-        }
-        return false;
+        return $this->roles->where('name', 'Company Admin');
     }
 
     /**
