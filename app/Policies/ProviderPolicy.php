@@ -18,7 +18,7 @@ class ProviderPolicy
     }
 
     /**
-     * Determine whether the user can index companies.
+     * Determine whether the user can index providers.
      *
      * @param  App\User  $user
      * @return mixed
@@ -29,7 +29,7 @@ class ProviderPolicy
     }
 
     /**
-     * Determine whether the user can view the company.
+     * Determine whether the user can view the provider.
      *
      * @param  App\User  $user
      * @param  App\Provider  $provider
@@ -41,7 +41,7 @@ class ProviderPolicy
     }
 
     /**
-     * Determine whether the user can create companies.
+     * Determine whether the user can create providers.
      *
      * @param  App\User  $user
      * @return mixed
@@ -52,7 +52,7 @@ class ProviderPolicy
     }
 
     /**
-     * Determine whether the user can update the company.
+     * Determine whether the user can update the provider.
      *
      * @param  App\User  $user
      * @param  App\Provider  $provider
@@ -64,7 +64,7 @@ class ProviderPolicy
     }
 
     /**
-     * Determine whether the user can delete the company.
+     * Determine whether the user can delete the provider.
      *
      * @param  App\User  $user
      * @param  App\Provider  $provider

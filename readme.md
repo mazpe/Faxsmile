@@ -17,19 +17,27 @@ User can only through one Fax
 #### Company Permissions
 - Only 'Super Admin' can 'store' a Company
 - Only 'Super Admin' can 'create' a Company
-- Only 'Company Admin' that belongs to the Entity can 'update' a Company
-- Only 'Company Admin' that belongs to the Entity can 'edit' a Company
-- Only 'Company Admin' that belongs to the Entity can 'view' a Company 
+- Only 'Company Admin' from the Entity can 'update' a Company
+- Only 'Company Admin' from the Entity can 'edit' a Company
+- Only 'Company Admin' from the Entity can 'view' a Company 
 - Only 'Super Admin' can 'delete' a Company
 - Only 'Super Admin' can 'index' Companies
 #### Provider Permissions
 - Only 'Super Admin' can 'store' a Provider
 - Only 'Super Admin' can 'create' a Provider
-- Only 'Provider Admin' that belongs to the Entity can 'update' a Provider
-- Only 'Provider Admin' that belongs to the Entity can 'edit' a Provider
-- Only 'Provider Admin' that belongs to the Entity can 'view' a Provider 
+- Only 'Provider Admin' from the Entity can 'update' a Provider
+- Only 'Provider Admin' from the Entity can 'edit' a Provider
+- Only 'Provider Admin' from the Entity can 'view' a Provider 
 - Only 'Super Admin' can 'delete' a Provider
 - Only 'Super Admin' can 'index' Providers
+#### Client Permissions
+- Only 'Super Admin' and 'Company Admin' from 'Company' can 'store' a Client for their 'Company'
+- Only 'Super Admin' and 'Company Admin' from 'Company' can 'create' a Client for their 'Company'
+- Only 'Super Admin' and 'Company Admin from 'Company' who owns the Client and 'Client Admin' from the Entity can 'update' a Client
+- Only 'Super Admin' and 'Company Admin from 'Company' who owns the Client and 'Client Admin' from the Entity can 'edit' a Client
+- Only 'Super Admin' and 'Company Admin from 'Company' who owns the Client and 'Client Admin' from the Entity can 'view' a Client 
+X Only 'Super Admin' and 'Company Admin' from 'Company' who owns the Client can 'delete' a Client
+X Only 'Super Admin' and 'Company Admin' from 'Company' who owns the Client can 'index' Clients
 
 #### Super Admin
 - 'Super Admin' can do anything

@@ -180,14 +180,36 @@ class User extends Authenticatable
 
     public function isCompanyAdmin()
     {
-        return $this->roles->where('name', 'Company Admin');
+        $isCompanyAdmin = false;
+
+        if ($this->roles->where('name', 'Company Admin')->count() > 0) {
+            $isCompanyAdmin = true;
+        }
+
+        return $isCompanyAdmin;
     }
 
     public function isProviderAdmin()
     {
-        return $this->roles->where('name', 'Provider Admin');
+        $isProviderAdmin = false;
+
+        if ($this->roles->where('name', 'Provider Admin')->count() > 0) {
+            $isProviderAdmin = true;
+        }
+
+        return $isProviderAdmin;
     }
 
+    public function isClientAdmin()
+    {
+        $isClientAdmin = false;
+
+        if ($this->roles->where('name', 'Client Admin')->count() > 0) {
+            $isClientAdmin = true;
+        }
+
+        return $isClientAdmin;
+    }
     /**
      *  Get a user that is not associated with a Fax
      *
