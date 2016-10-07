@@ -14,6 +14,8 @@ class CompanyController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index() {
+//        $this->authorize('index', Company::class);
+
         return view('admin.company.index',[
             'companies' => Company::withCount('clients')->get()
         ]);
@@ -25,6 +27,9 @@ class CompanyController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create() {
+
+        $this->authorize('create', Company::class);
+
         return view('admin.company.create');
     }
 
@@ -35,6 +40,9 @@ class CompanyController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request) {
+
+        $this->authorize('create', Company::class);
+
         $this->validate($request, [
             'name' => 'required|unique:entities,name,NULL,id,deleted_at,NULL'
         ]);
@@ -53,6 +61,8 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
+        $this->authorize('view', Company::class);
+
         $company= Company::find($id);
         $company_clients = $company->clients;
         $company_users = $company->users;
@@ -69,6 +79,8 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('update', Company::class);
+
         $company= Company::find($id);
         return view('admin.company.edit',compact('company'));
     }
@@ -82,6 +94,8 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('update', Company::class);
+
         $this->validate($request, [
             'name' => 'required|max:255',
         ]);
@@ -100,6 +114,8 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('update', Company::class);
+
         Company::find($id)->delete();
         return redirect()->route('company.index')
             ->with('success','Company deleted successfully');
