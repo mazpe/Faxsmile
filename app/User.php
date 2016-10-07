@@ -167,6 +167,26 @@ class User extends Authenticatable
 
 
     ### CUSTOM FUNCTIONS
+    public function isSuperAdmin()
+    {
+        foreach ($this->roles as $role) {
+            if ($role->name == "Super Admin") {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function isCompanyAdmin()
+    {
+        foreach ($this->roles as $role) {
+            if ($role->name == "Super Admin") {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      *  Get a user that is not associated with a Fax
      *
