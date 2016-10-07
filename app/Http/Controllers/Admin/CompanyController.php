@@ -13,7 +13,8 @@ class CompanyController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index() {
+    public function index()
+    {
 //        $this->authorize('index', Company::class);
 
         return view('admin.company.index',[
@@ -28,7 +29,6 @@ class CompanyController extends Controller
      */
     public function create()
     {
-
         $this->authorize('create', Company::class);
 
         return view('admin.company.create');
