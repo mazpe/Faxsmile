@@ -12,6 +12,16 @@ Fax can be received by many User
 User can only through one Fax
 
 ## [CHANGE LOG]
+### 10-07-2016
+- Authorization
+- Super Admin can do anything
+#### Company Permissions
+- Only Super Admin can 'create' a Company
+- Only Company Admin that belongs to the Entity can 'view' a Company 
+- Only Company Admin that belongs to the Entity can 'update' a Company
+- Only Company Admin that belongs to the Entity can 'edit' a Company
+- Only Super Admin can 'delete' a Company
+
 ### 10-04-2016
 - Users CRUD updated to match new relationship and Reciepients list
 - Display users fax number as recipient and sender

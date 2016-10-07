@@ -26,7 +26,8 @@ class CompanyController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create() {
+    public function create()
+    {
 
         $this->authorize('create', Company::class);
 
@@ -39,8 +40,8 @@ class CompanyController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request) {
-
+    public function store(Request $request)
+    {
         $this->authorize('create', Company::class);
 
         $this->validate($request, [
@@ -61,11 +62,13 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
-        $this->authorize('view', Company::class);
-
         $company= Company::find($id);
+
+        $this->authorize('view', $company);
+
         $company_clients = $company->clients;
         $company_users = $company->users;
+
         return view('admin.company.show',
             compact('company','company_clients','company_users')
         );
@@ -79,9 +82,10 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-        $this->authorize('update', Company::class);
+        $company = Company::find($id);
 
-        $company= Company::find($id);
+        $this->authorize('update', $company);
+
         return view('admin.company.edit',compact('company'));
     }
 
@@ -94,13 +98,15 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('update', Company::class);
+        $company = Company::find($id);
+
+        $this->authorize('update', $company);
 
         $this->validate($request, [
             'name' => 'required|max:255',
         ]);
 
-        Company::find($id)->update($request->all());
+        $company->update($request->all());
 
         return redirect()->route('company.index')
             ->with('success','Company updated successfully');
@@ -114,9 +120,12 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        $this->authorize('update', Company::class);
+        $company = Company::find($id);
 
-        Company::find($id)->delete();
+        $this->authorize('delete', $company);
+
+        $company->delete();
+
         return redirect()->route('company.index')
             ->with('success','Company deleted successfully');
     }
