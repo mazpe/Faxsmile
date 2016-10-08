@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\User;
-use App\Client;
+use App\Fax;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ClientPolicy
+class FaxPolicy
 {
     use HandlesAuthorization;
 
@@ -18,7 +18,7 @@ class ClientPolicy
     }
 
     /**
-     * Determine whether the user can index clients.
+     * Determine whether the user can index faxes.
      *
      * @param  App\User  $user
      * @return mixed
@@ -29,32 +29,33 @@ class ClientPolicy
     }
 
     /**
-     * Determine whether the user can view the client.
+     * Determine whether the user can view the fax.
      *
      * @param  App\User  $user
-     * @param  App\Client  $client
+     * @param  App\Fax  $fax
      * @return mixed
      */
-    public function view(User $user, Client $client)
+    public function view(User $user, Fax $fax)
     {
         // if client admin
         if ($user->isClientAdmin())
         {
-            // does user belong to the client
-            return $user->entity_id == $client->id;
+            // does user belong to the client that owns the fax
+            return $user->entity_id == $fax->client_id;
         }
         // if company admin
         else if ($user->isCompanyAdmin())
         {
             // does user belong to a the parent company
-            return $user->entity_id == $client->parent_id;
+            return $user->entity_id == $fax->client->company->id;
         }
+
 
         return false;
     }
 
     /**
-     * Determine whether the user can create clients.
+     * Determine whether the user can create faxes.
      *
      * @param  App\User  $user
      * @return mixed
@@ -65,7 +66,7 @@ class ClientPolicy
     }
 
     /**
-     * Determine whether the user can create clients.
+     * Determine whether the user can create faxes.
      *
      * @param  App\User  $user
      * @return mixed
@@ -77,35 +78,35 @@ class ClientPolicy
     }
 
     /**
-     * Determine whether the user can update the client.
+     * Determine whether the user can update the fax.
      *
      * @param  App\User  $user
-     * @param  App\Client  $client
+     * @param  App\Fax  $fax
      * @return mixed
      */
-    public function update(User $user, Client $client)
+    public function update(User $user, Fax $fax)
     {
         // if client admin
         if ($user->isClientAdmin())
         {
-            // does user belong to the client
-            return $user->entity_id == $client->id;
+            // does user belong to the client who owns the fax
+            return $user->entity_id == $fax->client_id;
         }
         // if company admin
         else if ($user->isCompanyAdmin())
         {
             // does user belong to a the parent company
-            return $user->entity_id == $client->parent_id;
+            return $user->entity_id == $fax->client->company->id;
         }
 
         return false;
     }
 
     /**
-     * Determine whether the user can delete the client.
+     * Determine whether the user can delete the fax.
      *
      * @param  App\User  $user
-     * @param  App\Client  $client
+     * @param  App\Fax  $fax
      * @return mixed
      */
     public function delete(User $user)

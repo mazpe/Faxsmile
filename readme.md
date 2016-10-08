@@ -31,13 +31,21 @@ User can only through one Fax
 - Only 'Super Admin' can 'delete' a Provider
 - Only 'Super Admin' can 'index' Providers
 #### Client Permissions
-- Only 'Super Admin' and 'Company Admin' from 'Company' can 'store' a Client for their 'Company'
-- Only 'Super Admin' and 'Company Admin' from 'Company' can 'create' a Client for their 'Company'
-- Only 'Super Admin' and 'Company Admin from 'Company' who owns the Client and 'Client Admin' from the Entity can 'update' a Client
-- Only 'Super Admin' and 'Company Admin from 'Company' who owns the Client and 'Client Admin' from the Entity can 'edit' a Client
-- Only 'Super Admin' and 'Company Admin from 'Company' who owns the Client and 'Client Admin' from the Entity can 'view' a Client 
-X Only 'Super Admin' and 'Company Admin' from 'Company' who owns the Client can 'delete' a Client
-X Only 'Super Admin' and 'Company Admin' from 'Company' who owns the Client can 'index' Clients
+- Only 'Super Admin' and 'Company Admin' can 'store' a Client for their 'Company'
+- Only 'Super Admin' and 'Company Admin' can 'create' a Client for their 'Company'
+- Only 'Super Admin' and 'Company Admin' and 'Client Admin' from the Entity can 'update' a Client
+- Only 'Super Admin' and 'Company Admin' and 'Client Admin' from the Entity can 'edit' a Client
+- Only 'Super Admin' and 'Company Admin' and 'Client Admin' from the Entity can 'view' a Client 
+- Only 'Super Admin' and 'Company Admin' can 'delete' a Client
+- Only 'Super Admin' and 'Company Admin' can 'index' Clients
+#### Fax Permissions
+- Only 'Super Admin', 'Company Admin' can 'store' a Fax for their 'Company'
+- Only 'Super Admin', 'Company Admin' can 'create' a Fax for their 'Company'
+- Only 'Super Admin', 'Company Admin' and 'Client Admin' from the Entity can 'update' a Fax
+- Only 'Super Admin', 'Company Admin' and 'Client Admin' from the Entity can 'edit' a Fax
+- Only 'Super Admin', 'Company Admin' and 'Client Admin' from the Entity can 'view' a Fax 
+- Only 'Super Admin', 'Company Admin' can 'delete' a Fax
+- Only 'Super Admin', 'Company Admin' and 'Client Admin' can 'index' clients Fax
 
 #### Super Admin
 - 'Super Admin' can do anything
@@ -93,6 +101,8 @@ X Only 'Super Admin' and 'Company Admin' from 'Company' who owns the Client can 
 ## Setup/System
 - Improve seeder to one simple task: Create 10 Company foreach create 10 Client for each create 10 User
 - Secure API calls
+## Security
+- Prevent Company Admin from creating a Client under any other company that he is not a member of
 ## Fax
 - Add error handling when creating/editing a fax if the added recipient is not a user
 - When adding a fax recipient check if it entires are in a valid format and entires are valid emails

@@ -16,6 +16,8 @@ class ClientController extends Controller
      */
     public function index()
     {
+        $this->authorize('index', Client::class);
+
         return view('admin.client.index',[
             'clients' => Client::withCount('users','faxes')->get()
         ]);
