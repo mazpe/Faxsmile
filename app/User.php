@@ -170,7 +170,6 @@ class User extends Authenticatable
     public function isSuperAdmin()
     {
         $isSuperAdmin = false;
-
         if ($this->roles->where('name', 'Super Admin')->count() > 0) {
             $isSuperAdmin = true;
         }
@@ -210,6 +209,18 @@ class User extends Authenticatable
 
         return $isClientAdmin;
     }
+
+    public function isUser()
+    {
+        $isUser = false;
+
+        if ($this->roles->where('name', 'User')->count() > 0) {
+            $isUser = true;
+        }
+
+        return $isUser;
+    }
+
     /**
      *  Get a user that is not associated with a Fax
      *
