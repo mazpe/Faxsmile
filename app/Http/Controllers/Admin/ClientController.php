@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Client;
 use App\Company;
-use App\User;
 
 class ClientController extends Controller
 {
@@ -15,7 +14,10 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index() {
+    public function index()
+    {
+        $this->authorize('index', Client::class);
+
         return view('admin.client.index',[
             'clients' => Client::withCount('users','faxes')->get()
         ]);
@@ -26,8 +28,12 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create() {
+    public function create()
+    {
+        $this->authorize('create', Client::class);
+
         $companies = Company::Pluck('name', 'id');
+
         return view('admin.client.create', compact('companies'));
     }
 
@@ -37,7 +43,10 @@ class ClientController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
+        $this->authorize('store', Client::class);
+
         $this->validate($request, [
             'parent_id' => 'required|numeric',
             'name' => 'required|unique:entities,name,NULL,id,deleted_at,NULL'
@@ -58,6 +67,9 @@ class ClientController extends Controller
     public function show($id)
     {
         $client = Client::with('users','faxes')->find($id);
+
+        $this->authorize('view', $client);
+
         return view('admin.client.show',
             compact('client')
         );
@@ -72,6 +84,9 @@ class ClientController extends Controller
     public function edit($id)
     {
         $client = Client::find($id);
+
+        $this->authorize('update', $client);
+
         $companies = Company::Pluck('name', 'id');
 
         return view('admin.client.edit',compact('client','companies'));
@@ -86,12 +101,16 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $client = Client::find($id);
+
+        $this->authorize('update', $client);
+
         $this->validate($request, [
             'parent_id' => 'required|numeric',
             'name' => 'required|max:255',
         ]);
 
-        Client::find($id)->update($request->all());
+        $client->update($request->all());
 
         return redirect()->route('client.index')
             ->with('success','Client updated successfully');
@@ -105,7 +124,11 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        Client::find($id)->delete();
+        $client = Client::find($id);
+
+        $this->authorize('delete', $client);
+
+        $client->delete();
         return redirect()->route('client.index')
             ->with('success','Client deleted successfully');
     }

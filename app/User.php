@@ -148,6 +148,15 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the roles for the user
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function roles() {
+        return $this->belongsToMany('App\Role')->withTimestamps();
+    }
+
+    /**
      * Get the recipients for the user
      *
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
@@ -156,7 +165,51 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Recipient','fax_recipients', 'recipient_id')->withTimestamps();
     }
 
+
     ### CUSTOM FUNCTIONS
+    public function isSuperAdmin()
+    {
+        $isSuperAdmin = false;
+
+        if ($this->roles->where('name', 'Super Admin')->count() > 0) {
+            $isSuperAdmin = true;
+        }
+
+        return $isSuperAdmin;
+    }
+
+    public function isCompanyAdmin()
+    {
+        $isCompanyAdmin = false;
+
+        if ($this->roles->where('name', 'Company Admin')->count() > 0) {
+            $isCompanyAdmin = true;
+        }
+
+        return $isCompanyAdmin;
+    }
+
+    public function isProviderAdmin()
+    {
+        $isProviderAdmin = false;
+
+        if ($this->roles->where('name', 'Provider Admin')->count() > 0) {
+            $isProviderAdmin = true;
+        }
+
+        return $isProviderAdmin;
+    }
+
+    public function isClientAdmin()
+    {
+        $isClientAdmin = false;
+
+        if ($this->roles->where('name', 'Client Admin')->count() > 0) {
+            $isClientAdmin = true;
+        }
+
+        return $isClientAdmin;
+    }
     /**
      *  Get a user that is not associated with a Fax
      *
@@ -207,6 +260,10 @@ class User extends Authenticatable
         if (Fax::where('sender_id', $user_id)->count() > 0) {
             return $isAlreadyFaxSender = true;
         }
+    }
+
+    public static function attachUserToRole($user,$role) {
+        dd($role);
     }
 
 }

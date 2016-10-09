@@ -32,6 +32,8 @@ class UserController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', User::class);
+
         $clients = Client::Pluck('name', 'id');
         $faxes = Fax::Pluck('number', 'id');
 
@@ -46,6 +48,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('store', User::class);
+
         $this->validate($request, [
             'entity_id' => 'required|numeric',
             'email' => 'required|unique:users|email',
@@ -65,7 +69,11 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::with('entity')->find($id);
+        $user = User::find($id);
+
+        $this->authorize('view', $user);
+
+        $user->with('entity');
         $recipient = Recipient::find($user->id);
 
         return view('admin.user.show',

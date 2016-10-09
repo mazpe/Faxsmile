@@ -20,9 +20,12 @@ class FaxController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index() {
+    public function index()
+    {
+        $this->authorize('index', Fax::class);
+
         return view('admin.fax.index',[
-            'faxes' => Fax::with('provider')->get()
+            'faxes' => Fax::with('provider')->withCount('senders','recipients')->get()
         ]);
     }
 
@@ -31,10 +34,14 @@ class FaxController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create() {
+    public function create()
+    {
+        $this->authorize('create', Fax::class);
+
         $providers = Provider::Pluck('name', 'id');
         $clients = Client::pluck('name','id');
         $users = User::all()->pluck('full_name','id');
+
         return view('admin.fax.create', compact('providers','clients','users'));
     }
 
@@ -44,7 +51,10 @@ class FaxController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
+        $this->authorize('store', Fax::class);
+
         $input = $request->input;
         $v = Validator::make($request->all(), [
             'provider_id' => 'required|numeric',
@@ -134,8 +144,11 @@ class FaxController extends Controller
      */
     public function show($id)
     {
+        $fax = Fax::find($id);
+        $this->authorize('view', $fax);
+
         $clients = Client::all();
-        $fax = Fax::with('provider')->find($id);
+        $fax->with('provider');
 
         return view('admin.fax.show',
             compact('fax','clients')
@@ -151,9 +164,10 @@ class FaxController extends Controller
     public function edit($id)
     {
         $fax = Fax::find($id);
-        $providers = Provider::Pluck('name', 'id');
 
-        $users = User::all()->pluck('full_name', 'id');
+        $this->authorize('update', $fax);
+
+        $providers = Provider::Pluck('name', 'id');
         $clients = Client::pluck('name', 'id');
 
         // create a mailing list style of recipients (email@email.com, user@aol.com)
@@ -173,12 +187,15 @@ class FaxController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $fax = Fax::find($id);
+
+        $this->authorize('update', $fax);
+
         $this->validate($request, [
             'provider_id' => 'required|numeric',
             'number' => 'required|numeric',
         ]);
 
-        $fax = Fax::find($id);
         $fax->update($request->all());
 
         $recipients_ids = array();
@@ -264,10 +281,14 @@ class FaxController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete', Fax::class);
+
         $fax = Fax::find($id);
+
         $fax->recipients()->detach();
         $fax->senders()->update(['fax_id' => null]);
         $fax->delete();
+
         return redirect()->route('fax.index')
             ->with('success','Fax deleted successfully');
     }

@@ -34,7 +34,7 @@ class Provider extends Entity
         static::created(function(Provider $provider)
         {
             if ($provider->contact_email) {
-                $provider->users()->create([
+                $user = $provider->users()->create([
                     'first_name' => $provider->contact_first_name,
                     'last_name' => $provider->contact_last_name,
                     'email' => $provider->contact_email,
@@ -43,6 +43,9 @@ class Provider extends Entity
                     'note' => 'Provider Administrator',
                     'active' => 1
                 ]);
+//                dd($user);
+//                $role = Role::where('name', 'Provider Admin')->first();
+                $user->roles()->attach(2);
             }
 
             return true;

@@ -2,8 +2,9 @@
 
 use Illuminate\Database\Seeder;
 use App\Company;
+use App\Role;
 
-class IISCompanyTableSeeder extends Seeder
+class IISCompanySeeder extends Seeder
 {
     /**
      * Run the database seeds.

@@ -34,7 +34,7 @@ class Company extends Entity
         static::created(function(Company $company)
         {
             if ($company->contact_email) {
-                $company->users()->create([
+                $user = $company->users()->create([
                     'first_name' => $company->contact_first_name,
                     'last_name' => $company->contact_last_name,
                     'email' => $company->contact_email,
@@ -43,10 +43,14 @@ class Company extends Entity
                     'note' => 'Company Administrator',
                     'active' => 1
                 ]);
+
+                $role = Role::where('name', 'Company Admin')->first();
+                $user->roles()->attach($role->id);
             }
 
             return true;
         });
+
     }
 
     /**
@@ -83,5 +87,12 @@ class Company extends Entity
      */
     public function emailTemplates() {
         return $this->hasMany('App\EmailTemplate');
+    }
+
+    ### CUSTOM FUNCTION
+    public function makeCompanyUserAdmin($user) {
+        $role = Role::where('name', 'Company Admin');
+        $user->roles()->attach($role->id);
+        return;
     }
 }
