@@ -5,7 +5,7 @@ use App\User;
 use App\Role;
 use App\Company;
 
-class CompanyAdminTableSeeder extends Seeder
+class SuperAdminUserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,17 +14,19 @@ class CompanyAdminTableSeeder extends Seeder
      */
     public function run()
     {
-        $role = Role::where('name', 'Company Admin')->first();
-        $entity_id = Company::orderBy('id','ASC')->first()->id;
+        $role = Role::where('name', 'Super Admin')->first();
+
+        $iisUser = Company::where('name', 'Innovative Internet Solutions')->first();
 
         $user = User::create([
-            'entity_id' => $entity_id,
-            'first_name' => 'Company',
+            'entity_id' => $iisUser->id,
+            'first_name' => 'Super',
             'last_name' => 'Admin',
-            'email' => 'company@faxit.cloud',
-            'password' => 'CompanyAdmin',
+            'email' => 'superadmin@faxit.cloud',
+            'password' => 'SuperAdmin',
             'remember_token' => str_random(10),
         ]);
         $user->roles()->attach($role->id);
+
     }
 }

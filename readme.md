@@ -31,8 +31,8 @@ User can only through one Fax
 - Only 'Super Admin' can 'delete' a Provider
 - Only 'Super Admin' can 'index' Providers
 #### Client Permissions
-- Only 'Super Admin' and 'Company Admin' can 'store' a Client for their 'Company'
-- Only 'Super Admin' and 'Company Admin' can 'create' a Client for their 'Company'
+- Only 'Super Admin' and 'Company Admin' can 'store' a Client for their Company
+- Only 'Super Admin' and 'Company Admin' can 'create' a Client for their Company
 - Only 'Super Admin' and 'Company Admin' and 'Client Admin' from the Entity can 'update' a Client
 - Only 'Super Admin' and 'Company Admin' and 'Client Admin' from the Entity can 'edit' a Client
 - Only 'Super Admin' and 'Company Admin' and 'Client Admin' from the Entity can 'view' a Client 
@@ -46,6 +46,14 @@ User can only through one Fax
 - Only 'Super Admin', 'Company Admin' and 'Client Admin' from the Entity can 'view' a Fax 
 - Only 'Super Admin', 'Company Admin' can 'delete' a Fax
 - Only 'Super Admin', 'Company Admin' and 'Client Admin' can 'index' clients Fax
+#### User Permissions
+X Only 'Super Admin', 'Company Admin' can 'store' a User for their Company or Client
+X Only 'Super Admin', 'Company Admin' can 'create' a User for their Company or Client
+X Only 'Super Admin', 'Company Admin' and 'Client Admin' from the Entity can 'update' a User
+X Only 'Super Admin', 'Company Admin' and 'Client Admin' from the Entity can 'edit' a User
+X Only 'Super Admin', 'Company Admin' and 'Client Admin' from the Entity can 'view' a User 
+X Only 'Super Admin', 'Company Admin' and 'Client Admin' can 'delete' a User
+X Only 'Super Admin', 'Company Admin' and 'Client Admin' can 'index' clients User
 
 #### Super Admin
 - 'Super Admin' can do anything

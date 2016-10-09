@@ -6,10 +6,12 @@ use App\Company;
 use App\Provider;
 use App\Client;
 use App\Fax;
+use App\User;
 use App\Policies\CompanyPolicy;
 use App\Policies\ProviderPolicy;
 use App\Policies\ClientPolicy;
 use App\Policies\FaxPolicy;
+use App\Policies\UserPolicy;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -26,6 +28,7 @@ class AuthServiceProvider extends ServiceProvider
         Provider::class => ProviderPolicy::class,
         Client::class => ClientPolicy::class,
         Fax::class => FaxPolicy::class,
+        User::class => UserPolicy::class,
     ];
 
     /**
