@@ -126,7 +126,16 @@ class User extends Authenticatable
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function client() {
-        return $this->belongsTo('App\Client','entity_id');
+        return $this->belongsTo('App\Client','entity_id', 'id');
+    }
+
+    /**
+     * Get the company that owns the user
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function company() {
+        return $this->belongsTo('App\Company','entity_id');
     }
 
     /**
@@ -170,7 +179,6 @@ class User extends Authenticatable
     public function isSuperAdmin()
     {
         $isSuperAdmin = false;
-
         if ($this->roles->where('name', 'Super Admin')->count() > 0) {
             $isSuperAdmin = true;
         }
@@ -210,6 +218,18 @@ class User extends Authenticatable
 
         return $isClientAdmin;
     }
+
+    public function isUser()
+    {
+        $isUser = false;
+
+        if ($this->roles->where('name', 'User')->count() > 0) {
+            $isUser = true;
+        }
+
+        return $isUser;
+    }
+
     /**
      *  Get a user that is not associated with a Fax
      *

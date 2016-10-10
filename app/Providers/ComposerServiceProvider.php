@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ComposerServiceProvider extends ServiceProvider
 {
@@ -59,8 +60,12 @@ class ComposerServiceProvider extends ServiceProvider
                 'FL' => "Florida"
             ];
 
+            $client = Auth::user()->client;
+
             $view->with('page_title', 'Faxes')
-                ->with('states', $states);
+                ->with('states', $states)
+//                ->with('client', $client)
+                ;
         });
 
         view()->composer('admin.user.*', function ($view) {
@@ -70,6 +75,27 @@ class ComposerServiceProvider extends ServiceProvider
 
             $view->with('page_title', 'Users')
                 ->with('states', $states);
+        });
+
+        view()->composer('admin.*', function ($view) {
+
+            $user = Auth::user();
+            $client = Auth::user()->client;
+            $company = Auth::user()->company;
+
+//            dd($company);
+
+//            $view->with('client', $client)
+//                ->with('user', $user)
+//            ;
+
+            $with = array_merge([
+                'company' => $company,
+                'client' => $client,
+                'user' => $user
+            ], $view->getData());
+
+            $view->with($with);
         });
     }
 

@@ -25,7 +25,7 @@ class FaxPolicy
      */
     public function index(User $user)
     {
-        return $user->isSuperAdmin() || $user->isCompanyAdmin();
+        return $user->isSuperAdmin() || $user->isCompanyAdmin() || $user->isClientAdmin();
     }
 
     /**
@@ -49,7 +49,6 @@ class FaxPolicy
             // does user belong to a the parent company
             return $user->entity_id == $fax->client->company->id;
         }
-
 
         return false;
     }

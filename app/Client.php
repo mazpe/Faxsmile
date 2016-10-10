@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Askedio\SoftCascade\Traits\SoftCascadeTrait;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class Client extends Entity
 {
@@ -30,6 +32,7 @@ class Client extends Entity
      */
     protected $dates = ['deleted_at'];
 
+
     /**
      * Default values for attributes in the model
      *
@@ -47,6 +50,21 @@ class Client extends Entity
     public static function boot()
     {
         parent::boot();
+
+        static::addGlobalScope('CompanyAdmin', function(Builder $builder) {
+            if (Auth::user()->isSuperAdmin()) {
+
+            }
+            else if (Auth::user()->isCompanyAdmin()) {
+                $builder->where('parent_id', '=', Auth::user()->company->id);
+            }
+            else if (Auth::user()->isClientAdmin()) {
+                $builder->where('id', '=', Auth::user()->entity_id);
+            }
+            else if (Auth::user()->isUser()) {
+                $builder->where('id', '=', Auth::user()->entity_id);
+            }
+        });
 
         /**
          * Listen to the Client created event.

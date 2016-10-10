@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 
+use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -24,8 +25,22 @@ class FaxController extends Controller
     {
         $this->authorize('index', Fax::class);
 
+        if (Auth::user()->isSuperAdmin()) {
+            $faxes = Fax::with('provider')->withCount('senders','recipients')->get();
+        }
+        else if (Auth::user()->isProviderAdmin()) {
+            $faxes = Auth::user()->provider->faxes;
+        }
+        else if (Auth::user()->isCompanyAdmin()) {
+            $faxes = Auth::user()->company->faxes;
+        }
+        else if (Auth::user()->isClientAdmin())
+        {
+            $faxes = Auth::user()->client->faxes;
+        }
+
         return view('admin.fax.index',[
-            'faxes' => Fax::with('provider')->withCount('senders','recipients')->get()
+            'faxes' =>  $faxes
         ]);
     }
 

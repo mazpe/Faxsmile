@@ -10,6 +10,7 @@ use App\Client;
 use App\Fax;
 use App\Sender;
 use Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -20,8 +21,29 @@ class UserController extends Controller
      */
     public function index()
     {
+
+        if (Auth::user()->isSuperAdmin()) {
+            $users = User::with('entity')->get();
+        }
+        else if (Auth::user()->isProviderAdmin()) {
+            $users = Auth::user()->provider->users;
+        }
+        else if (Auth::user()->isCompanyAdmin()) {
+            $client_users = Auth::user()->company->users;
+            $company_users = User::where('entity_id',Auth::user()->company->id)->get();
+
+            $users = $client_users->merge($company_users);
+        }
+        else if (Auth::user()->isClientAdmin())
+        {
+            $client_users = Auth::user()->client->users;
+            $client_admins = User::where('entity_id',Auth::user()->client->id)->get();
+
+            $users = $client_users->merge($client_admins);
+        }
+
         return view('admin.user.index', [
-            'users' => User::with('entity')->get()
+            'users' => $users
         ]);
     }
 
@@ -110,10 +132,12 @@ class UserController extends Controller
             'email' => 'required|email'
         ]);
 
-        $user = User::find($id)->update($request->all());
+        $user = User::find($id);
 
-        return redirect()->route('user.index')
-            ->with('success', 'User updated successfully');
+        $user->update($request->all());
+        
+        return redirect()->route('user.show', ['user_id' => $user->id])
+            ->with('success','User updated successfully');
     }
 
     /**

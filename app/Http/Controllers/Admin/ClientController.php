@@ -112,7 +112,7 @@ class ClientController extends Controller
 
         $client->update($request->all());
 
-        return redirect()->route('client.index')
+        return redirect()->route('client.show', ['client_id' => $client->id])
             ->with('success','Client updated successfully');
     }
 
