@@ -10,6 +10,7 @@ use App\Client;
 use App\Fax;
 use App\Sender;
 use Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -20,8 +21,30 @@ class UserController extends Controller
      */
     public function index()
     {
+
+        if (Auth::user()->isSuperAdmin()) {
+            $users = User::with('entity')->get();
+        }
+        else if (Auth::user()->isProviderAdmin()) {
+            $users = Auth::user()->provider->users;
+        }
+        else if (Auth::user()->isCompanyAdmin()) {
+            $client_users = Auth::user()->company->users;
+            $company_users = User::where('entity_id',Auth::user()->company->id)->get();
+
+//            dd(User::where('entity_id',Auth::user()->company->id));
+            $users = $client_users->merge($company_users);
+
+//            $users = array_merge($client_users->toArray(), $company_users->toArray());
+//            $users = $
+        }
+        else if (Auth::user()->isClientAdmin())
+        {
+            $users = Auth::user()->client->users;
+        }
+
         return view('admin.user.index', [
-            'users' => User::with('entity')->get()
+            'users' => $users
         ]);
     }
 

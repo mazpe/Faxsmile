@@ -81,10 +81,21 @@ class ComposerServiceProvider extends ServiceProvider
 
             $user = Auth::user();
             $client = Auth::user()->client;
+            $company = Auth::user()->company;
 
-            $view->with('client', $client)
-                ->with('user', $user)
-            ;
+//            dd($company);
+
+//            $view->with('client', $client)
+//                ->with('user', $user)
+//            ;
+
+            $with = array_merge([
+                'company' => $company,
+                'client' => $client,
+                'user' => $user
+            ], $view->getData());
+
+            $view->with($with);
         });
     }
 

@@ -130,6 +130,15 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the company that owns the user
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function company() {
+        return $this->belongsTo('App\Company','entity_id');
+    }
+
+    /**
      * Get the fax that is attached to the user
      *
      * @return \Illuminate\Database\Eloquent\Relations\hasOne

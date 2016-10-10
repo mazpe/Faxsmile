@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Askedio\SoftCascade\Traits\SoftCascadeTrait;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class Company extends Entity
 {
@@ -23,6 +25,12 @@ class Company extends Entity
     public static function boot()
     {
         parent::boot();
+
+        static::addGlobalScope('company', function(Builder $builder) {
+            if (!Auth::user()->isSuperAdmin() && Auth::user()->isCompanyAdmin()) {
+                $builder->where('id', '=', Auth::user()->entity->id);
+            }
+        });
 
         /**
          * Listen to the Company created event.
@@ -50,7 +58,6 @@ class Company extends Entity
 
             return true;
         });
-
     }
 
     /**
@@ -60,15 +67,6 @@ class Company extends Entity
      */
     public function clients() {
         return $this->hasMany('App\Client','parent_id');
-    }
-
-    /**
-     * Get the users that belong to the company
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function users() {
-        return $this->hasMany('App\User','entity_id');
     }
 
     /**
@@ -87,6 +85,23 @@ class Company extends Entity
      */
     public function emailTemplates() {
         return $this->hasMany('App\EmailTemplate');
+    }
+
+    /**
+     * Get all of the faxes for the company.
+     */
+    public function faxes()
+    {
+        return $this->hasManyThrough('App\Fax', 'App\Client', 'parent_id', 'client_id');
+    }
+
+    /**
+     * Get the users that belong to the company
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function users() {
+        return $this->hasManyThrough('App\User','App\Client','parent_id','entity_id');
     }
 
     ### CUSTOM FUNCTION

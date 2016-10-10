@@ -24,9 +24,13 @@
             @can('index', \App\Provider::class)
                 <li @if ($page_title == "Providers") class="active" @endif><a href="{{ url('/admin/provider') }}"><i class="fa fa-group"></i> <span>Providers</span></a></li>
             @endcan
+
             @can('index', \App\Company::class)
                 <li @if ($page_title == "Companies") class="active" @endif><a href="{{ url('/admin/company') }}"><i class="fa fa-building-o"></i> <span>Companies</span></a></li>
             @endcan
+            @if( (isset($company)) && (Auth::user()->isCompanyAdmin() && Auth::user()->can('view', $company)))
+                <li @if ($page_title == "Company") class="active" @endif><a href="{{ url('/admin/company/' . $company->id) }}"><i class="fa fa-building"></i> <span>Company</span></a></li>
+            @endif
 
             @can('index', \App\Client::class)
                 <li @if ($page_title == "Clients") class="active" @endif><a href="{{ url('/admin/client') }}"><i class="fa fa-building"></i> <span>Clients</span></a></li>
@@ -44,8 +48,6 @@
             @can('index', \App\User::class)
                 <li @if ($page_title == "Users") class="active" @endif><a href="{{ url('/admin/user') }}"><i class="fa fa-user"></i> <span>Users</span></a></li>
             @endcan
-
-
             @if( isset($user) && (Auth::user()->isUser() && Auth::user()->can('view', $user)) )
                 <li @if ($page_title == "User") class="active" @endif><a href="{{ url('/admin/user/' . $user->id) }}"><i class="fa fa-building"></i> <span>User</span></a></li>
             @endif

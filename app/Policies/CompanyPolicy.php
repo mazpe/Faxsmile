@@ -25,7 +25,7 @@ class CompanyPolicy
      */
     public function index(User $user)
     {
-        return $user->isSuperAdmin() || $user->isCompanyAdmin();
+        return $user->isSuperAdmin();
     }
 
     /**
@@ -37,7 +37,6 @@ class CompanyPolicy
      */
     public function view(User $user, Company $company)
     {
-        dd('view');
         return ($user->entity_id == $company->id) &&  $user->isCompanyAdmin();
     }
 

@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Askedio\SoftCascade\Traits\SoftCascadeTrait;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class Fax extends Model
 {
@@ -28,6 +30,18 @@ class Fax extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    public static function boot()
+    {
+        parent::boot();
+
+//        static::addGlobalScope('fax', function(Builder $builder) {
+//            if ( ( isset(Auth::user()->isSuperAdmin()) || !Auth::user()->isSuperAdmin() ) &&
+//                ( isset(Auth::user()->isCompanyAdmin()) || Auth::user()->isCompanyAdmin()) ) {
+//                $builder->where('id', '=', Auth::user()->entity->id);
+//            }
+//        });
+    }
 
     /**
      *  Set user_id to value or null
