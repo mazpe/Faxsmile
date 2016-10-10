@@ -3,7 +3,7 @@
   background-color: #3c8dbc;
   color: white; }
 
-.table-hover > tbody > tr:hover {
+.table tbody tr:hover td {
   background-color: #cb1745; }
 
 .table > tr.active {
