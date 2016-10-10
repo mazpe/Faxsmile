@@ -56,8 +56,12 @@ return [
     */
 
     'from' => [
+        'address' => 'Support@FaxIT.Cloud',
+        'name' => 'FaxIT.Cloud',
+/*  Jack - 9-30-16
         'address' => 'hello@example.com',
         'name' => 'Example',
+*/
     ],
 
     /*

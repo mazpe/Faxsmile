@@ -23,10 +23,19 @@
                                     style="width: 80px;">Type
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="users" rowspan="1" colspan="1"
+                                    aria-label="Full Name: activate to sort column ascending" style="width: 195px;">Client
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="users" rowspan="1" colspan="1"
                                     aria-label="Full Name: activate to sort column ascending" style="width: 195px;">Full Name
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="users" rowspan="1" colspan="1"
                                     aria-label="Active: activate to sort column ascending" style="width: 30px;">E-Mail
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="users" rowspan="1" colspan="1"
+                                    aria-label="Active: activate to sort column ascending" style="width: 30px;">R
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="users" rowspan="1" colspan="1"
+                                    aria-label="Active: activate to sort column ascending" style="width: 30px;">S
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="users" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 50px;">
@@ -39,8 +48,11 @@
                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/user/' . $user->id)}}">
                                     <td class="sorting_1">{{ $user->id }}</td>
                                     <td>{{ isset($user->entity) ? ucfirst($user->entity->type) : '' }}</td>
+                                    <td>{{ $user->entity->name }}</td>
                                     <td>{{ $user->full_name }}</td>
                                     <td>{{ $user->email }}</td>
+                                    <td>{{ $user->recipient }}</td>
+                                    <td>{{ $user->sender }}</td>
                                     <td>
                                         {{ link_to_action('Admin\UserController@show', $title = 'Show',
                                             $parameters = array($user->id),
@@ -59,8 +71,11 @@
                             <tr>
                                 <th rowspan="1" colspan="1">ID</th>
                                 <th rowspan="1" colspan="1">Type</th>
+                                <th rowspan="1" colspan="1">Client</th>
                                 <th rowspan="1" colspan="1">Full Name</th>
                                 <th rowspan="1" colspan="1">E-Mail</th>
+                                <th rowspan="1" colspan="1">R</th>
+                                <th rowspan="1" colspan="1">S</th>
                                 <th rowspan="1" colspan="1">Action</th>
                             </tr>
                             </tfoot>

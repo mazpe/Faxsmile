@@ -113,7 +113,10 @@
                                             <thead>
                                             <tr role="row">
                                                 <th class="sorting" tabindex="0" aria-controls="client_faxes" rowspan="1" colspan="1"
-                                                    aria-label="Name: activate to sort column ascending" style="width: 250px;">Name
+                                                    aria-label="Name: activate to sort column ascending" style="width: 250px;">Fax Number
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="client_faxes" rowspan="1" colspan="1"
+                                                    aria-label="Name: activate to sort column ascending" style="width: 250px;">Description
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="client_faxes" rowspan="1" colspan="1"
                                                     aria-label="Active: activate to sort column ascending" style="width: 20px;">Active
@@ -128,6 +131,7 @@
                                             @foreach($client->faxes as $fax)
                                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/fax/' . $fax->id)}}">
                                                     <td>{{ $fax->number }}</td>
+                                                    <td>{{ $fax->description }}</td>
                                                     <td>{{ $fax->active }}</td>
                                                     <td>
                                                         {{ link_to_action('Admin\FaxController@show', $title = 'Show',
@@ -145,7 +149,8 @@
                                             </tbody>
                                             <tfoot>
                                             <tr>
-                                                <th rowspan="1" colspan="1">Name</th>
+                                                <th rowspan="1" colspan="1">Fax Number</th>
+                                                <th rowspan="1" colspan="1">Description</th>
                                                 <th rowspan="1" colspan="1">Active</th>
                                                 <th rowspan="1" colspan="1">Action</th>
                                             </tr>
@@ -180,6 +185,9 @@
                                                     aria-label="Email: activate to sort column ascending" style="width: 100px;">Email
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="client_users" rowspan="1" colspan="1"
+                                                    aria-label="Active: activate to sort column ascending" style="width: 20px;">Fax
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="client_users" rowspan="1" colspan="1"
                                                     aria-label="Active: activate to sort column ascending" style="width: 20px;">Active
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="client_users" rowspan="1" colspan="1"
@@ -194,6 +202,7 @@
                                                     <td class="sorting_1">{{ $user->id }}</td>
                                                     <td>{{ $user->full_name }}</td>
                                                     <td>{{ $user->email }}</td>
+                                                    <td>{{ $user->number }}</td>
                                                     <td>{{ $user->active }}</td>
                                                     <td>
                                                         {{ link_to_action('Admin\UserController@show', $title = 'Show',
@@ -214,6 +223,7 @@
                                                 <th rowspan="1" colspan="1">ID</th>
                                                 <th rowspan="1" colspan="1">Name</th>
                                                 <th rowspan="1" colspan="1">Email</th>
+                                                <th rowspan="1" colspan="1">Fax</th>
                                                 <th rowspan="1" colspan="1">Active</th>
                                                 <th rowspan="1" colspan="1">Action</th>
                                             </tr>
