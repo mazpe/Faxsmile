@@ -27,13 +27,16 @@ class Company extends Entity
         parent::boot();
 
         static::addGlobalScope('company', function(Builder $builder) {
-            if (Auth::user()->isSuperAdmin()) {
-
+            if (!Auth::user()) {
+                return;
             }
-            else if (Auth::user()->isCompanyAdmin()) {
+
+            if (Auth::user()->isCompanyAdmin())
+            {
                 $builder->where('id', '=', Auth::user()->entity->id);
             }
-            else if (Auth::user()->isClientAdmin()) {
+            else if (Auth::user()->isClientAdmin())
+            {
                 $builder->where('id', '=', Auth::user()->client->parent_id);
             }
         });
@@ -48,9 +51,10 @@ class Company extends Entity
         static::created(function(Company $company)
         {
             if ($company->contact_email) {
-                $user = $company->users()->create([
+                $user = \App\User::create([
                     'first_name' => $company->contact_first_name,
                     'last_name' => $company->contact_last_name,
+                    'entity_id' => $company->id,
                     'email' => $company->contact_email,
                     'password' => str_random(10),
                     'remember_token' => str_random(10),
