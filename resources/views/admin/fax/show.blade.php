@@ -52,11 +52,12 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="box">
-                                    <div><strong>Number:</strong> {{ $fax->number }}</div>
                                     <div><strong>Provider:</strong> {{ $fax->provider->name }}</div>
+                                    <div><strong>Fax Number:</strong> {{ $fax->number }}</div>
                                     @if ($fax->client)
                                     <div><strong>Client:</strong> {{ $fax->client->name }}</div>
                                     @endif
+                                    <div><strong>Description:</strong> {{ $fax->description }}</div>
                                     @if ($fax->sender)
                                     <div><strong>Sender:</strong> {{ $fax->sender->full_name }}</div>
                                     @endif
