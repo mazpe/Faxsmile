@@ -26,7 +26,7 @@ class UserPolicy
      */
     public function index(User $user)
     {
-        return $user->isSuperAdmin() || $user->isCompanyAdmin();
+        return $user->isSuperAdmin() || $user->isCompanyAdmin() || $user->isClientAdmin();
     }
 
     /**
@@ -47,13 +47,10 @@ class UserPolicy
         // if company admin
         else if ($user->isCompanyAdmin())
         {
-            dd($user->entity_id == $currentUser->entity->id);
-//            if($currentUser->entity->provider) {
-                return $user->entity_id == $currentUser->entity->id;
-//            }
-//            dd();
-            // does user belong to a the parent company
-
+            return $user->entity_id == $currentUser->entity->id;
+        } else if ($user->isUser())
+        {
+            return $user->id == $currentUser->id;
         }
 
         return false;

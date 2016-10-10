@@ -1,7 +1,9 @@
 @extends('admin.admin_template')
 
 @section('content')
-
+@can('index', \App\Company::class)
+    here
+@endcan
     <div class="box">
         <div class="box-header">
             <h3 class="box-title">Companies</h3>

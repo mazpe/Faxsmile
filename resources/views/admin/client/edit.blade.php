@@ -19,6 +19,8 @@
         </div>
     @endif
 
+{{--    {{ dd($client) }}--}}
+
     {!! Form::model($client, ['method' => 'PATCH','action' => ['Admin\ClientController@update', $client->id],
         'class' => 'form-horizontal']) !!}
         <div class="box-body">
