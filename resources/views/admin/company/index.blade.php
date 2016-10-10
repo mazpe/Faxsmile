@@ -25,6 +25,9 @@
                                     aria-label="Name: activate to sort column ascending" style="width: 195px;">Name
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="companies" rowspan="1" colspan="1"
+                                    aria-label="Name: activate to sort column ascending" style="width: 195px;">Contact
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="companies" rowspan="1" colspan="1"
                                     aria-label="Active: activate to sort column ascending" style="width: 30px;">Clients
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="companies" rowspan="1" colspan="1"
@@ -38,6 +41,7 @@
                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/company/' . $company->id)}}">
                                     <td class="sorting_1">{{ $company->id }}</td>
                                     <td>{{ $company->name }}</td>
+				    <td>{{ $company->contact_first_name }} {{ $company->contact_last_name }}</td>
                                     <td>{{ $company->clients_count }}</td>
                                     <td>
                                         {{ link_to_action('Admin\CompanyController@show', $title = 'Show',
@@ -57,6 +61,7 @@
                             <tr>
                                 <th rowspan="1" colspan="1">Type</th>
                                 <th rowspan="1" colspan="1">Name</th>
+                                <th rowspan="1" colspan="1">Contact</th>
                                 <th rowspan="1" colspan="1">Clients</th>
                                 <th rowspan="1" colspan="1">Action</th>
                             </tr>

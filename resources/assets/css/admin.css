@@ -3,8 +3,9 @@
   background-color: #3c8dbc;
   color: white; }
 
+/* Data Table Row Mouseover color */
 .table tbody tr:hover td {
-  background-color: #cb1745; }
+  background-color: #b3d7ec; }
 
 .table > tr.active {
   background: green; }
