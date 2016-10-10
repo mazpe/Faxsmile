@@ -14,6 +14,7 @@ class Client extends Entity
 
     protected static $singleTableType = 'client';
     protected $softCascade = ['users'];
+
     /**
      * The attributes that are mass assignable.
      *

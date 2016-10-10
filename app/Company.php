@@ -110,8 +110,17 @@ class Company extends Entity
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function users() {
+    public function clientUsers() {
         return $this->hasManyThrough('App\User','App\Client','parent_id','entity_id');
+    }
+
+    /**
+     * Get the users that belong to the company
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function users() {
+        return $this->hasMany('App\User', 'entity_id');
     }
 
     ### CUSTOM FUNCTION
