@@ -126,7 +126,7 @@ class User extends Authenticatable
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function client() {
-        return $this->belongsTo('App\Client','entity_id');
+        return $this->belongsTo('App\Client','entity_id', 'id');
     }
 
     /**

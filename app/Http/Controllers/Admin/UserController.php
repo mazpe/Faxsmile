@@ -32,15 +32,14 @@ class UserController extends Controller
             $client_users = Auth::user()->company->users;
             $company_users = User::where('entity_id',Auth::user()->company->id)->get();
 
-//            dd(User::where('entity_id',Auth::user()->company->id));
             $users = $client_users->merge($company_users);
-
-//            $users = array_merge($client_users->toArray(), $company_users->toArray());
-//            $users = $
         }
         else if (Auth::user()->isClientAdmin())
         {
-            $users = Auth::user()->client->users;
+            $client_users = Auth::user()->client->users;
+            $client_admins = User::where('entity_id',Auth::user()->client->id)->get();
+
+            $users = $client_users->merge($client_admins);
         }
 
         return view('admin.user.index', [
@@ -133,10 +132,12 @@ class UserController extends Controller
             'email' => 'required|email'
         ]);
 
-        $user = User::find($id)->update($request->all());
+        $user = User::find($id);
 
-        return redirect()->route('user.index')
-            ->with('success', 'User updated successfully');
+        $user->update($request->all());
+        
+        return redirect()->route('user.show', ['user_id' => $user->id])
+            ->with('success','User updated successfully');
     }
 
     /**

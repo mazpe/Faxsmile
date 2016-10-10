@@ -85,6 +85,8 @@ class ClientPolicy
      */
     public function update(User $user, Client $client)
     {
+
+
         // if client admin
         if ($user->isClientAdmin())
         {

@@ -32,6 +32,7 @@ class Client extends Entity
      */
     protected $dates = ['deleted_at'];
 
+
     /**
      * Default values for attributes in the model
      *
@@ -51,8 +52,17 @@ class Client extends Entity
         parent::boot();
 
         static::addGlobalScope('CompanyAdmin', function(Builder $builder) {
-            if (!Auth::user()->isSuperAdmin() && Auth::user()->isCompanyAdmin()) {
-                $builder->where('parent_id', '=', Auth::user()->entity->id);
+            if (Auth::user()->isSuperAdmin()) {
+
+            }
+            else if (Auth::user()->isCompanyAdmin()) {
+                $builder->where('parent_id', '=', Auth::user()->company->id);
+            }
+            else if (Auth::user()->isClientAdmin()) {
+                $builder->where('id', '=', Auth::user()->entity_id);
+            }
+            else if (Auth::user()->isUser()) {
+                $builder->where('id', '=', Auth::user()->entity_id);
             }
         });
 
