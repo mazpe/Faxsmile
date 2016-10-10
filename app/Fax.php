@@ -31,18 +31,6 @@ class Fax extends Model
      */
     protected $dates = ['deleted_at'];
 
-    public static function boot()
-    {
-        parent::boot();
-
-//        static::addGlobalScope('fax', function(Builder $builder) {
-//            if ( ( isset(Auth::user()->isSuperAdmin()) || !Auth::user()->isSuperAdmin() ) &&
-//                ( isset(Auth::user()->isCompanyAdmin()) || Auth::user()->isCompanyAdmin()) ) {
-//                $builder->where('id', '=', Auth::user()->entity->id);
-//            }
-//        });
-    }
-
     /**
      *  Set user_id to value or null
      *

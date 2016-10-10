@@ -52,16 +52,20 @@ class Client extends Entity
         parent::boot();
 
         static::addGlobalScope('CompanyAdmin', function(Builder $builder) {
-            if (Auth::user()->isSuperAdmin()) {
-
+            if (!Auth::user()) {
+                return;
             }
-            else if (Auth::user()->isCompanyAdmin()) {
+
+            if (Auth::user()->isCompanyAdmin())
+            {
                 $builder->where('parent_id', '=', Auth::user()->company->id);
             }
-            else if (Auth::user()->isClientAdmin()) {
+            else if (Auth::user()->isClientAdmin())
+            {
                 $builder->where('id', '=', Auth::user()->entity_id);
             }
-            else if (Auth::user()->isUser()) {
+            else if (Auth::user()->isUser())
+            {
                 $builder->where('id', '=', Auth::user()->entity_id);
             }
         });
