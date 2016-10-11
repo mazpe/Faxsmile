@@ -19,11 +19,13 @@ class FormServiceProvider extends ServiceProvider
         Form::component('bsText', 'components.form.text',[
             'name', 'title', 'value' => null, 'labelAttributes' => [], 'inputAttributes' => []
         ]);
+        Form::component('bsHidden', 'components.form.hidden',[
+            'name', 'value' => null
+        ]);
         Form::component('bsEmail', 'components.form.email', [
             'name', 'title', 'value' => null, 'labelAttributes' => [], 'inputAttributes' => []
         ]);
         Form::component('bsPassword', 'components.form.password', [
-//            'name', 'title' => null, 'class', 'id'
             'name', 'title', 'value' => null, 'labelAttributes' => [], 'inputAttributes' => []
         ]);
         Form::component('bsSelect', 'components.form.select', [

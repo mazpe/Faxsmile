@@ -136,6 +136,9 @@ class UserController extends Controller
 
         $this->authorize('update', $user);
 
+
+        $request->merge(array('entity_id' => $user->entity_id));
+
         $this->validate($request, [
             'entity_id' => 'required|numeric',
             'email' => 'required|email'

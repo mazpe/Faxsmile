@@ -1,8 +1,13 @@
 <div class="box-body">
     <!-- name, title, value, label attributes, input attributes -->
+    @if ( isset($user) && $user->entity->type == 'client' && Auth::user()->isCompanyAdmin() )
     {{ Form::bsSelect('parent_id', 'Company',
         isset($client->company) ? $client->company->id : null, $companies,
         ['class' => 'col-sm-2 control-label'], ['id' => 'client-companies', 'class' =>'form-control', 'placeholder' => 'Select one...']) }}
+    @elseif(isset($user) && $user->entity->type == 'client' && Auth::user()->isClientAdmin())
+        {{ Form::bsHidden('parent_id', null) }}
+    @endif
+    
     {{ Form::bsText('name', null, null, ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}
     {{ Form::bsText('address_1', null, null, ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}
     {{ Form::bsText('address_2', null, null, ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}

@@ -110,6 +110,6 @@ class FaxPolicy
      */
     public function delete(User $user)
     {
-        return $user->isSuperAdmin() || $user->isCompanyAdmin();
+        return $user->isSuperAdmin() || $user->isCompanyAdmin() || $user->isClientAdmin();
     }
 }
