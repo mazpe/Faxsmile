@@ -180,7 +180,7 @@
                                                     aria-label="Active: activate to sort column ascending" style="width: 20px;">Fax
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="client_users" rowspan="1" colspan="1"
-                                                    aria-label="Active: activate to sort column ascending" style="width: 20px;">Active
+                                                    aria-label="Role: activate to sort column ascending" style="width: 20px;">Role
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="client_users" rowspan="1" colspan="1"
                                                     aria-label="CSS grade: activate to sort column ascending" style="width: 50px;">
@@ -195,7 +195,7 @@
                                                     <td>{{ $user->full_name }}</td>
                                                     <td>{{ $user->email }}</td>
                                                     <td>{{ $user->number }}</td>
-                                                    <td>{{ $user->active }}</td>
+                                                    <td>{{ $user->roles->implode('name', ', ') }}</td>
                                                     <td>
                                                         {{ link_to_action('Admin\UserController@show', $title = 'Show',
                                                             $parameters = array($user->id),

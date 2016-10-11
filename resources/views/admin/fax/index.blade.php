@@ -73,8 +73,10 @@
         </div>
         <!-- /.box-body -->
         <div class="box-footer clearfix no-border">
+            @can('store', \App\Fax::class)
             <a class="btn btn-large btn-info pull-right" href="/admin/fax/create"> <i class="fa fa-plus"></i> Create
                 Fax</a>
+                @endcan
         </div>
     </div>
 
