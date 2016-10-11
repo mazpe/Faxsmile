@@ -31,11 +31,9 @@
                                 <th class="sorting" tabindex="0" aria-controls="users" rowspan="1" colspan="1"
                                     aria-label="Active: activate to sort column ascending" style="width: 30px;">E-Mail
                                 </th>
-                                <th class="sorting" tabindex="0" aria-controls="users" rowspan="1" colspan="1"
-                                    aria-label="Active: activate to sort column ascending" style="width: 30px;">R
+                                <th rowspan="1" colspan="1" style="width: 3px;">R
                                 </th>
-                                <th class="sorting" tabindex="0" aria-controls="users" rowspan="1" colspan="1"
-                                    aria-label="Active: activate to sort column ascending" style="width: 30px;">S
+                                <th rowspan="1" colspan="1" style="width: 3px;">S
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="users" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 50px;">

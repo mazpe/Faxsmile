@@ -24,7 +24,7 @@
                                 </th>
 
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
-                                    aria-label="Number: activate to sort column ascending" style="width: 10px;">Number
+                                    aria-label="Number: activate to sort column ascending" style="width: 10px;">Fax Number
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
                                     aria-label="Number: activate to sort column ascending" style="width: 10px;">Client
