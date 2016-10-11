@@ -47,7 +47,14 @@ class UserPolicy
         // if company admin
         else if ($user->isCompanyAdmin())
         {
-            return $user->entity_id == $currentUser->entity->id;
+            // does user belong to a the parent company
+            if ($currentUser->entity->type == 'client')
+            {
+                return $user->entity_id == $currentUser->entity->parent_id;
+            }
+            else if ($currentUser->entity->type == 'company') {
+                return $user->entity_id == $currentUser->entity->id;
+            }
         } else if ($user->isUser())
         {
             return $user->id == $currentUser->id;
@@ -91,6 +98,7 @@ class UserPolicy
         // if client admin
         if ($user->isClientAdmin())
         {
+
             // does user belong to the client who owns the fax
             return $user->entity_id == $currentUser->entity_id;
         }
@@ -98,7 +106,13 @@ class UserPolicy
         else if ($user->isCompanyAdmin())
         {
             // does user belong to a the parent company
-            return $user->entity_id == $currentUser->client->company->id;
+            if ($currentUser->entity->type == 'client')
+            {
+                return $user->entity_id == $currentUser->entity->parent_id;
+            }
+            else if ($currentUser->entity->type == 'company') {
+                return $user->entity_id == $currentUser->entity->id;
+            }
         }
 
         return false;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Company;
 use App\Http\Controllers\Controller;
 use App\Recipient;
 use Illuminate\Http\Request;
@@ -21,15 +22,15 @@ class UserController extends Controller
      */
     public function index()
     {
-
         if (Auth::user()->isSuperAdmin()) {
+
             $users = User::with('entity')->get();
         }
         else if (Auth::user()->isProviderAdmin()) {
             $users = Auth::user()->provider->users;
         }
         else if (Auth::user()->isCompanyAdmin()) {
-            $client_users = Auth::user()->company->users;
+            $client_users = Auth::user()->company->clientUsers;
             $company_users = User::where('entity_id',Auth::user()->company->id)->get();
 
             $users = $client_users->merge($company_users);
@@ -112,10 +113,14 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
+
+        $this->authorize('update', $user);
+
         $clients = Client::Pluck('name', 'id');
+        $companies = ($user->entity->type == 'company') ? Company::Pluck('name', 'id') : null;
         $faxes = Fax::Pluck('number', 'id');
 
-        return view('admin.user.edit', compact('user', 'clients', 'faxes'));
+        return view('admin.user.edit', compact('user', 'clients', 'faxes', 'companies'));
     }
 
     /**
@@ -127,12 +132,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $user = User::find($id);
+
+        $this->authorize('update', $user);
+
         $this->validate($request, [
             'entity_id' => 'required|numeric',
             'email' => 'required|email'
         ]);
-
-        $user = User::find($id);
 
         $user->update($request->all());
         

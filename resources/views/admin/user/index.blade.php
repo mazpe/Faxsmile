@@ -51,8 +51,8 @@
                                     <td>{{ $user->entity->name }}</td>
                                     <td>{{ $user->full_name }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td>{{ $user->recipient }}</td>
-                                    <td>{{ $user->sender }}</td>
+                                    <td>{{ $user->recipients->count() }}</td>
+                                    <td>{{ $user->fax_id ? 1 : 0 }}</td>
                                     <td>
                                         {{ link_to_action('Admin\UserController@show', $title = 'Show',
                                             $parameters = array($user->id),

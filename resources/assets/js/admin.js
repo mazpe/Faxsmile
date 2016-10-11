@@ -4,6 +4,7 @@ $(function () {
     var companies_table = $("#companies").DataTable();
     var company_clients_table = $("#company_clients").DataTable();
     var company_users_table = $("#company_users").DataTable();
+    var company_faxes_table = $("#company_faxes").DataTable();
     $('#companies tbody').on('click', 'tr', function (e) {
             if (e.target.name === 'delete_modal') return;
             var data = companies_table.row( this ).data();
@@ -18,6 +19,11 @@ $(function () {
             if (e.target.name === 'delete_modal') return;
             var data = company_users_table.row( this ).data();
             window.location.href = $(this).data('href');
+    } );
+    $('#company_faxes tbody').on('click', 'tr', function (e) {
+        if (e.target.name === 'delete_modal') return;
+        var data = company_faxes_table.row( this ).data();
+        window.location.href = $(this).data('href');
     } );
 
     var providers_table = $("#providers").DataTable();

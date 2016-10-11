@@ -50,8 +50,8 @@
                                     <td>{{ $fax->provider->name }}</td>
                                     <td>{{ $fax->number }}</td>
                                     <td>{{ $fax->description }}</td>
-                                    <td>{{ $fax->senders_count }}</td>
-                                    <td>{{ $fax->recipients_count }}</td>
+                                    <td>{{ $fax->senders->count() }}</td>
+                                    <td>{{ $fax->recipients->count() }}</td>
                                     <td>
                                         {{ link_to_action('Admin\FaxController@show', $title = 'Show',
                                             $parameters = array($fax->id),
