@@ -189,7 +189,7 @@
                                                     aria-label="Name: activate to sort column ascending" style="width: 250px;">Name
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="company_users" rowspan="1" colspan="1"
-                                                    aria-label="Role(s): activate to sort column ascending" style="width: 100px;">Role(s)
+                                                    aria-label="Role: activate to sort column ascending" style="width: 100px;">Role
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="company_users" rowspan="1" colspan="1"
                                                     aria-label="Active: activate to sort column ascending" style="width: 30px;">Active
@@ -222,7 +222,7 @@
                                             <tr>
                                                 <th rowspan="1" colspan="1">ID</th>
                                                 <th rowspan="1" colspan="1">Name</th>
-                                                <th rowspan="1" colspan="1">Role(s)</th>
+                                                <th rowspan="1" colspan="1">Role</th>
                                                 <th rowspan="1" colspan="1">Active</th>
                                                 <th rowspan="1" colspan="1">Action</th>
                                             </tr>
@@ -258,9 +258,6 @@
                                                     aria-label="Name: activate to sort column ascending" style="width: 250px;">Name
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="company_faxes" rowspan="1" colspan="1"
-                                                    aria-label="Name: activate to sort column ascending" style="width: 250px;">
-                                                </th>
-                                                <th class="sorting" tabindex="0" aria-controls="company_faxes" rowspan="1" colspan="1"
                                                     aria-label="Active: activate to sort column ascending" style="width: 30px;">Active
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="company_faxes" rowspan="1" colspan="1"
@@ -270,17 +267,17 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($company->faxes as $user)
-                                                <tr role="row" class="odd"  data-href="{{URL::to('/admin/user/' . $user->id)}}">
-                                                    <td class="sorting_1">{{ $user->id }}</td>
-                                                    <td>{{ $user->full_name }}</td>
-                                                    <td>{{ $user->active }}</td>
+                                            @foreach($company->faxes as $fax)
+                                                <tr role="row" class="odd"  data-href="{{URL::to('/admin/fax/' . $fax->id)}}">
+                                                    <td class="sorting_1">{{ $fax->id }}</td>
+                                                    <td>{{ $fax->number }}</td>
+                                                    <td>{{ $fax->active }}</td>
                                                     <td>
-                                                        {{ link_to_action('Admin\UserController@show', $title = 'Show',
-                                                            $parameters = array($user->id),
+                                                        {{ link_to_action('Admin\FaxController@show', $title = 'Show',
+                                                            $parameters = array($fax->id),
                                                             $attributes = array('class' => 'btn btn-xs btn-success')) }}
-                                                        {{ link_to_action('Admin\UserController@edit', $title = 'Edit',
-                                                            $parameters = array($user->id),
+                                                        {{ link_to_action('Admin\FaxController@edit', $title = 'Edit',
+                                                            $parameters = array($fax->id),
                                                             $attributes = array('class' => 'btn btn-xs btn-info')) }}
                                                     </td>
                                                 </tr>

@@ -14,7 +14,6 @@ class Client extends Entity
 
     protected static $singleTableType = 'client';
     protected $softCascade = ['users'];
-
     /**
      * The attributes that are mass assignable.
      *
@@ -90,7 +89,6 @@ class Client extends Entity
                     'note' => 'Client Administrator',
                     'active' => 1
                 ]);
-
 
                 $role = Role::where('name', 'Client Admin')->first();
                 $user->roles()->attach($role->id);
