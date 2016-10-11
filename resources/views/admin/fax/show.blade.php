@@ -110,13 +110,6 @@
                                                             </tr>
                                                         @endforeach
                                                         </tbody>
-                                                        <tfoot>
-                                                        <tr>
-                                                            <th rowspan="1" colspan="1">ID</th>
-                                                            <th rowspan="1" colspan="1">Name</th>
-                                                            <th rowspan="1" colspan="1">Email</th>
-                                                        </tr>
-                                                        </tfoot>
                                                     </table>
                                                 </div>
                                             </div>
@@ -165,13 +158,6 @@
                                                             </tr>
                                                         @endforeach
                                                         </tbody>
-                                                        <tfoot>
-                                                        <tr>
-                                                            <th rowspan="1" colspan="1">ID</th>
-                                                            <th rowspan="1" colspan="1">Name</th>
-                                                            <th rowspan="1" colspan="1">Email</th>
-                                                        </tr>
-                                                        </tfoot>
                                                     </table>
                                                 </div>
                                             </div>

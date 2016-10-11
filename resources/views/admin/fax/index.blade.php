@@ -66,17 +66,6 @@
                                 </tr>
                             @endforeach
                             </tbody>
-                            <tfoot>
-                            <tr>
-                                <th rowspan="1" colspan="1">ID</th>
-                                <th rowspan="1" colspan="1">Provider</th>
-                                <th rowspan="1" colspan="1">Number</th>
-                                <th rowspan="1" colspan="1">Description</th>
-                                <th rowspan="1" colspan="1">Senders</th>
-                                <th rowspan="1" colspan="1">Recipients</th>
-                                <th rowspan="1" colspan="1">Action</th>
-                            </tr>
-                            </tfoot>
                         </table>
                     </div>
                 </div>
