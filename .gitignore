@@ -1,3 +1,5 @@
+error_log
+public/error_log
 /bower_components
 /node_modules
 /public/assets
