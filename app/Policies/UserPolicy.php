@@ -114,6 +114,18 @@ class UserPolicy
                 return $user->entity_id == $currentUser->entity->id;
             }
         }
+        // if company admin
+        else if ($user->isUser())
+        {
+            // does user belong to a the parent company
+            if ($currentUser->entity->type == 'client')
+            {
+                return $user->id == $currentUser->id;
+            }
+            else if ($currentUser->entity->type == 'company') {
+                return $user->entity_id == $currentUser->entity->id;
+            }
+        }
 
         return false;
     }
