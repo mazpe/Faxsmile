@@ -26,5 +26,7 @@ class ClientAdminUserSeeder extends Seeder
         ]);
 
         $user->roles()->attach($role->id);
+
+
     }
 }

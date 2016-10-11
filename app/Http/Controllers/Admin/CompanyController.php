@@ -67,7 +67,9 @@ class CompanyController extends Controller
         $this->authorize('view', $company);
 
         $company_clients = $company->clients;
-        $company_users = $company->users;
+        $company_admin = $company->users;
+
+        $company_users = $company_admin->merge($company->clientUsers);
 
         return view('admin.company.show',
             compact('company','company_clients','company_users')

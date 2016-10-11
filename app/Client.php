@@ -90,7 +90,6 @@ class Client extends Entity
                     'active' => 1
                 ]);
 
-
                 $role = Role::where('name', 'Client Admin')->first();
                 $user->roles()->attach($role->id);
             }

@@ -62,6 +62,7 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#info" data-toggle="tab">Info</a></li>
                     <li><a href="#company-clients" data-toggle="tab">Clients</a></li>
+                    <li><a href="#company-faxes" data-toggle="tab">Faxes</a></li>
                     <li><a href="#company-users" data-toggle="tab">Users</a></li>
                 </ul>
                 <div class="tab-content">
@@ -180,9 +181,6 @@
                                                     aria-label="Name: activate to sort column ascending" style="width: 250px;">Name
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="company_users" rowspan="1" colspan="1"
-                                                    aria-label="Name: activate to sort column ascending" style="width: 250px;">E-Mail
-                                                </th>
-                                                <th class="sorting" tabindex="0" aria-controls="company_users" rowspan="1" colspan="1"
                                                     aria-label="Active: activate to sort column ascending" style="width: 30px;">Active
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="company_users" rowspan="1" colspan="1"
@@ -196,7 +194,6 @@
                                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/user/' . $user->id)}}">
                                                     <td class="sorting_1">{{ $user->id }}</td>
                                                     <td>{{ $user->full_name }}</td>
-                                                    <td>{{ $user->email }}</td>
                                                     <td>{{ $user->active }}</td>
                                                     <td>
                                                         {{ link_to_action('Admin\UserController@show', $title = 'Show',
@@ -209,6 +206,14 @@
                                                 </tr>
                                             @endforeach
                                             </tbody>
+                                            <tfoot>
+                                            <tr>
+                                                <th rowspan="1" colspan="1">ID</th>
+                                                <th rowspan="1" colspan="1">Name</th>
+                                                <th rowspan="1" colspan="1">Active</th>
+                                                <th rowspan="1" colspan="1">Action</th>
+                                            </tr>
+                                            </tfoot>
                                         </table>
                                     </div>
                                 </div>
