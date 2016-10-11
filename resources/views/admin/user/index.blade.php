@@ -18,15 +18,17 @@
                                 <th class="sorting_asc" tabindex="0" aria-controls="users" rowspan="1" colspan="1"
                                     aria-sort="ascending" aria-label="ID: activate to sort column ascending" style="width: 5px;">ID
                                 </th>
+                                @if(!Auth::user()->isClientAdmin())
                                 <th class="sorting" tabindex="0" aria-controls="users" rowspan="1" colspan="1"
                                     aria-label="Type: activate to sort column descending"
-                                    style="width: 80px;">Type
+                                    style="width: 30px;">Type
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="users" rowspan="1" colspan="1"
-                                    aria-label="Full Name: activate to sort column ascending" style="width: 195px;">Company
+                                    aria-label="Full Name: activate to sort column ascending" style="width: 120px;">Company
                                 </th>
+                                @endif
                                 <th class="sorting" tabindex="0" aria-controls="users" rowspan="1" colspan="1"
-                                    aria-label="Full Name: activate to sort column ascending" style="width: 195px;">Contact
+                                    aria-label="Full Name: activate to sort column ascending" style="width: 60px;">Contact
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="users" rowspan="1" colspan="1"
                                     aria-label="Active: activate to sort column ascending" style="width: 30px;">E-Mail
@@ -45,8 +47,10 @@
                             @foreach($users as $user)
                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/user/' . $user->id)}}">
                                     <td class="sorting_1">{{ $user->id }}</td>
+                                    @if(!Auth::user()->isClientAdmin())
                                     <td>{{ isset($user->entity) ? ucfirst($user->entity->type) : '' }}</td>
                                     <td>{{ $user->entity->name }}</td>
+                                    @endif
                                     <td>{{ $user->full_name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->recipients->count() }}</td>

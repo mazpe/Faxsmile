@@ -20,15 +20,17 @@
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
                                     aria-label="Provider: activate to sort column descending"
-                                    style="width: 100px;">Provider
+                                    style="width: 140px;">Provider
                                 </th>
 
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
                                     aria-label="Number: activate to sort column ascending" style="width: 10px;">Fax Number
                                 </th>
+                                @if(!Auth::user()->isClientAdmin())
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
                                     aria-label="Number: activate to sort column ascending" style="width: 10px;">Client
                                 </th>
+                                @endif
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
                                     aria-label="Description: activate to sort column ascending" style="width: 20px;">Description
                                 </th>
@@ -41,7 +43,7 @@
                                     style="width: 10px;">Recipients
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
-                                    aria-label="CSS grade: activate to sort column ascending" style="width: 60px;">
+                                    aria-label="CSS grade: activate to sort column ascending" style="width: 50px;">
                                     Action
                                 </th>
                             </tr>
@@ -52,7 +54,9 @@
                                     <td class="sorting_1">{{ $fax->id }}</td>
                                     <td>{{ $fax->provider->name }}</td>
                                     <td>{{ $fax->number }}</td>
+                                    @if(!Auth::user()->isClientAdmin())
                                     <td>{{ $fax->name }}</td>
+                                    @endif
                                     <td>{{ $fax->description }}</td>
                                     <td>{{ $fax->senders->count() }}</td>
                                     <td>{{ $fax->recipients->count() }}</td>
