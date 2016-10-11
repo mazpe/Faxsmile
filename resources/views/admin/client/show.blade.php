@@ -113,16 +113,16 @@
                                             <thead>
                                             <tr role="row">
                                                 <th class="sorting" tabindex="0" aria-controls="client_faxes" rowspan="1" colspan="1"
-                                                    aria-label="Name: activate to sort column ascending" style="width: 250px;">Fax Number
+                                                    aria-label="Name: activate to sort column ascending" style="width: 50px;">Fax Number
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="client_faxes" rowspan="1" colspan="1"
-                                                    aria-label="Name: activate to sort column ascending" style="width: 250px;">Description
+                                                    aria-label="Name: activate to sort column ascending" style="width: 100px;">Description
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="client_faxes" rowspan="1" colspan="1"
                                                     aria-label="Active: activate to sort column ascending" style="width: 20px;">Active
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="client_faxes" rowspan="1" colspan="1"
-                                                    aria-label="CSS grade: activate to sort column ascending" style="width: 50px;">
+                                                    aria-label="CSS grade: activate to sort column ascending" style="width: 40px;">
                                                     Action
                                                 </th>
                                             </tr>
@@ -167,14 +167,11 @@
                                                aria-describedby="client_users_info" data-form="deleteForm">
                                             <thead>
                                             <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="client_users" rowspan="1" colspan="1"
-                                                    aria-sort="ascending" aria-label="ID: activate to sort column ascending" style="width: 5px;">ID
+                                                <th class="sorting" tabindex="0" aria-controls="client_users" rowspan="1" colspan="1"
+                                                    aria-label="Name: activate to sort column ascending" style="width: 50px;">Name
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="client_users" rowspan="1" colspan="1"
-                                                    aria-label="Name: activate to sort column ascending" style="width: 100px;">Name
-                                                </th>
-                                                <th class="sorting" tabindex="0" aria-controls="client_users" rowspan="1" colspan="1"
-                                                    aria-label="Email: activate to sort column ascending" style="width: 100px;">Email
+                                                    aria-label="Email: activate to sort column ascending" style="width: 20px;">Email
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="client_users" rowspan="1" colspan="1"
                                                     aria-label="Active: activate to sort column ascending" style="width: 20px;">Fax
@@ -190,8 +187,7 @@
                                             </thead>
                                             <tbody>
                                             @foreach($client->users as $user)
-                                                <tr role="row" class="odd"  data-href="{{URL::to('/admin/user/' . $user->id)}}">
-                                                    <td class="sorting_1">{{ $user->id }}</td>
+                                                <tr role="row" class="odd"  data-href="{{URL::to('/admin/user/' . $user->id)}}"></td>
                                                     <td>{{ $user->full_name }}</td>
                                                     <td>{{ $user->email }}</td>
                                                     <td>{{ $user->number }}</td>

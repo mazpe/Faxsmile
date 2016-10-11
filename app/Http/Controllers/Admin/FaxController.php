@@ -73,11 +73,11 @@ class FaxController extends Controller
         $input = $request->input;
         $v = Validator::make($request->all(), [
             'provider_id' => 'required|numeric',
-            'recipients' => 'required',
+            'client_id' => 'required|numeric',
             'number' => 'required|unique:faxes,number,NULL,id,deleted_at,NULL'
         ]);
-        $v->sometimes('client_id', 'required|numeric', function($input) {
-            return !empty($input['recipients']);
+        $v->sometimes('recipients', 'required', function($input) {
+            return !(Auth::user()->isSuperAdmin() ||  Auth::user()->isCompanyAdmin());
         });
         $v->validate();
 
