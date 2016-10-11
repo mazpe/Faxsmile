@@ -119,7 +119,10 @@
                                             <thead>
                                             <tr role="row">
                                                 <th class="sorting" tabindex="0" aria-controls="provider_faxes" rowspan="1" colspan="1"
-                                                    aria-label="Name: activate to sort column ascending" style="width: 250px;">Number
+                                                    aria-label="Name: activate to sort column ascending" style="width: 250px;">Fax Number
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="provider_faxes" rowspan="1" colspan="1"
+                                                    aria-label="Name: activate to sort column ascending" style="width: 250px;">Client
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="provider_faxes" rowspan="1" colspan="1"
                                                     aria-label="Active: activate to sort column ascending" style="width: 30px;">Active
@@ -134,6 +137,7 @@
                                             @foreach($provider_faxes as $fax)
                                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/fax/' . $fax->id)}}">
                                                     <td>{{ $fax->number }}</td>
+                                                    <td>{{ $fax->name }}</td>
                                                     <td>{{ $fax->active }}</td>
                                                     <td>
                                                         {{ link_to_action('Admin\FaxController@show', $title = 'Show',

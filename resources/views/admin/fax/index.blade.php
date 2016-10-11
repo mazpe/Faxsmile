@@ -27,11 +27,14 @@
                                     aria-label="Number: activate to sort column ascending" style="width: 10px;">Number
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
+                                    aria-label="Number: activate to sort column ascending" style="width: 10px;">Client
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
                                     aria-label="Description: activate to sort column ascending" style="width: 20px;">Description
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
                                     aria-label="Sender: activate to sort column descending"
-                                    style="width: 10px;">Sender
+                                    style="width: 10px;">Senders
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
                                     aria-label="Sender: activate to sort column descending"
@@ -49,6 +52,7 @@
                                     <td class="sorting_1">{{ $fax->id }}</td>
                                     <td>{{ $fax->provider->name }}</td>
                                     <td>{{ $fax->number }}</td>
+                                    <td>{{ $fax->name }}</td>
                                     <td>{{ $fax->description }}</td>
                                     <td>{{ $fax->senders->count() }}</td>
                                     <td>{{ $fax->recipients->count() }}</td>

@@ -22,13 +22,19 @@
                                     style="width: 5px;">ID
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="companies" rowspan="1" colspan="1"
-                                    aria-label="Name: activate to sort column ascending" style="width: 195px;">Name
+                                    aria-label="Name: activate to sort column ascending" style="width: 195px;">Company
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="companies" rowspan="1" colspan="1"
                                     aria-label="Name: activate to sort column ascending" style="width: 195px;">Contact
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="companies" rowspan="1" colspan="1"
                                     aria-label="Active: activate to sort column ascending" style="width: 30px;">Clients
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="companies" rowspan="1" colspan="1"
+                                    aria-label="Active: activate to sort column ascending" style="width: 30px;">Faxes
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="companies" rowspan="1" colspan="1"
+                                    aria-label="Active: activate to sort column ascending" style="width: 30px;">Users
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="companies" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 50px;">
@@ -43,6 +49,10 @@
                                     <td>{{ $company->name }}</td>
 				    <td>{{ $company->contact_first_name }} {{ $company->contact_last_name }}</td>
                                     <td>{{ $company->clients_count }}</td>
+
+                                    <td>{{ $company->name }}</td>
+                                    <td>{{ $company->name }}</td>
+
                                     <td>
                                         {{ link_to_action('Admin\CompanyController@show', $title = 'Show',
                                             $parameters = array($company->id),

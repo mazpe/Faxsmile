@@ -23,10 +23,10 @@
                                     style="width: 80px;">Type
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="users" rowspan="1" colspan="1"
-                                    aria-label="Full Name: activate to sort column ascending" style="width: 195px;">Client
+                                    aria-label="Full Name: activate to sort column ascending" style="width: 195px;">Company
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="users" rowspan="1" colspan="1"
-                                    aria-label="Full Name: activate to sort column ascending" style="width: 195px;">Full Name
+                                    aria-label="Full Name: activate to sort column ascending" style="width: 195px;">Contact
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="users" rowspan="1" colspan="1"
                                     aria-label="Active: activate to sort column ascending" style="width: 30px;">E-Mail

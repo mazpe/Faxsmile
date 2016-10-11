@@ -20,7 +20,10 @@
                                     style="width: 10px;">ID
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="providers" rowspan="1" colspan="1"
-                                    aria-label="Name: activate to sort column ascending" style="width: 195px;">Name
+                                    aria-label="Name: activate to sort column ascending" style="width: 195px;">Company
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="providers" rowspan="1" colspan="1"
+                                    aria-label="Name: activate to sort column ascending" style="width: 195px;">Contact
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="providers" rowspan="1" colspan="1"
                                     aria-label="Faxes: activate to sort column ascending" style="width: 30px;">Faxes
@@ -36,6 +39,7 @@
                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/provider/' . $provider->id)}}">
                                     <td class="sorting_1">{{ $provider->id }}</td>
                                     <td>{{ $provider->name }}</td>
+                                    <td>{{ $provider->contact_first_name }} {{ $provider->contact_last_name }}</td>
                                     <td>{{ $provider->faxes_count }}</td>
                                     <td>
                                         {{ link_to_action('Admin\ProviderController@show', $title = 'Show',

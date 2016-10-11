@@ -206,14 +206,6 @@
                                                 </tr>
                                             @endforeach
                                             </tbody>
-                                            <tfoot>
-                                            <tr>
-                                                <th rowspan="1" colspan="1">ID</th>
-                                                <th rowspan="1" colspan="1">Name</th>
-                                                <th rowspan="1" colspan="1">Role</th>
-                                                <th rowspan="1" colspan="1">Action</th>
-                                            </tr>
-                                            </tfoot>
                                         </table>
                                     </div>
                                 </div>
@@ -242,7 +234,13 @@
                                                     aria-sort="ascending" aria-label="ID: activate to sort column descending"
                                                     style="width: 5px;">ID
                                                 <th class="sorting" tabindex="0" aria-controls="company_faxes" rowspan="1" colspan="1"
-                                                    aria-label="Name: activate to sort column ascending" style="width: 250px;">Name
+                                                    aria-label="Name: activate to sort column ascending" style="width: 250px;">Fax Number
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="client_faxes" rowspan="1" colspan="1"
+                                                    aria-label="Name: activate to sort column ascending" style="width: 250px;">Client
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="company_faxes" rowspan="1" colspan="1"
+                                                    aria-label="Name: activate to sort column ascending" style="width: 250px;">Description
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="company_faxes" rowspan="1" colspan="1"
                                                     aria-label="Active: activate to sort column ascending" style="width: 30px;">Active
@@ -258,6 +256,8 @@
                                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/fax/' . $fax->id)}}">
                                                     <td class="sorting_1">{{ $fax->id }}</td>
                                                     <td>{{ $fax->number }}</td>
+                                                    <td>{{ $fax->name }}</td>
+                                                    <td>{{ $fax->description }}</td>
                                                     <td>{{ $fax->active }}</td>
                                                     <td>
                                                         {{ link_to_action('Admin\FaxController@show', $title = 'Show',
@@ -270,14 +270,6 @@
                                                 </tr>
                                             @endforeach
                                             </tbody>
-                                            <tfoot>
-                                            <tr>
-                                                <th rowspan="1" colspan="1">ID</th>
-                                                <th rowspan="1" colspan="1">Name</th>
-                                                <th rowspan="1" colspan="1">Active</th>
-                                                <th rowspan="1" colspan="1">Action</th>
-                                            </tr>
-                                            </tfoot>
                                         </table>
                                     </div>
                                 </div>
