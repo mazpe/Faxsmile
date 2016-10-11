@@ -1,13 +1,10 @@
 /* Data Table Background Title Row */
 .table th {
-background-color: #3c8dbc;
-color: white;
+	background-color: #3c8dbc;
+	color: white;
 }
 
-.table-hover>tbody>tr:hover {
-    background-color: #cb1745;
-}
-
-.table > tr.active {
-  background:green;
+/* Data Table Row Mouseover color */
+.table tbody tr:hover td {
+	background-color: #b3d7ec;
 }

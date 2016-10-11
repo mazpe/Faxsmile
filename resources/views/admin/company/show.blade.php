@@ -62,8 +62,8 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#info" data-toggle="tab">Info</a></li>
                     <li><a href="#company-clients" data-toggle="tab">Clients</a></li>
-                    <li><a href="#company-users" data-toggle="tab">Users</a></li>
                     <li><a href="#company-faxes" data-toggle="tab">Faxes</a></li>
+                    <li><a href="#company-users" data-toggle="tab">Users</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="active tab-pane" id="info">
@@ -150,14 +150,6 @@
                                                 </tr>
                                             @endforeach
                                             </tbody>
-                                            <tfoot>
-                                            <tr>
-                                                <th rowspan="1" colspan="1">ID</th>
-                                                <th rowspan="1" colspan="1">Name</th>
-                                                <th rowspan="1" colspan="1">Active</th>
-                                                <th rowspan="1" colspan="1">Action</th>
-                                            </tr>
-                                            </tfoot>
                                         </table>
                                     </div>
                                 </div>
@@ -189,9 +181,6 @@
                                                     aria-label="Name: activate to sort column ascending" style="width: 250px;">Name
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="company_users" rowspan="1" colspan="1"
-                                                    aria-label="Role: activate to sort column ascending" style="width: 100px;">Role
-                                                </th>
-                                                <th class="sorting" tabindex="0" aria-controls="company_users" rowspan="1" colspan="1"
                                                     aria-label="Active: activate to sort column ascending" style="width: 30px;">Active
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="company_users" rowspan="1" colspan="1"
@@ -205,7 +194,6 @@
                                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/user/' . $user->id)}}">
                                                     <td class="sorting_1">{{ $user->id }}</td>
                                                     <td>{{ $user->full_name }}</td>
-                                                    <td>{{ $user->roles->implode('name', ', ') }}</td>
                                                     <td>{{ $user->active }}</td>
                                                     <td>
                                                         {{ link_to_action('Admin\UserController@show', $title = 'Show',
@@ -222,7 +210,6 @@
                                             <tr>
                                                 <th rowspan="1" colspan="1">ID</th>
                                                 <th rowspan="1" colspan="1">Name</th>
-                                                <th rowspan="1" colspan="1">Role</th>
                                                 <th rowspan="1" colspan="1">Active</th>
                                                 <th rowspan="1" colspan="1">Action</th>
                                             </tr>
@@ -238,69 +225,6 @@
                     </div>
                     <!-- /.tab-pane -->
 
-                    <!-- company-faxes-tab-pane -->
-                    <div class="tab-pane" id="company-faxes">
-                        <!-- company clients -->
-
-                        <!-- box -->
-                        <div class="box-body">
-                            <div id="company_faxes_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <table id="company_faxes" class="table table-bordered table-striped hover dataTable" role="grid"
-                                               aria-describedby="company_faxes_info">
-                                            <thead>
-                                            <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="company_clients" rowspan="1" colspan="1"
-                                                    aria-sort="ascending" aria-label="ID: activate to sort column descending"
-                                                    style="width: 5px;">ID
-                                                <th class="sorting" tabindex="0" aria-controls="company_faxes" rowspan="1" colspan="1"
-                                                    aria-label="Name: activate to sort column ascending" style="width: 250px;">Name
-                                                </th>
-                                                <th class="sorting" tabindex="0" aria-controls="company_faxes" rowspan="1" colspan="1"
-                                                    aria-label="Active: activate to sort column ascending" style="width: 30px;">Active
-                                                </th>
-                                                <th class="sorting" tabindex="0" aria-controls="company_faxes" rowspan="1" colspan="1"
-                                                    aria-label="CSS grade: activate to sort column ascending" style="width: 50px;">
-                                                    Action
-                                                </th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            @foreach($company->faxes as $fax)
-                                                <tr role="row" class="odd"  data-href="{{URL::to('/admin/fax/' . $fax->id)}}">
-                                                    <td class="sorting_1">{{ $fax->id }}</td>
-                                                    <td>{{ $fax->number }}</td>
-                                                    <td>{{ $fax->active }}</td>
-                                                    <td>
-                                                        {{ link_to_action('Admin\FaxController@show', $title = 'Show',
-                                                            $parameters = array($fax->id),
-                                                            $attributes = array('class' => 'btn btn-xs btn-success')) }}
-                                                        {{ link_to_action('Admin\FaxController@edit', $title = 'Edit',
-                                                            $parameters = array($fax->id),
-                                                            $attributes = array('class' => 'btn btn-xs btn-info')) }}
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                            </tbody>
-                                            <tfoot>
-                                            <tr>
-                                                <th rowspan="1" colspan="1">ID</th>
-                                                <th rowspan="1" colspan="1">Name</th>
-                                                <th rowspan="1" colspan="1">Active</th>
-                                                <th rowspan="1" colspan="1">Action</th>
-                                            </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.box-body -->
-
-                        <!-- /.company users -->
-                    </div>
-                    <!-- /.tab-pane -->
 
                 </div>
                 <!-- /.tab-content -->

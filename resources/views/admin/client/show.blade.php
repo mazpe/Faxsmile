@@ -147,14 +147,6 @@
                                                 </tr>
                                             @endforeach
                                             </tbody>
-                                            <tfoot>
-                                            <tr>
-                                                <th rowspan="1" colspan="1">Fax Number</th>
-                                                <th rowspan="1" colspan="1">Description</th>
-                                                <th rowspan="1" colspan="1">Active</th>
-                                                <th rowspan="1" colspan="1">Action</th>
-                                            </tr>
-                                            </tfoot>
                                         </table>
                                     </div>
                                 </div>
@@ -218,16 +210,6 @@
                                                 </tr>
                                             @endforeach
                                             </tbody>
-                                            <tfoot>
-                                            <tr>
-                                                <th rowspan="1" colspan="1">ID</th>
-                                                <th rowspan="1" colspan="1">Name</th>
-                                                <th rowspan="1" colspan="1">Email</th>
-                                                <th rowspan="1" colspan="1">Fax</th>
-                                                <th rowspan="1" colspan="1">Active</th>
-                                                <th rowspan="1" colspan="1">Action</th>
-                                            </tr>
-                                            </tfoot>
                                         </table>
                                     </div>
                                 </div>
