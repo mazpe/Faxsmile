@@ -19,7 +19,7 @@
                                     aria-sort="ascending" aria-label="ID: activate to sort column ascending" style="width: 10px;">ID
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="clients" rowspan="1" colspan="1"
-                                    aria-label="Name: activate to sort column ascending" style="width: 195px;">Name
+                                    aria-label="Name: activate to sort column ascending" style="width: 195px;">Company
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="clients" rowspan="1" colspan="1"
                                     aria-label="Contact: activate to sort column ascending" style="width: 30px;">Contact
