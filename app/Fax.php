@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Askedio\SoftCascade\Traits\SoftCascadeTrait;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
+
+use App\Recipient;
+use App\Sender;
 
 class Fax extends Model
 {
@@ -30,6 +35,76 @@ class Fax extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    public static function boot()
+    {
+        parent::boot();
+
+        /**
+         * Listen to the Fax deleted an event.
+         * - check if fax users are not been used by any other Fax and delete user too
+         *
+         * @param  $client
+         * @return void
+         */
+        static::deleting(function(Fax $fax)
+        {
+            $deleteUsers = collect();
+
+            // get all user_ids of the Fax as a sender or reciever
+            $usersWithFaxRelation = $fax->recipients->pluck('id')->merge($fax->senders->pluck('id'));
+
+
+            // delete fax to recipeints and remove fax from sender
+            $fax->recipients()->detach();
+            $fax->senders()->update(['fax_id' => null]);
+
+
+            foreach($usersWithFaxRelation->unique()->toArray() as $user_id) {
+                if ( (isset(Recipient::find($user_id)->faxes) && Recipient::find($user_id)->faxes->count()) < 0 || (isset(Sender::find($user_id)->fax) && Sender::find($user_id)->fax->count() < 0) )
+                {
+                    $deleteUsers = $deleteUsers->merge(collect([$user_id]));
+                }
+            }
+
+            DB::rollBack();
+            dd($deleteUsers);
+
+                die();
+//            foreach(Recipient::);
+
+//            // check if each sender
+//            $deleteUser = array();
+//
+//            $users = $fax->recipients->merge($fax->senders);
+//
+//            $users->each(function ($item, $key) {
+//                $deleteUser = [
+//                   'id' => $item->id,
+//                   'delete' => Recipient::find($item->id)->faxes->count() > 0 ? false : true
+//                ];
+//
+//            });
+
+//            $fax->recipients->each(function ($item, $key) {
+//               $deleteUser = [
+//                   'id' => $item->id,
+//                   'delete' => Recipient::find($item->id)->faxes->count() > 0 ? false : true;
+//                ]
+//            });
+
+
+
+            return $fax;
+        });
+
+
+    }
 
     /**
      *  Set user_id to value or null

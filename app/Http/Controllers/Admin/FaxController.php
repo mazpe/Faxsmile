@@ -300,8 +300,6 @@ class FaxController extends Controller
 
         $fax = Fax::find($id);
 
-        $fax->recipients()->detach();
-        $fax->senders()->update(['fax_id' => null]);
         $fax->delete();
 
         return redirect()->route('fax.index')
