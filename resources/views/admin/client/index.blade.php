@@ -19,16 +19,16 @@
                                     aria-sort="ascending" aria-label="ID: activate to sort column ascending" style="width: 10px;">ID
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="clients" rowspan="1" colspan="1"
-                                    aria-label="Name: activate to sort column ascending" style="width: 195px;">Name
+                                    aria-label="Name: activate to sort column ascending" style="width: 195px;">Company
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="clients" rowspan="1" colspan="1"
                                     aria-label="Contact: activate to sort column ascending" style="width: 30px;">Contact
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="clients" rowspan="1" colspan="1"
-                                    aria-label="Users: activate to sort column ascending" style="width: 30px;">Users
+                                    aria-label="Faxes: activate to sort column ascending" style="width: 30px;">Faxes
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="clients" rowspan="1" colspan="1"
-                                    aria-label="Faxes: activate to sort column ascending" style="width: 30px;">Faxes
+                                    aria-label="Users: activate to sort column ascending" style="width: 30px;">Users
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="clients" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 50px;">
@@ -42,8 +42,8 @@
                                     <td class="sorting_1">{{ $client->id }}</td>
                                     <td>{{ $client->name }}</td>
                                     <td>{{ $client->contact_first_name }} {{ $client->contact_last_name }}</td>
-                                    <td>{{ $client->users_count }}</td>
                                     <td>{{ $client->faxes_count }}</td>
+                                    <td>{{ $client->users_count }}</td>
                                     <td>
                                         {{ link_to_action('Admin\ClientController@show', $title = 'Show',
                                             $parameters = array($client->id),
