@@ -52,56 +52,35 @@ class Fax extends Model
          * @param  $client
          * @return void
          */
-        static::deleting(function(Fax $fax)
-        {
-            $deleteUsers = collect();
-
-            // get all user_ids of the Fax as a sender or reciever
-            $usersWithFaxRelation = $fax->recipients->pluck('id')->merge($fax->senders->pluck('id'));
-
-
-            // delete fax to recipeints and remove fax from sender
-            $fax->recipients()->detach();
-            $fax->senders()->update(['fax_id' => null]);
-
-
-            foreach($usersWithFaxRelation->unique()->toArray() as $user_id) {
-                if ( (isset(Recipient::find($user_id)->faxes) && Recipient::find($user_id)->faxes->count()) < 0 || (isset(Sender::find($user_id)->fax) && Sender::find($user_id)->fax->count() < 0) )
-                {
-                    $deleteUsers = $deleteUsers->merge(collect([$user_id]));
-                }
-            }
-
-            DB::rollBack();
-            dd($deleteUsers);
-
-                die();
-//            foreach(Recipient::);
-
-//            // check if each sender
-//            $deleteUser = array();
+//        static::deleting(function(Fax $fax)
+//        {
+//            $deleteUsers = collect();
 //
-//            $users = $fax->recipients->merge($fax->senders);
+//            // get all user_ids of the Fax as a sender or reciever
+//            $usersWithFaxRelation = $fax->recipients->pluck('id')->merge($fax->senders->pluck('id'));
 //
-//            $users->each(function ($item, $key) {
-//                $deleteUser = [
-//                   'id' => $item->id,
-//                   'delete' => Recipient::find($item->id)->faxes->count() > 0 ? false : true
-//                ];
 //
-//            });
-
-//            $fax->recipients->each(function ($item, $key) {
-//               $deleteUser = [
-//                   'id' => $item->id,
-//                   'delete' => Recipient::find($item->id)->faxes->count() > 0 ? false : true;
-//                ]
-//            });
-
-
-
-            return $fax;
-        });
+//            // delete fax to recipeints and remove fax from sender
+//            $fax->recipients()->detach();
+//            $fax->senders()->update(['fax_id' => null]);
+//
+//
+//            foreach($usersWithFaxRelation->unique()->toArray() as $user_id) {
+//                if ( (isset(Recipient::find($user_id)->faxes) && Recipient::find($user_id)->faxes->count()) < 0 || (isset(Sender::find($user_id)->fax) && Sender::find($user_id)->fax->count() < 0) )
+//                {
+//                    $deleteUsers = $deleteUsers->merge(collect([$user_id]));
+//                }
+//            }
+//
+//            DB::rollBack();
+//            dd($deleteUsers);
+//
+//                die();
+//
+//
+//
+//            return $fax;
+//        });
 
 
     }

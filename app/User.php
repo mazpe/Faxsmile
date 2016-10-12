@@ -81,9 +81,19 @@ class User extends Authenticatable
      * @param $value
      */
     public function setPasswordAttribute($value) {
-        if ($value) {
-            $this->attributes['password'] = Hash::make($value);
-        } else {
+        if ($value)
+        {
+            if (Hash::needsRehash($value))
+            {
+                $this->attributes['password'] = Hash::make($value);
+            }
+            else
+            {
+                $this->attributes['password'] = $value;
+            }
+        }
+        else
+        {
             $this->attributes['password'] = Hash::make('ChangeMe1!');
         }
     }
