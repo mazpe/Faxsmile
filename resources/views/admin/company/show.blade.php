@@ -125,6 +125,12 @@
                                                     aria-label="Name: activate to sort column ascending" style="width: 250px;">Name
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="company_clients" rowspan="1" colspan="1"
+                                                    aria-label="Name: activate to sort column ascending" style="width: 250px;">Faxes
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="company_clients" rowspan="1" colspan="1"
+                                                    aria-label="Name: activate to sort column ascending" style="width: 250px;">Users
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="company_clients" rowspan="1" colspan="1"
                                                     aria-label="Active: activate to sort column ascending" style="width: 30px;">Active
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="company_clients" rowspan="1" colspan="1"
@@ -138,6 +144,8 @@
                                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/client/' . $client->id)}}">
                                                     <td class="sorting_1">{{ $client->id }}</td>
                                                     <td>{{ $client->name }}</td>
+						    <td>{{ $client->faxes_count }}</td>
+						    <td>{{ $client->users_count }}</td>
                                                     <td>{{ $client->active }}</td>
                                                     <td>
                                                         {{ link_to_action('Admin\ClientController@show', $title = 'Show',
