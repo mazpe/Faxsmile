@@ -31,7 +31,7 @@
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
                                     aria-label="Number: activate to sort column ascending" style="width: 10px;">Fax Number
                                 </th>
-                                @if(!Auth::user()->isClientAdmin())
+                                @if(Auth::user()->isSuperAdmin() || Auth::user()->isCompanyAdmin())
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
                                     aria-label="Number: activate to sort column ascending" style="width: 10px;">Client
                                 </th>
@@ -62,8 +62,8 @@
                                     <td>{{ $fax->client->company->name }}</td>
                                     @endif
                                     <td>{{ $fax->number }}</td>
-                                    @if(!Auth::user()->isClientAdmin())
-                                    <td>{{ $fax->name }}</td>
+                                    @if(Auth::user()->isSuperAdmin() || Auth::user()->isCompanyAdmin())
+                                    <td>{{ $fax->client->name }}</td>
                                     @endif
                                     <td>{{ $fax->description }}</td>
                                     <td>{{ $fax->senders->count() }}</td>
