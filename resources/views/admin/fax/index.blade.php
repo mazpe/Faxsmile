@@ -59,7 +59,7 @@
                                     <td class="sorting_1">{{ $fax->id }}</td>
                                     @if(Auth::user()->isSuperAdmin())
                                     <td>{{ $fax->provider->name }}</td>
-                                    <td>{{ $fax->name }}</td>
+                                    <td>{{ $fax->client->company->name }}</td>
                                     @endif
                                     <td>{{ $fax->number }}</td>
                                     @if(!Auth::user()->isClientAdmin())
