@@ -22,7 +22,10 @@
                                     aria-label="Provider: activate to sort column descending"
                                     style="width: 140px;">Provider
                                 </th>
-
+                                <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
+                                    aria-label="Provider: activate to sort column descending"
+                                    style="width: 140px;">Company
+                                </th>
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
                                     aria-label="Number: activate to sort column ascending" style="width: 10px;">Fax Number
                                 </th>
@@ -53,6 +56,7 @@
                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/fax/' . $fax->id)}}">
                                     <td class="sorting_1">{{ $fax->id }}</td>
                                     <td>{{ $fax->provider->name }}</td>
+                                    <td>{{ $fax->name }}</td>
                                     <td>{{ $fax->number }}</td>
                                     @if(!Auth::user()->isClientAdmin())
                                     <td>{{ $fax->name }}</td>
