@@ -52,35 +52,31 @@ class Fax extends Model
          * @param  $client
          * @return void
          */
-//        static::deleting(function(Fax $fax)
-//        {
-//            $deleteUsers = collect();
-//
-//            // get all user_ids of the Fax as a sender or reciever
-//            $usersWithFaxRelation = $fax->recipients->pluck('id')->merge($fax->senders->pluck('id'));
-//
-//
-//            // delete fax to recipeints and remove fax from sender
-//            $fax->recipients()->detach();
-//            $fax->senders()->update(['fax_id' => null]);
-//
-//
-//            foreach($usersWithFaxRelation->unique()->toArray() as $user_id) {
-//                if ( (isset(Recipient::find($user_id)->faxes) && Recipient::find($user_id)->faxes->count()) < 0 || (isset(Sender::find($user_id)->fax) && Sender::find($user_id)->fax->count() < 0) )
-//                {
-//                    $deleteUsers = $deleteUsers->merge(collect([$user_id]));
-//                }
-//            }
-//
-//            DB::rollBack();
-//            dd($deleteUsers);
-//
-//                die();
-//
-//
-//
-//            return $fax;
-//        });
+        static::deleting(function(Fax $fax)
+        {
+            // get all user_ids of the Fax as a sender or reciever
+            $usersWithFaxRelation = $fax->recipients->pluck('id')->merge($fax->senders->pluck('id'));
+
+            // delete fax to recipeints and remove fax from sender
+            $fax->recipients()->detach();
+            $fax->senders()->update(['fax_id' => null]);
+
+            foreach($usersWithFaxRelation->unique()->toArray() as $key => $value)
+            {
+                $asRecipientCount = isset(Recipient::find($value)->faxes) ? Recipient::find($value)->faxes->count() : 0;
+                $asSenderCount = isset(Sender::find($value)->fax) ? 1 : 0;
+
+                $userInUseCount = $asRecipientCount + $asSenderCount;
+
+                if ($userInUseCount == 0)
+                {
+                    $user = User::find($value);
+                    $user->delete();
+                }
+            }
+
+            return;
+        });
 
 
     }

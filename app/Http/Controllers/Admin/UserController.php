@@ -114,6 +114,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+
         $user = User::find($id);
 
         $this->authorize('update', $user);
@@ -138,8 +139,7 @@ class UserController extends Controller
 
         $this->authorize('update', $user);
 
-
-        $request->merge(array('entity_id' => $user->entity_id));
+        //$request->merge(array('entity_id' => $user->entity_id));
 
         $this->validate($request, [
             'entity_id' => 'required|numeric',

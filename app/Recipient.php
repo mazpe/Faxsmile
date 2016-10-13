@@ -10,7 +10,7 @@ use Hash;
 class Recipient extends Model
 {
     // TODO: support Soft Delete
-//    use SoftDeletes;
+    //use SoftDeletes;
 //    use SoftCascadeTrait;
 
     protected $table = 'users';

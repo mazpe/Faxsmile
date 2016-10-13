@@ -1,6 +1,7 @@
 <div class="box-body">
     <!-- name, title, value, label attributes, input attributes -->
-    @if ( isset($user) && isset($user->entity) && $user->entity->type == 'client' && Auth::user()->isCompanyAdmin() )
+
+    @if ( isset($user) && isset($user->entity) && $user->entity->type == 'client' && (Auth::user()->isSuperAdmin() || Auth::user()->isCompanyAdmin())  )
     {{ Form::bsSelect('entity_id', 'Client',
         isset($user) && isset($user->entity) ? $user->entity->id : null, $clients, // selected
         ['class' => 'col-sm-2 control-label'], ['id' => 'user-clients', 'class' =>'form-control', 'placeholder' => 'Select one...']) }}
