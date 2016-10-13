@@ -18,6 +18,7 @@
                                 <th class="sorting_asc" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
                                     aria-sort="ascending" aria-label="ID: activate to sort column ascending" style="width: 5px;">ID
                                 </th>
+                                @if(Auth::user()->isSuperAdmin())
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
                                     aria-label="Provider: activate to sort column descending"
                                     style="width: 140px;">Provider
@@ -26,6 +27,7 @@
                                     aria-label="Provider: activate to sort column descending"
                                     style="width: 140px;">Company
                                 </th>
+                                @endif
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
                                     aria-label="Number: activate to sort column ascending" style="width: 10px;">Fax Number
                                 </th>
@@ -55,8 +57,10 @@
                             @foreach($faxes as $fax)
                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/fax/' . $fax->id)}}">
                                     <td class="sorting_1">{{ $fax->id }}</td>
+                                    @if(Auth::user()->isSuperAdmin())
                                     <td>{{ $fax->provider->name }}</td>
                                     <td>{{ $fax->name }}</td>
+                                    @endif
                                     <td>{{ $fax->number }}</td>
                                     @if(!Auth::user()->isClientAdmin())
                                     <td>{{ $fax->name }}</td>
