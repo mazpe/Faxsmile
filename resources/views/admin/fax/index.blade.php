@@ -18,15 +18,20 @@
                                 <th class="sorting_asc" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
                                     aria-sort="ascending" aria-label="ID: activate to sort column ascending" style="width: 5px;">ID
                                 </th>
+                                @if(Auth::user()->isSuperAdmin())
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
                                     aria-label="Provider: activate to sort column descending"
                                     style="width: 140px;">Provider
                                 </th>
-
+                                <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
+                                    aria-label="Provider: activate to sort column descending"
+                                    style="width: 140px;">Company
+                                </th>
+                                @endif
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
                                     aria-label="Number: activate to sort column ascending" style="width: 10px;">Fax Number
                                 </th>
-                                @if(!Auth::user()->isClientAdmin())
+                                @if(Auth::user()->isSuperAdmin() || Auth::user()->isCompanyAdmin())
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
                                     aria-label="Number: activate to sort column ascending" style="width: 10px;">Client
                                 </th>
@@ -52,13 +57,16 @@
                             @foreach($faxes as $fax)
                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/fax/' . $fax->id)}}">
                                     <td class="sorting_1">{{ $fax->id }}</td>
+                                    @if(Auth::user()->isSuperAdmin())
                                     <td>{{ $fax->provider->name }}</td>
+                                    <td>{{ $fax->client->company->name }}</td>
+                                    @endif
                                     <td>{{ $fax->number }}</td>
-                                    @if(!Auth::user()->isClientAdmin())
-                                    <td>{{ $fax->name }}</td>
+                                    @if(Auth::user()->isSuperAdmin() || Auth::user()->isCompanyAdmin())
+                                    <td>{{ $fax->client->name }}</td>
                                     @endif
                                     <td>{{ $fax->description }}</td>
-                                    <td>{{ $fax->senders->count() }}</td>
+                                    <td>{{ $fax->usersCount }} - {{ $fax->senders->count() }}</td>
                                     <td>{{ $fax->recipients->count() }}</td>
                                     <td>
                                         {{ link_to_action('Admin\FaxController@show', $title = 'Show',

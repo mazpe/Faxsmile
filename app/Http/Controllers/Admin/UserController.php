@@ -57,10 +57,12 @@ class UserController extends Controller
     {
         $this->authorize('create', User::class);
 
+        $user = Auth::user();
+
         $clients = Client::Pluck('name', 'id');
         $faxes = Fax::Pluck('number', 'id');
 
-        return view('admin.user.create', compact('clients', 'faxes'));
+        return view('admin.user.create', compact('user', 'clients', 'faxes'));
     }
 
     /**

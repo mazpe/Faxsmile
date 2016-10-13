@@ -81,7 +81,7 @@ class User extends Authenticatable
      * @param $value
      */
     public function setPasswordAttribute($value) {
-        if ($value)
+        if (empty($value))
         {
             if (Hash::needsRehash($value))
             {
@@ -189,9 +189,6 @@ class User extends Authenticatable
     public function isSuperAdmin()
     {
         $isSuperAdmin = false;
-
-//        dd($this->roles->where('name', 'Super Admin')->count() > 0);
-//        dd($this->roles);
 
         if ($this->roles->where('name', 'Super Admin')->count() > 0) {
             $isSuperAdmin = true;
