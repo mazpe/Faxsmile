@@ -190,10 +190,7 @@
                                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/user/' . $user->id)}}"></td>
                                                     <td>{{ $user->full_name }}</td>
                                                     <td>{{ $user->email }}</td>
-                                                    <td>
-                                                        @if($user->fax)
-                                                            {{ $user->fax->number }}
-                                                        @endif
+                                                    <td>{{ isset($user->fax) ? $user->fax->number : "" }}
                                                     </td>
                                                     <td>{{ $user->roles->implode('name', ', ') }}</td>
                                                     <td>
