@@ -1,9 +1,6 @@
 @extends('admin.admin_template')
 
 @section('content')
-@can('index', \App\Company::class)
-    here
-@endcan
     <div class="box">
         <div class="box-header">
             <h3 class="box-title">Companies</h3>
@@ -34,9 +31,6 @@
                                     aria-label="Active: activate to sort column ascending" style="width: 30px;">Faxes
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="companies" rowspan="1" colspan="1"
-                                    aria-label="Active: activate to sort column ascending" style="width: 30px;">Users
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="companies" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 50px;">
                                     Action
                                 </th>
@@ -47,12 +41,9 @@
                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/company/' . $company->id)}}">
                                     <td class="sorting_1">{{ $company->id }}</td>
                                     <td>{{ $company->name }}</td>
-				    <td>{{ $company->contact_first_name }} {{ $company->contact_last_name }}</td>
+				                    <td>{{ $company->contact_first_name }} {{ $company->contact_last_name }}</td>
                                     <td>{{ $company->clients_count }}</td>
-
-                                    <td>{{ $company->name }}</td>
-                                    <td>{{ $company->name }}</td>
-
+                                    <td>{{ isset($company->faxes) ? $company->faxes->count() : 0 }}</td>
                                     <td>
                                         {{ link_to_action('Admin\CompanyController@show', $title = 'Show',
                                             $parameters = array($company->id),
