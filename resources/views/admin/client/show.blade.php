@@ -190,7 +190,11 @@
                                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/user/' . $user->id)}}"></td>
                                                     <td>{{ $user->full_name }}</td>
                                                     <td>{{ $user->email }}</td>
-                                                    <td>{{ $user->number }}</td>
+                                                    <td>
+                                                        @if($user->fax)
+                                                            {{ $user->fax->number }}
+                                                        @endif
+                                                    </td>
                                                     <td>{{ $user->roles->implode('name', ', ') }}</td>
                                                     <td>
                                                         {{ link_to_action('Admin\UserController@show', $title = 'Show',
