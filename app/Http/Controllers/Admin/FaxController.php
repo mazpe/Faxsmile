@@ -226,6 +226,7 @@ class FaxController extends Controller
             // Attach each recipient in the list seperated by , or ; to the created fax
             foreach($senders as $sender_email) {
                 $sender_email = trim($sender_email);
+
                 $sender = Sender::where('email', $sender_email);
 
                 if ($sender->exists()) {
@@ -259,13 +260,15 @@ class FaxController extends Controller
             // Attach each recipient in the list seperated by , or ; to the created fax
             foreach($recipients as $recipient_email) {
                 $recipient_email = trim($recipient_email);
-                $recipient = Recipient::where('email', $recipient_email);
+                // TODO: switch to using Recipient model (which is currently having issues with SoftDelete)
+                $recipient = User::where('email', $recipient_email);
 
                 if ($recipient->exists()) {
                     $recipient = $recipient->first();
                 } else {
                     // create user
-                    $recipient = Recipient::create([
+                    // TODO: switch to using Recipient model (which is currently having issues with SoftDelete)
+                    $recipient = User::create([
                         'entity_id' => $request->input('client_id'),
                         'email' => $recipient_email,
                         'password' => str_random(6),
@@ -300,8 +303,6 @@ class FaxController extends Controller
 
         $fax = Fax::find($id);
 
-        $fax->recipients()->detach();
-        $fax->senders()->update(['fax_id' => null]);
         $fax->delete();
 
         return redirect()->route('fax.index')

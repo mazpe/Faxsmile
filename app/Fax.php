@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Askedio\SoftCascade\Traits\SoftCascadeTrait;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
+
+use App\Recipient;
+use App\Sender;
 
 class Fax extends Model
 {
@@ -30,6 +35,51 @@ class Fax extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    public static function boot()
+    {
+        parent::boot();
+
+        /**
+         * Listen to the Fax deleted an event.
+         * - check if fax users are not been used by any other Fax and delete user too
+         *
+         * @param  $client
+         * @return void
+         */
+        static::deleting(function(Fax $fax)
+        {
+            // get all user_ids of the Fax as a sender or reciever
+            $usersWithFaxRelation = $fax->recipients->pluck('id')->merge($fax->senders->pluck('id'));
+
+            // delete fax to recipeints and remove fax from sender
+            $fax->recipients()->detach();
+            $fax->senders()->update(['fax_id' => null]);
+
+            foreach($usersWithFaxRelation->unique()->toArray() as $key => $value)
+            {
+                $asRecipientCount = isset(Recipient::find($value)->faxes) ? Recipient::find($value)->faxes->count() : 0;
+                $asSenderCount = isset(Sender::find($value)->fax) ? 1 : 0;
+
+                $userInUseCount = $asRecipientCount + $asSenderCount;
+
+                if ($userInUseCount == 0)
+                {
+                    $user = User::find($value);
+                    $user->delete();
+                }
+            }
+
+            return;
+        });
+
+
+    }
 
     /**
      *  Set user_id to value or null
