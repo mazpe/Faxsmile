@@ -19,10 +19,14 @@
     {{ Form::bsText('phone', null, null, ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}
     {{ Form::bsText('fax', null, null, ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}
     {{ Form::bsText('website', null, null, ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}
+
+    @if(Route::current()->getName() == 'client.create')
     {{ Form::bsText('contact_first_name', null, null, ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}
     {{ Form::bsText('contact_last_name', null, null, ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}
     {{ Form::bsText('contact_phone', null, null, ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}
     {{ Form::bsEmail('contact_email', null, null, ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}
+    @endif
+
     {{ Form::bsText('note', null, null, ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}
     {{ Form::bsSubmit('Submit', '','btn btn-info pull-right') }}
 </div>

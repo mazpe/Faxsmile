@@ -66,7 +66,7 @@
                                     <td>{{ $fax->client->name }}</td>
                                     @endif
                                     <td>{{ $fax->description }}</td>
-                                    <td>{{ $fax->usersCount }} - {{ $fax->senders->count() }}</td>
+                                    <td>{{ $fax->senders->count() }}</td>
                                     <td>{{ $fax->recipients->count() }}</td>
                                     <td>
                                         {{ link_to_action('Admin\FaxController@show', $title = 'Show',

@@ -302,7 +302,7 @@ class FaxController extends Controller
         $this->authorize('delete', Fax::class);
 
         $fax = Fax::find($id);
-        
+
         $fax->delete();
 
         return redirect()->route('fax.index')
