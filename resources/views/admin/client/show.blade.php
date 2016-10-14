@@ -140,8 +140,8 @@
                                                         {{ link_to_action('Admin\FaxController@edit', $title = 'Edit',
                                                             $parameters = array($fax->id),
                                                             $attributes = array('class' => 'btn btn-xs btn-info')) }}
-                                                        {!! Form::open(['method' => 'DELETE','action' => ['Admin\FaxController@destroy', $fax->id],'style'=>'display:inline']) !!}
-                                                        {!! Form::submit('Delete', ['class' => 'btn btn-xs btn-danger']) !!}
+                                                        {!! Form::open(['method' => 'DELETE','action' => ['Admin\FaxController@destroy', $fax->id],'class' => 'form-delete','style'=>'display:inline']) !!}
+                                                        {!! Form::submit('Delete', ['class' => 'btn btn-xs btn-danger delete', 'name' => 'delete_modal']) !!}
                                                         {!! Form::close() !!}
                                                     </td>
                                                 </tr>
@@ -194,14 +194,17 @@
                                                     </td>
                                                     <td>{{ $user->roles->implode('name', ', ') }}</td>
                                                     <td>
+
                                                         {{ link_to_action('Admin\UserController@show', $title = 'Show',
                                                             $parameters = array($user->id),
                                                             $attributes = array('class' => 'btn btn-xs btn-success')) }}
+
                                                         {{ link_to_action('Admin\UserController@edit', $title = 'Edit',
                                                             $parameters = array($user->id),
                                                             $attributes = array('class' => 'btn btn-xs btn-info')) }}
+
                                                         {!! Form::open(['method' => 'DELETE','action' => ['Admin\UserController@destroy', $user->id],'style'=>'display:inline']) !!}
-                                                        {!! Form::submit('Delete', ['class' => 'btn btn-xs btn-danger']) !!}
+                                                        {!! Form::submit('Delete', ['class' => 'btn btn-xs btn-danger delete', 'name' => 'delete_modal']) !!}
                                                         {!! Form::close() !!}
                                                     </td>
                                                 </tr>
