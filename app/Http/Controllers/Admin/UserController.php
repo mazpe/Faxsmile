@@ -115,7 +115,6 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-
         $user = User::find($id);
 
         $this->authorize('update', $user);

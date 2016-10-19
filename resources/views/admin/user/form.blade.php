@@ -3,7 +3,6 @@
 
 
     @if( Auth::user()->isSuperAdmin() )
-
         {{ Form::bsSelect('entity_id', 'Company',
             isset($user) && isset($user->entity) ? $user->entity->id : null, $companies, // selected
             ['class' => 'col-sm-2 control-label'], ['id' => 'user-companies', 'class' =>'form-control', 'placeholder' => 'Select one...']) }}
