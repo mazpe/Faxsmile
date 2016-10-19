@@ -1,11 +1,14 @@
 <div class="box-body">
     <!-- name, title, value, label attributes, input attributes -->
-    @if ( Auth::user()->isSuperAdmin() || Auth::user()->isCompanyAdmin() )
-    {{ Form::bsSelect('parent_id', 'Company',
+
+    @if ( Auth::user()->isSuperAdmin() )
+        {{ Form::bsSelect('parent_id', 'Company',
         isset($client->company) ? $client->company->id : null, $companies,
         ['class' => 'col-sm-2 control-label'], ['id' => 'client-companies', 'class' =>'form-control', 'placeholder' => 'Select one...']) }}
-    @elseif(isset($user) && $user->entity->type == 'client' && Auth::user()->isClientAdmin())
-        {{ Form::bsHidden('parent_id', null) }}
+    @elseif ( Auth::user()->isCompanyAdmin() )
+        {{ Form::bsHidden('parent_id', Auth::user()->entity->id) }}
+    @elseif ( Auth::user()->isClientAdmin() )
+        {{ Form::bsHidden('parent_id', $client->parent_id) }}
     @endif
 
     {{ Form::bsText('name', null, null, ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}

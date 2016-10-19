@@ -72,7 +72,7 @@ class CompanyController extends Controller
         $company_users = $company_admin->merge($company->clientUsers);
 
         return view('admin.company.show',
-            compact('company','company_clients','company_users')
+            compact('company','company_users')
         );
     }
 
@@ -110,7 +110,7 @@ class CompanyController extends Controller
 
         $company->update($request->all());
 
-        return redirect()->route('company.index')
+        return redirect()->route('company.show', ['company_id' => $company->id])
             ->with('success','Company updated successfully');
     }
 

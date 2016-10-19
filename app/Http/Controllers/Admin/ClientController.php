@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Client;
 use App\Company;
+use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
@@ -34,7 +35,16 @@ class ClientController extends Controller
 
         $companies = Company::Pluck('name', 'id');
 
-        return view('admin.client.create', compact('companies'));
+        if (Auth::user()->isClientAdmin())
+        {
+            $parent_id = Auth::user()->parent_id;
+        }
+        else if (Auth::user()->isCompanyAdmin())
+        {
+            $parent_id = Auth::user()->id;
+        }
+
+        return view('admin.client.create', compact('companies', 'parent_id'));
     }
 
     /**

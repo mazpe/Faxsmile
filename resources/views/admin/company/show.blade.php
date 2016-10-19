@@ -114,7 +114,7 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <table id="company_clients" class="table table-bordered table-striped hover dataTable" role="grid"
-                                               aria-describedby="company_clients_info">
+                                               aria-describedby="company_clients_info" data-form="deleteForm">
                                             <thead>
                                             <tr role="row">
                                                 <th class="sorting_asc" tabindex="0" aria-controls="company_clients" rowspan="1" colspan="1"
@@ -140,12 +140,12 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($company_clients as $client)
+                                            @foreach($company->clients as $client)
                                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/client/' . $client->id)}}">
                                                     <td class="sorting_1">{{ $client->id }}</td>
                                                     <td>{{ $client->name }}</td>
-						    <td>{{ $client->faxes_count }}</td>
-						    <td>{{ $client->users_count }}</td>
+                                                    <td>{{ $client->faxes->count() }}</td>
+                                                    <td>{{ $client->users->count() }}</td>
                                                     <td>{{ $client->active }}</td>
                                                     <td>
                                                         {{ link_to_action('Admin\ClientController@show', $title = 'Show',
@@ -154,6 +154,9 @@
                                                         {{ link_to_action('Admin\ClientController@edit', $title = 'Edit',
                                                             $parameters = array($client->id),
                                                             $attributes = array('class' => 'btn btn-xs btn-info')) }}
+                                                        {!! Form::open(['method' => 'DELETE','action' => ['Admin\ClientController@destroy', $client->id],'class' => 'form-delete','style'=>'display:inline']) !!}
+                                                        {!! Form::submit('Delete', ['class' => 'btn btn-xs btn-danger delete', 'name' => 'delete_modal']) !!}
+                                                        {!! Form::close() !!}
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -169,62 +172,6 @@
                     </div>
                     <!-- /.tab-pane -->
 
-                    <!-- company-users-tab-pane -->
-                    <div class="tab-pane" id="company-users">
-                        <!-- company clients -->
-
-                        <!-- box -->
-                        <div class="box-body">
-                            <div id="company_users_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <table id="company_users" class="table table-bordered table-striped hover dataTable" role="grid"
-                                               aria-describedby="company_users_info">
-                                            <thead>
-                                            <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="company_clients" rowspan="1" colspan="1"
-                                                    aria-sort="ascending" aria-label="ID: activate to sort column descending"
-                                                    style="width: 5px;">ID
-                                                <th class="sorting" tabindex="0" aria-controls="company_users" rowspan="1" colspan="1"
-                                                    aria-label="Name: activate to sort column ascending" style="width: 250px;">Name
-                                                </th>
-                                                <th class="sorting" tabindex="0" aria-controls="company_users" rowspan="1" colspan="1"
-                                                    aria-label="Role: activate to sort column ascending" style="width: 100px;">Role
-                                                </th>
-                                                <th class="sorting" tabindex="0" aria-controls="company_users" rowspan="1" colspan="1"
-                                                    aria-label="CSS grade: activate to sort column ascending" style="width: 50px;">
-                                                    Action
-                                                </th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            @foreach($company_users as $user)
-                                                <tr role="row" class="odd"  data-href="{{URL::to('/admin/user/' . $user->id)}}">
-                                                    <td class="sorting_1">{{ $user->id }}</td>
-                                                    <td>{{ $user->full_name }}</td>
-                                                    <td>{{ $user->roles->implode('name', ', ') }}</td>
-                                                    <td>
-                                                        {{ link_to_action('Admin\UserController@show', $title = 'Show',
-                                                            $parameters = array($user->id),
-                                                            $attributes = array('class' => 'btn btn-xs btn-success')) }}
-                                                        {{ link_to_action('Admin\UserController@edit', $title = 'Edit',
-                                                            $parameters = array($user->id),
-                                                            $attributes = array('class' => 'btn btn-xs btn-info')) }}
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.box-body -->
-
-                        <!-- /.company users -->
-                    </div>
-                    <!-- /.tab-pane -->
-
                     <!-- company-faxes-tab-pane -->
                     <div class="tab-pane" id="company-faxes">
                         <!-- company faxes -->
@@ -235,7 +182,7 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <table id="company_faxes" class="table table-bordered table-striped hover dataTable" role="grid"
-                                               aria-describedby="company_faxes_info">
+                                               aria-describedby="company_faxes_info" data-form="deleteForm">
                                             <thead>
                                             <tr role="row">
                                                 <th class="sorting_asc" tabindex="0" aria-controls="company_clients" rowspan="1" colspan="1"
@@ -264,7 +211,7 @@
                                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/fax/' . $fax->id)}}">
                                                     <td class="sorting_1">{{ $fax->id }}</td>
                                                     <td>{{ $fax->number }}</td>
-                                                    <td>{{ $fax->name }}</td>
+                                                    <td>{{ $fax->client->name }}</td>
                                                     <td>{{ $fax->description }}</td>
                                                     <td>{{ $fax->active }}</td>
                                                     <td>
@@ -274,6 +221,9 @@
                                                         {{ link_to_action('Admin\FaxController@edit', $title = 'Edit',
                                                             $parameters = array($fax->id),
                                                             $attributes = array('class' => 'btn btn-xs btn-info')) }}
+                                                        {!! Form::open(['method' => 'DELETE','action' => ['Admin\FaxController@destroy', $fax->id],'class' => 'form-delete','style'=>'display:inline']) !!}
+                                                        {!! Form::submit('Delete', ['class' => 'btn btn-xs btn-danger delete', 'name' => 'delete_modal']) !!}
+                                                        {!! Form::close() !!}
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -289,6 +239,68 @@
                     </div>
                     <!-- /.tab-pane -->
 
+                    <!-- company-users-tab-pane -->
+                    <div class="tab-pane" id="company-users">
+                        <!-- company clients -->
+
+                        <!-- box -->
+                        <div class="box-body">
+                            <div id="company_users_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table id="company_users" class="table table-bordered table-striped hover dataTable" role="grid"
+                                               aria-describedby="company_users_info" data-form="deleteForm">
+                                            <thead>
+                                            <tr role="row">
+                                                <th class="sorting_asc" tabindex="0" aria-controls="company_clients" rowspan="1" colspan="1"
+                                                    aria-sort="ascending" aria-label="ID: activate to sort column descending"
+                                                    style="width: 5px;">ID
+                                                <th class="sorting" tabindex="0" aria-controls="company_users" rowspan="1" colspan="1"
+                                                    aria-label="Name: activate to sort column ascending" style="width: 100px;">Name
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="company_users" rowspan="1" colspan="1"
+                                                    aria-label="Email: activate to sort column ascending" style="width: 100px;">Email
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="company_users" rowspan="1" colspan="1"
+                                                    aria-label="Role: activate to sort column ascending" style="width: 60px;">Role
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="company_users" rowspan="1" colspan="1"
+                                                    aria-label="CSS grade: activate to sort column ascending" style="width: 50px;">
+                                                    Action
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($company->users->merge($company->clientUsers) as $user)
+                                                <tr role="row" class="odd"  data-href="{{URL::to('/admin/user/' . $user->id)}}">
+                                                    <td class="sorting_1">{{ $user->id }}</td>
+                                                    <td>{{ $user->full_name }}</td>
+                                                    <td>{{ $user->email }}</td>
+                                                    <td>{{ $user->roles->implode('name', ', ') }}</td>
+                                                    <td>
+                                                        {{ link_to_action('Admin\UserController@show', $title = 'Show',
+                                                            $parameters = array($user->id),
+                                                            $attributes = array('class' => 'btn btn-xs btn-success')) }}
+                                                        {{ link_to_action('Admin\UserController@edit', $title = 'Edit',
+                                                            $parameters = array($user->id),
+                                                            $attributes = array('class' => 'btn btn-xs btn-info')) }}
+                                                        {!! Form::open(['method' => 'DELETE','action' => ['Admin\UserController@destroy', $user->id],'class' => 'form-delete','style'=>'display:inline']) !!}
+                                                        {!! Form::submit('Delete', ['class' => 'btn btn-xs btn-danger delete', 'name' => 'delete_modal']) !!}
+                                                        {!! Form::close() !!}
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+
+                        <!-- /.company users -->
+                    </div>
+                    <!-- /.tab-pane -->
 
                 </div>
                 <!-- /.tab-content -->

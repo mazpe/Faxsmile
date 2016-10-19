@@ -10,7 +10,7 @@
     {{ Form::bsText('recipients', null, isset($temp) ? $recipients : "", ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}
     {{ Form::bsText('number', null, null, ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}
     {{ Form::bsText('description', null, null, ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}
-    {{ Form::bsText('notes', null, null, ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}
+    {{ Form::bsText('note', null, null, ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}
 
     {{ Form::bsSubmit('Submit', '','btn btn-info pull-right') }}
 </div>

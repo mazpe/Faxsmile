@@ -59,10 +59,11 @@ class UserController extends Controller
 
         $user = Auth::user();
 
+        $companies = Company::Pluck('name', 'id');
         $clients = Client::Pluck('name', 'id');
         $faxes = Fax::Pluck('number', 'id');
 
-        return view('admin.user.create', compact('user', 'clients', 'faxes'));
+        return view('admin.user.create', compact('user', 'companies', 'clients', 'faxes'));
     }
 
     /**

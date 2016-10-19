@@ -60,16 +60,22 @@ class User extends Authenticatable
          */
         static::creating(function(User $user)
         {
+
             if (empty($user->remember_token)) {
                 $user->attributes['remember_token'] = str_random(10);
             }
+//            if ($user->email = "superadmin@faxit.cloud") {
+//                dd($user);
+//            }
             if (empty($user->password)) {
+
+
+
                 $user->attributes['password'] = Hash::make(str_random(12));
             }
 
             return $user;
         });
-
 
     }
 
@@ -80,8 +86,13 @@ class User extends Authenticatable
      *
      * @param $value
      */
-    public function setPasswordAttribute($value) {
+    public function setPasswordAttribute($value)
+    {
         if (empty($value))
+        {
+            $this->attributes['password'] = Hash::make($value);
+        }
+        else
         {
             if (Hash::needsRehash($value))
             {
@@ -91,10 +102,6 @@ class User extends Authenticatable
             {
                 $this->attributes['password'] = $value;
             }
-        }
-        else
-        {
-            $this->attributes['password'] = Hash::make('ChangeMe1!');
         }
     }
 
@@ -294,7 +301,7 @@ class User extends Authenticatable
     }
 
     public static function attachUserToRole($user,$role) {
-        dd($role);
+        //dd($role);
     }
 
 }

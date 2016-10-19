@@ -19,14 +19,14 @@ class DatabaseSeeder extends Seeder
         // Companies
         $this->call(IISCompanySeeder::class);
         $this->call(CompaniesTableSeeder::class);
-
-        // Clients / Users
+//
+//        // Clients / Users
         $this->call(ClientsTableSeeder::class);
-
-//        // Faxes
+//
+////        // Faxes
         $this->call(FaxesTableSeeder::class);
-
-        // Admins/User
+//
+//        // Admins/User
         $this->call(SuperAdminUserSeeder::class);
         $this->call(ProviderAdminUserSeeder::class);
         $this->call(CompanyAdminUserSeeder::class);

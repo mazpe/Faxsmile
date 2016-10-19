@@ -26,6 +26,7 @@ class SuperAdminUserSeeder extends Seeder
             'password' => 'SuperAdmin',
             'remember_token' => str_random(10),
         ]);
+
         $user->roles()->attach($role->id);
 
     }
