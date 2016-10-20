@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
+use App\UsState;
 use Illuminate\Support\ServiceProvider;
-use Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class ComposerServiceProvider extends ServiceProvider
@@ -22,9 +22,7 @@ class ComposerServiceProvider extends ServiceProvider
                 'Reseller' => "Reseller",
             ];
 
-            $states = [
-                'FL' => "Florida"
-            ];
+            $states = UsState::pluck('name','code');
 
             $view->with('page_title', 'Companies')
                 ->with('company_types', $company_types)
@@ -36,9 +34,8 @@ class ComposerServiceProvider extends ServiceProvider
                 'Fax Service' => "Fax Service"
             ];
 
-            $states = [
-                'FL' => "Florida"
-            ];
+            $states = UsState::pluck('name','code');
+
             $page_title = 'Providers';
 
             $view->with('page_title', $page_title)
@@ -47,31 +44,22 @@ class ComposerServiceProvider extends ServiceProvider
         });
 
         view()->composer('admin.client.*', function ($view) {
-            $states = [
-                'FL' => "Florida"
-            ];
+            $states = UsState::pluck('name','code');
 
             $view->with('page_title', 'Clients')
                 ->with('states', $states);
         });
 
         view()->composer('admin.fax.*', function ($view) {
-            $states = [
-                'FL' => "Florida"
-            ];
-
-            $client = Auth::user()->client;
+            $states = UsState::pluck('name','code');
 
             $view->with('page_title', 'Faxes')
                 ->with('states', $states)
-//                ->with('client', $client)
                 ;
         });
 
         view()->composer('admin.user.*', function ($view) {
-            $states = [
-                'FL' => "Florida"
-            ];
+            $states = UsState::pluck('name','code');
 
             $view->with('page_title', 'Users')
                 ->with('states', $states);
@@ -82,12 +70,6 @@ class ComposerServiceProvider extends ServiceProvider
             $user = Auth::user();
             $client = Auth::user()->client;
             $company = Auth::user()->company;
-
-//            dd($company);
-
-//            $view->with('client', $client)
-//                ->with('user', $user)
-//            ;
 
             $with = array_merge([
                 'company' => $company,

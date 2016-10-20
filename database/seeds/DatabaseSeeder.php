@@ -11,6 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // States
+        $this->call(UsStatesTableSeeder::class);
         // Providers
         $this->call(ProvidersTableSeeder::class);
 
