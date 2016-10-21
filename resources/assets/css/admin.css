@@ -5,7 +5,7 @@
 
 /* Data Table Row Mouseover color */
 .table tbody tr:hover td {
-  background-color: #b3d7ec; }
+  background-color: #77bcf5; }
 
 /* Reduce padding to make rows shorter */
 table.table-bordered.dataTable tbody td {
