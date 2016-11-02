@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Client;
 use App\Fax;
-use App\Sender;
+use App\Entity;
 use App\Provider;
 use Hash;
 use Illuminate\Support\Facades\Auth;
@@ -62,9 +62,10 @@ class UserController extends Controller
 
         $companies = Company::Pluck('name', 'id');
         $clients = Client::Pluck('name', 'id');
+        $entities = Entity::Pluck('name','id');
         $faxes = Fax::Pluck('number', 'id');
 
-        return view('admin.user.create', compact('user', 'companies', 'clients', 'faxes'));
+        return view('admin.user.create', compact('user', 'entities', 'companies', 'clients', 'faxes'));
     }
 
     /**
