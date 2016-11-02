@@ -10,6 +10,7 @@ use App\User;
 use App\Client;
 use App\Fax;
 use App\Sender;
+use App\Provider;
 use Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -78,7 +79,7 @@ class UserController extends Controller
 
         $this->validate($request, [
             'entity_id' => 'required|numeric',
-            'email' => 'required|unique:users|email',
+            'email' => 'required|unique:users,email,NULL,id,deleted_at,NULL'
         ]);
 
         User::create($request->all());
@@ -120,10 +121,13 @@ class UserController extends Controller
         $this->authorize('update', $user);
 
         $clients = Client::Pluck('name', 'id');
-        $companies = ($user->entity->type == 'company') ? Company::Pluck('name', 'id') : null;
+        //$companies = ($user->entity->type == 'company') ? Company::Pluck('name', 'id') : null;
+        $providers = Provider::Pluck('name', 'id');
+        $companies = Company::Pluck('name', 'id');
+
         $faxes = Fax::Pluck('number', 'id');
 
-        return view('admin.user.edit', compact('user', 'clients', 'faxes', 'companies'));
+        return view('admin.user.edit', compact('user', 'clients', 'faxes', 'providers','companies'));
     }
 
     /**

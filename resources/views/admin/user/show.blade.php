@@ -33,7 +33,6 @@
                     @endif
                     <p class="text-muted text-center">{{ $user->entity->name }}</p>
 
-
                     <div class="box">
                         <div class="box-header"><strong>Contact Information</strong></div>
                         <div class="box-body">
@@ -54,7 +53,6 @@
                             @foreach($user->roles as $role)
                                 <li>{{ $role->name }}</li>
                             @endforeach
-
                             </ul>
                         </div>
                     </div>

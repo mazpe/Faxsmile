@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         // Providers
         $this->call(ProvidersTableSeeder::class);
 
+        // Roles
         $this->call(RolesTableSeeder::class);
 
         // Companies

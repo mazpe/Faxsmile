@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->integer('fax_id')->nullable()->unsigned();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('password');
             $table->string('recipient')->nullable();
             $table->string('sender')->nullable();
