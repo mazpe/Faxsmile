@@ -230,10 +230,22 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="box">
-                                    <div><strong>From Email:</strong> {{ $emailConfig->from_email }}</div>
-                                    <div><strong>From Name:</strong> {{ $emailConfig->from_name }}</div>
-                                    <div><strong>Signature:</strong> {{ $emailConfig->signature }}</div>
-                                    <div><strong>Note:</strong> {{ $emailConfig->note }}</div>
+                                    <div>
+                                        <strong>From Email:</strong>
+                                        {{ $client->emailConfigs[0] ? $client->emailConfigs[0]->from_email : ''}}
+                                    </div>
+                                    <div>
+                                        <strong>From Name:</strong>
+                                        {{ $client->emailConfigs[0] ? $client->emailConfigs[0]->from_name : ''}}
+                                    </div>
+                                    <div>
+                                        <strong>Signature:</strong>
+                                        {{ $client->emailConfigs[0] ? $client->emailConfigs[0]->signature : ''}}
+                                    </div>
+                                    <div>
+                                        <strong>Note:</strong>
+                                        {{ $client->emailConfigs[0] ? $client->emailConfigs[0]->note : ''}}
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -76,7 +76,7 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        $client = Client::with('users','faxes','email_configs')->find($id);
+        $client = Client::with('users','faxes','emailConfigs')->find($id);
 
         $this->authorize('view', $client);
 

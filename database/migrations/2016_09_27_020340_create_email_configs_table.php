@@ -15,6 +15,7 @@ class CreateEmailConfigsTable extends Migration
     {
         Schema::create('email_configs', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('client_id')->unsigned();
             $table->integer('company_id')->unsigned();
             $table->integer('provider_id')->unsigned();
             $table->string('from_email')->nullable();

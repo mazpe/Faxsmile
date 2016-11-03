@@ -16,6 +16,9 @@ $factory->define(App\EmailConfig::class, function (Faker\Generator $faker) {
     $departmentName = $departmentNames[array_rand($departmentNames)];
 
     return [
+        'client_id' => function () {
+            return App\Client::orderByRaw("RAND()")->first()->id;
+        },
         'company_id' => function () {
             return App\Company::orderByRaw("RAND()")->first()->id;
         },
