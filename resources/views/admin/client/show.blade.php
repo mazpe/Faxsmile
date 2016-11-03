@@ -232,19 +232,24 @@
                                 <div class="box">
                                     <div>
                                         <strong>From Email:</strong>
-                                        {{ $client->emailConfigs[0] ? $client->emailConfigs[0]->from_email : ''}}
+                                        {{ isset($client->emailConfigs[0]) ? $client->emailConfigs[0]->from_email : ''}}
                                     </div>
                                     <div>
                                         <strong>From Name:</strong>
-                                        {{ $client->emailConfigs[0] ? $client->emailConfigs[0]->from_name : ''}}
+                                        {{ isset($client->emailConfigs[0]) ? $client->emailConfigs[0]->from_name : ''}}
                                     </div>
                                     <div>
                                         <strong>Signature:</strong>
-                                        {{ $client->emailConfigs[0] ? $client->emailConfigs[0]->signature : ''}}
+                                        {{ isset($client->emailConfigs[0]) ? $client->emailConfigs[0]->signature : ''}}
                                     </div>
                                     <div>
                                         <strong>Note:</strong>
-                                        {{ $client->emailConfigs[0] ? $client->emailConfigs[0]->note : ''}}
+                                        {{ isset($client->emailConfigs[0]) ? $client->emailConfigs[0]->note : ''}}
+                                    </div>
+                                    <div class="col-md-3 pull-right" style="padding-top: 10px">
+                                        {{ link_to_action('Admin\ClientController@edit', $title = 'Edit',
+                                            $parameters = array($client->id),
+                                            $attributes = array('class' => 'btn btn-primary btn-block')) }}
                                     </div>
                                 </div>
                             </div>
