@@ -60,12 +60,15 @@
         <div class="col-md-9">
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#info" data-toggle="tab">Info</a></li>
+                    <li class="active"><a href="#client_info_panel" data-toggle="tab">Info</a></li>
                     <li><a href="#client_faxes_panel" data-toggle="tab">Faxes</a></li>
                     <li><a href="#client_users_panel" data-toggle="tab">Users</a></li>
+                    <li><a href="#client_settings_panel" data-toggle="tab">Settings</a></li>
                 </ul>
                 <div class="tab-content">
-                    <div class="active tab-pane" id="info">
+
+                    <!-- info tab-pane -->
+                    <div class="active tab-pane" id="client_info_panel">
                         <!-- client info -->
                         <div class="row">
                             <div class="col-md-6">
@@ -99,7 +102,7 @@
                         </div>
                         <!-- /.client info -->
                     </div>
-                    <!-- /.tab-pane -->
+                    <!-- /.info tab-pane -->
 
                     <!-- faxes tab-pane -->
                     <div class="tab-pane" id="client_faxes_panel">
@@ -220,6 +223,23 @@
                         <!-- /.client clients -->
                     </div>
                     <!-- /.users tab-pane -->
+
+                    <!-- setting tab-pane -->
+                    <div class="tab-pane" id="client_settings_panel">
+                        <!-- box -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="box">
+                                    <div><strong>From Email:</strong> {{ $emailConfig->from_email }}</div>
+                                    <div><strong>From Name:</strong> {{ $emailConfig->from_name }}</div>
+                                    <div><strong>Signature:</strong> {{ $emailConfig->signature }}</div>
+                                    <div><strong>Note:</strong> {{ $emailConfig->note }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.setting tab-pane -->
 
                 </div>
                 <!-- /.tab-content -->
