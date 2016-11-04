@@ -137,4 +137,13 @@ class Client extends Entity
     public function faxes() {
         return $this->hasMany('App\Fax');
     }
+
+    /**
+     * Get all of the faxes for the client.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasManyThrough
+     */
+    public function emailConfigs() {
+        return $this->hasMany('App\EmailConfig');
+    }
 }

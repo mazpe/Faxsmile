@@ -76,7 +76,7 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        $client = Client::with('users','faxes')->find($id);
+        $client = Client::with('users','faxes','emailConfigs')->find($id);
 
         $this->authorize('view', $client);
 
@@ -142,4 +142,22 @@ class ClientController extends Controller
         return redirect()->route('client.index')
             ->with('success','Client deleted successfully');
     }
+
+    /**
+     * Display the specified resource to be edited.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function editSettings($id)
+    {
+        $client = Client::find($id);
+
+        $this->authorize('update', $client);
+
+        $companies = Company::Pluck('name', 'id');
+
+        return view('admin.client.edit',compact('client','companies'));
+    }
+
 }
