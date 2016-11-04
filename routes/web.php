@@ -22,6 +22,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('company', 'Admin\CompanyController');
     Route::resource('provider', 'Admin\ProviderController');
     Route::resource('client', 'Admin\ClientController');
+    Route::get('/client/{client}/settings/edit', 'Admin\Client\SettingController@edit');
+    Route::post('/client/{client}/settings/store', 'Admin\Client\SettingController@store');
+    Route::match(['put', 'patch'],'/client/{client}/settings/update', 'Admin\Client\SettingController@update')
+        ->name('client.settings.update');
     Route::resource('fax', 'Admin\FaxController');
     Route::delete('/fax/{fax_id}/sender/{sender_id}/delete', 'Admin\Fax\SenderController@destroy');
     Route::delete('/fax/{fax_id}/recipient/{recipient_id}/delete', 'Admin\Fax\RecipientController@destroy');

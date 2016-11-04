@@ -247,9 +247,19 @@
                                         {{ isset($client->emailConfigs[0]) ? $client->emailConfigs[0]->note : ''}}
                                     </div>
                                     <div class="col-md-3 pull-right" style="padding-top: 10px">
-                                        {{ link_to_action('Admin\ClientController@edit', $title = 'Edit',
-                                            $parameters = array($client->id),
-                                            $attributes = array('class' => 'btn btn-primary btn-block')) }}
+
+                                        {{--@if(!isset($client->emailConfigs[0]))--}}
+                                            {{--<a class="btn btn-large btn-info pull-right" href="/admin/client/create">--}}
+                                                {{--Edit--}}
+                                            {{--</a>--}}
+                                            {{--{{ link_to_action('Admin\ClientController@edit', $title = 'Edit',--}}
+                                                {{--$parameters = array($client->id),--}}
+                                                {{--$attributes = array('class' => 'btn btn-primary btn-block')) }}--}}
+                                        {{--@else--}}
+                                            {{ link_to_action('Admin\Client\SettingController@edit', $title = 'Edit',
+                                                $parameters = array($client->id),
+                                                $attributes = array('class' => 'btn btn-primary btn-block')) }}
+                                        {{--@endif--}}
                                     </div>
                                 </div>
                             </div>

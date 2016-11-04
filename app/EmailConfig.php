@@ -18,7 +18,7 @@ class EmailConfig extends Model
      * @var array
      */
     public $fillable = [
-        'company_id', 'provider_id', 'from_email','from_name','signature', 'note'
+        'company_id', 'provider_id', 'client_id', 'from_email','from_name','signature', 'note'
     ];
 
     /**
