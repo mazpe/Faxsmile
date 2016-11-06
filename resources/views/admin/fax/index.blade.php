@@ -58,16 +58,16 @@
                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/fax/' . $fax->id)}}">
                                     <td class="sorting_1">{{ $fax->id }}</td>
                                     @if(Auth::user()->isSuperAdmin())
-                                    <td>{{ $fax->provider->name }}</td>
-                                    <td>{{ $fax->client->company->name }}</td>
+                                    <td>{{ isset($fax->provider) ? $fax->provider->name : '' }}</td>
+                                    <td>{{ isset($fax->client->company) ? $fax->client->company->name : '' }}</td>
                                     @endif
                                     <td>{{ $fax->number }}</td>
                                     @if(Auth::user()->isSuperAdmin() || Auth::user()->isCompanyAdmin())
-                                    <td>{{ $fax->client->name }}</td>
+                                    <td>{{ isset($fax->client) ? $fax->client->name : ''}}</td>
                                     @endif
                                     <td>{{ $fax->description }}</td>
-                                    <td>{{ $fax->senders->count() }}</td>
-                                    <td>{{ $fax->recipients->count() }}</td>
+                                    <td>{{ isset($fax->senders) ? $fax->senders->count() : ''}}</td>
+                                    <td>{{ isset($fax->recipients) ? $fax->recipients->count() : ''}}</td>
                                     <td>
                                         {{ link_to_action('Admin\FaxController@show', $title = 'Show',
                                             $parameters = array($fax->id),
