@@ -106,6 +106,8 @@ class Client extends Entity
          */
         static::deleting(function(Client $client)
         {
+            // TODO: Fix softCascades
+            User::where('entity_id', $client->id)->update(['deleted_at' => date("Y-m-d H:i:s")]);
             Fax::where('client_id', $client->id)->update(['client_id' => null]);
             return true;
         });
