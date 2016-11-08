@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use PhpMimeMailParser\Parser;
 use GuzzleHttp\Client;
+use App\Sender;
 
 class EmailParser extends Command
 {
@@ -22,6 +23,7 @@ class EmailParser extends Command
      */
     protected $description = 'Parse incoming email';
 
+    protected $attach_dir = '/home/vagrant/Code/Faxsmile/scripts/attachments/';
     /**
      * Create a new command instance.
      *
@@ -39,63 +41,81 @@ class EmailParser extends Command
      */
     public function handle()
     {
-//        require_once __DIR__.'/../../../vendor/autoload.php';
-//
-//        $Parser = new Parser();
-//        $Parser->setStream(fopen("php://stdin", "r"));
-//
-//        // Once we've indicated where to find the mail, we can parse out the data
-//        $to = $Parser->getHeader('to');             // "test" <test@example.com>, "test2" <test2@example.com>
-//        $addressesTo = $Parser->getAddresses('to'); //Return an array : [[test, test@example.com, false],[test2, test2@example.com, false]]
-//
-//        $from = $Parser->getHeader('from');             // "test" <test@example.com>
-//        $addressesFrom = $Parser->getAddresses('from'); //Return an array : test, test@example.com, false
-//
-//        $subject = $Parser->getHeader('subject');
-//
-//        $text = $Parser->getMessageBody('text');
-//
-//        $html = $Parser->getMessageBody('html');
-//        $htmlEmbedded = $Parser->getMessageBody('htmlEmbedded'); //HTML Body included data
-//
-//        $stringHeaders = $Parser->getHeadersRaw();  // Get all headers as a string, no charset conversion
-//        $arrayHeaders = $Parser->getHeaders();      // Get all headers as an array, with charset conversion
-//
-//        // Pass in a writeable path to save attachments
-//        $attach_dir = '/path/to/save/attachments/';
-//        $Parser->saveAttachments($attach_dir);
-//
-//        // Get an array of Attachment items from $Parser
-//        $attachments = $Parser->getAttachments();
-//
-//        //  Loop through all the Attachments
-//        if (count($attachments) > 0) {
-//            foreach ($attachments as $attachment) {
-//                echo 'Filename : '.$attachment->getFilename().'<br />'; // logo.jpg
-//                echo 'Filesize : '.filesize($attach_dir.$attachment->getFilename()).'<br />'; // 1000
-//                echo 'Filetype : '.$attachment->getContentType().'<br />'; // image/jpeg
-//                echo 'MIME part string : '.$attachment->getMimePartStr().'<br />'; // (the whole MIME part of the attachment)
-//            }
-//        }
-//
-//
-//
-//        // read from stdin
-////        $fd = fopen("php://stdin", "r");
-//        $email = "";
-//
-//        $email .= "\n";
-//        $email .= $to ."\n";
-//        $email .= $from ."\n";
-//        $email .= $subject ."\n";
+        require_once __DIR__.'/../../../vendor/autoload.php';
 
-        $this->sendfax();
+        $Parser = new Parser();
+        $Parser->setStream(fopen("php://stdin", "r"));
 
+        // Once we've indicated where to find the mail, we can parse out the data
+        $to = $Parser->getHeader('to');             // "test" <test@example.com>, "test2" <test2@example.com>
+        $addressesTo = $Parser->getAddresses('to'); //Return an array : [[test, test@example.com, false],[test2, test2@example.com, false]]
+
+        $from = $Parser->getHeader('from');             // "test" <test@example.com>
+        $addressesFrom = $Parser->getAddresses('from'); //Return an array : test, test@example.com, false
+
+        $subject = $Parser->getHeader('subject');
+
+        $text = $Parser->getMessageBody('text');
+
+        $html = $Parser->getMessageBody('html');
+        $htmlEmbedded = $Parser->getMessageBody('htmlEmbedded'); //HTML Body included data
+
+        $stringHeaders = $Parser->getHeadersRaw();  // Get all headers as a string, no charset conversion
+        $arrayHeaders = $Parser->getHeaders();      // Get all headers as an array, with charset conversion
+
+        // Pass in a writeable path to save attachments
+        $attach_dir = '/home/vagrant/Code/Faxsmile/scripts/attachments/';
+        $Parser->saveAttachments($attach_dir);
+
+        // Get an array of Attachment items from $Parser
+        $attachments = $Parser->getAttachments();
+
+
+        // Support faxes been set to multiple address
+        foreach ($addressesTo as $key => $value ) {
+
+            // TODO: get the sentToFaxNumber
+            $sendFaxToNumber = $value['display'];
+
+            // TODO: verify that is a valid number
+            $sendFaxToNumber = '7864886196';
+
+            // Get the senders Fax DID
+            $addressesFrom = 'lesterm@gmail.com';
+            $sender = Sender::where('email', $addressesFrom)->first();
+            $senderName = $sender->name;
+            $senderFaxDID = $sender->fax->number;
+
+            // Get Attachments and fax them
+            if (count($attachments) > 0) {
+                foreach ($attachments as $attachment) {
+                    if (str_contains($attachment->getContentType(), "officedocument"))
+                    {
+                        $this->sendfax($sendFaxToNumber,$senderName,$senderFaxDID,$attachment->getFilename());
+                    }
+
+                    $file = fopen("/tmp/postfixtest1", "a");
+
+                    $log = "Attachments \n";
+                    $log .= "addressesTo: $addressesTo[0] \n";
+                    $log .= "filename: " . $attachment->getFilename() ."\n";
+                    $log .= "content type: " . $attachment->getContentType() ."\n";
+
+                    fwrite($file, $log);
+                    fclose($file);
+                }
+
+            }
+        }
+        dd($addressesTo);
 
     }
 
+    public function getAttachment() {
 
-    public function sendfax() {
+    }
+
+    public function sendfax($sendFaxToNumber, $sendFaxToName, $sendFaxFromDid, $attachment) {
         $client = new Client([
             // You can set any number of default request options.
         ]);
@@ -103,42 +123,44 @@ class EmailParser extends Command
         $username = 'lestermesa';
         $company = '37049';
         $password = 'laravel123';
-        $src = '7861112222';
-        $dst = '3057262499';
-        $sendfaxto = 'Lester';
 
+        $attach_dir = '/home/vagrant/Code/Faxsmile/scripts/attachments/';
 
-        $response = $client->request('get', 'https://www.faxage.com/httpsfax.php', [
+        $file = $attach_dir.$attachment;
+
+        $fh = fopen($file, "r");
+        $fdata = fread($fh, filesize($file));
+        fclose($fh);
+
+        $b64data = base64_encode($fdata);
+
+        $response = $client->request('POST', 'https://www.faxage.com/httpsfax.php', [
             'debug' => true,
-            'query' => [
+            'form_params' => [
                 'username' => $username,
                 'company' => $company,
                 'password' => $password,
-                'callerid' => $src,
-                'faxno' => $dst,
-                'recipname' => $sendfaxto,
+                'callerid' => $sendFaxFromDid,
+                'faxno' => $sendFaxToNumber,
+                'recipname' => $sendFaxToName,
                 'operation' => 'sendfax',
 //                'tagname' => $tagname,
 //                'tagnumber' => $tagnumber,
-//                'faxfilenames[0]' => $file,
-//                'faxfiledata[0]' => $b64data
+                'faxfilenames[0]' => $file,
+                'faxfiledata[0]' => $b64data
             ]
         ]);
 
-//        $file = fopen("/tmp/postfixtest", "a");
+        $logfile = fopen("/tmp/postfixtest", "a");
 
         $log = "Script successfully ran at ".date("Y-m-d H:i:s")."\n";
-        $log .= "response ". $response->getBody() . "\n";
-//
-//        fwrite($file, $log);
-//        fclose($file);
+        $log .= "attach_dir: $attach_dir \n";
+        $log .= "attachment: $attachment \n";
+        $log .= "file: $file \n";
+        $log .= "response: ". $response->getBody() . "\n";
 
-        echo "\nBody\n";
-        echo $response->getBody();
-        echo "\nBody\n";
+        fwrite($logfile, $log);
+        fclose($logfile);
 
-        foreach ($response->getHeaders() as $name => $values) {
-            echo $name . ': ' . implode(', ', $values) . "\r\n";
-        }
     }
 }
