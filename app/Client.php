@@ -20,9 +20,9 @@ class Client extends Entity
      * @var array
      */
     public $fillable = [
-        'parent_id','parent_type','type','name','address_1','address_2','city','state','zip','phone','fax','website',
-        'domain','time_zone','external_account','contact_first_name','contact_last_name', 'contact_phone',
-        'contact_email','note'
+        'parent_id', 'parent_type', 'type', 'name', 'address_1', 'address_2', 'city', 'state', 'zip', 'phone', 'fax', 'website',
+        'domain', 'time_zone', 'external_account', 'contact_first_name', 'contact_last_name', 'contact_phone',
+        'contact_email', 'note'
     ];
 
     /**
@@ -51,21 +51,16 @@ class Client extends Entity
     {
         parent::boot();
 
-        static::addGlobalScope('CompanyAdmin', function(Builder $builder) {
+        static::addGlobalScope('CompanyAdmin', function (Builder $builder) {
             if (!Auth::user()) {
                 return;
             }
 
-            if (Auth::user()->isCompanyAdmin())
-            {
+            if (Auth::user()->isCompanyAdmin()) {
                 $builder->where('parent_id', '=', Auth::user()->company->id);
-            }
-            else if (Auth::user()->isClientAdmin())
-            {
+            } else if (Auth::user()->isClientAdmin()) {
                 $builder->where('id', '=', Auth::user()->entity_id);
-            }
-            else if (Auth::user()->isUser())
-            {
+            } else if (Auth::user()->isUser()) {
                 $builder->where('id', '=', Auth::user()->entity_id);
             }
         });
@@ -77,8 +72,7 @@ class Client extends Entity
          * @param  $client
          * @return void
          */
-        static::created(function(Client $client)
-        {
+        static::created(function (Client $client) {
             if ($client->contact_email) {
                 $user = $client->users()->create([
                     'first_name' => $client->contact_first_name,
@@ -104,8 +98,7 @@ class Client extends Entity
          * @param  $client
          * @return void
          */
-        static::deleting(function(Client $client)
-        {
+        static::deleting(function (Client $client) {
             // TODO: Fix softCascades
             User::where('entity_id', $client->id)->update(['deleted_at' => date("Y-m-d H:i:s")]);
             Fax::where('client_id', $client->id)->update(['client_id' => null]);
@@ -118,8 +111,9 @@ class Client extends Entity
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function company() {
-        return $this->belongsTo('App\Company','parent_id');
+    public function company()
+    {
+        return $this->belongsTo('App\Company', 'parent_id');
     }
 
     /**
@@ -127,7 +121,8 @@ class Client extends Entity
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function users() {
+    public function users()
+    {
         return $this->hasMany('App\User', 'entity_id');
     }
 
@@ -136,7 +131,8 @@ class Client extends Entity
      *
      * @return \Illuminate\Database\Eloquent\Relations\hasManyThrough
      */
-    public function faxes() {
+    public function faxes()
+    {
         return $this->hasMany('App\Fax');
     }
 
@@ -145,7 +141,8 @@ class Client extends Entity
      *
      * @return \Illuminate\Database\Eloquent\Relations\hasManyThrough
      */
-    public function emailConfigs() {
+    public function emailConfigs()
+    {
         return $this->hasMany('App\EmailConfig');
     }
 }
