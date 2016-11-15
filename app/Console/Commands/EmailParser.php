@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use PhpMimeMailParser\Parser;
 use GuzzleHttp\Client;
 use App\Sender;
+use App;
 
 class EmailParser extends Command
 {
