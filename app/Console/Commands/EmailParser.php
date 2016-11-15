@@ -47,10 +47,7 @@ class EmailParser extends Command
         $Parser->setStream(fopen("php://stdin", "r"));
 
         // Once we've indicated where to find the mail, we can parse out the data
-        $to = $Parser->getHeader('to');             // "test" <test@example.com>, "test2" <test2@example.com>
         $addressesTo = $Parser->getAddresses('to'); //Return an array : [[test, test@example.com, false],[test2, test2@example.com, false]]
-
-        $from = $Parser->getHeader('from');             // "test" <test@example.com>
         $addressesFrom = $Parser->getAddresses('from'); //Return an array : test, test@example.com, false
 
         $subject = $Parser->getHeader('subject');
@@ -70,18 +67,21 @@ class EmailParser extends Command
         // Get an array of Attachment items from $Parser
         $attachments = $Parser->getAttachments();
 
-
         // Support faxes been set to multiple address
         foreach ($addressesTo as $key => $value ) {
 
-            // TODO: get the sentToFaxNumber
-            $sendFaxToNumber = $value['display'];
+            // Get the sentToFaxNumber
+            $sendFaxTo = explode('@',$value['display']);
+            $sendFaxToNumber = $sendFaxTo[0];
 
             // TODO: verify that is a valid number
-            $sendFaxToNumber = '7864886196';
+//            $sendFaxToNumber = '7864886196';
 
             // Get the senders Fax DID
-            $addressesFrom = 'lesterm@gmail.com';
+            $addressesFrom = $addressesFrom[0]['address'];
+            if (App::environment('local')) {
+                $addressesFrom = 'lesterm@gmail.com';
+            }
             $sender = Sender::where('email', $addressesFrom)->first();
             $senderName = $sender->name;
             $senderFaxDID = $sender->fax->number;
@@ -92,33 +92,25 @@ class EmailParser extends Command
                     if (str_contains($attachment->getContentType(), "officedocument"))
                     {
                         $this->sendfax($sendFaxToNumber,$senderName,$senderFaxDID,$attachment->getFilename());
+
+                        $file = fopen("/tmp/postfixtest1", "a");
+
+                        $log = "Attachments \n";
+                        $log .= "addressesTo: ". $sendFaxToNumber ."\n";
+                        $log .= "filename: " . $attachment->getFilename() ."\n";
+                        $log .= "content type: " . $attachment->getContentType() ."\n";
+
+                        fwrite($file, $log);
+                        fclose($file);
                     }
-
-                    $file = fopen("/tmp/postfixtest1", "a");
-
-                    $log = "Attachments \n";
-                    $log .= "addressesTo: $addressesTo[0] \n";
-                    $log .= "filename: " . $attachment->getFilename() ."\n";
-                    $log .= "content type: " . $attachment->getContentType() ."\n";
-
-                    fwrite($file, $log);
-                    fclose($file);
                 }
-
             }
         }
-        dd($addressesTo);
-
-    }
-
-    public function getAttachment() {
 
     }
 
     public function sendfax($sendFaxToNumber, $sendFaxToName, $sendFaxFromDid, $attachment) {
-        $client = new Client([
-            // You can set any number of default request options.
-        ]);
+        $client = new Client();
 
         $username = 'lestermesa';
         $company = '37049';
