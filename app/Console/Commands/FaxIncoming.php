@@ -38,6 +38,22 @@ class FaxIncoming extends Command
      */
     public function handle()
     {
-        //
+        $client = new Client();
+
+        $username = 'lestermesa';
+        $company = '37049';
+        $password = 'laravel123';
+
+        $response = $client->request('POST', 'https://www.faxage.com/httpsfax.php', [
+            'debug' => true,
+            'form_params' => [
+                'username' => $username,
+                'company' => $company,
+                'password' => $password,
+                'operation' => 'listfax',
+            ]
+        ]);
+
+        dd($response);
     }
 }
