@@ -45,7 +45,7 @@ class FaxIncoming extends Command
         $password = 'laravel123';
 
         $response = $client->request('POST', 'https://www.faxage.com/httpsfax.php', [
-            'debug' => true,
+            'debug' => false,
             'form_params' => [
                 'username' => $username,
                 'company' => $company,
@@ -54,6 +54,19 @@ class FaxIncoming extends Command
             ]
         ]);
 
-        dd($response);
+        $incoming_faxes = explode("\n", $response->getBody());
+
+        $i = 0;
+        foreach($incoming_faxes as $fax) {
+            $fax = explode("\t", $fax);
+
+            if ($fax[0] == "")
+                continue;
+
+            $jobs[$i] = $fax[0];
+            $i++;
+        }
+
+        dd($jobs);
     }
 }
