@@ -65,8 +65,32 @@ class FaxIncoming extends Command
 
             $jobs[$i] = $fax[0];
             $i++;
+
+//            $this->getFaxDetails($fax[0]);
         }
 
-        dd($jobs);
+//        dd($jobs);
+    }
+
+    public function getFaxDetails($faxid) {
+        $client = new Client();
+
+        $username = 'lestermesa';
+        $company = '37049';
+        $password = 'laravel123';
+
+        $response = $client->request('POST', 'https://www.faxage.com/httpsfax.php', [
+            'debug' => false,
+            'form_params' => [
+                'username' => $username,
+                'company' => $company,
+                'password' => $password,
+                'operation' => 'getfax',
+                'faxid' => $faxid
+            ]
+        ]);
+
+        dd($response);
+
     }
 }
