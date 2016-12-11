@@ -2,6 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Fax;
+use App\Faxjob;
+use App\Recipient;
 use Illuminate\Console\Command;
 use GuzzleHttp\Client;
 
@@ -56,23 +59,40 @@ class FaxIncoming extends Command
 
         $incoming_faxes = explode("\n", $response->getBody());
 
-        $i = 0;
         foreach($incoming_faxes as $fax) {
             $fax = explode("\t", $fax);
 
             if ($fax[0] == "")
                 continue;
 
-            $jobs[$i] = $fax[0];
-            $i++;
-
-//            $this->getFaxDetails($fax[0]);
+            $this->saveFaxJobInDatabase($fax);
+            $this->sendFaxToRecipients($fax);
         }
 
-//        dd($jobs);
     }
 
-    public function getFaxDetails($faxid) {
+    public function saveFaxJobInDatabase($fax_job) {
+        $fax_number = preg_replace( '/[^0-9]/', '', $fax_job[2] );
+        $fax = Fax::where('number', $fax_number)->first();
+
+        $fax_id = null;
+
+        if ($fax) {
+            $fax_id = $fax->id;
+        }
+
+        if (!Faxjob::where('job_id', $fax_job[0])->first()) {
+            Faxjob::create([
+                'job_id'        => $fax_job[0],
+                'fax_id'        => $fax_id,
+                'fax_number'    => $fax_number,
+                'timestamp'     => $fax_job[1],
+                'action'        => 'incoming'
+            ]);
+        }
+    }
+
+    public function getFaxDetails($fax_id) {
         $client = new Client();
 
         $username = 'lestermesa';
@@ -86,11 +106,25 @@ class FaxIncoming extends Command
                 'company' => $company,
                 'password' => $password,
                 'operation' => 'getfax',
-                'faxid' => $faxid
+                'faxid' => $fax_id
             ]
         ]);
 
         dd($response);
-
     }
+
+    public function sendFaxToRecipients($fax_job) {
+        $fax_number = preg_replace( '/[^0-9]/', '', $fax_job[2] );
+
+        $fax = Fax::where('number', $fax_number)->first();
+
+        $recipients = [];
+
+        foreach ($fax->recipients as $recipient) {
+            array_push($recipients, $recipient->email);
+        }
+
+        dd($recipients);
+    }
+
 }

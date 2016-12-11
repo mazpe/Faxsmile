@@ -12,7 +12,7 @@ class Faxjob extends Model
      * @var array
      */
     public $fillable = [
-        'jobid', 'fax_id', 'fax_number', 'action', 'status', 'timestamp'
+        'job_id', 'fax_id', 'fax_number', 'action', 'status', 'timestamp'
     ];
 
 }
