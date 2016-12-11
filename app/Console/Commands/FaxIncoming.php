@@ -66,6 +66,7 @@ class FaxIncoming extends Command
                 continue;
 
             $this->saveFaxJobInDatabase($fax);
+            $this->getFaxDetails($fax[0]);
             $this->sendFaxToRecipients($fax);
         }
 
@@ -107,7 +108,8 @@ class FaxIncoming extends Command
                 'password' => $password,
                 'operation' => 'getfax',
                 'faxid' => $fax_id
-            ]
+            ],
+            'save_to' => '/home/vagrant/Code/Faxsmile/storage/incoming_fax/'. $fax_id
         ]);
 
         dd($response);
