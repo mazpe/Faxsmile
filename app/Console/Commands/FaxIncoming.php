@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Fax;
-use App\Faxjob;
+use App\FaxJob;
 use App\Mail\EmailFaxRecipients;
 use App\Recipient;
 use Illuminate\Console\Command;
@@ -84,8 +84,8 @@ class FaxIncoming extends Command
             $fax_id = $fax->id;
         }
 
-        if (!Faxjob::where('job_id', $fax_job[0])->first()) {
-            Faxjob::create([
+        if (!FaxJob::where('job_id', $fax_job[0])->first()) {
+            FaxJob::create([
                 'job_id'        => $fax_job[0],
                 'fax_id'        => $fax_id,
                 'fax_number'    => $fax_number,
@@ -122,15 +122,11 @@ class FaxIncoming extends Command
 
         $fax = Fax::where('number', $fax_number)->first();
 
-        $recipients = [];
-
         if ($fax) {
             foreach ($fax->recipients as $recipient) {
-    //            dispatch(new EmailFaxRecipient());
-    //            array_push($recipients, $recipient->email);
+
 
                 Mail::to($recipient->email)
-    ////                ->attach('/home/vagrant/Code/Faxsmile/storage/incoming_fax/'. $fax_job[0])
                     ->queue(new EmailFaxRecipients([
                         'attach' => '/home/vagrant/Code/Faxsmile/storage/incoming_fax/'. $fax_job[0]
                     ]));

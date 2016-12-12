@@ -11,19 +11,13 @@
 |
 */
 
-$factory->define(App\EmailConfig::class, function (Faker\Generator $faker) {
+$factory->define(App\Setting::class, function (Faker\Generator $faker) {
     $departmentNames = ['Accounting','Sales', 'Finance'];
     $departmentName = $departmentNames[array_rand($departmentNames)];
 
     return [
-        'client_id' => function () {
-            return App\Client::orderByRaw("RAND()")->first()->id;
-        },
-        'company_id' => function () {
+        'entity_id' => function () {
             return App\Company::orderByRaw("RAND()")->first()->id;
-        },
-        'provider_id' => function () {
-            return App\Provider::orderByRaw("RAND()")->first()->id;
         },
         'from_email' => $departmentName.'@'.$faker->safeEmailDomain,
         'from_name' => $departmentName,

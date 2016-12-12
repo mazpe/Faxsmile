@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Faxjob extends Model
+class FaxJob extends Model
 {
     /**
      * The attributes that are mass assignable.
