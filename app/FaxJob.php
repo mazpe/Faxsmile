@@ -12,7 +12,15 @@ class FaxJob extends Model
      * @var array
      */
     public $fillable = [
-        'job_id', 'fax_id', 'fax_number', 'action', 'status', 'timestamp'
+        'job_id', 'fax_id', 'fax_number', 'fax_number2', 'action', 'status', 'timestamp'
     ];
 
+    /**
+     * Get the fax for the fax job
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function fax() {
+        return $this->belongsTo('App\Fax');
+    }
 }
