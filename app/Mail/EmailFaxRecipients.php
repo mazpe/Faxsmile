@@ -43,10 +43,13 @@ class EmailFaxRecipients extends Mailable
             ->attach($this->fax_job['attach'])
             ->with([
                 'body'  => $this->render($php, [
-                    'fax_id' => $this->fax_job['fax_id']
+                    'job_id'        => $this->fax_job['job_id'],
+                    'fax_id'        => $this->fax_job['fax_id'],
+                    'fax_from'      => $this->fax_job['fax_from'],
+                    'fax_to'        => $this->fax_job['fax_to'],
+                    'timestamp'     => $this->fax_job['timestamp'],
                 ]),
-            ])
-            ;
+            ]);
     }
 
     function render($__php, $__data)
@@ -54,6 +57,7 @@ class EmailFaxRecipients extends Mailable
         $obLevel = ob_get_level();
         ob_start();
         extract($__data, EXTR_SKIP);
+
         try {
             eval('?' . '>' . $__php);
         } catch (Exception $e) {
@@ -63,6 +67,7 @@ class EmailFaxRecipients extends Mailable
             while (ob_get_level() > $obLevel) ob_end_clean();
             throw new FatalThrowableError($e);
         }
+
         return ob_get_clean();
     }
 }

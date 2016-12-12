@@ -13,11 +13,12 @@ class CreateFaxjobsTable extends Migration
      */
     public function up()
     {
-        Schema::create('faxjobs', function (Blueprint $table) {
+        Schema::create('fax_jobs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('job_id')->index;
             $table->string('fax_id')->nullable()->index;
-            $table->string('fax_number');
+            $table->string('fax_from');
+            $table->string('fax_to');
             $table->string('action');
             $table->string('status')->nullable();
             $table->datetime('timestamp');
@@ -33,6 +34,6 @@ class CreateFaxjobsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('faxjobs');
+        Schema::dropIfExists('fax_jobs');
     }
 }

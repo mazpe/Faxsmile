@@ -75,9 +75,10 @@ class FaxIncoming extends Command
     }
 
     public function saveFaxJobInDatabase($fax_job) {
-        $fax_number = preg_replace( '/[^0-9]/', '', $fax_job[2] );
-        $fax_number2 = preg_replace( '/[^0-9]/', '', $fax_job[3] );
-        $fax = Fax::where('number', $fax_number)->first();
+        $fax_from = preg_replace( '/[^0-9]/', '', $fax_job[2] );
+        $fax_to = preg_replace( '/[^0-9]/', '', $fax_job[3] );
+
+        $fax = Fax::where('number', $fax_to)->first();
 
         $fax_id = null;
 
@@ -89,8 +90,8 @@ class FaxIncoming extends Command
             FaxJob::create([
                 'job_id'        => $fax_job[0],
                 'fax_id'        => $fax_id,
-                'fax_number'    => $fax_number,
-                'fax_number2'    => $fax_number2,
+                'fax_from'      => $fax_from,
+                'fax_to'        => $fax_to,
                 'timestamp'     => $fax_job[1],
                 'action'        => 'incoming'
             ]);
@@ -120,17 +121,20 @@ class FaxIncoming extends Command
     }
 
     public function sendFaxToRecipients($fax_job) {
-        $fax_number = preg_replace( '/[^0-9]/', '', $fax_job[2] );
+        $fax_from = preg_replace( '/[^0-9]/', '', $fax_job[2] );
+        $fax_to = preg_replace( '/[^0-9]/', '', $fax_job[3] );
 
-        $fax = Fax::where('number', $fax_number)->first();
+        $fax = Fax::where('number', $fax_to)->first();
 
         if ($fax) {
             foreach ($fax->recipients as $recipient) {
-
-
                 Mail::to($recipient->email)
                     ->queue(new EmailFaxRecipients([
-                        'fax_id'    => $fax->id,
+                        'job_id'        => $fax_job[0],
+                        'fax_id'        => $fax->id,
+                        'fax_from'      => $fax_from,
+                        'fax_to'        => $fax_to,
+                        'timestamp'     => $fax_job[1],
                         'attach'    => '/home/vagrant/Code/Faxsmile/storage/incoming_fax/'. $fax_job[0]
                     ]));
             }
