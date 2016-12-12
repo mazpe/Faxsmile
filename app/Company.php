@@ -123,6 +123,11 @@ class Company extends Entity
         return $this->hasMany('App\User', 'entity_id');
     }
 
+
+    public function setting() {
+        return $this->hasOne('App\Setting', 'entity_id');
+    }
+
     ### CUSTOM FUNCTION
     public function makeCompanyUserAdmin($user) {
         $role = Role::where('name', 'Company Admin');

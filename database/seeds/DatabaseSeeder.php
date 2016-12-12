@@ -22,13 +22,13 @@ class DatabaseSeeder extends Seeder
         // Companies
         $this->call(IISCompanySeeder::class);
         $this->call(CompaniesTableSeeder::class);
-//
+
 //        // Clients / Users
         $this->call(ClientsTableSeeder::class);
-//
-////        // Faxes
+
+//        // Faxes
         $this->call(FaxesTableSeeder::class);
-//
+
 //        // Admins/User
         $this->call(SuperAdminUserSeeder::class);
         $this->call(ProviderAdminUserSeeder::class);
@@ -37,9 +37,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
 
         // Configs
-        $this->call(EmailConfigsTableSeeder::class);
-        $this->call(EmailTemplatesTableSeeder::class);
+        $this->call(SettingsTableSeeder::class);
 
-//        $this->call(UsersTableSeeder::class);
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEmailTemplatesTable extends Migration
+class CreateSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,23 +13,22 @@ class CreateEmailTemplatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('email_templates', function (Blueprint $table) {
+        Schema::create('settings', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('company_id')->unsigned();
-            $table->integer('provider_id')->unsigned();
-            $table->string('name');
-            $table->text('body');
+            $table->integer('entity_id')->unsigned();
+            $table->string('from_email');
+            $table->string('from_name')->nullable();
             $table->string('signature')->nullable();
+            $table->text('incoming_fax')->nullable();
+            $table->text('outgoing_fax')->nullable();
+            $table->text('fax_status_change')->nullable();
+            $table->text('unauthorized_access')->nullable();
             $table->text('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
-//            $table->foreign('company_id')
-//                ->references('id')->on('companies')
-//                ->onDelete('cascade')
-//                ->onUpdate('cascade');
-//            $table->foreign('provider_id')
-//                ->references('id')->on('providers')
+//            $table->foreign('entity_id')
+//                ->references('id')->on('entities')
 //                ->onDelete('cascade')
 //                ->onUpdate('cascade');
         });
@@ -42,6 +41,6 @@ class CreateEmailTemplatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('email_templates');
+        Schema::dropIfExists('settings');
     }
 }

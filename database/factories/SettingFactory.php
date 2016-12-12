@@ -11,23 +11,22 @@
 |
 */
 
-$factory->define(App\EmailConfig::class, function (Faker\Generator $faker) {
+$factory->define(App\Setting::class, function (Faker\Generator $faker) {
     $departmentNames = ['Accounting','Sales', 'Finance'];
     $departmentName = $departmentNames[array_rand($departmentNames)];
+    $incoming_fax = "Fax ID: {{ \$fax_id }}<br>"
+                 .= "Fax Job: {{ \$fax_job }}<br>"
+                 .= "You receievd a fax message from {{ \$fax_from }} at {{ \$timestamp }} <br><br>"
+                 .= "Your Fax Number Is: {{ \$fax_to  }}";
 
     return [
-        'client_id' => function () {
-            return App\Client::orderByRaw("RAND()")->first()->id;
-        },
-        'company_id' => function () {
+        'entity_id' => function () {
             return App\Company::orderByRaw("RAND()")->first()->id;
-        },
-        'provider_id' => function () {
-            return App\Provider::orderByRaw("RAND()")->first()->id;
         },
         'from_email' => $departmentName.'@'.$faker->safeEmailDomain,
         'from_name' => $departmentName,
         'signature' => $faker->company,
+        'incoming_fax' => $incoming_fax,
         'note' => $faker->realText($maxNbChars = 50, $indexSize = 2),
     ];
 });

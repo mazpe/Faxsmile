@@ -1,9 +1,11 @@
 error_log
 public/error_log
+/scripts/attachments
 /bower_components
 /node_modules
 /public/assets
 /public/storage
+/storage/incoming_fax
 /vendor
 /.idea
 Homestead.json
