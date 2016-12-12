@@ -4,9 +4,11 @@ namespace App\Console\Commands;
 
 use App\Fax;
 use App\Faxjob;
+use App\Mail\EmailFaxRecipients;
 use App\Recipient;
 use Illuminate\Console\Command;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Mail;
 
 class FaxIncoming extends Command
 {
@@ -112,7 +114,7 @@ class FaxIncoming extends Command
             'save_to' => '/home/vagrant/Code/Faxsmile/storage/incoming_fax/'. $fax_id
         ]);
 
-        dd($response);
+//        dd($response);
     }
 
     public function sendFaxToRecipients($fax_job) {
@@ -122,11 +124,20 @@ class FaxIncoming extends Command
 
         $recipients = [];
 
-        foreach ($fax->recipients as $recipient) {
-            array_push($recipients, $recipient->email);
+        if ($fax) {
+            foreach ($fax->recipients as $recipient) {
+    //            dispatch(new EmailFaxRecipient());
+    //            array_push($recipients, $recipient->email);
+
+                Mail::to($recipient->email)
+    ////                ->attach('/home/vagrant/Code/Faxsmile/storage/incoming_fax/'. $fax_job[0])
+                    ->queue(new EmailFaxRecipients([
+                        'attach' => '/home/vagrant/Code/Faxsmile/storage/incoming_fax/'. $fax_job[0]
+                    ]));
+            }
         }
 
-        dd($recipients);
+//        dd($recipients);
     }
 
 }
