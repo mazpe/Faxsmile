@@ -37,7 +37,7 @@ class EmailFaxRecipients extends Mailable
     {
         $fax = Fax::find($this->fax_job['fax_id']);
 
-        $php = Blade::compileString($fax->client->company->setting->incoming_fax);
+        $php = Blade::compileString($fax->client->company->setting->fax_incoming);
 
         return $this->view('view.name')
             ->attach($this->fax_job['attach'])

@@ -114,7 +114,7 @@ class FaxIncoming extends Command
                 'operation' => 'getfax',
                 'faxid' => $fax_id
             ],
-            'save_to' => '/home/vagrant/Code/Faxsmile/storage/incoming_fax/'. $fax_id
+            'save_to' => '/home/vagrant/Code/Faxsmile/storage/fax_incoming/'. $fax_id
         ]);
 
         return $response;
@@ -135,7 +135,7 @@ class FaxIncoming extends Command
                         'fax_from'      => $fax_from,
                         'fax_to'        => $fax_to,
                         'timestamp'     => $fax_job[1],
-                        'attach'    => '/home/vagrant/Code/Faxsmile/storage/incoming_fax/'. $fax_job[0]
+                        'attach'    => '/home/vagrant/Code/Faxsmile/storage/fax_incoming/'. $fax_job[0]
                     ]));
             }
         }

@@ -36,7 +36,7 @@ class OutgoingFaxConfirmation extends Mailable
     {
         $fax = Fax::find($this->fax_job['fax_id']);
 
-        $php = Blade::compileString($fax->client->company->setting->outgoing_fax);
+        $php = Blade::compileString($fax->client->company->setting->fax_outgoing);
 
         return $this->view('fax.outgoing')
             ->attach($this->fax_job['attach'])

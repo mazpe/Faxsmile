@@ -336,7 +336,7 @@
                                 </div>
                                 <div class="box">
                                     <div>
-                                        {!! isset($company->setting) ? $company->setting->incoming_fax : '' !!}
+                                        {!! isset($company->setting) ? $company->setting->fax_incoming : '' !!}
                                     </div>
                                 </div>
                             </div>
