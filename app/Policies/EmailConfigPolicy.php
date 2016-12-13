@@ -12,7 +12,6 @@ class EmailConfigPolicy
 
     public function before($user, $ability)
     {
-        dd('here');
         if ($user->isSuperAdmin()) {
             return true;
         }
@@ -49,7 +48,6 @@ class EmailConfigPolicy
      */
     public function create(User $user)
     {
-        dd($user);
         return $user->isSuperAdmin() || $user->isCompanyAdmin() || $user->isClientAdmin();
     }
 

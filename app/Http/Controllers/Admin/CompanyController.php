@@ -64,7 +64,6 @@ class CompanyController extends Controller
     {
         $company= Company::with('setting')->find($id);
 
-        dd($company);
         $this->authorize('view', $company);
 
         $company_clients = $company->clients;

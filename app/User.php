@@ -64,9 +64,7 @@ class User extends Authenticatable
             if (empty($user->remember_token)) {
                 $user->attributes['remember_token'] = str_random(10);
             }
-//            if ($user->email = "superadmin@faxit.cloud") {
-//                dd($user);
-//            }
+
             if (empty($user->password)) {
 
 
