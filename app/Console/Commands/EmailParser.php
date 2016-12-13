@@ -6,7 +6,13 @@ use Illuminate\Console\Command;
 use PhpMimeMailParser\Parser;
 use GuzzleHttp\Client;
 use App\Sender;
+use App\FaxJob;
+use App\Fax;
 use App;
+use Carbon\Carbon;
+use App\Mail\OutgoingFaxConfirmation;
+use Illuminate\Support\Facades\Mail;
+
 
 class EmailParser extends Command
 {
@@ -24,7 +30,7 @@ class EmailParser extends Command
      */
     protected $description = 'Parse incoming email';
 
-    protected $attach_dir = '/home/vagrant/Code/Faxsmile/scripts/attachments/';
+    protected $attach_dir = '/home/vagrant/Code/Faxsmile/storage/outgoing_fax';
     /**
      * Create a new command instance.
      *
@@ -62,7 +68,7 @@ class EmailParser extends Command
         $arrayHeaders = $Parser->getHeaders();      // Get all headers as an array, with charset conversion
 
         // Pass in a writeable path to save attachments
-        $attach_dir = '/home/vagrant/Code/Faxsmile/scripts/attachments/';
+        $attach_dir = '/home/vagrant/Code/Faxsmile/storage/outgoing_fax';
         $Parser->saveAttachments($attach_dir);
 
         // Get an array of Attachment items from $Parser
@@ -92,7 +98,7 @@ class EmailParser extends Command
                 foreach ($attachments as $attachment) {
                     if (str_contains($attachment->getContentType(), "officedocument"))
                     {
-                        $this->sendfax($sendFaxToNumber,$senderName,$senderFaxDID,$attachment->getFilename());
+                        $this->sendfax($addressesFrom, $sendFaxToNumber,$senderName,$senderFaxDID,$attachment->getFilename());
 
                         $file = fopen("/tmp/postfixtest1", "a");
 
@@ -110,14 +116,14 @@ class EmailParser extends Command
 
     }
 
-    public function sendfax($sendFaxToNumber, $sendFaxToName, $sendFaxFromDid, $attachment) {
+    public function sendfax($addressesFrom, $sendFaxToNumber, $sendFaxToName, $sendFaxFromDid, $attachment) {
         $client = new Client();
 
         $username = 'lestermesa';
         $company = '37049';
         $password = 'laravel123';
 
-        $attach_dir = '/home/vagrant/Code/Faxsmile/scripts/attachments/';
+        $attach_dir = '/home/vagrant/Code/Faxsmile/storage/outgoing_fax';
 
         $file = $attach_dir.$attachment;
 
@@ -155,5 +161,27 @@ class EmailParser extends Command
         fwrite($logfile, $log);
         fclose($logfile);
 
+        $job_id = explode(" " ,$response->getBody())[1];
+
+        $fax = Fax::where('number', $sendFaxFromDid)->first();
+        FaxJob::create([
+            'job_id'    => $job_id,
+            'fax_id'       => $fax->id,
+            'fax_from'  => $sendFaxFromDid,
+            'fax_to'    => $sendFaxToNumber,
+            'timestamp' => Carbon::now(),
+            'action'    => 'outgoing'
+        ]);
+
+        Mail::to($addressesFrom)
+            ->queue(new OutgoingFaxConfirmation([
+                'job_id'        => $job_id,
+                'fax_id'        => $fax->id,
+                'fax_from'      => $sendFaxFromDid,
+                'fax_to'        => $sendFaxToNumber,
+                'from_email'    => $addressesFrom,
+                'timestamp'     => Carbon::now(),
+                'attach'        => $attach_dir .'/'. $attachment
+            ]));
     }
 }
