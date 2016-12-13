@@ -64,6 +64,7 @@
                     <li><a href="#company-clients" data-toggle="tab">Clients</a></li>
                     <li><a href="#company-faxes" data-toggle="tab">Faxes</a></li>
                     <li><a href="#company-users" data-toggle="tab">Users</a></li>
+                    <li><a href="#company-settings-panel" data-toggle="tab">Settings</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="active tab-pane" id="info">
@@ -301,6 +302,105 @@
                         <!-- /.company users -->
                     </div>
                     <!-- /.tab-pane -->
+
+                    <!-- setting tab-pane -->
+                    <div class="tab-pane" id="company-settings-panel">
+                        <!-- box -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="box">
+                                    <div>
+                                        <strong>From Email:</strong>
+                                        {{ isset($company->setting) ? $company->setting->from_email : ''}}
+                                    </div>
+                                    <div>
+                                        <strong>From Name:</strong>
+                                        {{ isset($company->setting) ? $company->setting->from_name : ''}}
+                                    </div>
+                                    <div>
+                                        <strong>Signature:</strong>
+                                        {{ isset($company->setting) ? $company->setting->signature : ''}}
+                                    </div>
+                                    <div>
+                                        <strong>Note:</strong>
+                                        {{ isset($company->setting) ? $company->setting->note : ''}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="box-header">
+                                    Incoming Fax
+                                </div>
+                                <div class="box">
+                                    <div>
+                                        {!! isset($company->setting) ? $company->setting->incoming_fax : '' !!}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="box-header">
+                                    Outgoing Fax Confirmation
+                                </div>
+                                <div class="box">
+                                    <div>
+                                        {!! isset($company->setting) ? $company->setting->outgoing_fax : '' !!}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="box-header">
+                                    Fax Status Change
+                                </div>
+                                <div class="box">
+                                    <div>
+                                        {!! isset($company->setting) ? $company->setting->status_chage : '' !!}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="box-header">
+                                    Unauthorized Access
+                                </div>
+                                <div class="box">
+                                    <div>
+                                        {!! isset($company->setting) ? $company->setting->unauthorized_access : '' !!}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3 pull-right" style="padding-top: 10px">
+                                button
+                                {{--@if(!isset($client->emailConfigs[0]))--}}
+                                {{--<a class="btn btn-large btn-info pull-right" href="/admin/client/create">--}}
+                                {{--Edit--}}
+                                {{--</a>--}}
+                                {{--{{ link_to_action('Admin\ClientController@edit', $title = 'Edit',--}}
+                                {{--$parameters = array($client->id),--}}
+                                {{--$attributes = array('class' => 'btn btn-primary btn-block')) }}--}}
+                                {{--@else--}}
+                                {{--{{ link_to_action('Admin\Company\SettingController@edit', $title = 'Edit',--}}
+                                {{--$parameters = array($company->id),--}}
+                                {{--$attributes = array('class' => 'btn btn-primary btn-block')) }}--}}
+                                {{--@endif--}}
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.setting tab-pane -->
 
                 </div>
                 <!-- /.tab-content -->
