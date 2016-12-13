@@ -392,9 +392,9 @@
                                 {{--$parameters = array($client->id),--}}
                                 {{--$attributes = array('class' => 'btn btn-primary btn-block')) }}--}}
                                 {{--@else--}}
-                                {{--{{ link_to_action('Admin\Company\SettingController@edit', $title = 'Edit',--}}
-                                {{--$parameters = array($company->id),--}}
-                                {{--$attributes = array('class' => 'btn btn-primary btn-block')) }}--}}
+                                {{ link_to_action('Admin\Company\SettingController@edit', $title = 'Edit',
+                                $parameters = array($company->id),
+                                $attributes = array('class' => 'btn btn-primary btn-block')) }}
                                 {{--@endif--}}
                             </div>
                         </div>
