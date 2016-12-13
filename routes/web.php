@@ -20,6 +20,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/', 'AdminController@index');
     Route::get('test', 'TestController@index');
     Route::resource('company', 'Admin\CompanyController');
+
     Route::get('/company/{company}/settings/edit', 'Admin\Company\SettingController@edit');
     Route::post('/company/{company}/settings/store', 'Admin\Company\SettingController@store');
     Route::match(['put', 'patch'],'/company/{company}/settings/update', 'Admin\Company\SettingController@update')
