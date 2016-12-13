@@ -69,7 +69,7 @@ class EmailParser extends Command
 
         // Pass in a writeable path to save attachments
         $attach_dir = '/home/vagrant/Code/Faxsmile/storage/outgoing_fax';
-        $Parser->saveAttachments($attach_dir);
+        $Parser->saveAttachments($attach_dir."/");
 
         // Get an array of Attachment items from $Parser
         $attachments = $Parser->getAttachments();
@@ -125,7 +125,7 @@ class EmailParser extends Command
 
         $attach_dir = '/home/vagrant/Code/Faxsmile/storage/outgoing_fax';
 
-        $file = $attach_dir.$attachment;
+        $file = $attach_dir.'/'.$attachment;
 
         $fh = fopen($file, "r");
         $fdata = fread($fh, filesize($file));
