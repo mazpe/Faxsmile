@@ -13,7 +13,7 @@ class Setting extends Model
      * @var array
      */
     public $fillable = [
-        'entity_id', 'from_email','from_name', 'signature', 'incoming_fax', 'outgoing_fax', 'fax_status_change',
+        'entity_id', 'from_email','from_name', 'signature', 'fax_incoming', 'fax_outgoing', 'fax_status',
         'unauthorized_access', 'note'
     ];
 

@@ -19,18 +19,22 @@ class CreateSettingsTable extends Migration
             $table->string('from_email');
             $table->string('from_name')->nullable();
             $table->string('signature')->nullable();
-            $table->text('incoming_fax')->nullable();
-            $table->text('outgoing_fax')->nullable();
-            $table->text('fax_status_change')->nullable();
+            $table->string('fax_incoming_subject')->nullable();
+            $table->text('fax_incoming')->nullable();
+            $table->string('fax_outgoing_subject')->nullable();
+            $table->text('fax_outgoing')->nullable();
+            $table->string('fax_status_subject')->nullable();
+            $table->text('fax_status')->nullable();
+            $table->string('unauthorized_access_subject')->nullable();
             $table->text('unauthorized_access')->nullable();
             $table->text('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
-//            $table->foreign('entity_id')
-//                ->references('id')->on('entities')
-//                ->onDelete('cascade')
-//                ->onUpdate('cascade');
+            $table->foreign('entity_id')
+                ->references('id')->on('entities')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 

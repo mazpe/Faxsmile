@@ -35,9 +35,5 @@ class DatabaseSeeder extends Seeder
         $this->call(CompanyAdminUserSeeder::class);
         $this->call(ClientAdminUserSeeder::class);
         $this->call(UserSeeder::class);
-
-        // Configs
-        $this->call(SettingsTableSeeder::class);
-
     }
 }

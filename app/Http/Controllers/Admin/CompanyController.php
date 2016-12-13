@@ -62,7 +62,7 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
-        $company= Company::find($id);
+        $company= Company::with('setting')->find($id);
 
         $this->authorize('view', $company);
 

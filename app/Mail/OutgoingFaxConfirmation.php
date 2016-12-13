@@ -10,13 +10,12 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Blade;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
 
-class EmailFaxRecipients extends Mailable
+class OutgoingFaxConfirmation extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $settings;
     public $fax_job;
-
 
     /**
      * Create a new message instance.
@@ -37,18 +36,25 @@ class EmailFaxRecipients extends Mailable
     {
         $fax = Fax::find($this->fax_job['fax_id']);
 
-        $php = Blade::compileString($fax->client->company->setting->fax_incoming);
+        $outgoing_fax_template = Blade::compileString($fax->client->company->setting->fax_outgoing);
 
-        return $this->view('view.name')
+        return $this->view('fax.outgoing')
+            ->from([
+                'address'   => $fax->client->company->setting->from_email,
+                'name'      => $fax->client->company->setting->from_name
+            ])
+            ->subject($fax->client->company->setting->fax_outgoing_subject . ' - ' . $this->fax_job['fax_to'])
             ->attach($this->fax_job['attach'])
             ->with([
-                'body'  => $this->render($php, [
+                'body'  => $this->render($outgoing_fax_template, [
                     'job_id'        => $this->fax_job['job_id'],
                     'fax_id'        => $this->fax_job['fax_id'],
-                    'fax_from'      => $this->fax_job['fax_from'],
                     'fax_to'        => $this->fax_job['fax_to'],
+                    'fax_from'      => $this->fax_job['fax_from'],
+                    'email_from'    => $this->fax_job['email_from'],
                     'timestamp'     => $this->fax_job['timestamp'],
                 ]),
+                'signature' => $fax->client->company->setting->signature
             ]);
     }
 

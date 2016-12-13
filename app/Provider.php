@@ -43,8 +43,7 @@ class Provider extends Entity
                     'note' => 'Provider Administrator',
                     'active' => 1
                 ]);
-//                dd($user);
-//                $role = Role::where('name', 'Provider Admin')->first();
+
                 $user->roles()->attach(2);
             }
 

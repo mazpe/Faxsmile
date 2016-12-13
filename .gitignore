@@ -5,7 +5,8 @@ public/error_log
 /node_modules
 /public/assets
 /public/storage
-/storage/incoming_fax
+/storage/fax_incoming
+/storage/fax_outgoing
 /vendor
 /.idea
 Homestead.json

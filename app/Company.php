@@ -64,6 +64,40 @@ class Company extends Entity
 
                 $role = Role::where('name', 'Company Admin')->first();
                 $user->roles()->attach($role->id);
+
+                $fax_incoming = "Fax ID: {{ \$fax_id }} <br>";
+                $fax_incoming .= "Fax Job: {{ \$fax_job }} <br>";
+                $fax_incoming .= "You received a fax message from {{ \$fax_from }} at {{ \$timestamp }} <br><br>";
+                $fax_incoming .= "Your Fax Number Is: {{ \$fax_to }}";
+
+                $fax_outgoing = "Your fax has been queued for delivery.<br><br>";
+                $fax_outgoing .= "To: {{ \$fax_to }} <br>";
+                $fax_outgoing .= "From: {{ \$fax_from }} <br>";
+                $fax_outgoing .= "Source Email: {{ \$email_from }} <br>";
+                $fax_outgoing .= "When: {{ \$timestamp }} <br><br>";
+                $fax_outgoing .= "A preview of the sent document is attached to this email.";
+
+                $fax_status = "Your fax job status update: {{ \$fax_status }} .<br><br>";
+                $fax_status .= "To: {{ \$fax_to }} <br>";
+                $fax_status .= "From: {{ \$fax_from }} <br>";
+                $fax_status .= "Source Email: {{ \$email_from }} <br>";
+                $fax_status .= "When: {{ \$timestamp }} <br><br>";
+                $fax_status .= "A preview of the sent document is attached to this email.";
+
+                $unauthorized_access = "Not authorized to use this fax number";
+
+                $setting = \App\Setting::create([
+                    'entity_id'                     => $company->id,
+                    'from_email'                    => $company->contact_email,
+                    'fax_incoming_subject'          => 'You have recieved a fax',
+                    'fax_incoming'                  => $fax_incoming,
+                    'fax_outgoing_subject'          => 'Sent fax confirmation',
+                    'fax_outgoing'                  => $fax_outgoing,
+                    'fax_status_subject'            => 'Fax status change',
+                    'fax_status'                    => $fax_status,
+                    'unauthorized_access_subject'   => 'Unauthorized Access',
+                    'unauthorized_access'           => $unauthorized_access,
+                ]);
             }
 
             return true;
