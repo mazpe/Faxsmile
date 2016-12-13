@@ -13,9 +13,9 @@
     {{ Form::bsEmail('from_email',null,null,['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}
     {{ Form::bsText('signature', null, null, ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}
     {{ Form::bsText('note', null, null, ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}
-    {{ Form::bsTextArea('incoming_fax', null, null, ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}
-    {{ Form::bsTextArea('outgoing_fax', null, null, ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}
-    {{ Form::bsTextArea('fax_status_change', null, null, ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}
+    {{ Form::bsTextArea('fax_incoming', null, null, ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}
+    {{ Form::bsTextArea('fax_outgoing', null, null, ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}
+    {{ Form::bsTextArea('fax_status', null, null, ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}
     {{ Form::bsTextArea('unauthorized_access', null, null, ['class' => 'col-sm-2 control-label'], ['class' =>'form-control']) }}
     {{ Form::bsSubmit('Submit', '','btn btn-info pull-right') }}
 </div>

@@ -99,16 +99,6 @@ class EmailParser extends Command
                     if (str_contains($attachment->getContentType(), "officedocument"))
                     {
                         $this->sendfax($addressesFrom, $sendFaxToNumber,$senderName,$senderFaxDID,$attachment->getFilename());
-
-                        $file = fopen("/tmp/postfixtest1", "a");
-
-                        $log = "Attachments \n";
-                        $log .= "addressesTo: ". $sendFaxToNumber ."\n";
-                        $log .= "filename: " . $attachment->getFilename() ."\n";
-                        $log .= "content type: " . $attachment->getContentType() ."\n";
-
-                        fwrite($file, $log);
-                        fclose($file);
                     }
                 }
             }
@@ -150,17 +140,6 @@ class EmailParser extends Command
             ]
         ]);
 
-        $logfile = fopen("/tmp/postfixtest", "a");
-
-        $log = "Script successfully ran at ".date("Y-m-d H:i:s")."\n";
-        $log .= "attach_dir: $attach_dir \n";
-        $log .= "attachment: $attachment \n";
-        $log .= "file: $file \n";
-        $log .= "response: ". $response->getBody() . "\n";
-
-        fwrite($logfile, $log);
-        fclose($logfile);
-
         $job_id = explode(" " ,$response->getBody())[1];
 
         $fax = Fax::where('number', $sendFaxFromDid)->first();
@@ -179,7 +158,7 @@ class EmailParser extends Command
                 'fax_id'        => $fax->id,
                 'fax_from'      => $sendFaxFromDid,
                 'fax_to'        => $sendFaxToNumber,
-                'from_email'    => $addressesFrom,
+                'email_from'    => $addressesFrom,
                 'timestamp'     => Carbon::now(),
                 'attach'        => $attach_dir .'/'. $attachment
             ]));

@@ -1,1 +1,3 @@
 {!! $body !!}
+<br><br>
+{!! $signature !!}
