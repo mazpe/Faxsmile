@@ -30,8 +30,6 @@ class EmailParser extends Command
      */
     protected $description = 'Parse incoming email';
 
-    // TODO: Use class wide variable
-    protected $attach_dir = base_path() .'/storage/fax_outgoing';
     /**
      * Create a new command instance.
      *
