@@ -3,10 +3,9 @@
 namespace App\Policies;
 
 use App\User;
-use App\EmailConfig;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class EmailConfigPolicy
+class SettingPolicy
 {
     use HandlesAuthorization;
 
@@ -32,12 +31,12 @@ class EmailConfigPolicy
      * Determine whether the user can view the company.
      *
      * @param  App\User  $user
-     * @param  App\EmailConfig  $emailConfig
+     * @param  App\Setting  $setting
      * @return mixed
      */
-    public function view(User $user, Company $emailConfig)
+    public function view(User $user, Company $setting)
     {
-        return ($user->entity_id == $emailConfig->id) &&  $user->isCompanyAdmin();
+        return ($user->entity_id == $setting->id) &&  $user->isCompanyAdmin();
     }
 
     /**
@@ -55,19 +54,19 @@ class EmailConfigPolicy
      * Determine whether the user can update the company.
      *
      * @param  App\User  $user
-     * @param  App\EmailConfig  $emailConfig
+     * @param  App\Setting  $setting
      * @return mixed
      */
-    public function update(User $user, Company $emailConfig)
+    public function update(User $user, Company $setting)
     {
-        return ($user->entity_id == $emailConfig->id) &&  $user->isCompanyAdmin();
+        return ($user->entity_id == $setting->id) &&  $user->isCompanyAdmin();
     }
 
     /**
      * Determine whether the user can delete the company.
      *
      * @param  App\User  $user
-     * @param  App\EmailConfig  $emailConfig
+     * @param  App\Setting  $setting
      * @return mixed
      */
     public function delete(User $user)

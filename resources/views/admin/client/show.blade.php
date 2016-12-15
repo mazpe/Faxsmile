@@ -63,7 +63,6 @@
                     <li class="active"><a href="#client_info_panel" data-toggle="tab">Info</a></li>
                     <li><a href="#client_faxes_panel" data-toggle="tab">Faxes</a></li>
                     <li><a href="#client_users_panel" data-toggle="tab">Users</a></li>
-                    <li><a href="#client_settings_panel" data-toggle="tab">Settings</a></li>
                 </ul>
                 <div class="tab-content">
 
@@ -223,50 +222,6 @@
                         <!-- /.client clients -->
                     </div>
                     <!-- /.users tab-pane -->
-
-                    <!-- setting tab-pane -->
-                    <div class="tab-pane" id="client_settings_panel">
-                        <!-- box -->
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="box">
-                                    <div>
-                                        <strong>From Email:</strong>
-                                        {{ isset($client->emailConfigs[0]) ? $client->emailConfigs[0]->from_email : ''}}
-                                    </div>
-                                    <div>
-                                        <strong>From Name:</strong>
-                                        {{ isset($client->emailConfigs[0]) ? $client->emailConfigs[0]->from_name : ''}}
-                                    </div>
-                                    <div>
-                                        <strong>Signature:</strong>
-                                        {{ isset($client->emailConfigs[0]) ? $client->emailConfigs[0]->signature : ''}}
-                                    </div>
-                                    <div>
-                                        <strong>Note:</strong>
-                                        {{ isset($client->emailConfigs[0]) ? $client->emailConfigs[0]->note : ''}}
-                                    </div>
-                                    <div class="col-md-3 pull-right" style="padding-top: 10px">
-
-                                        {{--@if(!isset($client->emailConfigs[0]))--}}
-                                            {{--<a class="btn btn-large btn-info pull-right" href="/admin/client/create">--}}
-                                                {{--Edit--}}
-                                            {{--</a>--}}
-                                            {{--{{ link_to_action('Admin\ClientController@edit', $title = 'Edit',--}}
-                                                {{--$parameters = array($client->id),--}}
-                                                {{--$attributes = array('class' => 'btn btn-primary btn-block')) }}--}}
-                                        {{--@else--}}
-                                            {{ link_to_action('Admin\Client\SettingController@edit', $title = 'Edit',
-                                                $parameters = array($client->id),
-                                                $attributes = array('class' => 'btn btn-primary btn-block')) }}
-                                        {{--@endif--}}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /.setting tab-pane -->
 
                 </div>
                 <!-- /.tab-content -->
