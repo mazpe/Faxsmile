@@ -422,7 +422,6 @@
 
                         <div class="row">
                             <div class="col-md-3 pull-right" style="padding-top: 10px">
-                                button
                                 {{--@if(!isset($client->emailConfigs[0]))--}}
                                 {{--<a class="btn btn-large btn-info pull-right" href="/admin/client/create">--}}
                                 {{--Edit--}}
