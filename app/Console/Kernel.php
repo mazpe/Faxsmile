@@ -27,6 +27,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('fax:incoming')->everyMinute();
+        $schedule->command('fax:status')->everyMinute();
     }
 
     /**
