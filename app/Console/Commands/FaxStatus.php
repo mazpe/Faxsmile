@@ -69,7 +69,7 @@ class FaxStatus extends Command
                 'jobid'     => $fax_job_id,
                 'viewtype'  => 'pdf'
             ],
-            'save_to' => '/home/vagrant/Code/Faxsmile/storage/fax_incoming/'. $fax_job_id
+            'save_to' => base_path() .'/storage/fax_incoming/'. $fax_job_id
         ]);
 
         $body = $response->getBody();
