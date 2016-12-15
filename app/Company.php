@@ -67,21 +67,24 @@ class Company extends Entity
 
                 $fax_incoming = "Fax ID: {{ \$fax_id }} <br>";
                 $fax_incoming .= "Fax Job: {{ \$fax_job }} <br>";
-                $fax_incoming .= "You received a fax message from {{ \$fax_from }} at {{ \$timestamp }} <br><br>";
+                $fax_incoming .= "You received a fax message from {{ \$fax_from }} at {{ \$sendtime }} <br><br>";
                 $fax_incoming .= "Your Fax Number Is: {{ \$fax_to }}";
 
                 $fax_outgoing = "Your fax has been queued for delivery.<br><br>";
                 $fax_outgoing .= "To: {{ \$fax_to }} <br>";
                 $fax_outgoing .= "From: {{ \$fax_from }} <br>";
                 $fax_outgoing .= "Source Email: {{ \$email_from }} <br>";
-                $fax_outgoing .= "When: {{ \$timestamp }} <br><br>";
+                $fax_outgoing .= "When: {{ \$sendtime }} <br><br>";
                 $fax_outgoing .= "A preview of the sent document is attached to this email.";
 
                 $fax_status = "Your fax job status update: {{ \$fax_status }} .<br><br>";
                 $fax_status .= "To: {{ \$fax_to }} <br>";
                 $fax_status .= "From: {{ \$fax_from }} <br>";
                 $fax_status .= "Source Email: {{ \$email_from }} <br>";
-                $fax_status .= "When: {{ \$timestamp }} <br><br>";
+                $fax_status .= "When: {{ \$sendtime }} <br><br>";
+                $fax_status .= "@if(\$fax_status == 'success')";
+                $fax_status .= "Completed: {{ \$completetime }} <br><br>";
+                $fax_status .= "@endif";
                 $fax_status .= "A preview of the sent document is attached to this email.";
 
                 $unauthorized_access = "Not authorized to use this fax number";

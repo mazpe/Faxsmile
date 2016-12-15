@@ -13,7 +13,7 @@ use Carbon\Carbon;
 use App\Mail\OutgoingFaxConfirmation;
 use Illuminate\Support\Facades\Mail;
 
-
+// TODO: Refactor to FaxOutgoing
 class EmailParser extends Command
 {
     /**
@@ -30,6 +30,7 @@ class EmailParser extends Command
      */
     protected $description = 'Parse incoming email';
 
+    // TODO: Use class wide variable
     protected $attach_dir = '/home/vagrant/Code/Faxsmile/storage/fax_outgoing';
     /**
      * Create a new command instance.
@@ -96,7 +97,7 @@ class EmailParser extends Command
             // Get Attachments and fax them
             if (count($attachments) > 0) {
                 foreach ($attachments as $attachment) {
-                    if (str_contains($attachment->getContentType(), "officedocument"))
+                    if ( str_contains($attachment->getContentType(), "officedocument") )
                     {
                         $this->sendfax($addressesFrom, $sendFaxToNumber,$senderName,$senderFaxDID,$attachment->getFilename());
                     }
@@ -142,13 +143,14 @@ class EmailParser extends Command
 
         $job_id = explode(" " ,$response->getBody())[1];
 
+        // TODO: update database and send confirmation email after checking status
         $fax = Fax::where('number', $sendFaxFromDid)->first();
         FaxJob::create([
-            'job_id'    => $job_id,
-            'fax_id'       => $fax->id,
+            'job_id'    => trim($job_id),
+            'fax_id'    => $fax->id,
             'fax_from'  => $sendFaxFromDid,
             'fax_to'    => $sendFaxToNumber,
-            'timestamp' => Carbon::now(),
+            'sendtime'  => Carbon::now(),
             'action'    => 'outgoing'
         ]);
 

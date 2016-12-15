@@ -6,6 +6,7 @@ use App\Fax;
 use App\FaxJob;
 use App\Mail\EmailFaxRecipients;
 use App\Recipient;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Mail;
@@ -67,9 +68,12 @@ class FaxIncoming extends Command
             if ($fax[0] == "")
                 continue;
 
-            $this->saveFaxJobInDatabase($fax);
-            $this->getFaxDetails($fax[0]);
-            $this->sendFaxToRecipients($fax);
+            if (!FaxJob::where('job_id', $fax[0])->first()) {
+                $this->saveFaxJobInDatabase($fax);
+                // save incoming fax attachment
+                $this->getFaxDetails($fax[0]);
+                $this->sendFaxToRecipients($fax);
+            }
         }
 
     }
@@ -80,25 +84,17 @@ class FaxIncoming extends Command
 
         $fax = Fax::where('number', $fax_to)->first();
 
-        $fax_id = null;
-
-        if ($fax) {
-            $fax_id = $fax->id;
-        }
-
-        if (!FaxJob::where('job_id', $fax_job[0])->first()) {
-            FaxJob::create([
-                'job_id'        => $fax_job[0],
-                'fax_id'        => $fax_id,
-                'fax_from'      => $fax_from,
-                'fax_to'        => $fax_to,
-                'timestamp'     => $fax_job[1],
-                'action'        => 'incoming'
-            ]);
-        }
+        FaxJob::create([
+            'job_id'        => $fax_job[0],
+            'fax_id'        => $fax ? $fax->id : null,
+            'fax_from'      => $fax_from,
+            'fax_to'        => $fax_to,
+            'timestamp'     => $fax_job[1],
+            'action'        => 'incoming'
+        ]);
     }
 
-    public function getFaxDetails($fax_id) {
+    public function getFaxDetails($fax_job_id) {
         $client = new Client();
 
         $username = 'lestermesa';
@@ -112,9 +108,9 @@ class FaxIncoming extends Command
                 'company' => $company,
                 'password' => $password,
                 'operation' => 'getfax',
-                'faxid' => $fax_id
+                'faxid' => $fax_job_id
             ],
-            'save_to' => '/home/vagrant/Code/Faxsmile/storage/fax_incoming/'. $fax_id
+            'save_to' => '/home/vagrant/Code/Faxsmile/storage/fax_incoming/'. $fax_job_id
         ]);
 
         return $response;
@@ -135,9 +131,15 @@ class FaxIncoming extends Command
                         'fax_from'      => $fax_from,
                         'fax_to'        => $fax_to,
                         'timestamp'     => $fax_job[1],
-                        'attach'    => '/home/vagrant/Code/Faxsmile/storage/fax_incoming/'. $fax_job[0]
+                        'attach'        => '/home/vagrant/Code/Faxsmile/storage/fax_incoming/'. $fax_job[0]
                     ]));
             }
+
+            FaxJob::where('job_id', $fax_job[0])->first()->update([
+                'status'        => 'delivered',
+                'sendtime'      => $fax_job[1],
+                'completetime'  => Carbon::now(),
+            ]);
         }
 
         return true;

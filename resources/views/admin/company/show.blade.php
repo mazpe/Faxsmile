@@ -332,6 +332,16 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="box-header">
+                                    Incoming Fax Subject
+                                </div>
+                                <div class="box">
+                                    <div>
+                                        {!! isset($company->setting) ? $company->setting->fax_incoming_subject : '' !!}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="box-header">
                                     Incoming Fax
                                 </div>
                                 <div class="box">
@@ -343,6 +353,16 @@
                         </div>
 
                         <div class="row">
+                            <div class="col-md-12">
+                                <div class="box-header">
+                                    Outgoing Fax Confirmation Subject
+                                </div>
+                                <div class="box">
+                                    <div>
+                                        {!! isset($company->setting) ? $company->setting->fax_outgoing_subject : '' !!}
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-12">
                                 <div class="box-header">
                                     Outgoing Fax Confirmation
@@ -358,17 +378,36 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="box-header">
+                                    Fax Status Change Subject
+                                </div>
+                                <div class="box">
+                                    <div>
+                                        {!! isset($company->setting) ? $company->setting->fax_status_subject : '' !!}
+                                    </div>
+                                </div>
+
+                                <div class="box-header">
                                     Fax Status Change
                                 </div>
                                 <div class="box">
                                     <div>
-                                        {!! isset($company->setting) ? $company->setting->status_chage : '' !!}
+                                        {!! isset($company->setting) ? $company->setting->fax_status : '' !!}
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="row">
+                            <div class="col-md-12">
+                                <div class="box-header">
+                                    Unauthorized Access Subject
+                                </div>
+                                <div class="box">
+                                    <div>
+                                        {!! isset($company->setting) ? $company->setting->unauthorized_access_subject : '' !!}
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-12">
                                 <div class="box-header">
                                     Unauthorized Access

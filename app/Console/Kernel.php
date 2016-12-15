@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\EmailParser::class,
         Commands\FaxIncoming::class,
+        Commands\FaxStatus::class,
     ];
 
     /**
@@ -24,7 +25,7 @@ class Kernel extends ConsoleKernel
      * @return void
      */
     protected function schedule(Schedule $schedule)
-    {;
+    {
         $schedule->command('fax:incoming')->everyMinute();
     }
 
