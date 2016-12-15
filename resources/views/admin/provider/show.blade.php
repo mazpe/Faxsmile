@@ -174,7 +174,7 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <table id="provider_users" class="table table-bordered table-striped hover dataTable" role="grid"
-                                               aria-describedby="provider_users_info">
+                                               aria-describedby="provider_users_info" data-form="deleteForm">
                                             <thead>
                                             <tr role="row">
                                                 <th class="sorting_asc" tabindex="0" aria-controls="provider_users" rowspan="1" colspan="1"
@@ -205,6 +205,10 @@
                                                         {{ link_to_action('Admin\UserController@edit', $title = 'Edit',
                                                             $parameters = array($user->id),
                                                             $attributes = array('class' => 'btn btn-xs btn-info')) }}
+                                                        {!! Form::open(['method' => 'DELETE','action' => ['Admin\UserController@destroy', $user->id],'class' => 'form-delete','style'=>'display:inline']) !!}
+                                                        {!! Form::submit('Delete', ['class' => 'btn btn-xs btn-danger delete', 'name' => 'delete_modal']) !!}
+                                                        {!! Form::close() !!}
+
                                                     </td>
                                                 </tr>
                                             @endforeach
