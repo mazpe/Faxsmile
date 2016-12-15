@@ -69,7 +69,7 @@ class EmailParser extends Command
         $arrayHeaders = $Parser->getHeaders();      // Get all headers as an array, with charset conversion
 
         // Pass in a writeable path to save attachments
-        $attach_dir = '/home/vagrant/Code/Faxsmile/storage/fax_outgoing';
+        $attach_dir = base_path() .'/storage/fax_outgoing';
         $Parser->saveAttachments($attach_dir."/");
 
         // Get an array of Attachment items from $Parser
@@ -114,7 +114,7 @@ class EmailParser extends Command
         $company = '37049';
         $password = 'laravel123';
 
-        $attach_dir = '/home/vagrant/Code/Faxsmile/storage/fax_outgoing';
+        $attach_dir = base_path() .'/storage/fax_outgoing';
 
         $file = $attach_dir.'/'.$attachment;
 
