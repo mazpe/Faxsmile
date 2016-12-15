@@ -137,7 +137,7 @@
                                             @foreach($provider_faxes as $fax)
                                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/fax/' . $fax->id)}}">
                                                     <td>{{ $fax->number }}</td>
-                                                    <td>{{ $fax->client->name }}</td>
+                                                    <td>{{ $fax->client ? $fax->client->name : '' }}</td>
                                                     <td>{{ $fax->active }}</td>
                                                     <td>
                                                         {{ link_to_action('Admin\FaxController@show', $title = 'Show',
