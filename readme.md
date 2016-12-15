@@ -106,6 +106,8 @@ X Only 'Super Admin', 'Company Admin' and 'Client Admin' can 'index' clients Use
 - Deleting a client it will set to null the client_id field on faxes previously owned by client
 
 # [TODO]
+## Refactoring
+- table faxes should be fax_numbers
 ## Setup/System
 - Improve seeder to one simple task: Create 10 Company foreach create 10 Client for each create 10 User
 - Secure API calls
