@@ -10,7 +10,6 @@
         "laravelcollective/html": "^5.3.0",
         "askedio/laravel5-soft-cascade": "^1.7",
         "nanigans/single-table-inheritance": "0.7.*",
-        "php-mime-mail-parser/php-mime-mail-parser": "^2.5",
         "guzzlehttp/guzzle": "^6.2"
     },
     "require-dev": {
