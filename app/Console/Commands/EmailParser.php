@@ -123,7 +123,7 @@ class EmailParser extends Command
         $b64data = base64_encode($fdata);
 
         $response = $client->request('POST', 'https://www.faxage.com/httpsfax.php', [
-            'debug' => true,
+            'debug' => false,
             'form_params' => [
                 'username' => $username,
                 'company' => $company,
