@@ -117,15 +117,6 @@ class Company extends Entity
     }
 
     /**
-     * Get the email templates that belong to the company
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function emailTemplates() {
-        return $this->hasMany('App\EmailTemplate');
-    }
-
-    /**
      * Get all of the faxes for the company.
      */
     public function faxes()
