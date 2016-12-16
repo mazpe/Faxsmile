@@ -9,6 +9,7 @@ use App\FaxJob;
 use GuzzleHttp\Client;
 use App\Sender;
 use Illuminate\Support\Facades\Mail;
+use App;
 
 class FaxStatus extends Command
 {

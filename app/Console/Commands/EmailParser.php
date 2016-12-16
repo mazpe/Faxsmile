@@ -86,7 +86,7 @@ class EmailParser extends Command
             // Get the senders Fax DID
             $addressesFrom = $addressesFrom[0]['address'];
             if (App::environment('local')) {
-                $addressesFrom = 'lesterm@gmail.com';
+               $addressesFrom = 'lesterm@gmail.com';
             }
             $sender = Sender::where('email', $addressesFrom)->first();
             $senderName = $sender->name;

@@ -55,14 +55,10 @@ return [
     |
     */
 
-    'from' => [
-        'address' => 'lesterm@gmail.com',
-        'name' => 'Lester Mesa',
-/*  Jack - 9-30-16
-        'address' => 'hello@example.com',
-        'name' => 'Example',
-*/
-    ],
+    //'from' => [
+    //    'address' => 'lesterm@gmail.com',
+    //    'name' => 'Lester Mesa',
+    //],
 
     /*
     |--------------------------------------------------------------------------
