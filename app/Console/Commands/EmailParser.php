@@ -95,6 +95,9 @@ class EmailParser extends Command
             // Get Attachments and fax them
             if (count($attachments) > 0) {
                 foreach ($attachments as $attachment) {
+
+                    dd($attachment->getContentType());
+
                     if ( str_contains($attachment->getContentType(), "officedocument") )
                     {
                         $this->sendfax($addressesFrom, $sendFaxToNumber,$senderName,$senderFaxDID,$attachment->getFilename());

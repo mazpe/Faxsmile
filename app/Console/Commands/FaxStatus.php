@@ -98,15 +98,18 @@ class FaxStatus extends Command
                         'completetime'          => $fax_job[6] ? $fax_job[6] : null,
                         'xmittime'              => trim($fax_job[8]),
                     ]));
+
+                $saved_fax_job->update([
+                    'status'                => $fax_job[4],
+                    'status_description'    => $fax_job[5],
+                    'sendtime'              => $fax_job[6] ? $fax_job[6] : null,
+                    'completetime'          => $fax_job[7] != '0000-00-00 00:00:00' ? $fax_job[7] : null,
+                    'xmittime'              => trim($fax_job[8])
+                ]);
+
             }
 
-            $saved_fax_job->update([
-                'status'                => $fax_job[4],
-                'status_description'    => $fax_job[5],
-                'sendtime'              => $fax_job[6] ? $fax_job[6] : null,
-                'completetime'          => $fax_job[7] != '0000-00-00 00:00:00' ? $fax_job[7] : null,
-                'xmittime'              => trim($fax_job[8])
-            ]);
+
         }
 
         return $response;
