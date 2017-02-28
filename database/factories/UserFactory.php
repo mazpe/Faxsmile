@@ -15,8 +15,6 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
-        'client_id' => 1,
-        'fax_id' => 1,
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
         'email' => $faker->safeEmail,

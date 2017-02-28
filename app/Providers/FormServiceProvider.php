@@ -16,11 +16,27 @@ class FormServiceProvider extends ServiceProvider
     public function boot()
     {
         // Register the form components
-        Form::component('bsText', 'components.form.text', ['name', 'value' => null, 'attributes' => [], 'class']);
-        Form::component('bsPassword', 'components.form.password', ['name', 'class']);
-        Form::component('bsEmail', 'components.form.email', ['name', 'value' => null, 'attributes' => [], 'class']);
-        Form::component('bsSelect', 'components.form.select', ['name', 'value' => null, 'attributes' => [], 'class']);
-        Form::component('bsSubmit', 'components.form.submit', ['name', 'value' => null, 'class']);
+        Form::component('bsText', 'components.form.text',[
+            'name', 'title', 'value' => null, 'labelAttributes' => [], 'inputAttributes' => []
+        ]);
+        Form::component('bsTextArea', 'components.form.textarea',[
+            'name', 'title', 'value' => null, 'labelAttributes' => [], 'inputAttributes' => []
+        ]);
+        Form::component('bsHidden', 'components.form.hidden',[
+            'name', 'value' => null
+        ]);
+        Form::component('bsEmail', 'components.form.email', [
+            'name', 'title', 'value' => null, 'labelAttributes' => [], 'inputAttributes' => []
+        ]);
+        Form::component('bsPassword', 'components.form.password', [
+            'name', 'title', 'value' => null, 'labelAttributes' => [], 'inputAttributes' => []
+        ]);
+        Form::component('bsSelect', 'components.form.select', [
+            'name', 'title' => null, 'value' => null, 'options' => null, 'labelAttributes' => [], 'inputAttributes' => []
+        ]);
+        Form::component('bsSubmit', 'components.form.submit', [
+            'name', 'title' => null, 'value' => null, 'class', 'id'
+        ]);
     }
 
     /**

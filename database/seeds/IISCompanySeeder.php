@@ -2,8 +2,9 @@
 
 use Illuminate\Database\Seeder;
 use App\Company;
+use App\Role;
 
-class JackCompanyTableSeeder extends Seeder
+class IISCompanySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,7 +14,7 @@ class JackCompanyTableSeeder extends Seeder
     public function run()
     {
         Company::create([
-            'type' => 'Reseller',
+            'type' => 'Company',
             'name' => 'Innovative Internet Solutions',
             'address_1' => '4901 SW 74th Ct',
             'address_2' => '',
@@ -23,14 +24,14 @@ class JackCompanyTableSeeder extends Seeder
             'phone' => '305-665-2500',
             'fax' => '305-665-2551',
             'website' => 'innovativeinternet.com',
-            'domain' => '.innovativeinternet.com/',
+            'domain' => 'innovativeinternet.com',
             'time_zone' => 'EST',
             'external_account' => '',
             'contact_first_name' => 'Jack',
             'contact_last_name' => 'Sasportas',
             'contact_phone' => '',
             'contact_email' => 'jack@innovativeinternet.com',
-            'note' => '',
+            'note' => 'Main/Root account',
             'active' => '1',
         ]);
     }

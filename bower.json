@@ -1,5 +1,5 @@
 {
-  "name": "FaxIT",
+  "name": "FaxIT.cloud",
   "dependencies": {
     "AdminLTE": "admin-lte#^2.3.6",
     "bootstrap": "^3.3.7",

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProvidersTable extends Migration
+class CreateEntitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateProvidersTable extends Migration
      */
     public function up()
     {
-        Schema::create('providers', function (Blueprint $table) {
+        Schema::create('entities', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('type')->nullable();
-            $table->string('name')->unique();
+            $table->integer('parent_id')->nullable()->unsigned();;
+            $table->string('parent_type')->nullable();
+            $table->string('type');
+            $table->string('name');
             $table->string('address_1')->nullable();
             $table->string('address_2')->nullable();
             $table->string('city')->nullable();
@@ -25,14 +27,17 @@ class CreateProvidersTable extends Migration
             $table->string('phone')->nullable();
             $table->string('fax')->nullable();
             $table->string('website')->nullable();
+            $table->string('domain')->nullable();
+            $table->string('time_zone')->nullable();
             $table->string('external_account')->nullable();
-            $table->string('contact')->nullable();
+            $table->string('contact_first_name')->nullable();
+            $table->string('contact_last_name')->nullable();
             $table->string('contact_phone')->nullable();
+            $table->string('contact_email')->nullable();
             $table->text('note')->nullable();
             $table->integer('active')->default(1);
             $table->timestamps();
             $table->softDeletes();
-
         });
     }
 
@@ -43,6 +48,6 @@ class CreateProvidersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('providers');
+        Schema::dropIfExists('entities');
     }
 }

@@ -13,9 +13,12 @@ class CompanyController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index() {
+    public function index()
+    {
+        $this->authorize('index', Company::class);
+
         return view('admin.company.index',[
-            'companies' => Company::all()
+            'companies' => Company::withCount('clients')->get()
         ]);
     }
 
@@ -24,7 +27,10 @@ class CompanyController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create() {
+    public function create()
+    {
+        $this->authorize('create', Company::class);
+
         return view('admin.company.create');
     }
 
@@ -34,10 +40,12 @@ class CompanyController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
+        $this->authorize('create', Company::class);
+
         $this->validate($request, [
-            'type' => 'required',
-            'name' => 'required|unique:companies|max:255',
+            'name' => 'required|unique:entities,name,NULL,id,deleted_at,NULL'
         ]);
 
         Company::create($request->all());
@@ -54,10 +62,17 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
-        $company= Company::find($id);
+        $company= Company::with('setting')->find($id);
+
+        $this->authorize('view', $company);
+
         $company_clients = $company->clients;
+        $company_admin = $company->users;
+
+        $company_users = $company_admin->merge($company->clientUsers);
+
         return view('admin.company.show',
-            compact('company','company_clients')
+            compact('company','company_users')
         );
     }
 
@@ -69,7 +84,10 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-        $company= Company::find($id);
+        $company = Company::find($id);
+
+        $this->authorize('update', $company);
+
         return view('admin.company.edit',compact('company'));
     }
 
@@ -82,14 +100,17 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $company = Company::find($id);
+
+        $this->authorize('update', $company);
+
         $this->validate($request, [
-            'type' => 'required',
             'name' => 'required|max:255',
         ]);
 
-        Company::find($id)->update($request->all());
+        $company->update($request->all());
 
-        return redirect()->route('company.index')
+        return redirect()->route('company.show', ['company_id' => $company->id])
             ->with('success','Company updated successfully');
     }
 
@@ -101,7 +122,12 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        Company::find($id)->delete();
+        $company = Company::find($id);
+
+        $this->authorize('delete', $company);
+
+        $company->delete();
+
         return redirect()->route('company.index')
             ->with('success','Company deleted successfully');
     }

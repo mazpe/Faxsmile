@@ -13,7 +13,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\EmailParser::class,
+        Commands\FaxIncoming::class,
+        Commands\FaxStatus::class,
     ];
 
     /**
@@ -24,8 +26,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command('fax:incoming')->everyMinute();
+        $schedule->command('fax:status')->everyMinute();
     }
 
     /**

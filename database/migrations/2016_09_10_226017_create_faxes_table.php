@@ -15,8 +15,8 @@ class CreateFaxesTable extends Migration
     {
         Schema::create('faxes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('client_id')->unsigned();
             $table->integer('provider_id')->unsigned();
+            $table->integer('client_id')->nullable()->unsigned();
             $table->string('number');
             $table->string('description');
             $table->text('note')->nullable();
@@ -24,13 +24,8 @@ class CreateFaxesTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-
-            $table->foreign('client_id')
-                ->references('id')->on('clients')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
             $table->foreign('provider_id')
-                ->references('id')->on('providers')
+                ->references('id')->on('entities')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });

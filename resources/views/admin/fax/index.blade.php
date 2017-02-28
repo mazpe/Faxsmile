@@ -18,22 +18,34 @@
                                 <th class="sorting_asc" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
                                     aria-sort="ascending" aria-label="ID: activate to sort column ascending" style="width: 5px;">ID
                                 </th>
+                                @if(Auth::user()->isSuperAdmin())
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
-                                    aria-label="Client: activate to sort column descending"
-                                    style="width: 80px;">Client
+                                    aria-label="Provider: activate to sort column descending"
+                                    style="width: 140px;">Provider
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
                                     aria-label="Provider: activate to sort column descending"
-                                    style="width: 80px;">Provider
+                                    style="width: 140px;">Company
                                 </th>
+                                @endif
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
-                                    aria-label="Number: activate to sort column ascending" style="width: 20px;">Number
+                                    aria-label="Number: activate to sort column ascending" style="width: 10px;">Fax Number
                                 </th>
+                                @if(Auth::user()->isSuperAdmin() || Auth::user()->isCompanyAdmin())
+                                <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
+                                    aria-label="Number: activate to sort column ascending" style="width: 10px;">Client
+                                </th>
+                                @endif
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
                                     aria-label="Description: activate to sort column ascending" style="width: 20px;">Description
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
-                                    aria-label="Active: activate to sort column ascending" style="width: 20px;">Active
+                                    aria-label="Sender: activate to sort column descending"
+                                    style="width: 10px;">Senders
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
+                                    aria-label="Sender: activate to sort column descending"
+                                    style="width: 10px;">Recipients
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="faxes" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 50px;">
@@ -45,11 +57,17 @@
                             @foreach($faxes as $fax)
                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/fax/' . $fax->id)}}">
                                     <td class="sorting_1">{{ $fax->id }}</td>
-                                    <td>{{ $fax->client->name }}</td>
-                                    <td>{{ $fax->provider->name }}</td>
+                                    @if(Auth::user()->isSuperAdmin())
+                                    <td>{{ isset($fax->provider) ? $fax->provider->name : '' }}</td>
+                                    <td>{{ isset($fax->client->company) ? $fax->client->company->name : '' }}</td>
+                                    @endif
                                     <td>{{ $fax->number }}</td>
+                                    @if(Auth::user()->isSuperAdmin() || Auth::user()->isCompanyAdmin())
+                                    <td>{{ isset($fax->client) ? $fax->client->name : ''}}</td>
+                                    @endif
                                     <td>{{ $fax->description }}</td>
-                                    <td>{{ $fax->active }}</td>
+                                    <td>{{ isset($fax->senders) ? $fax->senders->count() : ''}}</td>
+                                    <td>{{ isset($fax->recipients) ? $fax->recipients->count() : ''}}</td>
                                     <td>
                                         {{ link_to_action('Admin\FaxController@show', $title = 'Show',
                                             $parameters = array($fax->id),
@@ -64,17 +82,6 @@
                                 </tr>
                             @endforeach
                             </tbody>
-                            <tfoot>
-                            <tr>
-                                <th rowspan="1" colspan="1">ID</th>
-                                <th rowspan="1" colspan="1">Client</th>
-                                <th rowspan="1" colspan="1">Provider</th>
-                                <th rowspan="1" colspan="1">Number</th>
-                                <th rowspan="1" colspan="1">Description</th>
-                                <th rowspan="1" colspan="1">Active</th>
-                                <th rowspan="1" colspan="1">Action</th>
-                            </tr>
-                            </tfoot>
                         </table>
                     </div>
                 </div>
@@ -82,8 +89,10 @@
         </div>
         <!-- /.box-body -->
         <div class="box-footer clearfix no-border">
+            @can('store', \App\Fax::class)
             <a class="btn btn-large btn-info pull-right" href="/admin/fax/create"> <i class="fa fa-plus"></i> Create
                 Fax</a>
+                @endcan
         </div>
     </div>
 

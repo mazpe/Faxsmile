@@ -1,7 +1,6 @@
 @extends('admin.admin_template')
 
 @section('content')
-
     <div class="box">
         <div class="box-header">
             <h3 class="box-title">Companies</h3>
@@ -16,14 +15,20 @@
                             <thead>
                             <tr role="row">
                                 <th class="sorting_asc" tabindex="0" aria-controls="companies" rowspan="1" colspan="1"
-                                    aria-sort="ascending" aria-label="Type: activate to sort column descending"
-                                    style="width: 80px;">Type
+                                    aria-sort="ascending" aria-label="ID: activate to sort column descending"
+                                    style="width: 5px;">ID
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="companies" rowspan="1" colspan="1"
-                                    aria-label="Name: activate to sort column ascending" style="width: 195px;">Name
+                                    aria-label="Name: activate to sort column ascending" style="width: 195px;">Company
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="companies" rowspan="1" colspan="1"
-                                    aria-label="Active: activate to sort column ascending" style="width: 30px;">Active
+                                    aria-label="Name: activate to sort column ascending" style="width: 195px;">Contact
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="companies" rowspan="1" colspan="1"
+                                    aria-label="Active: activate to sort column ascending" style="width: 30px;">Clients
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="companies" rowspan="1" colspan="1"
+                                    aria-label="Active: activate to sort column ascending" style="width: 30px;">Faxes
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="companies" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 50px;">
@@ -34,9 +39,11 @@
                             <tbody>
                             @foreach($companies as $company)
                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/company/' . $company->id)}}">
-                                    <td class="sorting_1">{{ $company->type }}</td>
+                                    <td class="sorting_1">{{ $company->id }}</td>
                                     <td>{{ $company->name }}</td>
-                                    <td>{{ $company->active }}</td>
+				                    <td>{{ $company->contact_first_name }} {{ $company->contact_last_name }}</td>
+                                    <td>{{ $company->clients_count }}</td>
+                                    <td>{{ isset($company->faxes) ? $company->faxes->count() : 0 }}</td>
                                     <td>
                                         {{ link_to_action('Admin\CompanyController@show', $title = 'Show',
                                             $parameters = array($company->id),
@@ -51,14 +58,6 @@
                                 </tr>
                             @endforeach
                             </tbody>
-                            <tfoot>
-                            <tr>
-                                <th rowspan="1" colspan="1">Type</th>
-                                <th rowspan="1" colspan="1">Name</th>
-                                <th rowspan="1" colspan="1">Active</th>
-                                <th rowspan="1" colspan="1">Action</th>
-                            </tr>
-                            </tfoot>
                         </table>
                     </div>
                 </div>

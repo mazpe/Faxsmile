@@ -29,7 +29,17 @@
 
                     <h3 class="profile-username text-center">{{ $provider->name }}</h3>
 
-                    <p class="text-muted text-center">{{ $provider->type }}</p>
+                    <div class="box">
+                        <div class="box-header"><strong>Contact Information</strong></div>
+                        <div class="box-body">
+                            <p class="text-muted text-left">
+                                <strong>First Name:</strong> {{ $provider->contact_first_name }}<br/>
+                                <strong>Last Name:</strong> {{ $provider->contact_last_name }}<br/>
+                                <strong>T:</strong> {{ $provider->contact_phone }}<br />
+                                <strong>E:</strong> {{ $provider->contact_email }}
+                            </p>
+                        </div>
+                    </div>
 
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
@@ -52,6 +62,7 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#info" data-toggle="tab">Info</a></li>
                     <li><a href="#provider-faxes-pane" data-toggle="tab">Faxes</a></li>
+                    <li><a href="#provider-users-pane" data-toggle="tab">Users</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="active tab-pane" id="info">
@@ -93,6 +104,8 @@
                         <!-- /.provider info -->
                     </div>
                     <!-- /.tab-pane -->
+
+                    <!-- provider-faxes-pane -->
                     <div class="tab-pane" id="provider-faxes-pane">
                         <!-- provider faxes -->
 
@@ -106,7 +119,10 @@
                                             <thead>
                                             <tr role="row">
                                                 <th class="sorting" tabindex="0" aria-controls="provider_faxes" rowspan="1" colspan="1"
-                                                    aria-label="Name: activate to sort column ascending" style="width: 250px;">Number
+                                                    aria-label="Name: activate to sort column ascending" style="width: 250px;">Fax Number
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="provider_faxes" rowspan="1" colspan="1"
+                                                    aria-label="Name: activate to sort column ascending" style="width: 250px;">Client
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="provider_faxes" rowspan="1" colspan="1"
                                                     aria-label="Active: activate to sort column ascending" style="width: 30px;">Active
@@ -121,6 +137,7 @@
                                             @foreach($provider_faxes as $fax)
                                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/fax/' . $fax->id)}}">
                                                     <td>{{ $fax->number }}</td>
+                                                    <td>{{ $fax->client ? $fax->client->name : '' }}</td>
                                                     <td>{{ $fax->active }}</td>
                                                     <td>
                                                         {{ link_to_action('Admin\FaxController@show', $title = 'Show',
@@ -136,13 +153,6 @@
                                                 </tr>
                                             @endforeach
                                             </tbody>
-                                            <tfoot>
-                                            <tr>
-                                                <th rowspan="1" colspan="1">Name</th>
-                                                <th rowspan="1" colspan="1">Active</th>
-                                                <th rowspan="1" colspan="1">Action</th>
-                                            </tr>
-                                            </tfoot>
                                         </table>
                                     </div>
                                 </div>
@@ -151,6 +161,66 @@
                         <!-- /.box-body -->
 
                         <!-- /.provider faxes -->
+                    </div>
+                    <!-- /.tab-pane -->
+
+                    <!-- provider-users-tab-pane -->
+                    <div class="tab-pane" id="provider-users-pane">
+                        <!-- provider clients -->
+
+                        <!-- box -->
+                        <div class="box-body">
+                            <div id="provider_users_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table id="provider_users" class="table table-bordered table-striped hover dataTable" role="grid"
+                                               aria-describedby="provider_users_info" data-form="deleteForm">
+                                            <thead>
+                                            <tr role="row">
+                                                <th class="sorting_asc" tabindex="0" aria-controls="provider_users" rowspan="1" colspan="1"
+                                                    aria-sort="ascending" aria-label="ID: activate to sort column descending"
+                                                    style="width: 5px;">ID
+                                                <th class="sorting" tabindex="0" aria-controls="provider_users" rowspan="1" colspan="1"
+                                                    aria-label="Name: activate to sort column ascending" style="width: 250px;">Name
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="provider_users" rowspan="1" colspan="1"
+                                                    aria-label="Active: activate to sort column ascending" style="width: 30px;">Active
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="provider_users" rowspan="1" colspan="1"
+                                                    aria-label="CSS grade: activate to sort column ascending" style="width: 50px;">
+                                                    Action
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($provider_users as $user)
+                                                <tr role="row" class="odd"  data-href="{{URL::to('/admin/user/' . $user->id)}}">
+                                                    <td class="sorting_1">{{ $user->id }}</td>
+                                                    <td>{{ $user->full_name }}</td>
+                                                    <td>{{ $user->active }}</td>
+                                                    <td>
+                                                        {{ link_to_action('Admin\UserController@show', $title = 'Show',
+                                                            $parameters = array($user->id),
+                                                            $attributes = array('class' => 'btn btn-xs btn-success')) }}
+                                                        {{ link_to_action('Admin\UserController@edit', $title = 'Edit',
+                                                            $parameters = array($user->id),
+                                                            $attributes = array('class' => 'btn btn-xs btn-info')) }}
+                                                        {!! Form::open(['method' => 'DELETE','action' => ['Admin\UserController@destroy', $user->id],'class' => 'form-delete','style'=>'display:inline']) !!}
+                                                        {!! Form::submit('Delete', ['class' => 'btn btn-xs btn-danger delete', 'name' => 'delete_modal']) !!}
+                                                        {!! Form::close() !!}
+
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+
+                        <!-- /.provider users -->
                     </div>
                     <!-- /.tab-pane -->
 

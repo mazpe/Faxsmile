@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Askedio\SoftCascade\Traits\SoftCascadeTrait;
 
-
-class EmailConfig extends Model
+class Role extends Model
 {
     use SoftDeletes;
     use SoftCascadeTrait;
@@ -18,7 +17,7 @@ class EmailConfig extends Model
      * @var array
      */
     public $fillable = [
-        'company_id', 'provider_id', 'from_email','from_name','signature', 'note'
+        'name', 'note', 'active'
     ];
 
     /**
@@ -29,11 +28,11 @@ class EmailConfig extends Model
     protected $dates = ['deleted_at'];
 
     /**
-     * Get the company that owns the client
+     * Get the users for the role
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
-    public function company() {
-        return $this->belongsTo('App\Company');
+    public function users() {
+        return $this->belongsToMany('App\Users')->withTimestamps();
     }
 }

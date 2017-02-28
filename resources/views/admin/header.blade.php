@@ -22,6 +22,7 @@
                     <!-- Menu Toggle Button -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <!-- The user image in the navbar-->
+                        {{ Auth::user()->full_name }}
                         <img src="{{ asset("/assets/images/admin/user2-160x160.jpg") }}" class="user-image" alt="User Image">
                         <!-- hidden-xs hides the username on small devices so only the image appears. -->
                         <span class="hidden-xs">{{ Auth::user()->name }}</span>
@@ -32,7 +33,18 @@
                             <img src="{{ asset("/assets/images/admin/user2-160x160.jpg") }}" class="img-circle" alt="User Image">
 
                             <p>
-                                {{ Auth::user()->name }}
+                                <div>
+                                    {{ Auth::user()->full_name }}
+                                </div>
+                                <div>
+                                    {{ Auth::user()->entity->name }}
+                                </div>
+                                <ul>
+                                    @foreach(Auth::user()->roles as $role)
+                                    <li>{{ $role->name }}</li>
+                                    @endforeach
+                                </ul>
+
                                 <small>Created {{ Auth::user()->created_at->toDayDateTimeString() }}</small>
                             </p>
                         </li>

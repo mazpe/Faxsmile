@@ -16,20 +16,19 @@
                             <thead>
                             <tr role="row">
                                 <th class="sorting_asc" tabindex="0" aria-controls="clients" rowspan="1" colspan="1"
-                                    aria-sort="ascending" aria-label="ID: activate to sort column ascending" style="width: 5px;">ID
+                                    aria-sort="ascending" aria-label="ID: activate to sort column ascending" style="width: 10px;">ID
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="clients" rowspan="1" colspan="1"
-                                    aria-label="Company: activate to sort column descending"
-                                    style="width: 80px;">Seller
+                                    aria-label="Name: activate to sort column ascending" style="width: 195px;">Company
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="clients" rowspan="1" colspan="1"
-                                    aria-label="Name: activate to sort column ascending" style="width: 195px;">Name
+                                    aria-label="Contact: activate to sort column ascending" style="width: 30px;">Contact
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="clients" rowspan="1" colspan="1"
-                                    aria-label="Active: activate to sort column ascending" style="width: 30px;">Contact
+                                    aria-label="Faxes: activate to sort column ascending" style="width: 30px;">Faxes
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="clients" rowspan="1" colspan="1"
-                                    aria-label="Active: activate to sort column ascending" style="width: 30px;">Phone
+                                    aria-label="Users: activate to sort column ascending" style="width: 30px;">Users
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="clients" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 50px;">
@@ -41,10 +40,10 @@
                             @foreach($clients as $client)
                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/client/' . $client->id)}}">
                                     <td class="sorting_1">{{ $client->id }}</td>
-                                    <td>{{ $client->company->name }}</td>
                                     <td>{{ $client->name }}</td>
-                                    <td>{{ $client->contact_first_name }}</td>
-                                    <td>{{ $client->phone }}</td>
+                                    <td>{{ $client->contact_first_name }} {{ $client->contact_last_name }}</td>
+                                    <td>{{ $client->faxes_count }}</td>
+                                    <td>{{ $client->users_count }}</td>
                                     <td>
                                         {{ link_to_action('Admin\ClientController@show', $title = 'Show',
                                             $parameters = array($client->id),
@@ -59,15 +58,6 @@
                                 </tr>
                             @endforeach
                             </tbody>
-                            <tfoot>
-                            <tr>
-                                <th rowspan="1" colspan="1">ID</th>
-                                <th rowspan="1" colspan="1">Company</th>
-                                <th rowspan="1" colspan="1">Name</th>
-                                <th rowspan="1" colspan="1">Active</th>
-                                <th rowspan="1" colspan="1">Action</th>
-                            </tr>
-                            </tfoot>
                         </table>
                     </div>
                 </div>

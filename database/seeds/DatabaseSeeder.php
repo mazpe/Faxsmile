@@ -11,14 +11,29 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(JackCompanyTableSeeder::class);
-        $this->call(CompaniesTableSeeder::class);
+        // States
+        $this->call(UsStatesTableSeeder::class);
+        // Providers
         $this->call(ProvidersTableSeeder::class);
-        $this->call(EmailConfigsTableSeeder::class);
-        $this->call(EmailTemplatesTableSeeder::class);
+
+        // Roles
+        $this->call(RolesTableSeeder::class);
+
+        // Companies
+        $this->call(IISCompanySeeder::class);
+        $this->call(CompaniesTableSeeder::class);
+
+//        // Clients / Users
         $this->call(ClientsTableSeeder::class);
+
+//        // Faxes
         $this->call(FaxesTableSeeder::class);
-        $this->call(UserAdminSeeder::class);
-        $this->call(UsersTableSeeder::class);
+
+//        // Admins/User
+        $this->call(SuperAdminUserSeeder::class);
+        $this->call(ProviderAdminUserSeeder::class);
+        $this->call(CompanyAdminUserSeeder::class);
+        $this->call(ClientAdminUserSeeder::class);
+        $this->call(UserSeeder::class);
     }
 }

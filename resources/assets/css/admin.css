@@ -1,2 +1,35 @@
+/* Data Table Background Title Row */
+.table th {
+  background-color: #3c8dbc;
+  color: white; }
+
+/* Data Table Row Mouseover color */
+.table tbody tr:hover td {
+  background-color: #77bcf5; }
+
+/* Reduce padding to make rows shorter */
+table.table-bordered.dataTable tbody td {
+  padding: 4px; }
+
+/* if you need to change the overall background, then you need to make even rows white 
+
+.table-striped  tbody  tr:nth-of-type(even) {
+	background-color: white;
+}
+
+.box {
+	background-color: #e2e5ec;
+}
+*/
+/* color behind data table
+.content div.box {
+	background-color: #e2e5ec;
+}
+*/
+/* color in data table footer
+.content .box-footer {
+	background-color: #e2e5ec;
+}
+*/
 
 /*# sourceMappingURL=admin.css.map */

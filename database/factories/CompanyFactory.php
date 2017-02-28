@@ -12,11 +12,10 @@
 */
 
 $factory->define(App\Company::class, function (Faker\Generator $faker) {
-    $type = ['White Label', 'Reseller'];
 
     return [
-        'type' => $type[array_rand($type)],
-        'name' => $faker->company,
+        'type' => 'company',
+        'name' => 'Company - ' . $faker->company,
         'address_1' => $faker->streetAddress,
         'address_2' => '',
         'city' => $faker->city,

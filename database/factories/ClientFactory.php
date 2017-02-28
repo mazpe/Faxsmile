@@ -13,10 +13,12 @@
 
 $factory->define(App\Client::class, function (Faker\Generator $faker) {
     return [
-        'company_id' => function () {
+        'type' => 'client',
+        'parent_id'  => function () {
             return App\Company::orderByRaw("RAND()")->first()->id;
         },
-        'name' => $faker->company,
+        'parent_type' => 'company',
+        'name' => 'Client - ' . $faker->company,
         'address_1' => $faker->streetAddress,
         'address_2' => '',
         'city' => $faker->city,

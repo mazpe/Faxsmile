@@ -18,15 +18,24 @@
                                 <th class="sorting_asc" tabindex="0" aria-controls="users" rowspan="1" colspan="1"
                                     aria-sort="ascending" aria-label="ID: activate to sort column ascending" style="width: 5px;">ID
                                 </th>
+                                @if(!Auth::user()->isClientAdmin())
                                 <th class="sorting" tabindex="0" aria-controls="users" rowspan="1" colspan="1"
-                                    aria-label="Client: activate to sort column descending"
-                                    style="width: 80px;">Client
+                                    aria-label="Type: activate to sort column descending"
+                                    style="width: 30px;">Type
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="users" rowspan="1" colspan="1"
-                                    aria-label="Full Name: activate to sort column ascending" style="width: 195px;">Full Name
+                                    aria-label="Full Name: activate to sort column ascending" style="width: 120px;">Company
+                                </th>
+                                @endif
+                                <th class="sorting" tabindex="0" aria-controls="users" rowspan="1" colspan="1"
+                                    aria-label="Full Name: activate to sort column ascending" style="width: 60px;">Contact
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="users" rowspan="1" colspan="1"
                                     aria-label="Active: activate to sort column ascending" style="width: 30px;">E-Mail
+                                </th>
+                                <th rowspan="1" colspan="1" style="width: 3px;">R
+                                </th>
+                                <th rowspan="1" colspan="1" style="width: 3px;">S
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="users" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 50px;">
@@ -38,9 +47,14 @@
                             @foreach($users as $user)
                                 <tr role="row" class="odd"  data-href="{{URL::to('/admin/user/' . $user->id)}}">
                                     <td class="sorting_1">{{ $user->id }}</td>
-                                    <td>{{ $user->client->name }}</td>
-                                    <td>{{ $user->fullName() }}</td>
+                                    @if(!Auth::user()->isClientAdmin())
+                                    <td>{{ isset($user->entity) ? ucfirst($user->entity->type) : '' }}</td>
+                                    <td>{{ $user->entity->name }}</td>
+                                    @endif
+                                    <td>{{ $user->full_name }}</td>
                                     <td>{{ $user->email }}</td>
+                                    <td>{{ $user->recipients->count() }}</td>
+                                    <td>{{ $user->fax_id ? 1 : 0 }}</td>
                                     <td>
                                         {{ link_to_action('Admin\UserController@show', $title = 'Show',
                                             $parameters = array($user->id),
@@ -55,15 +69,6 @@
                                 </tr>
                             @endforeach
                             </tbody>
-                            <tfoot>
-                            <tr>
-                                <th rowspan="1" colspan="1">ID</th>
-                                <th rowspan="1" colspan="1">Client</th>
-                                <th rowspan="1" colspan="1">Full Name</th>
-                                <th rowspan="1" colspan="1">Active</th>
-                                <th rowspan="1" colspan="1">Action</th>
-                            </tr>
-                            </tfoot>
                         </table>
                     </div>
                 </div>
